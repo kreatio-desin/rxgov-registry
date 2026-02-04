@@ -118,10 +118,22 @@ export class AuditService {
       approved
     };
 
-    await this.offlineStorage.put('auditLogs', {
-      ...attestation,
-      action: 'attestation'
-    } as AuditLog);
+    const auditLog: AuditLog = {
+      id: attestation.id,
+      timestamp: attestation.timestamp,
+      userId: attestation.userId,
+      userRole: this.currentUserRole,
+      facilityId: attestation.facilityId,
+      action: 'attestation',
+      patientId: attestation.patientId,
+      status: approved ? 'success' : 'denied',
+      details: {
+        type,
+        reason
+      }
+    };
+
+    await this.offlineStorage.put('auditLogs', auditLog);
 
     return attestation;
   }
