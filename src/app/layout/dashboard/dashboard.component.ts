@@ -595,6 +595,298 @@ interface PatientRecord {
         }
       }
     }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      max-width: 448px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 10px 38px rgba(0, 0, 0, 0.1);
+      animation: modalSlideIn 0.2s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #6b7280;
+      padding: 0.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #1f2937;
+      }
+
+      svg {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    }
+
+    .modal-header {
+      margin-bottom: 1.5rem;
+
+      h2 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #1f2937;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.75rem;
+        color: #6b7280;
+      }
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .info-section {
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      background: #f9fafb;
+
+      h4 {
+        margin: 0 0 0.5rem 0;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #1f2937;
+      }
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+      font-size: 0.75rem;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
+    }
+
+    .info-label {
+      color: #6b7280;
+      font-size: 0.75rem;
+    }
+
+    .info-value {
+      margin: 0;
+      font-weight: 500;
+      color: #1f2937;
+    }
+
+    .font-mono {
+      font-family: monospace;
+    }
+
+    .notes-section {
+      background: #eff6ff;
+      border-color: #dbeafe;
+
+      h4 {
+        color: #1e40af;
+      }
+    }
+
+    .notes-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+
+      h4 {
+        margin: 0;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #1e40af;
+      }
+    }
+
+    .notes-icon {
+      width: 0.875rem;
+      height: 0.875rem;
+      color: #1e40af;
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+    }
+
+    .notes-text {
+      margin: 0;
+      font-size: 0.75rem;
+      color: #1f2937;
+      line-height: 1.5;
+      max-height: 6rem;
+      overflow-y: auto;
+    }
+
+    .responsibility-section {
+      border: 2px solid #fcd34d;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      background: #fef3c7;
+
+      h4 {
+        margin: 0;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #78350f;
+      }
+    }
+
+    .responsibility-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.375rem;
+
+      h4 {
+        margin: 0;
+      }
+    }
+
+    .warning-icon {
+      width: 1rem;
+      height: 1rem;
+      color: #b45309;
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+    }
+
+    .responsibility-text {
+      margin: 0 0 0.5rem 0;
+      font-size: 0.75rem;
+      color: #78350f;
+    }
+
+    .responsibility-footer {
+      margin: 0;
+      font-size: 0.75rem;
+      color: #92400e;
+      font-weight: 500;
+    }
+
+    .modal-footer {
+      display: flex;
+      flex-direction: column-reverse;
+      sm-flex-direction: row;
+      gap: 0.5rem;
+      sm-justify-content: flex-end;
+      padding-top: 0.5rem;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .btn-reject,
+    .btn-accept {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid transparent;
+      border-radius: 0.375rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      svg {
+        width: 0.875rem;
+        height: 0.875rem;
+      }
+    }
+
+    .btn-reject {
+      border: 1px solid #e5e7eb;
+      background: white;
+      color: #1f2937;
+
+      &:hover {
+        background: #f9fafb;
+        border-color: #9ca3af;
+      }
+    }
+
+    .btn-accept {
+      background: #2563eb;
+      color: white;
+      border: 1px solid #1d4ed8;
+
+      &:hover {
+        background: #1d4ed8;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .modal-content {
+        max-width: 100%;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-footer {
+        flex-direction: column;
+      }
+
+      .btn-reject,
+      .btn-accept {
+        width: 100%;
+        justify-content: center;
+      }
+    }
   `]
 })
 export class DashboardComponent implements OnInit {
