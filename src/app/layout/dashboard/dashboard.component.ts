@@ -971,6 +971,12 @@ export class DashboardComponent implements OnInit {
   }
 
   navigateToPatient(patientId: string): void {
+    // Grant access token for clinic staff viewing patient details
+    this.patientService.grantAccessViaAttestation(
+      patientId,
+      'clinic-user',
+      'Patient record access from clinic dashboard'
+    );
     this.router.navigate(['/patient', patientId]);
   }
 
