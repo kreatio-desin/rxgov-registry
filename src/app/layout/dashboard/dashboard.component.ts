@@ -112,36 +112,6 @@ interface PatientRecord {
               </tbody>
             </table>
           </div>
-
-          <!-- Mobile Cards -->
-          <div class="md:hidden space-y-3">
-            <div *ngFor="let patient of recentPatients" class="patient-card clickable-card" (click)="navigateToPatient(patient.id)">
-              <div class="card-header">
-                <div>
-                  <div class="card-rxid">{{ patient.rxId }}</div>
-                  <div class="card-name">{{ patient.name }}</div>
-                </div>
-                <span class="badge" [class]="'badge-' + patient.status">
-                  {{ patient.status | titlecase }}
-                </span>
-              </div>
-              <div class="card-grid">
-                <div class="card-item">
-                  <div class="card-label">DOB</div>
-                  <div>{{ patient.dob }}</div>
-                </div>
-                <div class="card-item">
-                  <div class="card-label">SSN (Last 4)</div>
-                  <div class="ssn-masked">{{ patient.ssn }}</div>
-                </div>
-              </div>
-              <div class="card-dose">
-                <div class="card-label">Last Dose</div>
-                <div class="dose-time">{{ patient.lastDose }}</div>
-                <div class="dose-info">{{ patient.lastDoseInfo }}</div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
