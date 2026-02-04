@@ -278,6 +278,7 @@ export class FacilityService {
    * Get facilities by region
    */
   async getFacilitiesByRegion(region: string): Promise<Facility[]> {
+    await this.initializationPromise;
     const facilities = await this.getAllFacilities();
     return facilities.filter((f) => f.region === region && f.isActive);
   }
