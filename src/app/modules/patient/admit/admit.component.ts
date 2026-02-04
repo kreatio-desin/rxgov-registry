@@ -7,7 +7,7 @@ import { FacilityService, Facility } from '../../../core/services/facility.servi
 import { AuditService } from '../../../core/services/audit.service';
 import { SyncService } from '../../../core/services/sync.service';
 
-type EnrollmentStep = 'demographics' | 'clinical' | 'consents';
+type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consents';
 
 @Component({
   selector: 'app-admit',
