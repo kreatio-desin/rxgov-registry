@@ -81,6 +81,28 @@ interface AvailableStop extends RouteStop {
               </div>
             </div>
           </div>
+
+          <!-- Today's Encounters -->
+          <div class="encounters-card">
+            <div class="card-header">
+              <i class="bi bi-people"></i>
+              Today's Encounters
+            </div>
+            <div class="card-body">
+              <div *ngIf="todayEncounters.length === 0" class="empty-state">
+                No encounters logged today.
+              </div>
+              <div *ngIf="todayEncounters.length > 0" class="encounters-list">
+                <div *ngFor="let encounter of todayEncounters" class="encounter-item">
+                  <div class="encounter-time">{{ encounter.time }}</div>
+                  <div class="encounter-details">
+                    <div class="encounter-name">{{ encounter.patientName }}</div>
+                    <div class="encounter-service">{{ encounter.service }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Add Stop Dropdown (Moved outside of scrollable container) -->
