@@ -247,6 +247,23 @@ import { SyncService } from '../core/services/sync.service';
       gap: 4px;
       padding: 8px;
       border-top: 1px solid #e5e7eb;
+
+      .nav-item {
+        width: 100%;
+        padding: 8px 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        &.nav-logout {
+          color: #ef4444;
+
+          &:hover {
+            background: #fee2e2;
+            color: #dc2626;
+          }
+        }
+      }
     }
 
     /* Main Wrapper */
