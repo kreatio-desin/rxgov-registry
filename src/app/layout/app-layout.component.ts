@@ -9,7 +9,7 @@ import { SyncService } from '../core/services/sync.service';
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, FormsModule],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, FormsModule],
   template: `
     <div class="app-container">
       <!-- Header with Global Search -->
