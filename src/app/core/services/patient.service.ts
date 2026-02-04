@@ -94,7 +94,7 @@ export class PatientService {
           firstName: 'James',
           lastName: 'Smith',
           dateOfBirth: '1990-03-15',
-          ssn: '5678',
+          ssn: '456-78-5678',
           motherFirstName: 'Patricia',
           demographics: {
             gender: 'Male',
