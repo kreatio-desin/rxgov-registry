@@ -77,7 +77,10 @@ interface AvailableStop extends RouteStop {
                     <i class="bi bi-plus"></i>
                     Add Stop
                   </button>
-                </div>
+
+                  <!-- Add Stop Dropdown -->
+                  <div *ngIf="showAddStopDialog" class="dropdown-content" style="position: absolute; top: calc(100% + 0.25rem); left: 0; z-index: 1000;">
+                    <div *ngIf="!showCreateNewForm" class="dropdown-inner">
               </div>
             </div>
           </div>
