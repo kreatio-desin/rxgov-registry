@@ -55,7 +55,7 @@ interface PatientRecord {
                   <div class="transfer-name">{{ transfer.patientName }}</div>
                   <div class="transfer-from">From: {{ transfer.fromFacility }}</div>
                 </div>
-                <button class="btn-review">Review</button>
+                <button class="btn-review" (click)="reviewTransfer(transfer)">Review</button>
               </div>
             </div>
           </div>
