@@ -80,29 +80,32 @@ interface AvailableStop extends RouteStop {
 
                   <!-- Add Stop Dropdown -->
                   <div *ngIf="showAddStopDialog" class="dropdown-content">
-                      <!-- Search Step -->
-                      <div *ngIf="!showCreateNewForm" class="dropdown-inner">
-                        <div class="dropdown-header">
-                          <i class="bi bi-search"></i>
-                          <input
-                            type="text"
-                            [(ngModel)]="searchQuery"
-                            (input)="searchStops()"
-                            placeholder="Search existing stops..."
-                            class="dropdown-search"
-                            autofocus
-                          />
+                    <div *ngIf="!showCreateNewForm" class="dropdown-inner">
+                      <div class="dropdown-header">
+                        <i class="bi bi-search"></i>
+                        <input
+                          type="text"
+                          [(ngModel)]="searchQuery"
+                          (input)="searchStops()"
+                          placeholder="Search existing stops..."
+                          class="dropdown-search"
+                          autofocus
+                        />
+                      </div>
+                      <div class="dropdown-list">
+                        <div *ngIf="searchQuery === '' && recentStops.length > 0">
+                          <div class="list-group-title">Recent Stops</div>
+                          <button *ngFor="let stop of recentStops" class="list-item" (click)="selectStop(stop)">
+                            <i class="bi bi-geo-alt"></i>
+                            <div class="list-item-content">
+                              <div class="list-item-name">{{ stop.name }}</div>
+                              <div class="list-item-address">{{ stop.address }}</div>
+                            </div>
+                          </button>
                         </div>
-
-                        <div class="dropdown-list">
-                          <!-- Recent Stops -->
-                          <div *ngIf="searchQuery === '' && recentStops.length > 0">
-                            <div class="list-group-title">Recent Stops</div>
-                            <button
-                              *ngFor="let stop of recentStops"
-                              class="list-item"
-                              (click)="selectStop(stop)"
-                            >
+                        <div *ngIf="searchQuery !== ''">
+                          <div *ngIf="filteredStops.length > 0">
+                            <button *ngFor="let stop of filteredStops" class="list-item" (click)="selectStop(stop)">
                               <i class="bi bi-geo-alt"></i>
                               <div class="list-item-content">
                                 <div class="list-item-name">{{ stop.name }}</div>
@@ -110,68 +113,34 @@ interface AvailableStop extends RouteStop {
                               </div>
                             </button>
                           </div>
-
-                          <!-- Search Results -->
-                          <div *ngIf="searchQuery !== ''">
-                            <div *ngIf="filteredStops.length > 0">
-                              <button
-                                *ngFor="let stop of filteredStops"
-                                class="list-item"
-                                (click)="selectStop(stop)"
-                              >
-                                <i class="bi bi-geo-alt"></i>
-                                <div class="list-item-content">
-                                  <div class="list-item-name">{{ stop.name }}</div>
-                                  <div class="list-item-address">{{ stop.address }}</div>
-                                </div>
-                              </button>
-                            </div>
-
-                            <!-- No Results - Create New -->
-                            <div *ngIf="filteredStops.length === 0" class="no-results-container">
-                              <p class="no-results-text">No existing stop found.</p>
-                              <button class="btn-create-stop" (click)="startCreateNewStop()">
-                                Create "{{ searchQuery }}"
-                              </button>
-                            </div>
+                          <div *ngIf="filteredStops.length === 0" class="no-results-container">
+                            <p class="no-results-text">No existing stop found.</p>
+                            <button class="btn-create-stop" (click)="startCreateNewStop()">
+                              Create "{{ searchQuery }}"
+                            </button>
                           </div>
                         </div>
                       </div>
-
-                      <!-- Create New Stop Form -->
-                      <div *ngIf="showCreateNewForm" class="dropdown-inner form-mode">
-                        <div class="form-title">
-                          <button class="btn-back" (click)="backToSearch()">
-                            <i class="bi bi-chevron-left"></i>
-                          </button>
-                          <span>Add Stop</span>
-                        </div>
-
-                        <div class="form-group-inline">
-                          <label>Stop Name</label>
-                          <input
-                            type="text"
-                            [(ngModel)]="newStopName"
-                            placeholder="Enter stop name"
-                            class="form-input-inline"
-                          />
-                        </div>
-                        <div class="form-group-inline">
-                          <label>Address</label>
-                          <input
-                            type="text"
-                            [(ngModel)]="newStopAddress"
-                            placeholder="Enter address"
-                            class="form-input-inline"
-                          />
-                        </div>
-
-                        <button class="btn-add-stop-save" (click)="saveNewStop()">
-                          Add Stop
+                    </div>
+                    <div *ngIf="showCreateNewForm" class="dropdown-inner form-mode">
+                      <div class="form-title">
+                        <button class="btn-back" (click)="backToSearch()">
+                          <i class="bi bi-chevron-left"></i>
                         </button>
+                        <span>Add Stop</span>
                       </div>
+                      <div class="form-group-inline">
+                        <label>Stop Name</label>
+                        <input type="text" [(ngModel)]="newStopName" placeholder="Enter stop name" class="form-input-inline" />
+                      </div>
+                      <div class="form-group-inline">
+                        <label>Address</label>
+                        <input type="text" [(ngModel)]="newStopAddress" placeholder="Enter address" class="form-input-inline" />
+                      </div>
+                      <button class="btn-add-stop-save" (click)="saveNewStop()">Add Stop</button>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
