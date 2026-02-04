@@ -73,14 +73,13 @@ interface AvailableStop extends RouteStop {
                   </div>
                 </div>
                 <div class="add-stop-container">
-                  <button #addStopBtn class="btn-add-stop" (click)="openAddStopDialog()">
+                  <button class="btn-add-stop" (click)="openAddStopDialog()">
                     <i class="bi bi-plus"></i>
                     Add Stop
                   </button>
 
                   <!-- Add Stop Dropdown -->
-                  <div *ngIf="showAddStopDialog" class="dropdown-wrapper" (click)="$event.stopPropagation()">
-                    <div class="dropdown-content">
+                  <div *ngIf="showAddStopDialog" class="dropdown-content">
                       <!-- Search Step -->
                       <div *ngIf="!showCreateNewForm" class="dropdown-inner">
                         <div class="dropdown-header">
