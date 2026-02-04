@@ -309,6 +309,7 @@ import { PatientService, Patient } from '../../core/services/patient.service';
 export class PatientDetailComponent implements OnInit {
   patient: Patient | null = null;
   activeTab = 'demographics';
+  private patientService!: PatientService;
 
   constructor(
     private route: ActivatedRoute,
