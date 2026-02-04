@@ -56,7 +56,16 @@ export class FacilityService {
   private async initializeAlaskaFacilities(): Promise<void> {
     await this.offlineStorage.ensureDbReady();
     const facilities = await this.offlineStorage.getAll<Facility>('facilities');
-    if (facilities.length === 0) {
+
+    // Check if we need to reload - if data exists but looks like old format
+    const needsReload = facilities.length > 0 &&
+      (!facilities[0].lastVerified ||
+       facilities[0].keyPersonnel?.some(p => p.name === 'TBD'));
+
+    if (facilities.length === 0 || needsReload) {
+      if (needsReload) {
+        await this.offlineStorage.clear('facilities');
+      }
       await this.loadAlaskaFacilities();
     }
   }
