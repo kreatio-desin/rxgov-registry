@@ -1443,9 +1443,26 @@ export class AdmitComponent implements OnInit {
   }
 
   requestBreakGlassAccess(): void {
-    // In a real system, this would create a break glass access request
+    // Show the break glass attestation dialog
+    this.showBreakGlassDialog = true;
+  }
+
+  confirmBreakGlassAccess(): void {
+    // Grant break glass access and close dialog
+    const demographics = this.demographicsForm.value;
+    this.patientService.grantAccessViaAttestation(
+      'patient-001',  // Hardcoded for now - in real system would get from search result
+      'current-user',
+      'Break Glass access granted via emergency access protocol'
+    );
+
+    this.showBreakGlassDialog = false;
     this.breakGlassRequested = true;
-    this.successMessage = 'Break Glass access request submitted. An administrator will review your request shortly.';
+    this.successMessage = 'Break Glass access has been granted. You can now proceed with enrollment.';
+  }
+
+  cancelBreakGlassDialog(): void {
+    this.showBreakGlassDialog = false;
   }
 
   async submitEnrollment(): Promise<void> {
