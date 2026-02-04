@@ -917,6 +917,7 @@ export class MMUComponent implements OnInit {
     this.searchQuery = '';
     this.newStopName = '';
     this.newStopAddress = '';
+    this.filteredStops = [];
   }
 
   searchStops(): void {
