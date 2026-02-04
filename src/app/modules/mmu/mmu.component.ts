@@ -577,6 +577,264 @@ interface AvailableStop extends RouteStop {
         cursor: not-allowed;
       }
     }
+
+    .btn-secondary {
+      background: white;
+      color: #374151;
+      border: 1px solid #d1d5db;
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background: #f9fafb;
+      }
+    }
+
+    /* Modal Dialog Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-dialog {
+      background: white;
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      max-width: 28rem;
+      max-height: 80vh;
+      z-index: 1001;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #e5e7eb;
+
+      h3 {
+        margin: 0;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #1f2937;
+      }
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      i {
+        font-size: 1.25rem;
+        color: #6b7280;
+      }
+    }
+
+    .modal-body {
+      padding: 1rem 1.5rem;
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      gap: 0.75rem;
+      justify-content: flex-end;
+
+      button {
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+    }
+
+    .search-group {
+      margin-bottom: 1rem;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      background-color: #f9fafb;
+      transition: all 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: #0c5caa;
+        background-color: white;
+        box-shadow: 0 0 0 3px rgba(12, 92, 170, 0.1);
+      }
+    }
+
+    .search-results {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .results-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .results-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #6b7280;
+      padding: 0 0 0.25rem 0;
+    }
+
+    .results-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-height: 16rem;
+      overflow-y: auto;
+    }
+
+    .result-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.375rem;
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+
+      &:hover {
+        border-color: #0c5caa;
+        background: #f0f9ff;
+      }
+
+      i {
+        flex-shrink: 0;
+        color: #0c5caa;
+        font-size: 1rem;
+        margin-top: 0.125rem;
+      }
+    }
+
+    .result-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .result-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #1f2937;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .result-address {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 0.125rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .no-results {
+      padding: 1.5rem 1rem;
+      text-align: center;
+      border: 1px dashed #e5e7eb;
+      border-radius: 0.375rem;
+
+      p {
+        margin: 0 0 0.75rem 0;
+        font-size: 0.875rem;
+        color: #6b7280;
+      }
+    }
+
+    .btn-create {
+      width: 100%;
+      padding: 0.75rem;
+      background: #0c5caa;
+      color: white;
+      border: none;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background: #0a4a85;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+
+      label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #374151;
+      }
+    }
+
+    .form-input {
+      padding: 0.75rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      background-color: #f9fafb;
+      transition: all 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: #0c5caa;
+        background-color: white;
+        box-shadow: 0 0 0 3px rgba(12, 92, 170, 0.1);
+      }
+    }
   `]
 })
 export class MMUComponent implements OnInit {
