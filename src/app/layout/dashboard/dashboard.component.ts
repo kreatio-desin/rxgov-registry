@@ -890,24 +890,51 @@ interface PatientRecord {
   `]
 })
 export class DashboardComponent implements OnInit {
+  showTransferModal = false;
+  selectedTransfer: Transfer | null = null;
+
   transfers: Transfer[] = [
     {
       id: '1',
       patientName: 'Taylor, Juniper',
       fromFacility: 'Community Medical Services – Wasilla',
-      status: 'pending'
+      status: 'pending',
+      patientRxId: 'RX-9988776655',
+      patientDob: '1991-07-08',
+      patientSsn: '6789',
+      patientMedication: 'Methadone',
+      patientDose: '85 mg',
+      initiatedBy: 'Dr. Willow Martinez',
+      initiatedDate: 'Feb 1, 2026',
+      transferNotes: 'Patient relocating to Anchorage for employment. Currently stable on 85mg methadone daily with 6 take-home doses per week. Last dose 12/16/24. No recent UA violations. Patient has been compliant with all treatment requirements. Recommend continuing current regimen.'
     },
     {
       id: '2',
       patientName: 'Davis, Grayson',
       fromFacility: 'SEARHC – Ketchikan',
-      status: 'pending'
+      status: 'pending',
+      patientRxId: 'RX-5544332211',
+      patientDob: '1985-03-15',
+      patientSsn: '4321',
+      patientMedication: 'Buprenorphine',
+      patientDose: '12 mg',
+      initiatedBy: 'Dr. James Wilson',
+      initiatedDate: 'Feb 2, 2026',
+      transferNotes: 'Transfer requested for family reunification. Patient has maintained sobriety for 18 months with consistent attendance. Recommend transfer to Anchorage clinic for continuity of care.'
     },
     {
       id: '3',
       patientName: 'Miller, Sedna',
       fromFacility: 'SEARHC – Juneau',
-      status: 'pending'
+      status: 'pending',
+      patientRxId: 'RX-1122334455',
+      patientDob: '1992-11-22',
+      patientSsn: '5555',
+      patientMedication: 'Methadone',
+      patientDose: '70 mg',
+      initiatedBy: 'Dr. River White',
+      initiatedDate: 'Feb 3, 2026',
+      transferNotes: 'Patient requested transfer for employment opportunity. Currently stable on current regimen. No clinical contraindications to transfer. Please accept and coordinate care continuation.'
     }
   ];
 
