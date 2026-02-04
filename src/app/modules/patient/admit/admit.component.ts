@@ -301,14 +301,15 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
                 </h2>
                 <p id="break-glass-desc" class="modal-description">
                   You are requesting to "Break Glass" to view a restricted patient record. This action will be logged in the system audit trail and reviewed by the compliance officer.
-                  <br><br>
+                </p>
+                <div class="modal-attestation">
                   <strong>By proceeding, you attest that:</strong>
                   <ul class="attestation-list">
                     <li>You have verified the patient's identity.</li>
                     <li>You have a valid clinical reason to access this record.</li>
                     <li>You will adhere to 42 CFR Part 2 confidentiality regulations.</li>
                   </ul>
-                </p>
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="cancelBreakGlassDialog()">
