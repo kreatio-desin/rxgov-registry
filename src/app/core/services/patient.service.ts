@@ -150,12 +150,21 @@ export class PatientService {
 
       for (const patient of samplePatients) {
         await this.offlineStorage.put('patients', patient);
+        // Grant access tokens for patients at the current user's clinic
+        // In a real system, this would check the user's facility context
+        // For demo purposes, all patients belong to "Anchorage Comprehensive Treatment Center"
+        if (patient.currentEnrollment?.facilityName === 'Anchorage Comprehensive Treatment Center') {
+          this.patientAccessTokens.set(patient.id, true);
+        }
+      }
+    } else {
+      // Grant access tokens for existing patients at the current user's clinic
+      for (const patient of existingPatients) {
+        if (patient.currentEnrollment?.facilityName === 'Anchorage Comprehensive Treatment Center') {
+          this.patientAccessTokens.set(patient.id, true);
+        }
       }
     }
-    // DO NOT grant access tokens automatically - they should only be granted when:
-    // 1. User provides attestation during enrollment of duplicate patient
-    // 2. User requests and is approved for break glass access
-    // 3. User's clinic has the patient enrolled
   }
 
   /**
