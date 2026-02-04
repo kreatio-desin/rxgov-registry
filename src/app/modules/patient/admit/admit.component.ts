@@ -1359,6 +1359,9 @@ export class AdmitComponent implements OnInit {
   }
 
   isStepCompleted(step: EnrollmentStep): boolean {
+    if (step === 'duplicate-check') {
+      return false; // Duplicate check is not a regular step
+    }
     return this.completedSteps.has(step);
   }
 
