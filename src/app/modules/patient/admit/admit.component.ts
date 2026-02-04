@@ -1328,6 +1328,106 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
         display: none !important;
       }
     }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-dialog {
+      background: white;
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      display: grid;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      width: 100%;
+      max-width: 28rem;
+      z-index: 1001;
+
+      @media (max-width: 640px) {
+        max-width: calc(100% - 2rem);
+      }
+    }
+
+    .modal-header {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .modal-title {
+      margin: 0;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #b45309;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      i {
+        font-size: 1.5rem;
+      }
+    }
+
+    .modal-description {
+      margin: 0;
+      font-size: 0.875rem;
+      color: #6b7280;
+      line-height: 1.5;
+
+      strong {
+        font-weight: 600;
+        color: #374151;
+      }
+    }
+
+    .attestation-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      list-style: disc;
+      space-y: 0.25rem;
+      margin-top: 0.5rem;
+
+      li {
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      flex-direction: row-reverse;
+
+      @media (max-width: 640px) {
+        flex-direction: column;
+      }
+    }
+
+    .btn-warning {
+      background-color: #b45309;
+      color: white;
+      border: none;
+
+      &:hover:not(:disabled) {
+        background-color: #92400e;
+      }
+
+      &:focus {
+        outline: 2px solid #b45309;
+        outline-offset: 2px;
+      }
+    }
   `]
 })
 export class AdmitComponent implements OnInit {
