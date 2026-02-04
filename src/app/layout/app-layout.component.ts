@@ -22,21 +22,30 @@ import { SyncService } from '../core/services/sync.service';
 
           <!-- Navigation Items -->
           <nav class="nav-menu">
-            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" 
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
                class="nav-item" title="Dashboard">
               <i class="bi bi-layout-dashboard"></i>
+              <span class="nav-label">Dashboard</span>
             </a>
-            <a routerLink="/patient" routerLinkActive="active" 
+            <a routerLink="/patient" routerLinkActive="active"
                class="nav-item" title="Patients">
               <i class="bi bi-bus"></i>
+              <span class="nav-label">Patients</span>
             </a>
-            <a routerLink="/facilities" routerLinkActive="active" 
+            <a routerLink="/facilities" routerLinkActive="active"
                class="nav-item" title="Facilities">
               <i class="bi bi-building-2"></i>
+              <span class="nav-label">Facilities</span>
             </a>
-            <a routerLink="/emergency" routerLinkActive="active" 
-               class="nav-item" title="Analytics">
-              <i class="bi bi-file-earmark-bar-graph"></i>
+            <a routerLink="/compliance" routerLinkActive="active"
+               class="nav-item" title="Compliance">
+              <i class="bi bi-file-earmark-check"></i>
+              <span class="nav-label">Compliance</span>
+            </a>
+            <a routerLink="/emergency" routerLinkActive="active"
+               class="nav-item" title="Emergency">
+              <i class="bi bi-exclamation-triangle"></i>
+              <span class="nav-label">Emergency</span>
             </a>
           </nav>
 
