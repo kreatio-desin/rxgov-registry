@@ -572,15 +572,12 @@ interface AvailableStop extends RouteStop {
     }
 
     .dropdown-content {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      margin-top: 0.25rem;
+      position: fixed;
       background: white;
       border: 1px solid #e5e7eb;
       border-radius: 0.375rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-      z-index: 100;
+      z-index: 1000;
       min-width: 18rem;
       max-height: 20rem;
       overflow-y: auto;
