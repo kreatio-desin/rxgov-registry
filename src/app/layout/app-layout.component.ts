@@ -64,16 +64,8 @@ import { SyncService } from '../core/services/sync.service';
           </div>
 
           <div class="header-actions">
-            <div class="sync-status" [ngSwitch]="(syncStatus$ | async) !== null">
-              <ng-container *ngSwitchCase="true">
-                <ng-container *ngIf="syncStatus$ | async as syncStatus">
-                  <i
-                    [class]="syncStatus.isSyncing ? 'bi bi-arrow-repeat rotating' : 'bi bi-check-circle'"
-                    [title]="syncStatus.lastSync ? 'Last sync: ' + (syncStatus.lastSync | date:'short') : 'Not synced'"
-                  ></i>
-                  <span *ngIf="syncStatus.pendingItems > 0" class="pending-badge">{{ syncStatus.pendingItems }}</span>
-                </ng-container>
-              </ng-container>
+            <div class="sync-status">
+              <i class="bi bi-cloud-check"></i>
             </div>
             
             <div class="online-status">
