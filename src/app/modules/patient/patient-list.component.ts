@@ -231,7 +231,7 @@ import { FacilityService } from '../../core/services/facility.service';
 export class PatientListComponent implements OnInit {
   patients: Patient[] = [];
 
-  constructor(private patientService: PatientService) {}
+  constructor(private patientService: PatientService, private router: Router) {}
 
   async ngOnInit(): Promise<void> {
     await this.loadPatients();
@@ -248,6 +248,6 @@ export class PatientListComponent implements OnInit {
   }
 
   navigateToAdmit(): void {
-    // Navigate to admit component
+    this.router.navigate(['/patient/admit/new']);
   }
 }
