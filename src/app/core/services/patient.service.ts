@@ -123,7 +123,7 @@ export class PatientService {
           firstName: 'Sarah',
           lastName: 'Johnson',
           dateOfBirth: '1985-07-22',
-          ssn: '9012',
+          ssn: '901-23-9012',
           motherFirstName: 'Margaret',
           demographics: {
             gender: 'Female',
