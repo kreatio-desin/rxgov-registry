@@ -1090,6 +1090,184 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       }
     }
 
+    .match-card {
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      background: white;
+    }
+
+    .match-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background-color: #f3f4f6;
+      border-bottom: 1px solid #e5e7eb;
+      flex-wrap: wrap;
+    }
+
+    .badge-possible-match {
+      background-color: #dbeafe;
+      color: #1e40af;
+      border-color: #93c5fd;
+    }
+
+    .badge-restricted {
+      background-color: #fef3c7;
+      color: #a16207;
+      border-color: #fcd34d;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+
+      i {
+        font-size: 0.75rem;
+      }
+    }
+
+    .match-reason {
+      font-size: 0.875rem;
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    .match-body {
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .patient-avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 9999px;
+      background-color: #f3f4f6;
+      flex-shrink: 0;
+      color: #9ca3af;
+
+      i {
+        font-size: 1.25rem;
+      }
+    }
+
+    .patient-info {
+      flex: 1;
+
+      h4 {
+        margin: 0 0 0.25rem 0;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1f2937;
+      }
+    }
+
+    .text-small {
+      font-size: 0.875rem;
+      color: #6b7280;
+      margin: 0;
+    }
+
+    .match-note {
+      padding: 0.75rem 1rem;
+      background-color: #f9fafb;
+      border-top: 1px solid #e5e7eb;
+
+      p {
+        margin: 0;
+        font-size: 0.875rem;
+        color: #4b5563;
+        line-height: 1.5;
+      }
+    }
+
+    .btn-break-glass {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: white;
+      border: 1px solid #fcd34d;
+      color: #a16207;
+      border-radius: 0.375rem;
+      margin: 1rem;
+      margin-top: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+
+      i {
+        font-size: 1rem;
+      }
+
+      &:hover {
+        background-color: #fef3c7;
+      }
+    }
+
+    .info-box {
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+
+      p {
+        margin: 0;
+        font-size: 0.875rem;
+        line-height: 1.5;
+      }
+    }
+
+    .blue-info {
+      background-color: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e3a8a;
+    }
+
+    .info-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.25rem;
+      height: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+      color: inherit;
+
+      i {
+        font-size: 1rem;
+      }
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 0.5rem;
+      flex: 1;
+
+      @media (max-width: 640px) {
+        flex-direction: column;
+        width: 100%;
+      }
+    }
+
+    .btn-cancel {
+      background-color: white;
+      border: 1px solid #fca5a5;
+      color: #991b1b;
+
+      &:hover:not(:disabled) {
+        background-color: #fee2e2;
+      }
+    }
+
     .sr-only {
       position: absolute;
       width: 1px;
