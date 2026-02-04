@@ -1312,6 +1312,7 @@ export class AdmitComponent implements OnInit {
   errorMessage = '';
   duplicateFound = false;
   breakGlassRequested = false;
+  showBreakGlassDialog = false;
 
   private completedSteps = new Set<EnrollmentStep>();
 
