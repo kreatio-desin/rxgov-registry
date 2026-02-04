@@ -1,387 +1,473 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuditService, AuditLog } from '../../core/services/audit.service';
+import { FormsModule } from '@angular/forms';
+
+interface Report {
+  id: string;
+  name: string;
+  description: string;
+  rowLevel: string;
+  rowLevelBg: string;
+}
 
 @Component({
   selector: 'app-compliance',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   template: `
-    <div class="compliance-container">
-      <h1>Compliance Dashboard</h1>
-      <p class="subtitle">Monitor access logs, attestations, and regulatory compliance</p>
-
-      <div class="compliance-sections">
-        <section class="compliance-section">
-          <div class="section-header">
-            <h2>Access Control Logs</h2>
-            <p>All patient record access attempts are logged for audit purposes</p>
-          </div>
-
-          <div *ngIf="auditLogs.length === 0" class="empty-state">
-            <p>No access logs yet</p>
-          </div>
-
-          <div *ngIf="auditLogs.length > 0" class="logs-table-container">
-            <table class="logs-table">
-              <thead>
-                <tr>
-                  <th>Timestamp</th>
-                  <th>Action</th>
-                  <th>User</th>
-                  <th>Patient ID</th>
-                  <th>Status</th>
-                  <th>Details</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let log of auditLogs.slice(0, 20)">
-                  <td>{{ log.timestamp | date:'short' }}</td>
-                  <td>{{ log.action | titlecase }}</td>
-                  <td>{{ log.userId }}</td>
-                  <td *ngIf="log.patientId">{{ log.patientId }}</td>
-                  <td *ngIf="!log.patientId">-</td>
-                  <td>
-                    <span class="status-badge" [class]="log.status">
-                      {{ log.status | titlecase }}
-                    </span>
-                  </td>
-                  <td class="details">
-                    <small *ngIf="log.reason">{{ log.reason }}</small>
-                    <small *ngIf="!log.reason">-</small>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section class="compliance-section">
-          <div class="section-header">
-            <h2>Security & Attestations</h2>
-            <p>Track Break Glass access and emergency authorizations</p>
-          </div>
-
-          <div class="attestation-cards">
-            <div class="attestation-card">
-              <h3>Active Attestations</h3>
-              <p class="stat-value">{{ activeAttestations }}</p>
-              <p class="stat-desc">Emergency access tokens granted</p>
-            </div>
-
-            <div class="attestation-card">
-              <h3>Access Denials</h3>
-              <p class="stat-value">{{ deniedAccess }}</p>
-              <p class="stat-desc">Unauthorized access attempts</p>
-            </div>
-
-            <div class="attestation-card">
-              <h3>Today's Activity</h3>
-              <p class="stat-value">{{ todayActivity }}</p>
-              <p class="stat-desc">Actions logged today</p>
-            </div>
-          </div>
-        </section>
-
-        <section class="compliance-section">
-          <div class="section-header">
-            <h2>Regulatory Compliance</h2>
-            <p>PDMP reporting and data quality metrics</p>
-          </div>
-
-          <div class="compliance-items">
-            <div class="compliance-item">
-              <i class="bi bi-check-circle-fill"></i>
-              <div>
-                <p class="item-title">PDMP Daily Submission</p>
-                <p class="item-desc">Last sync: 2 hours ago</p>
-              </div>
-            </div>
-
-            <div class="compliance-item">
-              <i class="bi bi-exclamation-circle"></i>
-              <div>
-                <p class="item-title">Data Quality Issues</p>
-                <p class="item-desc">3 records need correction</p>
-              </div>
-            </div>
-
-            <div class="compliance-item">
-              <i class="bi bi-check-circle-fill"></i>
-              <div>
-                <p class="item-title">Dual Enrollment Prevention</p>
-                <p class="item-desc">No conflicts detected</p>
-              </div>
-            </div>
-          </div>
-        </section>
+    <div class="reports-container">
+      <!-- Header Section -->
+      <div class="page-header">
+        <div class="header-content">
+          <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-icon">
+              <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path>
+              <path d="M14 2v5a1 1 0 0 0 1 1h5"></path>
+              <path d="M10 9H8"></path>
+              <path d="M16 13H8"></path>
+              <path d="M16 17H8"></path>
+            </svg>
+            Standard Reports
+          </h2>
+          <p>Export standard operational and compliance reports.</p>
+        </div>
       </div>
 
-      <div class="compliance-actions">
-        <button class="btn btn-primary">Export Audit Report</button>
-        <button class="btn btn-secondary">View Data Quality Issues</button>
+      <!-- Reports Card -->
+      <div class="reports-card">
+        <!-- Card Header -->
+        <div class="card-header">
+          <div class="header-title">
+            <h4>Available Reports</h4>
+            <p>Select a report to view details and export data.</p>
+          </div>
+          
+          <div class="search-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+              <path d="m21 21-4.34-4.34"></path>
+              <circle cx="11" cy="11" r="8"></circle>
+            </svg>
+            <input 
+              type="search" 
+              placeholder="Search reports..." 
+              [(ngModel)]="searchQuery"
+              (input)="filterReports()"
+              class="search-input"
+            >
+          </div>
+        </div>
+
+        <!-- Table Content -->
+        <div class="table-wrapper">
+          <table class="reports-table">
+            <thead>
+              <tr>
+                <th class="col-name">Report Name</th>
+                <th class="col-level">Row Level</th>
+                <th class="col-action">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let report of filteredReports" class="report-row">
+                <td class="col-name">
+                  <div class="report-cell">
+                    <div class="report-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path>
+                        <path d="M14 2v5a1 1 0 0 0 1 1h5"></path>
+                        <path d="M10 9H8"></path>
+                        <path d="M16 13H8"></path>
+                        <path d="M16 17H8"></path>
+                      </svg>
+                    </div>
+                    <div class="report-info">
+                      <span class="report-name">{{ report.name }}</span>
+                      <span class="report-description">{{ report.description }}</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="col-level">
+                  <span class="level-badge" [style.backgroundColor]="report.rowLevelBg">
+                    {{ report.rowLevel }}
+                  </span>
+                </td>
+                <td class="col-action">
+                  <button class="view-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    View
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   `,
   styles: [`
-    .compliance-container {
-      max-width: 1200px;
+    .reports-container {
+      padding: 1.5rem;
+      max-width: 1400px;
       margin: 0 auto;
-
-      h1 {
-        color: #333;
-        margin-bottom: 0.5rem;
-      }
-
-      .subtitle {
-        color: #666;
-        margin-bottom: 2rem;
-      }
     }
 
-    .compliance-sections {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
+    /* Header Section */
+    .page-header {
       margin-bottom: 2rem;
     }
 
-    .compliance-section {
-      background: white;
-      border-radius: 8px;
-      padding: 2rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .section-header {
-      margin-bottom: 1.5rem;
-
+    .header-content {
       h2 {
         margin: 0 0 0.5rem 0;
-        color: #333;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #1f2937;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
       }
 
       p {
         margin: 0;
-        color: #666;
-        font-size: 0.95rem;
+        font-size: 0.875rem;
+        color: #6b7280;
       }
     }
 
-    .empty-state {
-      text-align: center;
-      padding: 2rem;
-      background: #f8f9fa;
-      border-radius: 6px;
-      color: #999;
+    .header-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: #3b82f6;
     }
 
-    .logs-table-container {
+    /* Reports Card */
+    .reports-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 600px;
+    }
+
+    /* Card Header */
+    .card-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid #e5e7eb;
+      background: #f9fafb;
+      display: flex;
+      flex-direction: column;
+      md-flex-direction: row;
+      gap: 1.5rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      md-align-items: center;
+    }
+
+    .header-title {
+      flex: 1;
+
+      h4 {
+        margin: 0 0 0.25rem 0;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #374151;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.8125rem;
+        color: #6b7280;
+      }
+    }
+
+    .search-container {
+      position: relative;
+      width: 100%;
+      max-width: 224px;
+
+      .search-icon {
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1rem;
+        height: 1rem;
+        color: #6b7280;
+        pointer-events: none;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        background: white;
+        transition: border-color 0.2s, box-shadow 0.2s;
+
+        &:focus {
+          outline: none;
+          border-color: #3b82f6;
+          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        &::placeholder {
+          color: #9ca3af;
+        }
+      }
+    }
+
+    /* Table */
+    .table-wrapper {
+      flex: 1;
       overflow-x: auto;
+      overflow-y: auto;
     }
 
-    .logs-table {
+    .reports-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.9rem;
+      font-size: 0.875rem;
 
       thead {
-        background: #f8f9fa;
-        border-bottom: 2px solid #dee2e6;
+        background: white;
+        position: sticky;
+        top: 0;
+        z-index: 10;
       }
 
       th {
-        padding: 0.75rem;
+        padding: 0.75rem 1rem;
         text-align: left;
         font-weight: 600;
-        color: #333;
+        color: #374151;
+        white-space: nowrap;
+        border-bottom: 1px solid #e5e7eb;
+        height: 2rem;
       }
 
       td {
-        padding: 0.75rem;
-        border-bottom: 1px solid #dee2e6;
-        color: #333;
+        padding: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+        vertical-align: middle;
       }
 
-      tbody tr:hover {
-        background-color: #f8f9fa;
-      }
+      tbody tr {
+        transition: background-color 0.2s;
 
-      .details {
-        font-size: 0.85rem;
-      }
-    }
-
-    .status-badge {
-      display: inline-block;
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      font-weight: bold;
-      text-transform: capitalize;
-
-      &.success {
-        background: #d4edda;
-        color: #155724;
-      }
-
-      &.denied {
-        background: #f8d7da;
-        color: #721c24;
-      }
-
-      &.failed {
-        background: #f8d7da;
-        color: #721c24;
-      }
-    }
-
-    .attestation-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .attestation-card {
-      background: #f8f9fa;
-      border-radius: 6px;
-      padding: 1.5rem;
-      text-align: center;
-      border-left: 4px solid #0c5caa;
-
-      h3 {
-        margin: 0 0 0.5rem 0;
-        color: #666;
-        font-size: 0.95rem;
-      }
-
-      .stat-value {
-        margin: 0.5rem 0;
-        font-size: 2rem;
-        font-weight: bold;
-        color: #0c5caa;
-      }
-
-      .stat-desc {
-        margin: 0;
-        font-size: 0.85rem;
-        color: #999;
-      }
-    }
-
-    .compliance-items {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1rem;
-    }
-
-    .compliance-item {
-      display: flex;
-      gap: 1rem;
-      padding: 1rem;
-      background: #f8f9fa;
-      border-radius: 6px;
-      border-left: 4px solid #28a745;
-
-      i {
-        font-size: 1.5rem;
-        color: #28a745;
-        flex-shrink: 0;
-      }
-
-      &:has(i.bi-exclamation-circle) {
-        border-left-color: #ffc107;
-
-        i {
-          color: #ffc107;
+        &:hover {
+          background-color: #f9fafb;
         }
       }
-
-      .item-title {
-        margin: 0 0 0.25rem 0;
-        font-weight: bold;
-        color: #333;
-      }
-
-      .item-desc {
-        margin: 0;
-        color: #666;
-        font-size: 0.9rem;
-      }
     }
 
-    .compliance-actions {
+    .col-name {
+      width: 280px;
+    }
+
+    .col-level {
+      width: 120px;
+    }
+
+    .col-action {
+      width: auto;
+      text-align: right;
+      padding-right: 1rem;
+    }
+
+    .report-cell {
       display: flex;
-      gap: 1rem;
-      justify-content: flex-end;
+      align-items: flex-start;
+      gap: 0.75rem;
     }
 
-    .btn {
-      padding: 0.75rem 1.5rem;
+    .report-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 0.375rem;
+      flex-shrink: 0;
+
+      svg {
+        width: 0.875rem;
+        height: 0.875rem;
+        color: #3b82f6;
+      }
+    }
+
+    .report-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .report-name {
+      font-weight: 500;
+      color: #1f2937;
+      display: block;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .report-row:hover .report-name {
+      color: #3b82f6;
+    }
+
+    .report-description {
+      font-size: 0.8125rem;
+      color: #6b7280;
+      display: block;
+      line-height: 1.4;
+    }
+
+    .level-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.375rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #374151;
+      white-space: nowrap;
+    }
+
+    .view-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.5rem 0.75rem;
       border: none;
-      border-radius: 6px;
-      font-size: 0.95rem;
+      border-radius: 0.375rem;
+      background: transparent;
+      color: #6b7280;
+      font-size: 0.75rem;
+      font-weight: 500;
       cursor: pointer;
       transition: all 0.2s;
 
-      &.btn-primary {
-        background: #0c5caa;
-        color: white;
-
-        &:hover {
-          background: #0a4a85;
-          transform: translateY(-2px);
-        }
+      svg {
+        width: 0.875rem;
+        height: 0.875rem;
       }
 
-      &.btn-secondary {
-        background: #6c757d;
-        color: white;
-
-        &:hover {
-          background: #5a6268;
-          transform: translateY(-2px);
-        }
+      &:hover {
+        color: #3b82f6;
+        background: #f3f4f6;
       }
     }
 
+    /* Responsive */
     @media (max-width: 768px) {
-      .compliance-actions {
+      .reports-container {
+        padding: 1rem;
+      }
+
+      .card-header {
         flex-direction: column;
+        align-items: stretch;
       }
 
-      .btn {
-        width: 100%;
+      .search-container {
+        max-width: 100%;
       }
 
-      .logs-table {
-        font-size: 0.8rem;
+      .header-content h2 {
+        font-size: 1.25rem;
+      }
 
-        th, td {
-          padding: 0.5rem;
-        }
+      .col-name {
+        width: auto;
+        min-width: 200px;
+      }
+
+      .report-icon {
+        display: none;
       }
     }
   `]
 })
 export class ComplianceComponent implements OnInit {
-  auditLogs: AuditLog[] = [];
-  activeAttestations = 0;
-  deniedAccess = 0;
-  todayActivity = 0;
+  searchQuery = '';
+  
+  reports: Report[] = [
+    {
+      id: 'active-census',
+      name: 'Active Patient Census',
+      description: 'Active patient census including enrollment dates, current phases, and primary counselor assignments.',
+      rowLevel: 'Patient',
+      rowLevelBg: '#e0e7ff'
+    },
+    {
+      id: 'guest-dosing',
+      name: 'Guest Dosing Activity Report',
+      description: 'Track and audit all guest dosing events to ensure home clinic authorization.',
+      rowLevel: 'Dose',
+      rowLevelBg: '#e0e7ff'
+    },
+    {
+      id: 'mmu-activity',
+      name: 'MMU Activity Report',
+      description: 'Track and report on patients utilizing Mobile Medication Unit (MMU) services.',
+      rowLevel: 'MMU Encounter',
+      rowLevelBg: '#e0e7ff'
+    },
+    {
+      id: 'patient-movement',
+      name: 'Patient Movement',
+      description: 'Summary of enrollments, inactivations, and transfers (internal and external).',
+      rowLevel: 'Patient',
+      rowLevelBg: '#e0e7ff'
+    },
+    {
+      id: 'pdmp-log',
+      name: 'PDMP Submission Log',
+      description: 'Detailed log of all Schedule II-V controlled substance dispensations submitted to the state PDMP.',
+      rowLevel: 'Dose',
+      rowLevelBg: '#e0e7ff'
+    },
+    {
+      id: 'program-billing',
+      name: 'Program Billing',
+      description: 'Billable services summary for Medicaid and private insurance reimbursement.',
+      rowLevel: 'Dose',
+      rowLevelBg: '#e0e7ff'
+    },
+    {
+      id: 'transaction-list',
+      name: 'Transaction List',
+      description: 'Comprehensive list of all medication dispensing transactions, inventory adjustments, and voids.',
+      rowLevel: 'Dose',
+      rowLevelBg: '#e0e7ff'
+    }
+  ];
 
-  constructor(private auditService: AuditService) {}
+  filteredReports: Report[] = [];
 
-  async ngOnInit(): Promise<void> {
-    this.auditLogs = await this.auditService.getAllAuditLogs();
+  ngOnInit(): void {
+    this.filteredReports = [...this.reports];
+  }
 
-    // Calculate stats
-    this.deniedAccess = this.auditLogs.filter((log) => log.status === 'denied').length;
-    this.activeAttestations = this.auditLogs.filter((log) => log.action === 'attestation').length;
+  filterReports(): void {
+    if (!this.searchQuery.trim()) {
+      this.filteredReports = [...this.reports];
+      return;
+    }
 
-    const today = new Date().toDateString();
-    this.todayActivity = this.auditLogs.filter(
-      (log) => new Date(log.timestamp).toDateString() === today
-    ).length;
+    const query = this.searchQuery.toLowerCase();
+    this.filteredReports = this.reports.filter(report =>
+      report.name.toLowerCase().includes(query) ||
+      report.description.toLowerCase().includes(query) ||
+      report.rowLevel.toLowerCase().includes(query)
+    );
   }
 }
