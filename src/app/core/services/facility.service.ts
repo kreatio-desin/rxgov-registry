@@ -25,6 +25,7 @@ export interface Facility {
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
+  lastVerified?: string;
   lastReviewedDate?: string;
 }
 
