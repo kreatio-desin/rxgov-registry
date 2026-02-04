@@ -429,7 +429,7 @@ export class AppLayoutComponent implements OnInit {
   searchQuery = '';
   searchResults: SearchResult[] = [];
   isOnline = navigator.onLine;
-  syncStatus$!: any;
+  syncStatus$: any;
 
   constructor(
     private patientService: PatientService,
