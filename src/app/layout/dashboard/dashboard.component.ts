@@ -31,7 +31,7 @@ interface PatientRecord {
     <div class="dashboard-container">
       <!-- Add Patient Button -->
       <div class="dashboard-header">
-        <button class="add-patient-btn">
+        <button class="add-patient-btn" (click)="navigateToAdmit()">
           <i class="bi bi-plus"></i>
           Add New Patient
         </button>
