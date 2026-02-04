@@ -1401,14 +1401,16 @@ export class PatientDetailComponent implements OnInit {
 
   recordDose(): void {
     // Add the dose to history
+    const date = new Date(this.administerDoseForm.dateTime);
+    const dateTimeString = date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit'
+    });
+
     const newDose: DoseRecord = {
-      dateTime: new Date(this.administerDoseForm.dateTime).toLocaleString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit',
-        meridiem: 'short'
-      }),
+      dateTime: dateTimeString,
       type: 'Observed',
       medication: this.administerDoseForm.observedDose.medication,
       formulation: 'N/A',
