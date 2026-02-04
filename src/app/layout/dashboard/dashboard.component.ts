@@ -488,12 +488,21 @@ interface PatientRecord {
       }
 
       tbody tr:hover {
-        background: #f9fafb;
-      }
+      background: #f9fafb;
+    }
 
-      tbody tr:last-child td {
-        border-bottom: none;
-      }
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr.clickable-row {
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    tbody tr.clickable-row:hover {
+      background: #e5e7eb;
+    }
     }
 
     .cell-rxid {
