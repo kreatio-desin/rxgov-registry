@@ -507,10 +507,20 @@ export class DashboardComponent implements OnInit {
   constructor(
     private facilityService: FacilityService,
     private patientService: PatientService,
-    private syncService: SyncService
+    private syncService: SyncService,
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
     // Load dashboard data
+  }
+
+  navigateToAdmit(): void {
+    this.router.navigate(['/patient/admit/new']);
+  }
+
+  reviewTransfer(transfer: Transfer): void {
+    // Navigate to transfer review page or open transfer details
+    this.router.navigate(['/patient', transfer.id, 'transfer-review']);
   }
 }
