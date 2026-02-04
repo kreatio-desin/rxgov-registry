@@ -107,8 +107,8 @@ export class PatientService {
             phone: '(907) 555-0234'
           },
           currentEnrollment: {
-            facilityId: 'fac-act-001',
-            facilityName: 'Anchorage Comprehensive Treatment Center',
+            facilityId: 'fac-searhc-001',
+            facilityName: 'SEARHC – Ketchikan',
             moudType: 'Methadone',
             enrollmentDate: '2024-08-20',
             status: 'active'
