@@ -48,7 +48,111 @@ export class PatientService {
 
   private patientAccessTokens = new Map<string, boolean>(); // patientId -> hasAccess
 
-  constructor(private offlineStorage: OfflineStorageService) {}
+  constructor(private offlineStorage: OfflineStorageService) {
+    this.initializeSamplePatients();
+  }
+
+  private async initializeSamplePatients(): Promise<void> {
+    // Initialize with sample data if no patients exist
+    await this.offlineStorage.ensureDbReady();
+    const existingPatients = await this.offlineStorage.getAll<Patient>('patients');
+
+    if (existingPatients.length === 0) {
+      const samplePatients: Patient[] = [
+        {
+          id: 'patient-001',
+          registryId: 'RX-2233445566',
+          firstName: 'Maverick',
+          lastName: 'Nelson',
+          dateOfBirth: '1988-12-06',
+          ssn: '1234',
+          motherFirstName: 'Evelyn',
+          demographics: {
+            gender: 'Male',
+            race: 'White',
+            ethnicity: 'Non-Hispanic',
+            address: '987 Birch Ln',
+            city: 'Anchorage',
+            state: 'AK',
+            zip: '99501',
+            phone: '(907) 555-0105'
+          },
+          currentEnrollment: {
+            facilityId: 'fac-act-001',
+            facilityName: 'Anchorage Comprehensive Treatment Center',
+            moudType: 'Methadone',
+            enrollmentDate: '2024-05-12',
+            status: 'active'
+          },
+          pdmpConsent: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: 'patient-002',
+          registryId: 'RX-1122334455',
+          firstName: 'James',
+          lastName: 'Smith',
+          dateOfBirth: '1990-03-15',
+          ssn: '5678',
+          motherFirstName: 'Patricia',
+          demographics: {
+            gender: 'Male',
+            race: 'White',
+            ethnicity: 'Non-Hispanic',
+            address: '456 Oak Ave',
+            city: 'Anchorage',
+            state: 'AK',
+            zip: '99502',
+            phone: '(907) 555-0234'
+          },
+          currentEnrollment: {
+            facilityId: 'fac-act-001',
+            facilityName: 'Anchorage Comprehensive Treatment Center',
+            moudType: 'Methadone',
+            enrollmentDate: '2024-08-20',
+            status: 'active'
+          },
+          pdmpConsent: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: 'patient-003',
+          registryId: 'RX-9988776655',
+          firstName: 'Sarah',
+          lastName: 'Johnson',
+          dateOfBirth: '1985-07-22',
+          ssn: '9012',
+          motherFirstName: 'Margaret',
+          demographics: {
+            gender: 'Female',
+            race: 'Black',
+            ethnicity: 'Non-Hispanic',
+            address: '789 Pine St',
+            city: 'Anchorage',
+            state: 'AK',
+            zip: '99503',
+            phone: '(907) 555-0345'
+          },
+          currentEnrollment: {
+            facilityId: 'fac-act-001',
+            facilityName: 'Anchorage Comprehensive Treatment Center',
+            moudType: 'Buprenorphine',
+            enrollmentDate: '2024-02-10',
+            status: 'active'
+          },
+          pdmpConsent: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        }
+      ];
+
+      for (const patient of samplePatients) {
+        await this.offlineStorage.put('patients', patient);
+      }
+    }
+  }
 
   /**
    * Privacy-first patient search
