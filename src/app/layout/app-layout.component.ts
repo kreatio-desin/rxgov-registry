@@ -50,17 +50,22 @@ import { SyncService } from '../core/services/sync.service';
 
           <!-- Bottom Navigation -->
           <div class="nav-bottom">
-            <button class="nav-item" title="Offline Sync">
-              <i class="bi bi-cloud-arrow-up"></i>
-              <span class="nav-label">Offline Sync</span>
+            <div class="nav-divider"></div>
+            <button class="nav-item" title="Theme">
+              <i class="bi bi-circle-half"></i>
+              <span class="nav-label">Theme</span>
+            </button>
+            <button class="nav-item" title="Accessibility">
+              <i class="bi bi-person-standing"></i>
+              <span class="nav-label">Accessibility</span>
             </button>
             <button class="nav-item" title="Users">
               <i class="bi bi-people"></i>
               <span class="nav-label">Users</span>
             </button>
-            <button class="nav-item" title="Settings">
-              <i class="bi bi-gear"></i>
-              <span class="nav-label">Settings</span>
+            <button class="nav-item" title="Offline Sync">
+              <i class="bi bi-arrow-repeat"></i>
+              <span class="nav-label">Offline Sync</span>
             </button>
             <button class="nav-item nav-logout" title="Sign Out">
               <i class="bi bi-box-arrow-right"></i>
