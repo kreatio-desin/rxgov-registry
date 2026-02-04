@@ -1163,13 +1163,42 @@ export class AdmitComponent implements OnInit {
     return this.completedSteps.has(step);
   }
 
-  nextStep(step: EnrollmentStep): void {
+  async nextStep(step: EnrollmentStep): Promise<void> {
     if (step === 'demographics' && this.demographicsForm.valid) {
-      this.completedSteps.add('demographics');
-      this.currentStep = 'clinical';
+      // Check for duplicate patients
+      await this.checkForDuplicates();
     } else if (step === 'clinical' && this.clinicalForm.valid) {
       this.completedSteps.add('clinical');
       this.currentStep = 'consents';
+    }
+  }
+
+  private async checkForDuplicates(): Promise<void> {
+    const demographics = this.demographicsForm.value;
+
+    try {
+      const result = await this.patientService.searchPatient(
+        demographics.firstName,
+        demographics.lastName,
+        demographics.dateOfBirth,
+        demographics.ssn,
+        demographics.motherFirstName
+      );
+
+      if (result.type === 'conditional-match' && result.requiresAttestation) {
+        // Duplicate found - show restricted patient screen
+        this.duplicateFound = true;
+        this.currentStep = 'duplicate-check';
+      } else {
+        // No conflict - proceed to clinical
+        this.completedSteps.add('demographics');
+        this.currentStep = 'clinical';
+      }
+    } catch (error) {
+      console.error('Error checking for duplicates:', error);
+      // Proceed anyway on error
+      this.completedSteps.add('demographics');
+      this.currentStep = 'clinical';
     }
   }
 
