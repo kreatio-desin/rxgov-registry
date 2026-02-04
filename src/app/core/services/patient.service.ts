@@ -178,18 +178,28 @@ export class PatientService {
     ssn?: string,
     motherFirstName?: string
   ): Promise<SearchResult> {
-    // Search by name first
-    const matchesByName = await this.offlineStorage.getByIndex<Patient>(
-      'patients',
-      'lastName',
-      lastName
-    );
+    // Get all patients to search
+    const allPatients = await this.offlineStorage.getAll<Patient>('patients');
 
-    const exactMatches = matchesByName.filter(
-      (p) =>
-        p.firstName.toLowerCase() === firstName.toLowerCase() &&
-        p.dateOfBirth === dateOfBirth
-    );
+    // Search for matches by SSN first (primary identifier), then by name + DOB
+    let exactMatches: Patient[] = [];
+
+    if (ssn) {
+      // Search by SSN first - this is the primary duplicate identifier
+      exactMatches = allPatients.filter(
+        (p) => p.ssn === ssn
+      );
+    }
+
+    // If no SSN match, search by name + DOB
+    if (exactMatches.length === 0) {
+      exactMatches = allPatients.filter(
+        (p) =>
+          p.firstName.toLowerCase() === firstName.toLowerCase() &&
+          p.lastName.toLowerCase() === lastName.toLowerCase() &&
+          p.dateOfBirth === dateOfBirth
+      );
+    }
 
     if (exactMatches.length === 0) {
       // No match found
