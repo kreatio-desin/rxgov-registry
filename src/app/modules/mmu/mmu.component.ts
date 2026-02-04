@@ -589,174 +589,117 @@ interface AvailableStop extends RouteStop {
       }
     }
 
-    /* Modal Dialog Styles */
-    .modal-overlay {
+    /* Dropdown Styles */
+    .dropdown-wrapper {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
+      z-index: 999;
     }
 
-    .modal-dialog {
+    .dropdown-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      margin-top: 0.25rem;
       background: white;
-      border-radius: 0.75rem;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-      display: flex;
-      flex-direction: column;
-      width: 90%;
-      max-width: 28rem;
-      max-height: 80vh;
-      z-index: 1001;
-    }
-
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid #e5e7eb;
-
-      h3 {
-        margin: 0;
-        font-size: 1.125rem;
-        font-weight: 600;
-        color: #1f2937;
-      }
-    }
-
-    .close-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.25rem;
-      opacity: 0.6;
-      transition: opacity 0.2s;
-
-      &:hover {
-        opacity: 1;
-      }
-
-      i {
-        font-size: 1.25rem;
-        color: #6b7280;
-      }
-    }
-
-    .modal-body {
-      padding: 1rem 1.5rem;
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .modal-footer {
-      padding: 1rem 1.5rem;
-      border-top: 1px solid #e5e7eb;
-      display: flex;
-      gap: 0.75rem;
-      justify-content: flex-end;
-
-      button {
-        padding: 0.5rem 1rem;
-        border-radius: 0.375rem;
-        font-size: 0.875rem;
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-    }
-
-    .search-group {
-      margin-bottom: 1rem;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 0.75rem;
       border: 1px solid #e5e7eb;
       border-radius: 0.375rem;
-      font-size: 0.875rem;
-      background-color: #f9fafb;
-      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      z-index: 1000;
+      min-width: 18rem;
+      max-width: 100%;
+      max-height: 20rem;
+      overflow-y: auto;
+    }
 
-      &:focus {
-        outline: none;
-        border-color: #0c5caa;
-        background-color: white;
-        box-shadow: 0 0 0 3px rgba(12, 92, 170, 0.1);
+    .dropdown-inner {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dropdown-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      border-bottom: 1px solid #e5e7eb;
+
+      i {
+        font-size: 0.875rem;
+        color: #9ca3af;
+        flex-shrink: 0;
       }
     }
 
-    .search-results {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+    .dropdown-search {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 0;
+      font-size: 0.875rem;
+      outline: none;
+      color: #1f2937;
+
+      &::placeholder {
+        color: #9ca3af;
+      }
     }
 
-    .results-section {
+    .dropdown-list {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .results-title {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: #6b7280;
-      padding: 0 0 0.25rem 0;
-    }
-
-    .results-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+      padding: 0.5rem 0;
       max-height: 16rem;
       overflow-y: auto;
     }
 
-    .result-item {
+    .list-group-title {
+      font-size: 0.625rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #6b7280;
+      padding: 0.5rem 0.75rem 0.25rem 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .list-item {
       display: flex;
       align-items: flex-start;
-      gap: 0.75rem;
-      padding: 0.75rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.375rem;
+      gap: 0.5rem;
+      padding: 0.625rem 0.75rem;
       background: white;
+      border: none;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: background 0.15s;
       text-align: left;
+      width: 100%;
+      font-size: 0.75rem;
 
       &:hover {
-        border-color: #0c5caa;
-        background: #f0f9ff;
+        background: #f3f4f6;
       }
 
       i {
         flex-shrink: 0;
         color: #0c5caa;
-        font-size: 1rem;
+        font-size: 0.75rem;
         margin-top: 0.125rem;
       }
     }
 
-    .result-content {
+    .list-item-content {
       flex: 1;
       min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
     }
 
-    .result-name {
-      font-size: 0.875rem;
+    .list-item-name {
       font-weight: 500;
       color: #1f2937;
       white-space: nowrap;
@@ -764,71 +707,121 @@ interface AvailableStop extends RouteStop {
       text-overflow: ellipsis;
     }
 
-    .result-address {
-      font-size: 0.75rem;
+    .list-item-address {
       color: #6b7280;
-      margin-top: 0.125rem;
+      font-size: 0.7rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .no-results {
-      padding: 1.5rem 1rem;
+    .no-results-container {
+      padding: 1rem 0.75rem;
       text-align: center;
-      border: 1px dashed #e5e7eb;
-      border-radius: 0.375rem;
-
-      p {
-        margin: 0 0 0.75rem 0;
-        font-size: 0.875rem;
-        color: #6b7280;
-      }
+      border-top: 1px solid #e5e7eb;
     }
 
-    .btn-create {
+    .no-results-text {
+      margin: 0 0 0.75rem 0;
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .btn-create-stop {
       width: 100%;
-      padding: 0.75rem;
+      padding: 0.625rem 0.75rem;
       background: #0c5caa;
       color: white;
       border: none;
-      border-radius: 0.375rem;
-      font-size: 0.875rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: background 0.15s;
 
       &:hover {
         background: #0a4a85;
       }
     }
 
-    .form-group {
+    .form-mode {
+      padding: 0.75rem;
+    }
+
+    .form-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #1f2937;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .btn-back {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      color: #6b7280;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        font-size: 1rem;
+      }
+
+      &:hover {
+        color: #1f2937;
+      }
+    }
+
+    .form-group-inline {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
+      gap: 0.25rem;
+      margin-bottom: 0.75rem;
 
       label {
-        font-size: 0.875rem;
+        font-size: 0.75rem;
         font-weight: 500;
         color: #374151;
       }
     }
 
-    .form-input {
-      padding: 0.75rem;
+    .form-input-inline {
+      padding: 0.5rem;
       border: 1px solid #e5e7eb;
-      border-radius: 0.375rem;
-      font-size: 0.875rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
       background-color: #f9fafb;
-      transition: all 0.2s;
+      transition: all 0.15s;
 
       &:focus {
         outline: none;
         border-color: #0c5caa;
         background-color: white;
-        box-shadow: 0 0 0 3px rgba(12, 92, 170, 0.1);
+        box-shadow: 0 0 0 2px rgba(12, 92, 170, 0.1);
+      }
+    }
+
+    .btn-add-stop-save {
+      padding: 0.625rem;
+      background: #0c5caa;
+      color: white;
+      border: none;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-top: 0.5rem;
+
+      &:hover {
+        background: #0a4a85;
       }
     }
   `]
