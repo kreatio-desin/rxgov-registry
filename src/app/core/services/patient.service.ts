@@ -150,15 +150,12 @@ export class PatientService {
 
       for (const patient of samplePatients) {
         await this.offlineStorage.put('patients', patient);
-        // Grant access tokens for sample patients (internal clinic access)
-        this.patientAccessTokens.set(patient.id, true);
-      }
-    } else {
-      // Grant access tokens for existing patients (internal clinic access)
-      for (const patient of existingPatients) {
-        this.patientAccessTokens.set(patient.id, true);
       }
     }
+    // DO NOT grant access tokens automatically - they should only be granted when:
+    // 1. User provides attestation during enrollment of duplicate patient
+    // 2. User requests and is approved for break glass access
+    // 3. User's clinic has the patient enrolled
   }
 
   /**
