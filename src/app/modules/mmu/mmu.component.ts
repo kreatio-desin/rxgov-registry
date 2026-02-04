@@ -810,10 +810,7 @@ interface AvailableStop extends RouteStop {
     }
   `]
 })
-export class MMUComponent implements OnInit, AfterViewInit {
-  @ViewChild('addStopContainer', { static: false }) addStopContainer?: ElementRef;
-  @ViewChild('addStopBtn', { static: false }) addStopBtn?: ElementRef;
-
+export class MMUComponent implements OnInit {
   selectedUnit = 'unit1';
 
   routeStops: RouteStop[] = [
