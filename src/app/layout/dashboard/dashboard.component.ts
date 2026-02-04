@@ -115,7 +115,7 @@ interface PatientRecord {
 
           <!-- Mobile Cards -->
           <div class="md:hidden space-y-3">
-            <div *ngFor="let patient of recentPatients" class="patient-card">
+            <div *ngFor="let patient of recentPatients" class="patient-card clickable-card" (click)="navigateToPatient(patient.id)">
               <div class="card-header">
                 <div>
                   <div class="card-rxid">{{ patient.rxId }}</div>
