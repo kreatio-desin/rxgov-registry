@@ -140,14 +140,11 @@ import { SyncService } from '../core/services/sync.service';
     .sidebar {
       background: white;
       border-right: 1px solid #e5e7eb;
-      position: fixed;
-      left: 0;
-      top: 0;
       width: 52px;
       height: 100vh;
-      z-index: 1000;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
 
     .sidebar-content {
