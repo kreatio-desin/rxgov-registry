@@ -131,6 +131,7 @@ export class OfflineStorageService {
   }
 
   async get<T>(storeName: string, key: any): Promise<T | undefined> {
+    await this.ensureDbReady();
     return new Promise((resolve, reject) => {
       if (!this.db) {
         reject('Database not initialized');
