@@ -429,7 +429,7 @@ export class AppLayoutComponent implements OnInit {
   searchQuery = '';
   searchResults: SearchResult[] = [];
   isOnline = navigator.onLine;
-  syncStatus$ = this.syncService.syncStatus$;
+  syncStatus$!: any;
 
   constructor(
     private patientService: PatientService,
@@ -437,6 +437,7 @@ export class AppLayoutComponent implements OnInit {
     private syncService: SyncService,
     private router: Router
   ) {
+    this.syncStatus$ = this.syncService.syncStatus$;
     this.setupKeyboardShortcuts();
     this.setupOnlineOfflineListeners();
   }
