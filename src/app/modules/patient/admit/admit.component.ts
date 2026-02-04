@@ -1392,15 +1392,25 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       }
     }
 
+    .modal-attestation {
+      display: grid;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: #374151;
+
+      strong {
+        font-weight: 600;
+      }
+    }
+
     .attestation-list {
       margin: 0;
       padding-left: 1.25rem;
       list-style: disc;
-      space-y: 0.25rem;
-      margin-top: 0.5rem;
 
       li {
         margin-bottom: 0.25rem;
+        color: #6b7280;
       }
     }
 
