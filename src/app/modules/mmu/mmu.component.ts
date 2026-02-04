@@ -112,6 +112,113 @@ interface AvailableStop extends RouteStop {
           </div>
         </div>
       </div>
+
+      <!-- Add Stop Dialog -->
+      <div *ngIf="showAddStopDialog" class="modal-overlay" (click)="closeAddStopDialog()">
+        <div class="modal-dialog" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Add Stop</h3>
+            <button class="close-btn" (click)="closeAddStopDialog()">
+              <i class="bi bi-x"></i>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <!-- Search Step -->
+            <div *ngIf="!showCreateNewForm">
+              <div class="search-group">
+                <input
+                  type="text"
+                  [(ngModel)]="searchQuery"
+                  (input)="searchStops()"
+                  placeholder="Search existing stops..."
+                  class="search-input"
+                />
+              </div>
+
+              <div class="search-results">
+                <!-- Recent Stops -->
+                <div *ngIf="searchQuery === '' && recentStops.length > 0" class="results-section">
+                  <div class="results-title">Recent Stops</div>
+                  <div class="results-list">
+                    <button
+                      *ngFor="let stop of recentStops"
+                      class="result-item"
+                      (click)="selectStop(stop)"
+                    >
+                      <i class="bi bi-geo-alt"></i>
+                      <div class="result-content">
+                        <div class="result-name">{{ stop.name }}</div>
+                        <div class="result-address">{{ stop.address }}</div>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Search Results -->
+                <div *ngIf="searchQuery !== ''" class="results-section">
+                  <div *ngIf="filteredStops.length > 0" class="results-list">
+                    <button
+                      *ngFor="let stop of filteredStops"
+                      class="result-item"
+                      (click)="selectStop(stop)"
+                    >
+                      <i class="bi bi-geo-alt"></i>
+                      <div class="result-content">
+                        <div class="result-name">{{ stop.name }}</div>
+                        <div class="result-address">{{ stop.address }}</div>
+                      </div>
+                    </button>
+                  </div>
+
+                  <!-- No Results - Create New -->
+                  <div *ngIf="filteredStops.length === 0" class="no-results">
+                    <p>No existing stop found.</p>
+                    <button class="btn-create" (click)="startCreateNewStop()">
+                      Create "{{ searchQuery }}"
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Create New Stop Form -->
+            <div *ngIf="showCreateNewForm">
+              <div class="form-group">
+                <label>Stop Name</label>
+                <input
+                  type="text"
+                  [(ngModel)]="newStopName"
+                  placeholder="Enter stop name"
+                  class="form-input"
+                />
+              </div>
+              <div class="form-group">
+                <label>Address</label>
+                <input
+                  type="text"
+                  [(ngModel)]="newStopAddress"
+                  placeholder="Enter address"
+                  class="form-input"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn-secondary" (click)="closeAddStopDialog()">
+              {{ showCreateNewForm ? 'Back' : 'Cancel' }}
+            </button>
+            <button
+              *ngIf="showCreateNewForm"
+              class="btn-primary"
+              (click)="saveNewStop()"
+            >
+              Add Stop
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   `,
   styles: [`
