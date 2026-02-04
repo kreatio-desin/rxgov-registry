@@ -986,6 +986,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/patient/admit/new']);
   }
 
+  navigateToPatient(patientId: string): void {
+    this.router.navigate(['/patient', patientId]);
+  }
+
   reviewTransfer(transfer: Transfer): void {
     this.selectedTransfer = transfer;
     this.showTransferModal = true;
