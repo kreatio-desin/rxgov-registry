@@ -338,6 +338,7 @@ interface AvailableStop extends RouteStop {
       overflow-x: visible;
       flex: 1;
       min-height: 0;
+      clip-path: unset;
     }
 
     .stop-item {
