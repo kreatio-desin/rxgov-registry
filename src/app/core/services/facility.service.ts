@@ -43,9 +43,10 @@ export interface MMUStop {
 export class FacilityService {
   private currentFacilitySubject = new BehaviorSubject<Facility | null>(null);
   public currentFacility$ = this.currentFacilitySubject.asObservable();
+  private initializationPromise: Promise<void>;
 
   constructor(private offlineStorage: OfflineStorageService) {
-    this.initializeAlaskaFacilities();
+    this.initializationPromise = this.initializeAlaskaFacilities();
   }
 
   /**
