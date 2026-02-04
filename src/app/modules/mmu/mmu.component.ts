@@ -140,9 +140,8 @@ interface AvailableStop extends RouteStop {
                       </div>
                       <button class="btn-add-stop-save" (click)="saveNewStop()">Add Stop</button>
                     </div>
-                  </div>
-                </div>
               </div>
+              <!-- End of dropdown -->
             </div>
 
         <!-- Today's Encounters -->
