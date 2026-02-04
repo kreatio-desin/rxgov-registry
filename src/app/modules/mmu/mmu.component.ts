@@ -15,6 +15,10 @@ interface Encounter {
   service: string;
 }
 
+interface AvailableStop extends RouteStop {
+  // Extends RouteStop with same properties
+}
+
 @Component({
   selector: 'app-mmu',
   standalone: true,
