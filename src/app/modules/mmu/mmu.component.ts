@@ -594,10 +594,10 @@ interface AvailableStop extends RouteStop {
     }
 
     .dropdown-outside {
-      /* Positioned relative to add-stop-container */
-      position: absolute;
-      top: 2.5rem;
-      left: 0.75rem;
+      /* Positioned below the add-stop button */
+      position: absolute !important;
+      top: 9.5rem !important;
+      left: 1rem !important;
     }
 
     .dropdown-inner {
