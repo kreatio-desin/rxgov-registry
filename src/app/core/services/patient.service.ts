@@ -78,8 +78,8 @@ export class PatientService {
             phone: '(907) 555-0105'
           },
           currentEnrollment: {
-            facilityId: 'fac-act-001',
-            facilityName: 'Anchorage Comprehensive Treatment Center',
+            facilityId: 'fac-cms-001',
+            facilityName: 'Community Medical Services – Wasilla',
             moudType: 'Methadone',
             enrollmentDate: '2024-05-12',
             status: 'active'
