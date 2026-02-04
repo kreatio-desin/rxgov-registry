@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { FacilityService } from '../../core/services/facility.service';
 import { PatientService } from '../../core/services/patient.service';
 import { SyncService } from '../../core/services/sync.service';
