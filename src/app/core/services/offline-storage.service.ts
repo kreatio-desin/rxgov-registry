@@ -200,6 +200,7 @@ export class OfflineStorageService {
   }
 
   async clear(storeName: string): Promise<void> {
+    await this.ensureDbReady();
     return new Promise((resolve, reject) => {
       if (!this.db) {
         reject('Database not initialized');
