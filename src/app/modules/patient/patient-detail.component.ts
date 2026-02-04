@@ -535,12 +535,17 @@ interface AdministerDoseForm {
     .patient-meta {
       display: flex;
       flex-direction: column;
-      sm-flex-direction: row;
-      sm-items-center;
       gap: 0.75rem;
-      sm-gap: 0;
       font-size: 0.875rem;
       color: #6b7280;
+    }
+
+    @media (min-width: 640px) {
+      .patient-meta {
+        flex-direction: row;
+        align-items: center;
+        gap: 0;
+      }
     }
 
     .rx-id {
@@ -551,7 +556,12 @@ interface AdministerDoseForm {
 
     .meta-sep {
       display: none;
-      sm-display: inline;
+    }
+
+    @media (min-width: 640px) {
+      .meta-sep {
+        display: inline;
+      }
     }
 
     .ssn-wrapper {
