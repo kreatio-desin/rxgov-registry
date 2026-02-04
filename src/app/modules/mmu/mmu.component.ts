@@ -171,17 +171,18 @@ interface AvailableStop extends RouteStop {
             </div>
           </div>
         </div>
+      </div>
 
       <!-- Right Panel - Map/Details -->
-        <div class="right-panel">
-          <div class="map-placeholder">
-            <i class="bi bi-geo-alt"></i>
-            <h3>No Stop Selected</h3>
-            <p>Please select an active stop from the route list to begin logging encounters.</p>
-          </div>
+      <div class="right-panel">
+        <div class="map-placeholder">
+          <i class="bi bi-geo-alt"></i>
+          <h3>No Stop Selected</h3>
+          <p>Please select an active stop from the route list to begin logging encounters.</p>
         </div>
       </div>
     </div>
+  </div>
   `,
   styles: [`
     .mmu-wrapper {
