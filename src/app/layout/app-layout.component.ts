@@ -275,6 +275,12 @@ import { SyncService } from '../core/services/sync.service';
       padding: 8px;
       border-top: 1px solid #e5e7eb;
 
+      .nav-divider {
+        height: 1px;
+        background: #e5e7eb;
+        margin: 4px 0;
+      }
+
       .nav-item {
         width: 100%;
         padding: 8px 12px;
