@@ -150,6 +150,13 @@ export class PatientService {
 
       for (const patient of samplePatients) {
         await this.offlineStorage.put('patients', patient);
+        // Grant access tokens for sample patients (internal clinic access)
+        this.patientAccessTokens.set(patient.id, true);
+      }
+    } else {
+      // Grant access tokens for existing patients (internal clinic access)
+      for (const patient of existingPatients) {
+        this.patientAccessTokens.set(patient.id, true);
       }
     }
   }
