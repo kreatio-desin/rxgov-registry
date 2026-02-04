@@ -956,6 +956,12 @@ export class MMUComponent implements OnInit {
     this.showCreateNewForm = true;
   }
 
+  backToSearch(): void {
+    this.showCreateNewForm = false;
+    this.newStopName = '';
+    this.newStopAddress = '';
+  }
+
   saveNewStop(): void {
     if (this.newStopName.trim() && this.newStopAddress.trim()) {
       // Create new stop with unique ID
