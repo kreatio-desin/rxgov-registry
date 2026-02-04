@@ -54,6 +54,7 @@ export class FacilityService {
    * Initialize Alaska OTP facilities (demo data)
    */
   private async initializeAlaskaFacilities(): Promise<void> {
+    await this.offlineStorage.ensureDbReady();
     const facilities = await this.offlineStorage.getAll<Facility>('facilities');
     if (facilities.length === 0) {
       await this.loadAlaskaFacilities();
