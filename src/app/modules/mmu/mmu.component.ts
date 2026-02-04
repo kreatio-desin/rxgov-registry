@@ -141,7 +141,6 @@ interface AvailableStop extends RouteStop {
                     </div>
                   </div>
                 </div>
-                </div>
               </div>
             </div>
           </div>
