@@ -365,7 +365,7 @@ import { FacilityService, Facility } from '../../core/services/facility.service'
 
     /* Mobile View */
     .hidden-mobile {
-      display: none;
+      display: block;
     }
 
     .visible-mobile {
