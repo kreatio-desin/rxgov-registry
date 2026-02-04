@@ -140,9 +140,13 @@ import { SyncService } from '../core/services/sync.service';
   styles: [`
     .layout-wrapper {
       display: grid;
-      grid-template-columns: 52px 1fr;
+      grid-template-columns: 200px 1fr;
       min-height: 100vh;
       background-color: #f8f9fa;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* Sidebar Styles */
