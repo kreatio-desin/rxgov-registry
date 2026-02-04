@@ -149,7 +149,7 @@ import { SyncService } from '../core/services/sync.service';
     .sidebar {
       background: white;
       border-right: 1px solid #e5e7eb;
-      width: 52px;
+      width: 200px;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -159,7 +159,7 @@ import { SyncService } from '../core/services/sync.service';
     .sidebar-content {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       height: 100%;
       padding: 0;
     }
@@ -168,15 +168,18 @@ import { SyncService } from '../core/services/sync.service';
       height: 56px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       border-bottom: 1px solid #e5e7eb;
       width: 100%;
+      padding: 0 12px;
+      gap: 8px;
     }
 
     .logo-img {
       width: 32px;
       height: 32px;
       border-radius: 6px;
+      flex-shrink: 0;
     }
 
     .nav-menu {
@@ -188,11 +191,12 @@ import { SyncService } from '../core/services/sync.service';
     }
 
     .nav-item {
-      width: 36px;
-      height: 36px;
+      width: 100%;
+      height: auto;
+      min-height: 40px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 12px;
       border-radius: 6px;
       color: #6b7280;
       border: none;
@@ -201,6 +205,13 @@ import { SyncService } from '../core/services/sync.service';
       transition: all 0.2s;
       font-size: 18px;
       position: relative;
+      padding: 8px 12px;
+      text-decoration: none;
+
+      i {
+        font-size: 18px;
+        flex-shrink: 0;
+      }
 
       &:hover {
         background: #f3f4f6;
@@ -211,6 +222,15 @@ import { SyncService } from '../core/services/sync.service';
         background: #dbeafe;
         color: #0066cc;
       }
+    }
+
+    .nav-label {
+      font-size: 13px;
+      font-weight: 500;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .nav-bottom {
