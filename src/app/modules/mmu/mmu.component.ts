@@ -72,7 +72,7 @@ interface AvailableStop extends RouteStop {
                     </button>
                   </div>
                 </div>
-                <button class="btn-add-stop" (click)="addStop()">
+                <button class="btn-add-stop" (click)="openAddStopDialog()">
                   <i class="bi bi-plus"></i>
                   Add Stop
                 </button>
