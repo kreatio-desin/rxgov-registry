@@ -243,6 +243,7 @@ export class FacilityService {
    * Get all facilities
    */
   async getAllFacilities(): Promise<Facility[]> {
+    await this.initializationPromise;
     return this.offlineStorage.getAll<Facility>('facilities');
   }
 
