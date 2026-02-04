@@ -580,7 +580,9 @@ interface AvailableStop extends RouteStop {
     }
 
     .dropdown-content {
-      position: fixed;
+      position: absolute;
+      top: calc(100% + 0.25rem);
+      left: 0;
       background: white;
       border: 1px solid #e5e7eb;
       border-radius: 0.375rem;
@@ -592,7 +594,10 @@ interface AvailableStop extends RouteStop {
     }
 
     .dropdown-outside {
-      /* Will be positioned dynamically by component */
+      /* Positioned relative to add-stop-container */
+      position: absolute;
+      top: 2.5rem;
+      left: 0.75rem;
     }
 
     .dropdown-inner {
