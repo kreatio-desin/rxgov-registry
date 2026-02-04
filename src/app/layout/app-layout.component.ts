@@ -66,10 +66,10 @@ import { SyncService } from '../core/services/sync.service';
           <div class="header-actions">
             <div class="sync-status" *ngIf="(syncStatus$ | async) as sync">
               <i
-                [class]="(sync | keyValue).value.isSyncing ? 'bi bi-arrow-repeat rotating' : 'bi bi-check-circle'"
-                [title]="(sync | keyValue).value.lastSync ? 'Last sync: ' + ((sync | keyValue).value.lastSync | date:'short') : 'Not synced'"
+                [class]="sync['isSyncing'] ? 'bi bi-arrow-repeat rotating' : 'bi bi-check-circle'"
+                [title]="sync['lastSync'] ? 'Last sync: ' + (sync['lastSync'] | date:'short') : 'Not synced'"
               ></i>
-              <span *ngIf="(sync | keyValue).value.pendingItems > 0" class="pending-badge">{{ (sync | keyValue).value.pendingItems }}</span>
+              <span *ngIf="sync['pendingItems'] > 0" class="pending-badge">{{ sync['pendingItems'] }}</span>
             </div>
             
             <div class="online-status">
