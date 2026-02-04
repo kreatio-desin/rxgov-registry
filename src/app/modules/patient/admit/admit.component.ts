@@ -612,6 +612,27 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       gap: 1.5rem;
     }
 
+    .duplicate-check-card {
+      border-top: 4px solid #f59e0b;
+    }
+
+    .duplicate-content {
+      padding: 1.5rem;
+    }
+
+    .amber-header {
+      background-color: #fef3c7;
+      border-bottom: 1px solid #fcd34d;
+    }
+
+    .warning-icon {
+      color: #b45309;
+
+      i {
+        color: inherit;
+      }
+    }
+
     .card-header {
       display: grid;
       grid-template-columns: auto 1fr;
