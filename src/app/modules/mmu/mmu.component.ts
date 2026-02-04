@@ -171,9 +171,8 @@ interface AvailableStop extends RouteStop {
             </div>
           </div>
         </div>
-      </div>
 
-        <!-- Right Panel - Map/Details -->
+      <!-- Right Panel - Map/Details -->
         <div class="right-panel">
           <div class="map-placeholder">
             <i class="bi bi-geo-alt"></i>
