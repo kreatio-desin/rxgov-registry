@@ -1105,11 +1105,13 @@ export class AdmitComponent implements OnInit {
   demographicsForm!: FormGroup;
   clinicalForm!: FormGroup;
   consentsForm!: FormGroup;
-  
+
   facilities: Facility[] = [];
   isSubmitting = false;
   successMessage = '';
   errorMessage = '';
+  duplicateFound = false;
+  breakGlassRequested = false;
 
   private completedSteps = new Set<EnrollmentStep>();
 
