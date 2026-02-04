@@ -251,6 +251,7 @@ interface AvailableStop extends RouteStop {
     .route-card {
       flex: 0 0 auto;
       max-height: 55%;
+      overflow: visible;
     }
 
     .encounters-card {
