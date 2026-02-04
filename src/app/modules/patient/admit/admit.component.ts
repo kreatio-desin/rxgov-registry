@@ -222,6 +222,75 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
             </div>
           </div>
 
+          <!-- Duplicate Check Step -->
+          <div *ngIf="currentStep === 'duplicate-check'" class="enrollment-card duplicate-check-card">
+            <div class="card-header amber-header">
+              <div class="header-icon warning-icon">
+                <i class="bi bi-exclamation-triangle"></i>
+              </div>
+              <div class="header-content">
+                <h3 class="card-title">Possible Duplicate Patients Found</h3>
+                <p class="card-description">We found 1 existing patient record(s) that match the details you entered. Please verify if the patient is already enrolled before creating a new record.</p>
+              </div>
+            </div>
+
+            <div class="card-content duplicate-content">
+              <!-- Possible Match Card -->
+              <div class="match-card">
+                <div class="match-header">
+                  <span class="badge badge-possible-match">Possible Match</span>
+                  <span class="match-reason">Reason: SSN Last 4 Match</span>
+                  <span class="badge badge-restricted">
+                    <i class="bi bi-lock"></i>
+                    Restricted
+                  </span>
+                </div>
+
+                <div class="match-body">
+                  <div class="patient-avatar">
+                    <i class="bi bi-person"></i>
+                  </div>
+                  <div class="patient-info">
+                    <h4>Restricted Patient Record</h4>
+                    <p class="text-small">Identity protected under 42 CFR Part 2</p>
+                  </div>
+                </div>
+
+                <div class="match-note">
+                  <p>This patient is enrolled at another facility. To view details or coordinate care, you must verify identity and attest to having a valid release of information.</p>
+                </div>
+
+                <button type="button" class="btn btn-break-glass" (click)="requestBreakGlassAccess()">
+                  <i class="bi bi-shield-check"></i>
+                  Request "Break Glass" Access
+                </button>
+              </div>
+
+              <!-- Info Box -->
+              <div class="info-box blue-info">
+                <div class="info-icon">
+                  <i class="bi bi-eye"></i>
+                </div>
+                <p>If you are certain this is a different person (e.g., same name but different person), you may proceed. Otherwise, cancel this enrollment and manage the existing patient record.</p>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <button type="button" class="btn btn-secondary" (click)="backToEdit()">
+                Back to Edit
+              </button>
+              <div class="action-buttons">
+                <button type="button" class="btn btn-cancel" (click)="cancelEnrollment()">
+                  <i class="bi bi-x"></i>
+                  Cancel Enrollment
+                </button>
+                <button type="button" class="btn btn-primary" (click)="proceedAsNewPatient()">
+                  It's a Different Person, Proceed
+                </button>
+              </div>
+            </div>
+          </div>
+
           <!-- Clinical Step -->
           <div *ngIf="currentStep === 'clinical'" class="enrollment-card">
             <div class="card-header">
