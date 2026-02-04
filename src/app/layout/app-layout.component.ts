@@ -18,6 +18,10 @@ import { SyncService } from '../core/services/sync.service';
           <!-- Logo -->
           <div class="logo-section">
             <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%230066cc' width='32' height='32' rx='6'/%3E%3Ctext x='50%25' y='50%25' font-size='18' font-weight='bold' fill='white' text-anchor='middle' dominant-baseline='middle'%3ERx%3C/text%3E%3C/svg%3E" alt="RxGov" class="logo-img">
+            <div class="logo-text">
+              <div class="logo-title">REGISTRY</div>
+              <div class="logo-subtitle">My Clinic</div>
+            </div>
           </div>
 
           <!-- Navigation Items -->
