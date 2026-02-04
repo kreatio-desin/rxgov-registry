@@ -272,6 +272,7 @@ export class FacilityService {
    * Delete facility
    */
   async deleteFacility(id: string): Promise<void> {
+    await this.initializationPromise;
     await this.offlineStorage.delete('facilities', id);
   }
 
