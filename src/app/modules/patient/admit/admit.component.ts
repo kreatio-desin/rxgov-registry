@@ -425,8 +425,8 @@ type EnrollmentStep = 'demographics' | 'clinical' | 'consents';
   `,
   styles: [`
     .enrollment-layout {
-      display: grid;
-      grid-template-columns: 52px 1fr;
+      display: flex;
+      flex-direction: column;
       min-height: 100vh;
       background-color: #f8f9fa;
     }
