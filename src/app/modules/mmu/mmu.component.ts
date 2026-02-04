@@ -332,6 +332,7 @@ interface AvailableStop extends RouteStop {
       display: grid;
       gap: 0.375rem;
       overflow-y: auto;
+      overflow-x: visible;
       flex: 1;
       min-height: 0;
     }
