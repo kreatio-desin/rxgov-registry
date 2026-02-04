@@ -144,9 +144,8 @@ interface AvailableStop extends RouteStop {
                       </div>
                       <button class="btn-add-stop-save" (click)="saveNewStop()">Add Stop</button>
                     </div>
-              </div>
-              <!-- End of dropdown -->
-            </div>
+        </div>
+        <!-- End of dropdown -->
 
         <!-- Today's Encounters -->
         <div class="encounters-card">
