@@ -194,6 +194,29 @@ import { SyncService } from '../core/services/sync.service';
       flex-shrink: 0;
     }
 
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .logo-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: #1f2937;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .logo-subtitle {
+      font-size: 11px;
+      color: #6b7280;
+      line-height: 1;
+    }
+
     .nav-menu {
       display: flex;
       flex-direction: column;
