@@ -11,184 +11,321 @@ import { SyncService } from '../core/services/sync.service';
   standalone: true,
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, FormsModule],
   template: `
-    <div class="app-container">
-      <!-- Header with Global Search -->
-      <header class="app-header">
-        <div class="header-content">
-          <div class="logo">
-            <i class="bi bi-hospital"></i>
-            <span>RxGov Registry</span>
+    <div class="layout-wrapper">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <!-- Logo -->
+          <div class="logo-section">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%230066cc' width='32' height='32' rx='6'/%3E%3Ctext x='50%25' y='50%25' font-size='18' font-weight='bold' fill='white' text-anchor='middle' dominant-baseline='middle'%3ERx%3C/text%3E%3C/svg%3E" alt="RxGov" class="logo-img">
           </div>
-          
-          <div class="search-container">
-            <div class="search-box">
+
+          <!-- Navigation Items -->
+          <nav class="nav-menu">
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" 
+               class="nav-item" title="Dashboard">
+              <i class="bi bi-layout-dashboard"></i>
+            </a>
+            <a routerLink="/patient" routerLinkActive="active" 
+               class="nav-item" title="Patients">
+              <i class="bi bi-bus"></i>
+            </a>
+            <a routerLink="/facilities" routerLinkActive="active" 
+               class="nav-item" title="Facilities">
+              <i class="bi bi-building-2"></i>
+            </a>
+            <a routerLink="/emergency" routerLinkActive="active" 
+               class="nav-item" title="Analytics">
+              <i class="bi bi-file-earmark-bar-graph"></i>
+            </a>
+          </nav>
+
+          <!-- Bottom Navigation -->
+          <div class="nav-bottom">
+            <button class="nav-item" title="Theme">
+              <i class="bi bi-circle-half"></i>
+            </button>
+            <button class="nav-item" title="User">
+              <i class="bi bi-person-circle"></i>
+            </button>
+            <button class="nav-item" title="Settings">
+              <i class="bi bi-arrow-repeat"></i>
+            </button>
+            <button class="nav-item" title="Logout">
+              <i class="bi bi-box-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="main-wrapper">
+        <!-- Header -->
+        <header class="main-header">
+          <div class="header-left">
+            <button class="menu-toggle" (click)="toggleSidebar()">
+              <i class="bi bi-list"></i>
+            </button>
+            <h1 class="page-title">My Clinic Dashboard</h1>
+          </div>
+
+          <div class="header-center">
+            <div class="search-container">
               <i class="bi bi-search"></i>
-              <input
+              <input 
                 #globalSearch
-                type="text"
-                placeholder="Search patient (Ctrl+J)..."
+                type="text" 
+                placeholder="Search Registry..." 
                 [(ngModel)]="searchQuery"
                 (input)="onSearchInput()"
                 (blur)="closeSearchResults()"
                 class="search-input"
               />
-              
-              <!-- Search Results Dropdown -->
+              <kbd class="search-kbd">⌘J</kbd>
+
+              <!-- Search Results -->
               <div *ngIf="searchResults.length > 0" class="search-results">
-                <div
-                  *ngFor="let result of searchResults"
-                  class="search-result-item"
-                  (click)="selectSearchResult(result)"
-                >
-                  <div class="result-header">
-                    <span *ngIf="result.patient" class="patient-name">
-                      {{ result.patient.firstName }} {{ result.patient.lastName }}
-                    </span>
-                    <span *ngIf="!result.patient && result.type === 'conditional-match'" class="conditional-badge">
-                      Potential Match Found
-                    </span>
-                  </div>
-                  <div *ngIf="result.patient" class="result-meta">
-                    <span class="registry-id">{{ result.patient.registryId }}</span>
-                    <span class="status" [class]="result.patient.currentEnrollment?.status">
-                      {{ result.patient.currentEnrollment?.status || 'No Enrollment' }}
-                    </span>
-                  </div>
-                  <div *ngIf="result.type === 'conditional-match'" class="result-meta warning">
-                    <i class="bi bi-exclamation-triangle"></i>
-                    Consent required to view details
-                  </div>
+                <div *ngFor="let result of searchResults" 
+                     class="search-result-item"
+                     (click)="selectSearchResult(result)">
+                  <span *ngIf="result.patient" class="result-name">
+                    {{ result.patient.firstName }} {{ result.patient.lastName }}
+                  </span>
+                  <span *ngIf="!result.patient" class="result-name">
+                    Potential Match Found
+                  </span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="header-actions">
-            <div class="sync-status">
-              <i class="bi bi-cloud-check"></i>
+          <div class="header-right">
+            <div class="facility-info">
+              <div class="status-indicator"></div>
+              <div class="facility-text">
+                <div class="facility-name hidden lg:block">Anchorage Comprehensive Treatment Center</div>
+                <div class="facility-name-short lg:hidden">Anchorage Comprehens</div>
+                <div class="user-name">Liam Williams</div>
+              </div>
             </div>
-            
-            <div class="online-status">
-              <i [class]="isOnline ? 'bi bi-wifi' : 'bi bi-wifi-off offline'"></i>
-              <span>{{ isOnline ? 'Online' : 'Offline' }}</span>
-            </div>
+
+            <button class="notification-btn">
+              <i class="bi bi-bell"></i>
+              <span class="notification-badge">2</span>
+            </button>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <!-- Main Navigation -->
-      <nav class="app-nav">
-        <div class="nav-content">
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            <i class="bi bi-house"></i>
-            Dashboard
-          </a>
-          <a routerLink="/patient" routerLinkActive="active">
-            <i class="bi bi-person"></i>
-            Patients
-          </a>
-          <a routerLink="/facilities" routerLinkActive="active">
-            <i class="bi bi-building"></i>
-            Facilities
-          </a>
-          <a routerLink="/emergency" routerLinkActive="active">
-            <i class="bi bi-exclamation-circle"></i>
-            Emergency
-          </a>
-          <a routerLink="/mmu" routerLinkActive="active">
-            <i class="bi bi-van-front"></i>
-            MMU
-          </a>
-          <a routerLink="/compliance" routerLinkActive="active">
-            <i class="bi bi-shield-check"></i>
-            Compliance
-          </a>
-          <a routerLink="/settings" routerLinkActive="active">
-            <i class="bi bi-gear"></i>
-            Settings
-          </a>
-        </div>
-      </nav>
+        <!-- Main Content Area -->
+        <main class="main-content">
+          <router-outlet></router-outlet>
+        </main>
+      </div>
 
-      <!-- Main Content -->
-      <main class="app-main">
-        <router-outlet></router-outlet>
-      </main>
+      <!-- Floating Help Button -->
+      <button class="help-button" title="Help and Support">
+        <i class="bi bi-life-preserver"></i>
+      </button>
     </div>
   `,
   styles: [`
-    .app-container {
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
+    .layout-wrapper {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      min-height: 100vh;
       background-color: #f8f9fa;
     }
 
-    .app-header {
+    /* Sidebar Styles */
+    .sidebar {
       background: white;
-      border-bottom: 1px solid #dee2e6;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border-right: 1px solid #e5e7eb;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 52px;
+      height: 100vh;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
       padding: 0;
+    }
+
+    .logo-section {
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid #e5e7eb;
+      width: 100%;
+    }
+
+    .logo-img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+    }
+
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 8px;
+      flex: 1;
+    }
+
+    .nav-item {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      color: #6b7280;
+      border: none;
+      background: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 18px;
+      position: relative;
+
+      &:hover {
+        background: #f3f4f6;
+        color: #0066cc;
+      }
+
+      &.active {
+        background: #dbeafe;
+        color: #0066cc;
+      }
+    }
+
+    .nav-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 8px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    /* Main Wrapper */
+    .main-wrapper {
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header Styles */
+    .main-header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      gap: 24px;
       position: sticky;
       top: 0;
-      z-index: 1000;
+      z-index: 500;
     }
 
-    .header-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      width: 100%;
-      padding: 1rem 2rem;
+    .header-left {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 12px;
+      min-width: 0;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #0c5caa;
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 1px solid #e5e7eb;
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #374151;
+      font-size: 18px;
+
+      @media (max-width: 768px) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .page-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1f2937;
+      margin: 0;
       white-space: nowrap;
-      flex-shrink: 0;
+      display: none;
+
+      @media (max-width: 1024px) {
+        display: none;
+      }
+
+      @media (min-width: 1024px) {
+        display: block;
+      }
     }
 
-    .logo i {
-      font-size: 2rem;
-    }
-
-    .search-container {
+    .header-center {
       flex: 1;
       max-width: 500px;
     }
 
-    .search-box {
+    .search-container {
       position: relative;
       display: flex;
       align-items: center;
-      background: #f8f9fa;
-      border: 1px solid #dee2e6;
+      background: white;
+      border: 1px solid #e5e7eb;
       border-radius: 6px;
-      padding: 0.5rem 1rem;
-    }
+      padding: 8px 12px;
+      gap: 8px;
 
-    .search-box i {
-      color: #6c757d;
-      margin-right: 0.5rem;
+      i {
+        color: #6b7280;
+        font-size: 16px;
+      }
     }
 
     .search-input {
       border: none;
-      background: transparent;
-      flex: 1;
-      padding: 0.5rem;
+      background: none;
       outline: none;
-      font-size: 0.9rem;
+      flex: 1;
+      font-size: 14px;
+      color: #1f2937;
 
       &::placeholder {
-        color: #adb5bd;
+        color: #9ca3af;
+      }
+    }
+
+    .search-kbd {
+      font-size: 11px;
+      color: #6b7280;
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+      border: 1px solid #e5e7eb;
+      display: none;
+
+      @media (min-width: 640px) {
+        display: block;
       }
     }
 
@@ -198,22 +335,23 @@ import { SyncService } from '../core/services/sync.service';
       left: 0;
       right: 0;
       background: white;
-      border: 1px solid #dee2e6;
+      border: 1px solid #e5e7eb;
       border-top: none;
       border-radius: 0 0 6px 6px;
-      max-height: 400px;
+      max-height: 300px;
       overflow-y: auto;
-      z-index: 1001;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .search-result-item {
-      padding: 1rem;
-      border-bottom: 1px solid #f0f0f0;
+      padding: 12px;
+      border-bottom: 1px solid #f3f4f6;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: background 0.2s;
 
       &:hover {
-        background-color: #f8f9fa;
+        background: #f9fafb;
       }
 
       &:last-child {
@@ -221,200 +359,193 @@ import { SyncService } from '../core/services/sync.service';
       }
     }
 
-    .result-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.25rem;
+    .result-name {
+      color: #1f2937;
+      font-weight: 500;
+      font-size: 14px;
     }
 
-    .patient-name {
-      font-weight: bold;
-      color: #333;
-    }
-
-    .conditional-badge {
-      background: #fff3cd;
-      color: #856404;
-      padding: 0.25rem 0.75rem;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      font-weight: bold;
-    }
-
-    .result-meta {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.85rem;
-      color: #6c757d;
-
-      &.warning {
-        color: #856404;
-        gap: 0.5rem;
-        align-items: center;
-      }
-    }
-
-    .registry-id {
-      font-family: monospace;
-      color: #0c5caa;
-    }
-
-    .status {
-      padding: 0.25rem 0.5rem;
-      border-radius: 3px;
-      font-weight: bold;
-      text-transform: capitalize;
-
-      &.active {
-        background: #d4edda;
-        color: #155724;
-      }
-
-      &.inactive {
-        background: #e2e3e5;
-        color: #383d41;
-      }
-    }
-
-    .header-actions {
+    .header-right {
       display: flex;
       align-items: center;
-      gap: 2rem;
-      flex-shrink: 0;
+      gap: 16px;
     }
 
-    .sync-status {
+    .facility-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      @media (max-width: 640px) {
+        display: none;
+      }
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      title: 'Clinic Online';
+    }
+
+    .facility-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .facility-name {
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.2;
+    }
+
+    .facility-name-short {
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.2;
+    }
+
+    .user-name {
+      font-size: 12px;
+      color: #9ca3af;
+      font-weight: 500;
+    }
+
+    .notification-btn {
       position: relative;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      background: none;
+      border: none;
+      color: #6b7280;
+      font-size: 20px;
       cursor: pointer;
+      transition: color 0.2s;
 
-      i {
-        font-size: 1.25rem;
-        color: #28a745;
-
-        &.rotating {
-          animation: spin 2s linear infinite;
-          color: #0c5caa;
-        }
-      }
-
-      .pending-badge {
-        position: absolute;
-        top: -8px;
-        right: -12px;
-        background: #dc3545;
-        color: white;
-        border-radius: 10px;
-        padding: 2px 6px;
-        font-size: 0.75rem;
-        font-weight: bold;
+      &:hover {
+        color: #374151;
       }
     }
 
-    .online-status {
+    .notification-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: #ef4444;
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      color: #6c757d;
-
-      i {
-        font-size: 1.25rem;
-        color: #28a745;
-
-        &.offline {
-          color: #dc3545;
-        }
-      }
+      justify-content: center;
+      font-size: 11px;
+      font-weight: bold;
     }
 
-    .app-nav {
-      background: white;
-      border-bottom: 1px solid #dee2e6;
-      padding: 0;
-      position: sticky;
-      top: 70px;
-      z-index: 999;
-    }
-
-    .nav-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      width: 100%;
-      display: flex;
-      gap: 0;
-
-      a {
-        padding: 1rem 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #6c757d;
-        text-decoration: none;
-        border-bottom: 3px solid transparent;
-        transition: all 0.2s;
-        white-space: nowrap;
-
-        i {
-          font-size: 1.1rem;
-        }
-
-        &:hover {
-          color: #0c5caa;
-          background-color: #f8f9fa;
-        }
-
-        &.active {
-          color: #0c5caa;
-          border-bottom-color: #0c5caa;
-        }
-      }
-    }
-
-    .app-main {
+    /* Main Content */
+    .main-content {
       flex: 1;
       overflow-y: auto;
-      padding: 2rem;
+      padding: 24px;
     }
 
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
+    /* Help Button */
+    .help-button {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #0066cc;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+      transition: all 0.2s;
+      z-index: 999;
+
+      &:hover {
+        background: #0052a3;
+        box-shadow: 0 6px 16px rgba(0, 102, 204, 0.4);
+        transform: scale(1.05);
       }
     }
 
+    /* Responsive */
     @media (max-width: 768px) {
-      .header-content {
-        flex-wrap: wrap;
-        gap: 1rem;
-        padding: 1rem;
+      .layout-wrapper {
+        grid-template-columns: 1fr;
       }
 
-      .search-container {
-        order: 3;
-        flex-basis: 100%;
-      }
-
-      .logo {
-        font-size: 1.25rem;
-      }
-
-      .logo span {
+      .sidebar {
         display: none;
       }
 
-      .nav-content {
-        overflow-x: auto;
+      .main-wrapper {
+        grid-column: 1;
       }
 
-      .nav-content a {
-        padding: 1rem;
+      .main-header {
+        padding: 0 16px;
+        gap: 12px;
+      }
+
+      .header-center {
+        max-width: none;
+      }
+
+      .page-title {
+        display: block;
+      }
+
+      .main-content {
+        padding: 16px;
+      }
+
+      .help-button {
+        bottom: 16px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-header {
+        flex-direction: column;
+        height: auto;
+        padding: 12px 16px;
+        gap: 12px;
+      }
+
+      .header-left {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .page-title {
+        font-size: 16px;
+      }
+
+      .header-center {
+        width: 100%;
+      }
+
+      .header-right {
+        width: 100%;
+        justify-content: flex-end;
+        gap: 12px;
+      }
+
+      .search-kbd {
+        display: none;
       }
     }
   `]
@@ -426,6 +557,7 @@ export class AppLayoutComponent implements OnInit {
   searchResults: SearchResult[] = [];
   isOnline = navigator.onLine;
   syncStatus$: any;
+  sidebarOpen = false;
 
   constructor(
     private patientService: PatientService,
@@ -439,12 +571,11 @@ export class AppLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Initialize any needed data
+    // Initialize
   }
 
   private setupKeyboardShortcuts(): void {
     document.addEventListener('keydown', (e) => {
-      // Ctrl+J for global search
       if ((e.ctrlKey || e.metaKey) && e.key === 'j') {
         e.preventDefault();
         this.globalSearchInput?.nativeElement?.focus();
@@ -455,13 +586,15 @@ export class AppLayoutComponent implements OnInit {
   private setupOnlineOfflineListeners(): void {
     window.addEventListener('online', () => {
       this.isOnline = true;
-      console.log('Online');
     });
 
     window.addEventListener('offline', () => {
       this.isOnline = false;
-      console.log('Offline - using cached data');
     });
+  }
+
+  toggleSidebar(): void {
+    this.sidebarOpen = !this.sidebarOpen;
   }
 
   async onSearchInput(): Promise<void> {
@@ -470,7 +603,6 @@ export class AppLayoutComponent implements OnInit {
       return;
     }
 
-    // Simple search by patient name
     const parts = this.searchQuery.trim().split(' ');
     const firstName = parts[0];
     const lastName = parts.length > 1 ? parts[parts.length - 1] : '';
@@ -479,24 +611,21 @@ export class AppLayoutComponent implements OnInit {
       const result = await this.patientService.searchPatient(
         firstName,
         lastName,
-        '', // dateOfBirth - could be parsed from search
-        '', // ssn
+        '',
+        '',
         ''
       );
 
       this.searchResults = result.type !== 'no-match' ? [result] : [];
     } catch (error) {
-      console.error('Search error:', error);
       this.searchResults = [];
     }
   }
 
   async selectSearchResult(result: SearchResult): Promise<void> {
     if (result.type === 'conditional-match') {
-      // Navigate to attestation/break glass workflow
       this.router.navigate(['/emergency'], { queryParams: { hash: result.hash } });
     } else if (result.type === 'unconditional-match' && result.patient) {
-      // Navigate to patient detail
       this.patientService.setCurrentPatient(result.patient);
       this.router.navigate(['/patient', result.patient.id]);
     }
