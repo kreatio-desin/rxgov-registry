@@ -27,14 +27,14 @@ import { SyncService } from '../core/services/sync.service';
           <!-- Navigation Items -->
           <nav class="nav-menu">
             <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-               class="nav-item" title="Dashboard">
+               class="nav-item" title="My Clinic">
               <i class="bi bi-layout-dashboard"></i>
-              <span class="nav-label">Dashboard</span>
+              <span class="nav-label">My Clinic</span>
             </a>
-            <a routerLink="/patient" routerLinkActive="active"
-               class="nav-item" title="Patients">
+            <a routerLink="/mmu" routerLinkActive="active"
+               class="nav-item" title="Mobile Unit">
               <i class="bi bi-bus"></i>
-              <span class="nav-label">Patients</span>
+              <span class="nav-label">Mobile Unit</span>
             </a>
             <a routerLink="/facilities" routerLinkActive="active"
                class="nav-item" title="Facilities">
@@ -42,14 +42,9 @@ import { SyncService } from '../core/services/sync.service';
               <span class="nav-label">Facilities</span>
             </a>
             <a routerLink="/compliance" routerLinkActive="active"
-               class="nav-item" title="Compliance">
-              <i class="bi bi-file-earmark-check"></i>
-              <span class="nav-label">Compliance</span>
-            </a>
-            <a routerLink="/emergency" routerLinkActive="active"
-               class="nav-item" title="Emergency">
-              <i class="bi bi-exclamation-triangle"></i>
-              <span class="nav-label">Emergency</span>
+               class="nav-item" title="Reports">
+              <i class="bi bi-file-earmark-bar-graph"></i>
+              <span class="nav-label">Reports</span>
             </a>
           </nav>
 
