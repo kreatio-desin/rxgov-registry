@@ -505,10 +505,15 @@ interface AdministerDoseForm {
     .header-content {
       display: flex;
       flex-direction: column;
-      sm-flex-direction: row;
       justify-content: space-between;
       align-items: flex-start;
       gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .header-content {
+        flex-direction: row;
+      }
     }
 
     .patient-info {
