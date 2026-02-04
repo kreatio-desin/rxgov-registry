@@ -1210,6 +1210,40 @@ export class AdmitComponent implements OnInit {
     }
   }
 
+  backToEdit(): void {
+    this.currentStep = 'demographics';
+    this.duplicateFound = false;
+    this.breakGlassRequested = false;
+  }
+
+  cancelEnrollment(): void {
+    if (confirm('Are you sure you want to cancel this enrollment?')) {
+      this.router.navigate(['/']);
+    }
+  }
+
+  proceedAsNewPatient(): void {
+    // Grant attestation and proceed to clinical step
+    const demographics = this.demographicsForm.value;
+    // In a real scenario, this would grant a break glass access token
+    // For now, we just grant attestation locally
+    this.patientService.grantAccessViaAttestation(
+      'temp-' + demographics.ssn,
+      'current-user',
+      'Different person attestation during enrollment'
+    );
+
+    this.completedSteps.add('demographics');
+    this.duplicateFound = false;
+    this.currentStep = 'clinical';
+  }
+
+  requestBreakGlassAccess(): void {
+    // In a real system, this would create a break glass access request
+    this.breakGlassRequested = true;
+    this.successMessage = 'Break Glass access request submitted. An administrator will review your request shortly.';
+  }
+
   async submitEnrollment(): Promise<void> {
     if (!this.consentsForm.valid) return;
 
