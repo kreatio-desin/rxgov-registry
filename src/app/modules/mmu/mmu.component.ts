@@ -177,6 +177,9 @@ interface AvailableStop extends RouteStop {
             </div>
           </div>
 
+          <!-- Dropdown Overlay (for closing on outside click) -->
+          <div *ngIf="showAddStopDialog" class="dropdown-overlay" (click)="closeAddStopDialog()"></div>
+
           <!-- Today's Encounters -->
           <div class="encounters-card">
             <div class="card-header">
