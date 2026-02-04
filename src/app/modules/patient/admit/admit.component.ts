@@ -291,6 +291,36 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
             </div>
           </div>
 
+          <!-- Break Glass Dialog Overlay -->
+          <div *ngIf="showBreakGlassDialog" class="modal-overlay">
+            <div role="alertdialog" aria-describedby="break-glass-desc" aria-labelledby="break-glass-title" class="modal-dialog">
+              <div class="modal-header">
+                <h2 id="break-glass-title" class="modal-title">
+                  <i class="bi bi-shield-check"></i>
+                  Emergency Access Protocol
+                </h2>
+                <p id="break-glass-desc" class="modal-description">
+                  You are requesting to "Break Glass" to view a restricted patient record. This action will be logged in the system audit trail and reviewed by the compliance officer.
+                  <br><br>
+                  <strong>By proceeding, you attest that:</strong>
+                  <ul class="attestation-list">
+                    <li>You have verified the patient's identity.</li>
+                    <li>You have a valid clinical reason to access this record.</li>
+                    <li>You will adhere to 42 CFR Part 2 confidentiality regulations.</li>
+                  </ul>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="cancelBreakGlassDialog()">
+                  Cancel
+                </button>
+                <button type="button" class="btn btn-warning" (click)="confirmBreakGlassAccess()">
+                  I Attest and Grant Access
+                </button>
+              </div>
+            </div>
+          </div>
+
           <!-- Clinical Step -->
           <div *ngIf="currentStep === 'clinical'" class="enrollment-card">
             <div class="card-header">
