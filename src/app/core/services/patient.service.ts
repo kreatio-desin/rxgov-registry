@@ -57,7 +57,15 @@ export class PatientService {
     await this.offlineStorage.ensureDbReady();
     const existingPatients = await this.offlineStorage.getAll<Patient>('patients');
 
-    if (existingPatients.length === 0) {
+    // Check if we need to reload - if SSN is in old format (just last 4 digits)
+    const needsReload = existingPatients.length > 0 &&
+      existingPatients[0].ssn &&
+      existingPatients[0].ssn.length <= 4; // Old format was just '1234'
+
+    if (existingPatients.length === 0 || needsReload) {
+      if (needsReload) {
+        await this.offlineStorage.clear('patients');
+      }
       const samplePatients: Patient[] = [
         {
           id: 'patient-001',
