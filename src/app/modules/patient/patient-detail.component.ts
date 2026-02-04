@@ -309,7 +309,6 @@ import { PatientService, Patient } from '../../core/services/patient.service';
 export class PatientDetailComponent implements OnInit {
   patient: Patient | null = null;
   activeTab = 'demographics';
-  private patientService!: PatientService;
 
   constructor(
     private route: ActivatedRoute,
@@ -320,9 +319,11 @@ export class PatientDetailComponent implements OnInit {
     const patientId = this.route.snapshot.paramMap.get('id');
     if (patientId) {
       try {
-        this.patient = await this.patientService.getPatient(patientId);
+        const result = await this.patientService.getPatient(patientId);
+        this.patient = result || null;
       } catch (error) {
         console.error('Failed to load patient:', error);
+        this.patient = null;
       }
     }
   }
