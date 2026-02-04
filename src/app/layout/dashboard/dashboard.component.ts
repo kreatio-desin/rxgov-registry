@@ -940,7 +940,7 @@ export class DashboardComponent implements OnInit {
 
   recentPatients: PatientRecord[] = [
     {
-      id: '1',
+      id: 'patient-001',
       rxId: 'RX-2233445566',
       name: 'Nelson, Maverick "Mav"',
       dob: 'Dec 6, 1988',
@@ -948,6 +948,26 @@ export class DashboardComponent implements OnInit {
       status: 'active',
       lastDose: 'Feb 4, 1:33 PM',
       lastDoseInfo: '60mg Methadone'
+    },
+    {
+      id: 'patient-002',
+      rxId: 'RX-1122334455',
+      name: 'Smith, James',
+      dob: 'Mar 15, 1990',
+      ssn: '***-**-5678',
+      status: 'active',
+      lastDose: 'Feb 3, 10:20 AM',
+      lastDoseInfo: '55mg Methadone'
+    },
+    {
+      id: 'patient-003',
+      rxId: 'RX-9988776655',
+      name: 'Johnson, Sarah',
+      dob: 'Jul 22, 1985',
+      ssn: '***-**-9012',
+      status: 'active',
+      lastDose: 'Feb 2, 2:45 PM',
+      lastDoseInfo: '70mg Methadone'
     }
   ];
 
