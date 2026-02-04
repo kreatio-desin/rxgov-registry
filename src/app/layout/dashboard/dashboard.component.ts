@@ -967,7 +967,33 @@ export class DashboardComponent implements OnInit {
   }
 
   reviewTransfer(transfer: Transfer): void {
-    // Navigate to transfer review page or open transfer details
-    this.router.navigate(['/patient', transfer.id, 'transfer-review']);
+    this.selectedTransfer = transfer;
+    this.showTransferModal = true;
+  }
+
+  closeTransferModal(): void {
+    this.showTransferModal = false;
+    this.selectedTransfer = null;
+  }
+
+  acceptTransfer(): void {
+    if (this.selectedTransfer) {
+      // Update transfer status to approved
+      const transferIndex = this.transfers.findIndex(t => t.id === this.selectedTransfer!.id);
+      if (transferIndex !== -1) {
+        this.transfers[transferIndex].status = 'approved';
+      }
+      // Close modal
+      this.closeTransferModal();
+    }
+  }
+
+  rejectTransfer(): void {
+    if (this.selectedTransfer) {
+      // Remove transfer from queue or mark as rejected
+      this.transfers = this.transfers.filter(t => t.id !== this.selectedTransfer!.id);
+      // Close modal
+      this.closeTransferModal();
+    }
   }
 }
