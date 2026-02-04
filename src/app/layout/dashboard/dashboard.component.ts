@@ -10,6 +10,14 @@ interface Transfer {
   patientName: string;
   fromFacility: string;
   status: 'pending' | 'approved' | 'completed';
+  patientRxId?: string;
+  patientDob?: string;
+  patientSsn?: string;
+  patientMedication?: string;
+  patientDose?: string;
+  initiatedBy?: string;
+  initiatedDate?: string;
+  transferNotes?: string;
 }
 
 interface PatientRecord {
