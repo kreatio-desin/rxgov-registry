@@ -541,6 +541,11 @@ interface PatientRecord {
       &:active {
         background: #f9fafb;
       }
+
+      &.clickable-card:hover {
+        border-color: #d1d5db;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
     }
 
     .card-header {
