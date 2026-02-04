@@ -136,8 +136,8 @@ export class PatientService {
             phone: '(907) 555-0345'
           },
           currentEnrollment: {
-            facilityId: 'fac-act-001',
-            facilityName: 'Anchorage Comprehensive Treatment Center',
+            facilityId: 'fac-searhc-002',
+            facilityName: 'SEARHC – Juneau',
             moudType: 'Buprenorphine',
             enrollmentDate: '2024-02-10',
             status: 'active'
