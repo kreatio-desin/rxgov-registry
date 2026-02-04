@@ -251,6 +251,7 @@ export class FacilityService {
    * Get facility by ID
    */
   async getFacility(id: string): Promise<Facility | undefined> {
+    await this.initializationPromise;
     return this.offlineStorage.get<Facility>('facilities', id);
   }
 
