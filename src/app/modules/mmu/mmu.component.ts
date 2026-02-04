@@ -446,6 +446,11 @@ interface AvailableStop extends RouteStop {
       }
     }
 
+    .add-stop-container {
+      position: relative;
+      width: 100%;
+    }
+
     .btn-add-stop {
       width: 100%;
       padding: 0.5rem;
