@@ -259,6 +259,7 @@ export class FacilityService {
    * Create or update facility
    */
   async saveFacility(facility: Facility): Promise<Facility> {
+    await this.initializationPromise;
     if (!facility.id) {
       facility.id = this.generateFacilityId();
     }
