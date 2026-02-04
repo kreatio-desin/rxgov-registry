@@ -90,7 +90,7 @@ interface PatientRecord {
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let patient of recentPatients">
+                <tr *ngFor="let patient of recentPatients" class="clickable-row" (click)="navigateToPatient(patient.id)">
                   <td class="cell-rxid">{{ patient.rxId }}</td>
                   <td class="cell-name">{{ patient.name }}</td>
                   <td>{{ patient.dob }}</td>
