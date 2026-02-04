@@ -428,6 +428,7 @@ interface AvailableStop extends RouteStop {
     .add-stop-container {
       position: relative;
       width: 100%;
+      z-index: 10;
     }
 
     .btn-add-stop {
