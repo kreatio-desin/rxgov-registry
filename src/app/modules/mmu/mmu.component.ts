@@ -341,6 +341,9 @@ interface AvailableStop extends RouteStop {
       font-size: 0.75rem;
       background-color: #f3f4f6;
       height: 1.75rem;
+      overflow: visible;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .route-stops-section {
