@@ -848,25 +848,146 @@ export class MMUComponent implements OnInit {
     },
     {
       id: '2',
+      name: 'Muldoon Library',
+      address: '1251 Muldoon Rd'
+    },
+    {
+      id: '3',
+      name: 'fairview street',
+      address: 'Fairview street'
+    }
+  ];
+
+  // Available stops database (for search)
+  availableStops: AvailableStop[] = [
+    {
+      id: '1',
+      name: 'Downtown Shelter',
+      address: '100 E 4th Ave'
+    },
+    {
+      id: '2',
+      name: 'Muldoon Library',
+      address: '1251 Muldoon Rd'
+    },
+    {
+      id: '3',
+      name: 'fairview street',
+      address: 'Fairview street'
+    },
+    {
+      id: '4',
       name: 'Fairview Rec Center',
       address: '1121 E 10th Ave'
     },
     {
-      id: '3',
-      name: 'Muldoon Library',
-      address: '1251 Muldoon Rd'
+      id: '5',
+      name: 'Eldercare Center',
+      address: '456 Park Ave'
+    },
+    {
+      id: '6',
+      name: 'Community Clinic',
+      address: '789 Market St'
+    },
+    {
+      id: '7',
+      name: 'Youth Services',
+      address: '321 Main St'
     }
   ];
 
   todayEncounters: Encounter[] = [];
 
+  // Dialog state
+  showAddStopDialog = false;
+  showCreateNewForm = false;
+  searchQuery = '';
+  filteredStops: AvailableStop[] = [];
+  recentStops: AvailableStop[] = [];
+  newStopName = '';
+  newStopAddress = '';
+
   ngOnInit(): void {
     // Load today's encounters
+    this.recentStops = this.availableStops.slice(0, 3);
   }
 
-  addStop(): void {
-    // Open dialog to add new stop
-    console.log('Add stop functionality');
+  openAddStopDialog(): void {
+    this.showAddStopDialog = true;
+    this.showCreateNewForm = false;
+    this.searchQuery = '';
+    this.newStopName = '';
+    this.newStopAddress = '';
+    this.filteredStops = [];
+  }
+
+  closeAddStopDialog(): void {
+    this.showAddStopDialog = false;
+    this.showCreateNewForm = false;
+    this.searchQuery = '';
+    this.newStopName = '';
+    this.newStopAddress = '';
+  }
+
+  searchStops(): void {
+    if (this.searchQuery.trim() === '') {
+      this.filteredStops = [];
+      return;
+    }
+
+    const query = this.searchQuery.toLowerCase();
+    this.filteredStops = this.availableStops.filter(stop =>
+      stop.name.toLowerCase().includes(query) ||
+      stop.address.toLowerCase().includes(query)
+    );
+  }
+
+  selectStop(stop: AvailableStop): void {
+    // Check if stop is already in route
+    const existingStop = this.routeStops.find(s => s.id === stop.id);
+    if (existingStop) {
+      // Stop already added, just close dialog
+      this.closeAddStopDialog();
+      return;
+    }
+
+    // Add stop to route
+    this.routeStops.push({
+      id: stop.id,
+      name: stop.name,
+      address: stop.address
+    });
+
+    this.closeAddStopDialog();
+  }
+
+  startCreateNewStop(): void {
+    this.newStopName = this.searchQuery;
+    this.showCreateNewForm = true;
+  }
+
+  saveNewStop(): void {
+    if (this.newStopName.trim() && this.newStopAddress.trim()) {
+      // Create new stop with unique ID
+      const newStop: RouteStop = {
+        id: Math.random().toString(36).substr(2, 9),
+        name: this.newStopName,
+        address: this.newStopAddress
+      };
+
+      // Add to route stops
+      this.routeStops.push(newStop);
+
+      // Also add to available stops for future searches
+      this.availableStops.push({
+        id: newStop.id,
+        name: newStop.name,
+        address: newStop.address
+      });
+
+      this.closeAddStopDialog();
+    }
   }
 
   removeStop(stopId: string): void {
