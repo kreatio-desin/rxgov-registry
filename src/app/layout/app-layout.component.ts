@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterLink, Router } from '@angular/router';
+import { RouterOutlet, RouterLink, Router, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PatientService, SearchResult } from '../core/services/patient.service';
 import { OfflineStorageService } from '../core/services/offline-storage.service';
