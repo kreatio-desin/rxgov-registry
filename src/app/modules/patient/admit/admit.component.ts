@@ -967,13 +967,14 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       display: flex;
       align-items: center;
       gap: 1rem;
-      padding: 0.75rem 1.5rem;
+      padding: 1rem 1.5rem;
       background-color: #f9fafb;
       border-top: 1px solid #e5e7eb;
       justify-content: space-between;
 
       @media (max-width: 640px) {
         flex-direction: column-reverse;
+        padding: 1rem;
       }
     }
 
