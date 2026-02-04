@@ -144,6 +144,126 @@ interface PatientRecord {
           </div>
         </div>
       </div>
+
+      <!-- Transfer Review Modal -->
+      <div *ngIf="showTransferModal" class="modal-overlay" (click)="closeTransferModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <!-- Close Button -->
+          <button class="modal-close" (click)="closeTransferModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          </button>
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h2>Review Transfer Request</h2>
+            <p>Review clinical information and accept or reject this transfer</p>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <!-- Patient Information -->
+            <div class="info-section">
+              <h4>Patient Information</h4>
+              <div class="info-grid">
+                <div class="info-item">
+                  <span class="info-label">Name:</span>
+                  <p class="info-value">{{ selectedTransfer?.patientName }}</p>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">RxGov ID:</span>
+                  <p class="info-value font-mono">{{ selectedTransfer?.patientRxId }}</p>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">DOB:</span>
+                  <p class="info-value">{{ selectedTransfer?.patientDob }}</p>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">SSN (Last 4):</span>
+                  <p class="info-value font-mono">{{ selectedTransfer?.patientSsn }}</p>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Medication:</span>
+                  <p class="info-value">{{ selectedTransfer?.patientMedication }}</p>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Current Dose:</span>
+                  <p class="info-value">{{ selectedTransfer?.patientDose }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Transfer Details -->
+            <div class="info-section">
+              <h4>Transfer Details</h4>
+              <div class="info-list">
+                <div class="info-item">
+                  <span class="info-label">From:</span>
+                  <p class="info-value">{{ selectedTransfer?.fromFacility }}</p>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Initiated By:</span>
+                  <p class="info-value">{{ selectedTransfer?.initiatedBy }}</p>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Initiated Date:</span>
+                  <p class="info-value">{{ selectedTransfer?.initiatedDate }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Transfer Notes -->
+            <div class="info-section notes-section">
+              <div class="notes-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="notes-icon">
+                  <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path>
+                  <path d="M14 2v5a1 1 0 0 0 1 1h5"></path>
+                  <path d="M10 9H8"></path>
+                  <path d="M16 13H8"></path>
+                  <path d="M16 17H8"></path>
+                </svg>
+                <h4>Transfer Notes from Sending Provider</h4>
+              </div>
+              <p class="notes-text">{{ selectedTransfer?.transferNotes }}</p>
+            </div>
+
+            <!-- Responsibility Statement -->
+            <div class="responsibility-section">
+              <div class="responsibility-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="warning-icon">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" x2="12" y1="8" y2="12"></line>
+                  <line x1="12" x2="12.01" y1="16" y2="16"></line>
+                </svg>
+                <h4>Provider Responsibility Statement</h4>
+              </div>
+              <p class="responsibility-text">[Configurable legal language based on state policy]</p>
+              <p class="responsibility-footer">By accepting this transfer, you acknowledge responsibility for this patient's ongoing care and treatment.</p>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <button class="btn-reject" (click)="rejectTransfer()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m15 9-6 6"></path>
+                <path d="m9 9 6 6"></path>
+              </svg>
+              Reject Transfer
+            </button>
+            <button class="btn-accept" (click)="acceptTransfer()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+              Accept Transfer
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   `,
   styles: [`
