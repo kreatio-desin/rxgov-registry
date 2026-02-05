@@ -229,8 +229,8 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
           <section class="settings-section">
             <h2>Facility Users</h2>
             <p class="section-desc">
-              <span *ngIf="currentUser?.role === 'facility-manager'">Manage team members for {{ currentUser.facilityName }}</span>
-              <span *ngIf="currentUser?.role === 'admin'">View and manage all system users</span>
+              <span *ngIf="currentUser && currentUser.role === 'facility-manager'">Manage team members for {{ currentUser.facilityName }}</span>
+              <span *ngIf="currentUser && currentUser.role === 'admin'">View and manage all system users</span>
             </p>
 
             <div class="users-list">
