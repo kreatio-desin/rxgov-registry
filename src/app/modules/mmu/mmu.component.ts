@@ -1367,7 +1367,7 @@ interface DoseAdministration {
         flex: 1;
         gap: 0.75rem;
         padding: 1rem;
-        background: white;
+        background: var(--color-bg-primary);
         min-height: 0;
         overflow: hidden;
       }
@@ -1377,13 +1377,13 @@ interface DoseAdministration {
         align-items: center;
         justify-content: space-between;
         padding-bottom: 0.75rem;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid var(--color-border);
 
         h3 {
           margin: 0;
           font-size: 0.875rem;
           font-weight: 600;
-          color: #1f2937;
+          color: var(--color-text-primary);
         }
 
         .btn-close {
@@ -1391,7 +1391,7 @@ interface DoseAdministration {
           border: none;
           cursor: pointer;
           padding: 0.25rem;
-          color: #6b7280;
+          color: var(--color-text-secondary);
           display: flex;
           align-items: center;
           transition: color 0.2s;
@@ -1883,7 +1883,7 @@ interface DoseAdministration {
         flex: 1;
         gap: 0;
         padding: 0;
-        background: white;
+        background: var(--color-bg-primary);
         overflow-y: auto;
         min-height: 0;
       }
@@ -1891,7 +1891,7 @@ interface DoseAdministration {
       .encounter-header-card {
         padding: 1rem;
         background: linear-gradient(to right, rgba(79, 70, 229, 0.05), rgba(79, 70, 229, 0.02));
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid var(--color-border);
         border-left: 4px solid #4f46e5;
         flex-shrink: 0;
 
@@ -1905,7 +1905,7 @@ interface DoseAdministration {
             margin: 0;
             font-size: 0.875rem;
             font-weight: 600;
-            color: #1f2937;
+            color: var(--color-text-primary);
           }
 
           .btn-close-form {
@@ -1913,7 +1913,7 @@ interface DoseAdministration {
             border: none;
             cursor: pointer;
             padding: 0.25rem;
-            color: #6b7280;
+            color: var(--color-text-secondary);
             display: flex;
             align-items: center;
             transition: color 0.2s;
@@ -1931,14 +1931,14 @@ interface DoseAdministration {
         .header-subtitle {
           margin: 0;
           font-size: 0.75rem;
-          color: #6b7280;
+          color: var(--color-text-secondary);
         }
       }
 
       .patient-card-enhanced {
         padding: 1rem;
         margin: 0 0.75rem 0.75rem 0.75rem;
-        background: #f9fafb;
+        background: var(--color-bg-tertiary);
         border-radius: 0.375rem;
         border-left: 4px solid #64748b;
         flex-shrink: 0;
