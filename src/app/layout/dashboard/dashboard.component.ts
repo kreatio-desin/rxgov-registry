@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { FacilityService } from '../../core/services/facility.service';
 import { PatientService } from '../../core/services/patient.service';
 import { SyncService } from '../../core/services/sync.service';
+import { AuthService, AuthUser } from '../../core/services/auth.service';
+import { TransferService, PatientTransfer } from '../../core/services/transfer.service';
 
 interface Transfer {
   id: string;
