@@ -963,7 +963,9 @@ export class DashboardComponent implements OnInit {
     private facilityService: FacilityService,
     private patientService: PatientService,
     private syncService: SyncService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private transferService: TransferService
   ) {}
 
   async ngOnInit(): Promise<void> {
