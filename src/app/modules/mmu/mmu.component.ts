@@ -2340,11 +2340,11 @@ export class MMUComponent implements OnInit, AfterViewInit {
   patientSearchResults: PatientMatch[] = [];
   doseData: DoseAdministration = {
     medicationName: '',
-    dose: '',
-    unit: '',
-    route: '',
-    site: '',
-    time: '',
+    observedDose: '',
+    takeHomeDoses: '',
+    takeHomeDoseAmount: '',
+    individualCounseling: false,
+    groupCounseling: false,
     notes: '',
   };
   showBreakGlassModal = false;
