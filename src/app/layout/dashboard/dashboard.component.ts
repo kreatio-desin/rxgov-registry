@@ -284,7 +284,7 @@ interface PatientRecord {
     .section-card {
       background: var(--color-bg-primary);
       border-radius: 8px;
-      border: 1px solid #e5e7eb;
+      border: 1px solid var(--color-border);
       overflow: hidden;
     }
 
@@ -668,7 +668,7 @@ interface PatientRecord {
     }
 
     .info-section {
-      border: 1px solid #e5e7eb;
+      border: 1px solid var(--color-border);
       border-radius: 0.5rem;
       padding: 0.75rem;
       background: #f9fafb;
