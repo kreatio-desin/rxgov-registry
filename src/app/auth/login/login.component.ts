@@ -123,8 +123,9 @@ import { ThemeService } from '../../core/services/theme.service';
           <form (ngSubmit)="handleLogin()">
             <div class="form-group">
               <label>Email</label>
-              <input 
-                type="email" 
+              <input
+                type="email"
+                name="email"
                 [(ngModel)]="loginEmail"
                 [value]="selectedAccount.email"
                 readonly
@@ -134,8 +135,9 @@ import { ThemeService } from '../../core/services/theme.service';
 
             <div class="form-group">
               <label>Password</label>
-              <input 
-                type="password" 
+              <input
+                type="password"
+                name="password"
                 [(ngModel)]="loginPassword"
                 [value]="selectedAccount.password"
                 readonly
