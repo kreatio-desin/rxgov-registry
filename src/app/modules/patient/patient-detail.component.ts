@@ -1585,6 +1585,21 @@ export class PatientDetailComponent implements OnInit {
   currentDateTime: string;
   currentTransferDate: string;
 
+  transferForm: TransferForm = {
+    transferDate: '',
+    destinationClinic: '',
+    transferNotes: '',
+    consentAttest: false
+  };
+
+  availableFacilities: Facility[] = [
+    { id: 'facility-001', name: 'Downtown OTP Clinic' },
+    { id: 'facility-002', name: 'Northgate Treatment Center' },
+    { id: 'facility-003', name: 'Riverside Medical Center' },
+    { id: 'facility-004', name: 'Westside Addiction Services' },
+    { id: 'facility-005', name: 'Central Opioid Treatment Program' }
+  ];
+
   dosingHistory: DoseRecord[] = [
     {
       dateTime: 'Feb 4, 1:33 PM',
