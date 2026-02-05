@@ -374,16 +374,78 @@ interface DoseAdministration {
               <p class="header-subtitle">Recording medication dose for MMU encounter</p>
             </div>
 
-            <!-- Patient Info Card -->
-            <div class="patient-card">
-              <div class="patient-header">
-                <h4>{{ selectedPatient.lastName }}, {{ selectedPatient.firstName }}</h4>
-                <p class="patient-rx">{{ selectedPatient.rxNumber }}</p>
+            <!-- Detailed Patient Info Card -->
+            <div class="patient-card-enhanced">
+              <!-- Header with Avatar and Name -->
+              <div class="patient-header-row">
+                <div class="patient-avatar">
+                  <i class="bi bi-person"></i>
+                </div>
+                <div class="patient-header-info">
+                  <h3>{{ selectedPatient.lastName }}, {{ selectedPatient.firstName }}</h3>
+                  <p class="patient-rx-mono">{{ selectedPatient.rxNumber }}</p>
+                </div>
               </div>
-              <div class="patient-meta-info">
-                <span class="meta-item">{{ selectedPatient.rxNumber }}</span>
-                <span class="meta-item">DOB: {{ selectedPatient.dob }}</span>
-                <span class="meta-item">{{ selectedPatient.currentMedication }} {{ selectedPatient.dose }}</span>
+
+              <!-- Patient Metadata -->
+              <div class="patient-meta-grid">
+                <div class="meta-item">
+                  <i class="bi bi-calendar"></i>
+                  <span>DOB: {{ selectedPatient.dob }}</span>
+                </div>
+                <div class="meta-item">
+                  <i class="bi bi-capsule"></i>
+                  <span class="medication-highlight">
+                    {{ selectedPatient.currentMedication }} {{ selectedPatient.dose }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Status Badges -->
+              <div class="status-badges">
+                <span class="badge badge-info" *ngIf="selectedPatient.lastDoseHours !== undefined">
+                  <i class="bi bi-clock"></i>
+                  Last dose: {{ selectedPatient.lastDoseHours }}h ago
+                </span>
+                <span
+                  class="badge"
+                  [ngClass]="{
+                    'badge-danger': selectedPatient.takeHomeStatus?.includes('No'),
+                    'badge-success': selectedPatient.takeHomeStatus?.includes('Permitted'),
+                  }"
+                >
+                  <i
+                    class="bi"
+                    [ngClass]="{
+                      'bi-x-circle': selectedPatient.takeHomeStatus?.includes('No'),
+                      'bi-check-circle': selectedPatient.takeHomeStatus?.includes('Permitted'),
+                    }"
+                  ></i>
+                  {{ selectedPatient.takeHomeStatus }}
+                </span>
+              </div>
+
+              <!-- Recent Doses Section -->
+              <div class="recent-doses" *ngIf="selectedPatient.recentDoses && selectedPatient.recentDoses.length > 0">
+                <p class="section-title">RECENT DOSES</p>
+                <div class="doses-list">
+                  <div *ngFor="let dose of selectedPatient.recentDoses" class="dose-item">
+                    <div class="dose-datetime">
+                      <span class="dose-date">{{ dose.date }}</span>
+                      <span class="dose-time">{{ dose.time }}</span>
+                    </div>
+                    <span
+                      class="dose-badge"
+                      [ngClass]="{
+                        'badge-observed': dose.type === 'Observed',
+                        'badge-takehome': dose.type === 'Take-Home',
+                      }"
+                    >
+                      {{ dose.type }}
+                    </span>
+                    <span class="dose-amount">{{ dose.amount }}</span>
+                  </div>
+                </div>
               </div>
             </div>
 
