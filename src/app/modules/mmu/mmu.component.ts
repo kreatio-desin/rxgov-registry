@@ -1562,35 +1562,6 @@ interface DoseAdministration {
         opacity: 1;
       }
 
-      .patient-card-detailed {
-        display: flex;
-        flex-direction: column;
-        background: #f9fafb;
-        border: 1px solid #e5e7eb;
-        border-left: 4px solid #64748b;
-        border-radius: 0.375rem;
-        overflow: hidden;
-        cursor: pointer;
-        transition: background 0.2s;
-
-        &:hover {
-          background: #f0f1f3;
-
-          .btn-log-encounter-large {
-            opacity: 1;
-          }
-
-          .btn-view-record {
-            opacity: 1;
-          }
-        }
-      }
-
-      .patient-card-content {
-        padding: 0.75rem;
-        flex: 1;
-      }
-
       .patient-header-row {
         display: flex;
         align-items: flex-start;
