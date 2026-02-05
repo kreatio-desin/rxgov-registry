@@ -1355,7 +1355,7 @@ export class ComplianceComponent implements OnInit {
 
   navigateToPatient(record: PatientCensusRecord): void {
     if (!this.canViewPatientData(record)) {
-      // Show break glass modal
+      // Show break glass modal for cross-facility access
       this.breakGlassData = {
         patientId: record.patientId,
         patientName: `${record.lastName}, ${record.firstName}`,
@@ -1366,6 +1366,14 @@ export class ComplianceComponent implements OnInit {
       this.showBreakGlassModal = true;
       return;
     }
+
+    // Grant access through PatientService for same-facility patients
+    // (allows patient detail page to load without needing facility context)
+    this.patientService.grantAccessViaAttestation(
+      record.patientId,
+      'current-user-id',
+      'Patient viewed from Compliance Report (Same Facility)'
+    );
 
     // Navigate to patient page
     this.router.navigate(['/patient', record.patientId]);
