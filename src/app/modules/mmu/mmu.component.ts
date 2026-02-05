@@ -2649,7 +2649,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
   }
 
   saveEncounter(): void {
-    if (!this.selectedPatient || !this.doseData.medicationName.trim()) {
+    if (!this.selectedPatient || !this.doseData.medicationName.trim() || !this.doseData.observedDose.trim()) {
       console.warn('Missing required fields');
       return;
     }
@@ -2659,7 +2659,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
       id: Math.random().toString(36).substr(2, 9),
       patientName: `${this.selectedPatient.firstName} ${this.selectedPatient.lastName}`,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      service: `${this.doseData.medicationName} - ${this.doseData.dose} ${this.doseData.unit}`,
+      service: `${this.doseData.medicationName} - ${this.doseData.observedDose}mg`,
     };
 
     // Add to today's encounters
