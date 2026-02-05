@@ -390,8 +390,8 @@ interface BreakGlassAccess {
 
     /* Reports Card */
     .reports-card {
-      background: white;
-      border: 1px solid #e5e7eb;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
       border-radius: 0.75rem;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
       overflow: hidden;
@@ -453,7 +453,7 @@ interface BreakGlassAccess {
         border: 1px solid #d1d5db;
         border-radius: 0.375rem;
         font-size: 0.875rem;
-        background: white;
+        background: var(--color-bg-primary);
         transition: border-color 0.2s, box-shadow 0.2s;
 
         &:focus {
