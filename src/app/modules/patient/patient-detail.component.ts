@@ -1583,8 +1583,8 @@ export class PatientDetailComponent implements OnInit {
   patientNickname = '"Mav"';
   showAdministerDoseModal = false;
   showTransferModal = false;
-  currentDateTime: string;
-  currentTransferDate: string;
+  currentDateTime: string = '';
+  currentTransferDate: string = '';
 
   transferForm: TransferForm = {
     transferDate: '',
