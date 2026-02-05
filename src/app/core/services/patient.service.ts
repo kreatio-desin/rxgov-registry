@@ -410,14 +410,20 @@ export class PatientService {
    */
   grantAccessViaAttestation(patientId: string, userId: string, reason: string): void {
     this.patientAccessTokens.set(patientId, true);
+    this.saveAccessTokensToSessionStorage();
     // This will be logged in the audit service
+    console.log(`Access granted to patient ${patientId} by ${userId}: ${reason}`);
   }
 
   /**
    * Check if user has access to view patient
    */
   hasAccessToken(patientId: string): boolean {
-    return this.patientAccessTokens.get(patientId) ?? false;
+    const hasAccess = this.patientAccessTokens.get(patientId) ?? false;
+    if (hasAccess) {
+      console.log(`Access token verified for patient ${patientId}`);
+    }
+    return hasAccess;
   }
 
   /**
@@ -425,6 +431,7 @@ export class PatientService {
    */
   revokeAccessToken(patientId: string): void {
     this.patientAccessTokens.delete(patientId);
+    this.saveAccessTokensToSessionStorage();
   }
 
   /**
