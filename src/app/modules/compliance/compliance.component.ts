@@ -609,6 +609,412 @@ interface BreakGlassAccess {
       }
     }
 
+    /* Back Button */
+    .btn-back {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      color: #6b7280;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.375rem;
+      transition: all 0.2s;
+
+      &:hover {
+        background: #f3f4f6;
+        color: #1f2937;
+      }
+
+      svg {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    }
+
+    /* Detailed Report Card */
+    .detailed-report-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 600px;
+    }
+
+    .report-controls {
+      padding: 1.5rem;
+      border-bottom: 1px solid #e5e7eb;
+      background: #f9fafb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .controls-left {
+      flex: 1;
+    }
+
+    .search-input-detailed {
+      width: 100%;
+      padding: 0.625rem 0.875rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      background: white;
+      transition: border-color 0.2s, box-shadow 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      &::placeholder {
+        color: #9ca3af;
+      }
+    }
+
+    .controls-right {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn-export {
+      padding: 0.625rem 1rem;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s;
+
+      &:hover {
+        background: #2563eb;
+      }
+
+      svg {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+
+    .table-wrapper-detailed {
+      flex: 1;
+      overflow: auto;
+      min-height: 0;
+    }
+
+    .detail-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+
+      thead {
+        background: #f9fafb;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      th {
+        padding: 0.875rem 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: #374151;
+        white-space: nowrap;
+        border-bottom: 1px solid #e5e7eb;
+        background: #f9fafb;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      td {
+        padding: 0.875rem 1rem;
+        border-bottom: 1px solid #e5e7eb;
+        vertical-align: middle;
+      }
+
+      tbody tr {
+        transition: background-color 0.15s;
+
+        &:hover {
+          background-color: #f9fafb;
+        }
+      }
+    }
+
+    .patient-row {
+      &:hover {
+        background-color: #f3f4f6;
+      }
+    }
+
+    .patient-id-cell {
+      min-width: 100px;
+    }
+
+    .patient-link {
+      background: none;
+      border: none;
+      color: #3b82f6;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #1f59b8;
+        text-decoration: underline;
+      }
+    }
+
+    .patient-name-cell {
+      font-weight: 500;
+      color: #1f2937;
+    }
+
+    .restricted-text {
+      color: #9ca3af;
+      font-style: italic;
+    }
+
+    .report-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid #e5e7eb;
+      background: #f9fafb;
+      text-align: right;
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    .record-count {
+      font-weight: 500;
+    }
+
+    /* Break Glass Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .break-glass-modal {
+      max-width: 550px;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.5rem;
+      border-bottom: 1px solid #e5e7eb;
+      position: relative;
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: #dc2626;
+        flex-shrink: 0;
+        margin-top: 0.125rem;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #1f2937;
+        flex: 1;
+      }
+
+      .btn-close-modal {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.25rem;
+        color: #6b7280;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+
+        svg {
+          width: 1.25rem;
+          height: 1.25rem;
+          color: #6b7280;
+        }
+
+        &:hover {
+          color: #1f2937;
+        }
+      }
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .modal-description {
+      margin: 0;
+      font-size: 0.875rem;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+
+    .access-details {
+      background: #f9fafb;
+      padding: 1rem;
+      border-radius: 0.375rem;
+      border: 1px solid #e5e7eb;
+
+      h4 {
+        margin: 0 0 0.75rem 0;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #374151;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #e5e7eb;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .detail-label {
+          font-weight: 600;
+          color: #6b7280;
+          font-size: 0.875rem;
+        }
+
+        .detail-value {
+          color: #1f2937;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .attestation-section {
+      background: #fef3c7;
+      padding: 1rem;
+      border-radius: 0.375rem;
+      border: 1px solid #fcd34d;
+
+      .attestation-checkbox {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        cursor: pointer;
+
+        input {
+          width: 1rem;
+          height: 1rem;
+          cursor: pointer;
+          margin-top: 0.25rem;
+          accent-color: #dc2626;
+          flex-shrink: 0;
+        }
+
+        span {
+          font-size: 0.875rem;
+          color: #92400e;
+          line-height: 1.5;
+        }
+      }
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .btn-cancel,
+    .btn-confirm {
+      flex: 1;
+      padding: 0.625rem 1rem;
+      border: none;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-cancel {
+      background: white;
+      color: #374151;
+      border: 1px solid #d1d5db;
+
+      &:hover {
+        background: #f9fafb;
+      }
+    }
+
+    .btn-confirm {
+      background: #dc2626;
+      color: white;
+
+      &:hover:not(:disabled) {
+        background: #b91c1c;
+      }
+
+      &:disabled {
+        background: #d1d5db;
+        cursor: not-allowed;
+      }
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .reports-container {
@@ -635,6 +1041,24 @@ interface BreakGlassAccess {
 
       .report-icon {
         display: none;
+      }
+
+      .report-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .controls-left,
+      .controls-right {
+        width: 100%;
+      }
+
+      .detail-table {
+        font-size: 0.75rem;
+
+        th, td {
+          padding: 0.5rem 0.75rem;
+        }
       }
     }
   `]
