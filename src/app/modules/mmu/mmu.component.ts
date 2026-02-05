@@ -1217,6 +1217,7 @@ interface DoseAdministration {
       gap: 0.5rem;
       overflow-y: auto;
       flex: 1;
+      min-height: 0;
     }
 
     .no-results {
