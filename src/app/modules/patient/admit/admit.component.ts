@@ -562,7 +562,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
 
     .enrollment-subtitle {
       margin: 0;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       font-size: 0.875rem;
     }
 
@@ -678,7 +678,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       justify-content: center;
       width: 1.25rem;
       height: 1.25rem;
-      color: #6b7280;
+      color: var(--color-text-secondary);
 
       i {
         font-size: 1.25rem;
@@ -700,7 +700,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
     .card-description {
       margin: 0;
       font-size: 0.875rem;
-      color: #6b7280;
+      color: var(--color-text-secondary);
     }
 
     .card-content {
@@ -865,7 +865,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
 
     .checkbox-description {
       font-size: 0.875rem;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       margin: 0;
       line-height: 1.5;
     }
@@ -952,7 +952,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
 
     .consent-helper {
       font-size: 0.75rem;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       margin: 0;
       font-style: italic;
     }
@@ -1161,7 +1161,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
 
     .match-reason {
       font-size: 0.875rem;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       font-weight: 500;
     }
 
@@ -1201,7 +1201,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
 
     .text-small {
       font-size: 0.875rem;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       margin: 0;
     }
 
@@ -1383,7 +1383,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
     .modal-description {
       margin: 0;
       font-size: 0.875rem;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       line-height: 1.5;
 
       strong {
@@ -1410,7 +1410,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
 
       li {
         margin-bottom: 0.25rem;
-        color: #6b7280;
+        color: var(--color-text-secondary);
       }
     }
 
