@@ -776,7 +776,7 @@ interface AdministerDoseForm {
       padding: 0.25rem 0.5rem;
       border-radius: 0.25rem;
       font-size: 0.75rem;
-      background: #f3f4f6;
+      background: var(--color-bg-tertiary);
       color: #6b7280;
     }
 
@@ -1142,7 +1142,7 @@ interface AdministerDoseForm {
     }
 
     .form-input:disabled {
-      background: #f3f4f6;
+      background: var(--color-bg-tertiary);
       color: #9ca3af;
       cursor: not-allowed;
     }
