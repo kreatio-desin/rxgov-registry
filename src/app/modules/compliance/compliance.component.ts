@@ -815,6 +815,7 @@ export class ComplianceComponent implements OnInit {
 
   ngOnInit(): void {
     this.filteredReports = [...this.reports];
+    this.filteredPatientRecords = [...this.patientCensusData];
   }
 
   filterReports(): void {
@@ -829,5 +830,80 @@ export class ComplianceComponent implements OnInit {
       report.description.toLowerCase().includes(query) ||
       report.rowLevel.toLowerCase().includes(query)
     );
+  }
+
+  viewReport(report: Report): void {
+    this.selectedReport = report;
+    this.patientSearchQuery = '';
+    this.filterPatientRecords();
+  }
+
+  backToReportsList(): void {
+    this.selectedReport = null;
+    this.patientSearchQuery = '';
+  }
+
+  filterPatientRecords(): void {
+    if (!this.patientSearchQuery.trim()) {
+      this.filteredPatientRecords = [...this.patientCensusData];
+      return;
+    }
+
+    const query = this.patientSearchQuery.toLowerCase();
+    this.filteredPatientRecords = this.patientCensusData.filter(record =>
+      record.lastName.toLowerCase().includes(query) ||
+      record.firstName.toLowerCase().includes(query) ||
+      record.patientId.toLowerCase().includes(query) ||
+      record.enrollmentId.toLowerCase().includes(query) ||
+      record.medicaidId.toLowerCase().includes(query)
+    );
+  }
+
+  canViewPatientData(record: PatientCensusRecord): boolean {
+    // Can view data from own facility or if break glass access was granted
+    return record.facilityId === this.currentUserFacilityId ||
+           this.grantedBreakGlassAccess.has(record.patientId);
+  }
+
+  navigateToPatient(record: PatientCensusRecord): void {
+    if (!this.canViewPatientData(record)) {
+      // Show break glass modal
+      this.breakGlassData = {
+        patientId: record.patientId,
+        patientName: `${record.lastName}, ${record.firstName}`,
+        requestingFacilityId: this.currentUserFacilityId,
+        patientFacilityId: record.homeFacility,
+        attestationConfirmed: false
+      };
+      this.showBreakGlassModal = true;
+      return;
+    }
+
+    // Navigate to patient page (would use router in real implementation)
+    console.log('Navigating to patient page for:', record.patientId);
+    // router.navigate(['/patient', record.patientId]);
+  }
+
+  closeBreakGlassModal(): void {
+    this.showBreakGlassModal = false;
+    this.breakGlassData = {
+      patientId: '',
+      patientName: '',
+      requestingFacilityId: this.currentUserFacilityId,
+      patientFacilityId: '',
+      attestationConfirmed: false
+    };
+  }
+
+  confirmBreakGlassAccess(): void {
+    if (this.breakGlassData.attestationConfirmed && this.breakGlassData.patientId) {
+      this.grantedBreakGlassAccess.add(this.breakGlassData.patientId);
+      const patientId = this.breakGlassData.patientId;
+      this.closeBreakGlassModal();
+
+      // Navigate to patient page
+      console.log('Break glass access granted. Navigating to patient page for:', patientId);
+      // router.navigate(['/patient', patientId]);
+    }
   }
 }
