@@ -160,9 +160,26 @@ interface AvailableStop extends RouteStop {
                         <label>Stop Name</label>
                         <input type="text" [(ngModel)]="newStopName" placeholder="Enter stop name" class="form-input-inline" />
                       </div>
-                      <div class="form-group-inline">
+                      <div class="form-group-inline address-group">
                         <label>Address</label>
-                        <input type="text" [(ngModel)]="newStopAddress" placeholder="Enter address" class="form-input-inline" />
+                        <input type="text"
+                               #addressInput
+                               [(ngModel)]="newStopAddress"
+                               (input)="onAddressInput()"
+                               placeholder="Enter address"
+                               class="form-input-inline"
+                               autocomplete="off" />
+                        <div *ngIf="showAddressAutocomplete && addressPredictions.length > 0" class="address-predictions">
+                          <div *ngFor="let prediction of addressPredictions"
+                               class="prediction-item"
+                               (click)="selectAddressPrediction(prediction)">
+                            <i class="bi bi-geo-alt"></i>
+                            <div class="prediction-text">
+                              <div class="prediction-main">{{ prediction.main_text }}</div>
+                              <div class="prediction-secondary">{{ prediction.secondary_text }}</div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       <button class="btn-add-stop-save" (click)="saveNewStop()">Add Stop</button>
                     </div>
