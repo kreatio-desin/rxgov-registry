@@ -352,104 +352,152 @@ interface DoseAdministration {
 
           <!-- Encounter Logging Form -->
           <div *ngIf="selectedPatient && !showBreakGlassModal" class="encounter-form-container">
-            <div class="encounter-header">
-              <button class="btn-back" (click)="clearSelectedPatient()">
-                <i class="bi bi-chevron-left"></i>
-              </button>
-              <h3>{{ selectedPatient.firstName }} {{ selectedPatient.lastName }}</h3>
+            <!-- Header -->
+            <div class="encounter-header-card">
+              <div class="header-top">
+                <h3>Administer Dose: {{ selectedPatient.lastName }}, {{ selectedPatient.firstName }}</h3>
+                <button class="btn-close-form" (click)="clearSelectedPatient()">
+                  <i class="bi bi-x"></i>
+                </button>
+              </div>
+              <p class="header-subtitle">Recording medication dose for MMU encounter</p>
+            </div>
+
+            <!-- Patient Info Card -->
+            <div class="patient-card">
+              <div class="patient-header">
+                <h4>{{ selectedPatient.lastName }}, {{ selectedPatient.firstName }}</h4>
+                <p class="patient-rx">{{ selectedPatient.rxNumber }}</p>
+              </div>
+              <div class="patient-meta-info">
+                <span class="meta-item">{{ selectedPatient.rxNumber }}</span>
+                <span class="meta-item">DOB: {{ selectedPatient.dob }}</span>
+                <span class="meta-item">{{ selectedPatient.currentMedication }} {{ selectedPatient.dose }}</span>
+              </div>
             </div>
 
             <form class="encounter-form">
-              <!-- Medication Info -->
-              <div class="form-section">
-                <h4>Medication Administration</h4>
-
-                <div class="form-group-full">
-                  <label>Medication Name</label>
-                  <input
-                    type="text"
-                    [(ngModel)]="doseData.medicationName"
-                    name="medicationName"
-                    placeholder="Enter medication name"
-                    class="form-input"
-                  />
+              <!-- Observed Dose Section -->
+              <div class="form-section observed-dose-section">
+                <div class="section-header">
+                  <i class="bi bi-capsule"></i>
+                  <h4>Observed Dose</h4>
                 </div>
-
                 <div class="form-row">
                   <div class="form-group">
-                    <label>Dose</label>
-                    <input
-                      type="text"
-                      [(ngModel)]="doseData.dose"
-                      name="dose"
-                      placeholder="e.g. 500"
-                      class="form-input"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label>Unit</label>
-                    <select [(ngModel)]="doseData.unit" name="unit" class="form-input">
-                      <option value="">Select unit</option>
-                      <option value="mg">mg</option>
-                      <option value="mcg">mcg</option>
-                      <option value="g">g</option>
-                      <option value="ml">ml</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="form-group">
-                    <label>Route</label>
-                    <select [(ngModel)]="doseData.route" name="route" class="form-input">
-                      <option value="">Select route</option>
-                      <option value="oral">Oral</option>
-                      <option value="iv">IV</option>
-                      <option value="im">IM</option>
-                      <option value="sc">SC</option>
-                      <option value="topical">Topical</option>
+                    <label>Medication</label>
+                    <select [(ngModel)]="doseData.medicationName" name="medicationName" class="form-input">
+                      <option value="">Select medication</option>
+                      <option value="Methadone">Methadone</option>
+                      <option value="Buprenorphine">Buprenorphine</option>
+                      <option value="Naltrexone">Naltrexone</option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <label>Site</label>
+                    <label>Dose Amount (mg)</label>
                     <input
-                      type="text"
-                      [(ngModel)]="doseData.site"
-                      name="site"
-                      placeholder="e.g. Left Arm"
+                      type="number"
+                      [(ngModel)]="doseData.observedDose"
+                      name="observedDose"
+                      placeholder="0"
                       class="form-input"
                     />
                   </div>
-                </div>
-
-                <div class="form-group-full">
-                  <label>Time</label>
-                  <input
-                    type="datetime-local"
-                    [(ngModel)]="doseData.time"
-                    name="time"
-                    class="form-input"
-                  />
-                </div>
-
-                <div class="form-group-full">
-                  <label>Notes</label>
-                  <textarea
-                    [(ngModel)]="doseData.notes"
-                    name="notes"
-                    placeholder="Add any additional notes..."
-                    class="form-textarea"
-                    rows="3"
-                  ></textarea>
                 </div>
               </div>
 
-              <div class="form-actions">
+              <!-- Take-Home Doses Section -->
+              <div class="form-section take-home-section">
+                <div class="section-header">
+                  <i class="bi bi-box"></i>
+                  <div>
+                    <h4>Take-Home Doses</h4>
+                    <p class="section-description">Additional doses dispensed for at-home administration</p>
+                  </div>
+                </div>
+                <div class="warning-alert">
+                  <i class="bi bi-exclamation-circle"></i>
+                  <div>
+                    <p class="warning-title">Take-Home Not Recommended</p>
+                    <p class="warning-text">Patient record indicates take-home doses not currently permitted.</p>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Number of Doses</label>
+                    <input
+                      type="number"
+                      [(ngModel)]="doseData.takeHomeDoses"
+                      name="takeHomeDoses"
+                      min="0"
+                      placeholder="0"
+                      class="form-input"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Dose Amount (mg)</label>
+                    <input
+                      type="number"
+                      [(ngModel)]="doseData.takeHomeDoseAmount"
+                      name="takeHomeDoseAmount"
+                      min="0"
+                      placeholder="0"
+                      class="form-input"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Counseling Services Section -->
+              <div class="form-section counseling-section">
+                <div class="section-header">
+                  <i class="bi bi-chat-left-text"></i>
+                  <h4>Counseling Services</h4>
+                </div>
+                <div class="checkbox-group">
+                  <div class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      id="individualCounseling"
+                      [(ngModel)]="doseData.individualCounseling"
+                      name="individualCounseling"
+                      class="form-checkbox"
+                    />
+                    <label for="individualCounseling">Individual Counseling</label>
+                  </div>
+                  <div class="checkbox-item">
+                    <input
+                      type="checkbox"
+                      id="groupCounseling"
+                      [(ngModel)]="doseData.groupCounseling"
+                      name="groupCounseling"
+                      class="form-checkbox"
+                    />
+                    <label for="groupCounseling">Group Counseling</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Clinical Notes Section -->
+              <div class="form-section">
+                <label>Encounter Notes (Optional)</label>
+                <textarea
+                  [(ngModel)]="doseData.notes"
+                  name="notes"
+                  placeholder="Document any clinical observations, patient concerns, or notes..."
+                  class="form-textarea"
+                  rows="4"
+                ></textarea>
+              </div>
+
+              <!-- Form Actions -->
+              <div class="form-actions-footer">
                 <button type="button" class="btn-secondary" (click)="clearSelectedPatient()">
                   Cancel
                 </button>
-                <button type="button" class="btn-primary" (click)="saveEncounter()">
-                  Save Encounter
+                <button type="button" class="btn-primary-save" (click)="saveEncounter()">
+                  <i class="bi bi-save"></i>
+                  Save Dose
                 </button>
               </div>
             </form>
