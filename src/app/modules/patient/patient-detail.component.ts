@@ -295,8 +295,8 @@ interface TransferForm {
             </div>
           </div>
 
-          <!-- Clinical Management -->
-          <div class="card">
+          <!-- Clinical Management (Facility Manager Only) -->
+          <div class="card" *ngIf="currentUser && currentUser.role === 'facility-manager'">
             <div class="card-header">
               <h3 class="card-title">Clinical Management</h3>
             </div>
