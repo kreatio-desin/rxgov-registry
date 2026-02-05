@@ -102,7 +102,7 @@ export class PatientService {
           firstName: 'James',
           lastName: 'Smith',
           dateOfBirth: '1990-03-15',
-          ssn: '456-78-5678',
+          ssn: '5678',
           motherFirstName: 'Patricia',
           demographics: {
             gender: 'Male',
@@ -131,7 +131,7 @@ export class PatientService {
           firstName: 'Sarah',
           lastName: 'Johnson',
           dateOfBirth: '1985-07-22',
-          ssn: '901-23-9012',
+          ssn: '9012',
           motherFirstName: 'Margaret',
           demographics: {
             gender: 'Female',
@@ -160,7 +160,7 @@ export class PatientService {
           firstName: 'Michael',
           lastName: 'Chen',
           dateOfBirth: '1983-09-18',
-          ssn: '234-56-2345',
+          ssn: '2345',
           motherFirstName: 'Linda',
           demographics: {
             gender: 'Male',
@@ -189,7 +189,7 @@ export class PatientService {
           firstName: 'Jessica',
           lastName: 'Rodriguez',
           dateOfBirth: '1996-04-28',
-          ssn: '567-89-5678',
+          ssn: '5678',
           motherFirstName: 'Carmen',
           demographics: {
             gender: 'Female',
@@ -218,7 +218,7 @@ export class PatientService {
           firstName: 'Robert',
           lastName: 'Williams',
           dateOfBirth: '1970-11-03',
-          ssn: '789-01-7890',
+          ssn: '7890',
           motherFirstName: 'Dorothy',
           demographics: {
             gender: 'Male',
@@ -247,7 +247,7 @@ export class PatientService {
           firstName: 'Angela',
           lastName: 'Martinez',
           dateOfBirth: '1987-05-14',
-          ssn: '345-67-3456',
+          ssn: '3456',
           motherFirstName: 'Rosa',
           demographics: {
             gender: 'Female',
@@ -276,7 +276,7 @@ export class PatientService {
           firstName: 'David',
           lastName: 'Thompson',
           dateOfBirth: '1978-08-30',
-          ssn: '678-90-6789',
+          ssn: '6789',
           motherFirstName: 'Joyce',
           demographics: {
             gender: 'Male',
