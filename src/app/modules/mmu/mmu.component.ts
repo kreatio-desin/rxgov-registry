@@ -290,16 +290,6 @@ interface DoseAdministration {
                 <p>No patients found</p>
               </div>
               <div *ngFor="let result of patientSearchResults" class="patient-result-item">
-                <!-- Restricted Match -->
-                <div *ngIf="result.isRestricted" class="restricted-match">
-                  <div class="restricted-header">
-                    <i class="bi bi-shield-exclamation"></i>
-                    <span>Restricted Match</span>
-                  </div>
-                  <p class="restricted-note">
-                    Patient record is restricted. Emergency Guest Access required.
-                  </p>
-                </div>
                 <!-- Facility Patient -->
                 <div
                   *ngIf="!result.isRestricted"
@@ -307,11 +297,47 @@ interface DoseAdministration {
                   (click)="selectPatientForEncounter(result.patient)"
                 >
                   <div class="patient-info">
-                    <div class="patient-name">
-                      {{ result.patient.firstName }} {{ result.patient.lastName }}
+                    <div class="patient-name-section">
+                      <span class="patient-name">
+                        {{ result.patient.lastName }}, {{ result.patient.firstName }}
+                      </span>
+                      <span *ngIf="result.patient.nickName" class="patient-nickname">
+                        "{{ result.patient.nickName }}"
+                      </span>
                     </div>
-                    <div class="patient-dob">DOB: {{ result.patient.dob }}</div>
-                    <div class="patient-ssn">SSN: {{ result.patient.ssn }}</div>
+                    <div class="patient-meta">
+                      <span class="patient-rx">{{ result.patient.rxNumber }}</span>
+                      <span class="separator">•</span>
+                      <span class="patient-dob">DOB: {{ result.patient.dob }}</span>
+                      <span class="separator">•</span>
+                      <span class="patient-ssn">SSN: {{ result.patient.ssn }}</span>
+                    </div>
+                    <div *ngIf="result.patient.currentMedication" class="patient-medication">
+                      {{ result.patient.currentMedication }} {{ result.patient.dose }}
+                    </div>
+                  </div>
+                  <button
+                    class="btn-log-encounter"
+                    (click)="selectPatientForEncounter(result.patient); $event.stopPropagation()"
+                  >
+                    Log Encounter
+                  </button>
+                </div>
+                <!-- Restricted Match -->
+                <div *ngIf="result.isRestricted" class="restricted-match-item">
+                  <div class="restricted-match">
+                    <div class="restricted-header">
+                      <span>Restricted Match</span>
+                      <div class="restricted-badge">
+                        <i class="bi bi-shield-exclamation"></i>
+                        <span>Restricted</span>
+                      </div>
+                    </div>
+                    <div class="restricted-match-detail">Matched on: Mother's First Name</div>
+                    <div class="restricted-facility">
+                      <i class="bi bi-building-2"></i>
+                      <span>External OTP Facility</span>
+                    </div>
                   </div>
                   <button
                     class="btn-log-encounter"
