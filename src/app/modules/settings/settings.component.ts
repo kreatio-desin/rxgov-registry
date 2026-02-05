@@ -30,13 +30,22 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
           <i class="bi bi-plug"></i>
           Integrations
         </button>
-        <button 
+        <button
           class="tab-button"
           [class.active]="activeTab === 'data-quality'"
           (click)="activeTab = 'data-quality'"
         >
           <i class="bi bi-graph-up"></i>
           Data Quality
+        </button>
+        <button
+          class="tab-button"
+          [class.active]="activeTab === 'users'"
+          (click)="activeTab = 'users'"
+          *ngIf="currentUser && (currentUser.role === 'facility-manager' || currentUser.role === 'admin')"
+        >
+          <i class="bi bi-people"></i>
+          Users
         </button>
       </div>
 
