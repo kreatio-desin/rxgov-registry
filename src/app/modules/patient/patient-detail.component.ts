@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService, Patient } from '../../core/services/patient.service';
 import { TransferService } from '../../core/services/transfer.service';
 import { FacilityService, Facility } from '../../core/services/facility.service';
+import { AuthService, AuthUser } from '../../core/services/auth.service';
 
 interface DoseRecord {
   dateTime: string;
