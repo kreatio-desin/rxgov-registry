@@ -706,9 +706,9 @@ interface DoseAdministration {
 
       .route-card,
       .encounters-card {
-        background: white;
+        background: var(--color-bg-primary);
         border-radius: 0.5rem;
-        border: 1px solid #e5e7eb;
+        border: 1px solid var(--color-border);
         display: flex;
         flex-direction: column;
       }
@@ -727,13 +727,13 @@ interface DoseAdministration {
 
       .card-header {
         padding: 0.75rem;
-        background: #f9fafb;
-        border-bottom: 1px solid #e5e7eb;
+        background: var(--color-bg-tertiary);
+        border-bottom: 1px solid var(--color-border);
         font-size: 0.75rem;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: #6b7280;
+        color: var(--color-text-secondary);
         display: flex;
         align-items: center;
         gap: 0.5rem;
@@ -977,9 +977,9 @@ interface DoseAdministration {
       }
 
       .right-panel {
-        background: white;
+        background: var(--color-bg-primary);
         border-radius: 0.5rem;
-        border: 2px dashed #e5e7eb;
+        border: 2px dashed var(--color-border);
         display: flex;
         flex-direction: column;
         min-height: 0;
@@ -997,7 +997,7 @@ interface DoseAdministration {
 
         i {
           font-size: 2.5rem;
-          color: #d1d5db;
+          color: var(--color-border);
           margin-bottom: 0.75rem;
           opacity: 0.3;
         }
@@ -1006,18 +1006,18 @@ interface DoseAdministration {
           margin: 0 0 0.5rem 0;
           font-size: 0.875rem;
           font-weight: 600;
-          color: #374151;
+          color: var(--color-text-primary);
         }
 
         p {
           margin: 0;
           font-size: 0.75rem;
-          color: #6b7280;
+          color: var(--color-text-secondary);
         }
       }
 
       .btn-primary {
-        background: #0c5caa;
+        background: var(--color-button-bg);
         color: white;
         border: none;
         padding: 0.5rem 1rem;
@@ -1027,7 +1027,7 @@ interface DoseAdministration {
         transition: all 0.2s;
 
         &:hover:not(:disabled) {
-          background: #0a4a85;
+          background: var(--color-button-hover);
         }
 
         &:disabled {
@@ -1037,9 +1037,9 @@ interface DoseAdministration {
       }
 
       .btn-secondary {
-        background: white;
-        color: #374151;
-        border: 1px solid #d1d5db;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        border: 1px solid var(--color-border);
         padding: 0.5rem 1rem;
         border-radius: 0.375rem;
         font-size: 0.875rem;
@@ -1047,7 +1047,7 @@ interface DoseAdministration {
         transition: all 0.2s;
 
         &:hover {
-          background: #f9fafb;
+          background: var(--color-bg-tertiary);
         }
       }
 
@@ -1065,8 +1065,8 @@ interface DoseAdministration {
         position: absolute;
         top: calc(100% + 0.25rem);
         left: 0;
-        background: white;
-        border: 1px solid #e5e7eb;
+        background: var(--color-bg-primary);
+        border: 1px solid var(--color-border);
         border-radius: 0.375rem;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         z-index: 1000;
