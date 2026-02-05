@@ -486,6 +486,92 @@ interface Facility {
           </div>
         </div>
       </div>
+
+      <!-- Transfer Patient Modal -->
+      <div *ngIf="showTransferModal" class="modal-overlay" (click)="closeTransferModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <!-- Close Button -->
+          <button class="modal-close" (click)="closeTransferModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          </button>
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h2>Transfer Patient</h2>
+            <p>Initiate a transfer for {{ patient?.lastName }}, {{ patient?.firstName }} to another OTP.</p>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <!-- Transfer Date -->
+            <div class="form-group">
+              <label class="form-label">Transfer Date (Administrative)</label>
+              <input
+                type="date"
+                class="form-input"
+                [(ngModel)]="transferForm.transferDate"
+                [value]="currentTransferDate"
+              >
+              <p class="form-hint">Date of administrative transfer</p>
+            </div>
+
+            <!-- Destination Clinic -->
+            <div class="form-group">
+              <label class="form-label">Destination Clinic</label>
+              <select class="form-input" [(ngModel)]="transferForm.destinationClinic">
+                <option value="">Select facility...</option>
+                <option *ngFor="let facility of availableFacilities" [value]="facility.id">
+                  {{ facility.name }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Transfer Notes -->
+            <div class="form-group">
+              <label class="form-label">Transfer Notes *</label>
+              <textarea
+                class="form-input textarea"
+                placeholder="Clinical summary, current medication regimen, last dose details, special considerations..."
+                [(ngModel)]="transferForm.transferNotes"
+              ></textarea>
+              <p class="form-hint">Required: These notes will be visible to the receiving provider for clinical review.</p>
+            </div>
+
+            <!-- Consent Checkbox -->
+            <div class="consent-box">
+              <label class="consent-checkbox">
+                <input
+                  type="checkbox"
+                  class="checkbox-input"
+                  [(ngModel)]="transferForm.consentAttest"
+                >
+                <span>I attest that the patient has consented to the sharing of their treatment records with the receiving facility for the purpose of care coordination.</span>
+              </label>
+            </div>
+
+            <!-- Warning Message -->
+            <div class="info-box">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" x2="12" y1="8" y2="12"></line>
+                <line x1="12" x2="12.01" y1="16" y2="16"></line>
+              </svg>
+              <span>Patient will be hidden from staff until accepted by the receiving facility's OTP Manager.</span>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <button class="btn-cancel" (click)="closeTransferModal()">Cancel</button>
+            <button class="btn-confirm" (click)="confirmTransfer()" [disabled]="!transferForm.consentAttest || !transferForm.destinationClinic">
+              Confirm Transfer
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   `,
   styles: [`
