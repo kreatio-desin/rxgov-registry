@@ -295,7 +295,7 @@ import { SyncService, SyncConfig } from '../../core/services/sync.service';
       label {
         display: block;
         font-weight: 600;
-        color: #333;
+        color: var(--color-text-primary);
         margin-bottom: 0.5rem;
       }
 
@@ -309,13 +309,15 @@ import { SyncService, SyncConfig } from '../../core/services/sync.service';
       select {
         width: 100%;
         padding: 0.75rem;
-        border: 1px solid #dee2e6;
+        border: 1px solid var(--color-border);
         border-radius: 6px;
         font-size: 0.95rem;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
 
         &:focus {
           outline: none;
-          border-color: #0c5caa;
+          border-color: var(--color-button-bg);
         }
       }
 
