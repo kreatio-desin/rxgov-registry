@@ -1648,6 +1648,15 @@ export class PatientDetailComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    // Load facilities for transfer dropdown
+    try {
+      this.availableFacilities = await this.facilityService.getAllFacilities();
+    } catch (error) {
+      console.error('Failed to load facilities:', error);
+      this.availableFacilities = [];
+    }
+
+    // Load patient data
     const patientId = this.route.snapshot.paramMap.get('id');
     if (patientId) {
       try {
