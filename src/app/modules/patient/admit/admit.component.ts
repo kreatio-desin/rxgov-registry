@@ -587,7 +587,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
         width: 1.5rem;
         height: 1.5rem;
         border-radius: 9999px;
-        border: 1px solid #d1d5db;
+        border: 1px solid var(--color-border);
         font-size: 0.75rem;
       }
 
@@ -752,7 +752,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       width: 100%;
       min-width: 0;
       border-radius: 0.375rem;
-      border: 1px solid #d1d5db;
+      border: 1px solid var(--color-border);
       background-color: #f9fafb;
       padding: 0.5rem 0.75rem;
       font-size: 0.875rem;
@@ -827,7 +827,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
 
     .checkbox-card {
       border-radius: 0.375rem;
-      border: 1px solid #d1d5db;
+      border: 1px solid var(--color-border);
       padding: 1rem;
       background-color: #f9fafb;
 
@@ -1042,7 +1042,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       &.btn-secondary {
         background-color: white;
         color: var(--color-text-primary);
-        border: 1px solid #d1d5db;
+        border: 1px solid var(--color-border);
 
         &:hover:not(:disabled) {
           background-color: #f3f4f6;
@@ -1123,7 +1123,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
     }
 
     .match-card {
-      border: 1px solid #d1d5db;
+      border: 1px solid var(--color-border);
       border-radius: 0.5rem;
       overflow: hidden;
       background: white;
