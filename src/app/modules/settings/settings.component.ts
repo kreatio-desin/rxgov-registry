@@ -578,9 +578,7 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
       .quality-issues {
         grid-template-columns: 1fr;
       }
-
     }
-  }
   `]
 })
 export class SettingsComponent implements OnInit {
