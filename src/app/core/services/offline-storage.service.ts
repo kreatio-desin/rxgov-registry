@@ -90,6 +90,27 @@ export class OfflineStorageService {
     });
   }
 
+  private validateStores(db: IDBDatabase): boolean {
+    const requiredStores = [
+      'patients',
+      'facilities',
+      'encounters',
+      'dosages',
+      'auditLogs',
+      'syncQueue',
+      'userConsents',
+      'transfers'
+    ];
+
+    for (const storeName of requiredStores) {
+      if (!db.objectStoreNames.contains(storeName)) {
+        console.warn(`Store '${storeName}' not found in database`);
+        return false;
+      }
+    }
+    return true;
+  }
+
   private createObjectStores(db: IDBDatabase): void {
     // Patients store
     if (!db.objectStoreNames.contains('patients')) {
