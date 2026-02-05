@@ -37,7 +37,15 @@ export class OfflineStorageService {
       request.onsuccess = () => {
         this.db = request.result;
         console.log('IndexedDB initialized with version', this.db.version);
-        resolve(this.db);
+
+        // Validate that all required stores exist
+        if (!this.validateStores(this.db)) {
+          console.warn('Some stores are missing, recreating database');
+          this.db.close();
+          this.deleteAndRecreate().then(resolve).catch(reject);
+        } else {
+          resolve(this.db);
+        }
       };
 
       request.onupgradeneeded = (event) => {
