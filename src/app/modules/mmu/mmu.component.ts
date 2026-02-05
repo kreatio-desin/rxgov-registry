@@ -3167,7 +3167,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
   }
 
   saveEncounter(): void {
-    if (!this.selectedPatient || !this.doseData.medicationName.trim() || !this.doseData.observedDose.trim()) {
+    if (!this.selectedPatient || !this.doseData.medicationName.trim() || !this.doseData.observedDose) {
       console.warn('Missing required fields');
       return;
     }
