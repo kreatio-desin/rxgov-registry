@@ -100,7 +100,8 @@ export class OfflineStorageService {
       'auditLogs',
       'syncQueue',
       'userConsents',
-      'transfers'
+      'transfers',
+      'auth_session'
     ];
 
     for (const storeName of requiredStores) {
