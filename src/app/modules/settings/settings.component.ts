@@ -642,8 +642,57 @@ export class SettingsComponent implements OnInit {
   syncFrequencyMinutes = 1;
   maxRetries = 3;
   pendingCount = 0;
+  currentUser: AuthUser | null = null;
+  filteredUsers: AuthUser[] = [];
 
-  constructor(private syncService: SyncService) {}
+  // Demo users for the system
+  private allUsers: AuthUser[] = [
+    {
+      id: 'user-admin-001',
+      email: 'admin@rxgov.gov',
+      name: 'Dr. Lisa Johnson',
+      role: 'admin',
+      permissions: ['all']
+    },
+    {
+      id: 'user-mgr-001',
+      email: 'manager@anchorage-ctc.org',
+      name: 'Robert Chen',
+      role: 'facility-manager',
+      facilityId: 'fac-act-001',
+      facilityName: 'Anchorage Comprehensive Treatment Center',
+      permissions: ['view_facility_patients', 'manage_facility_patients']
+    },
+    {
+      id: 'user-mgr-002',
+      email: 'manager2@cms-anc.org',
+      name: 'Maria Rodriguez',
+      role: 'facility-manager',
+      facilityId: 'fac-cms-anc-001',
+      facilityName: 'Community Medical Services – Anchorage',
+      permissions: ['view_facility_patients', 'manage_facility_patients']
+    },
+    {
+      id: 'user-staff-001',
+      email: 'staff@anchorage-ctc.org',
+      name: 'James Wilson',
+      role: 'facility-staff',
+      facilityId: 'fac-act-001',
+      facilityName: 'Anchorage Comprehensive Treatment Center',
+      permissions: ['view_facility_patients', 'record_doses']
+    },
+    {
+      id: 'user-staff-002',
+      email: 'staff2@cms-anc.org',
+      name: 'Emily Davis',
+      role: 'facility-staff',
+      facilityId: 'fac-cms-anc-001',
+      facilityName: 'Community Medical Services – Anchorage',
+      permissions: ['view_facility_patients', 'record_doses']
+    }
+  ];
+
+  constructor(private syncService: SyncService, private authService: AuthService) {}
 
   async ngOnInit(): Promise<void> {
     const pending = await this.syncService.getPendingItems();
