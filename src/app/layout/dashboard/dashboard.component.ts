@@ -282,7 +282,7 @@ interface PatientRecord {
     }
 
     .section-card {
-      background: white;
+      background: var(--color-bg-primary);
       border-radius: 8px;
       border: 1px solid #e5e7eb;
       overflow: hidden;
@@ -391,8 +391,8 @@ interface PatientRecord {
     }
 
     .btn-review {
-      background: white;
-      border: 1px solid #d1d5db;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
       color: #374151;
       padding: 6px 12px;
       border-radius: 4px;
@@ -501,8 +501,8 @@ interface PatientRecord {
     }
 
     .patient-card {
-      background: white;
-      border: 1px solid #e5e7eb;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
       border-radius: 8px;
       padding: 16px;
       cursor: pointer;
@@ -596,7 +596,7 @@ interface PatientRecord {
     }
 
     .modal-content {
-      background: white;
+      background: var(--color-bg-primary);
       border-radius: 0.5rem;
       padding: 1.5rem;
       max-width: 448px;
