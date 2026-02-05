@@ -89,6 +89,14 @@ export class OfflineStorageService {
           consentStore.createIndex('patientId', 'patientId', { unique: false });
           consentStore.createIndex('userId', 'userId', { unique: false });
         }
+
+        // Transfers store
+        if (!db.objectStoreNames.contains('transfers')) {
+          const transferStore = db.createObjectStore('transfers', { keyPath: 'id' });
+          transferStore.createIndex('patientId', 'patientId', { unique: false });
+          transferStore.createIndex('status', 'status', { unique: false });
+          transferStore.createIndex('destinationFacilityId', 'destinationFacilityId', { unique: false });
+        }
       };
     });
   }
