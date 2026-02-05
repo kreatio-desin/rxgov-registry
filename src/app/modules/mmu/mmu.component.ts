@@ -1156,37 +1156,84 @@ export class MMUComponent implements OnInit, AfterViewInit {
     {
       id: '1',
       name: 'Downtown Shelter',
-      address: '100 E 4th Ave'
+      address: '100 E 4th Ave',
+      facilityId: 'facility1'
     },
     {
       id: '2',
       name: 'Muldoon Library',
-      address: '1251 Muldoon Rd'
+      address: '1251 Muldoon Rd',
+      facilityId: 'facility1'
     },
     {
       id: '3',
       name: 'fairview street',
-      address: 'Fairview street'
+      address: 'Fairview street',
+      facilityId: 'facility1'
     },
     {
       id: '4',
       name: 'Fairview Rec Center',
-      address: '1121 E 10th Ave'
+      address: '1121 E 10th Ave',
+      facilityId: 'facility1'
     },
     {
       id: '5',
       name: 'Eldercare Center',
-      address: '456 Park Ave'
+      address: '456 Park Ave',
+      facilityId: 'facility1'
     },
     {
       id: '6',
       name: 'Community Clinic',
-      address: '789 Market St'
+      address: '789 Market St',
+      facilityId: 'facility1'
     },
     {
       id: '7',
       name: 'Youth Services',
-      address: '321 Main St'
+      address: '321 Main St',
+      facilityId: 'facility1'
+    }
+  ];
+
+  // Patient database
+  patientsDatabase: Patient[] = [
+    {
+      id: 'pat1',
+      firstName: 'John',
+      lastName: 'Smith',
+      dob: '1985-05-15',
+      ssn: '123-45-6789',
+      facilityId: 'facility1',
+      isRestricted: false
+    },
+    {
+      id: 'pat2',
+      firstName: 'Sarah',
+      lastName: 'Johnson',
+      dob: '1990-08-20',
+      ssn: '987-65-4321',
+      facilityId: 'facility1',
+      isRestricted: false
+    },
+    {
+      id: 'pat3',
+      firstName: 'Michael',
+      lastName: 'Williams',
+      dob: '1975-03-10',
+      ssn: '456-78-9012',
+      facilityId: 'facility2',
+      isRestricted: true
+    },
+    {
+      id: 'pat4',
+      firstName: 'Emma',
+      lastName: 'Brown',
+      dob: '1988-12-25',
+      ssn: '789-01-2345',
+      facilityId: 'facility1',
+      isRestricted: false
     }
   ];
 
@@ -1200,6 +1247,24 @@ export class MMUComponent implements OnInit, AfterViewInit {
   recentStops: AvailableStop[] = [];
   newStopName = '';
   newStopAddress = '';
+
+  // Patient queue and encounter state
+  selectedStopId: string | null = null;
+  selectedPatient: Patient | null = null;
+  patientSearchQuery = '';
+  patientSearchResults: PatientMatch[] = [];
+  doseData: DoseAdministration = {
+    medicationName: '',
+    dose: '',
+    unit: '',
+    route: '',
+    site: '',
+    time: '',
+    notes: ''
+  };
+  showBreakGlassModal = false;
+  breakGlassPatient: Patient | null = null;
+  attestationConfirmed = false;
 
   ngOnInit(): void {
     // Load today's encounters
