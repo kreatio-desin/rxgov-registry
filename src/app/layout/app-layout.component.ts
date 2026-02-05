@@ -62,7 +62,7 @@ import { AuthService, AuthUser } from '../core/services/auth.service';
               <i class="bi bi-person-standing"></i>
               <span class="nav-label">Accessibility</span>
             </button>
-            <button class="nav-item" title="Users">
+            <button class="nav-item" title="Users" (click)="navigateToUsers()">
               <i class="bi bi-people"></i>
               <span class="nav-label">Users</span>
             </button>
