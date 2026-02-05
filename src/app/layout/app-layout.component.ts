@@ -151,7 +151,7 @@ import { ThemeService } from '../core/services/theme.service';
       display: grid;
       grid-template-columns: 200px 1fr;
       min-height: 100vh;
-      background-color: #f8f9fa;
+      background-color: var(--color-bg-secondary);
 
       @media (max-width: 768px) {
         grid-template-columns: 1fr;
