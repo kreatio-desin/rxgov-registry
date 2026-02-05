@@ -1384,8 +1384,16 @@ export class ComplianceComponent implements OnInit {
 
   confirmBreakGlassAccess(): void {
     if (this.breakGlassData.attestationConfirmed && this.breakGlassData.patientId) {
-      this.grantedBreakGlassAccess.add(this.breakGlassData.patientId);
       const patientId = this.breakGlassData.patientId;
+
+      // Grant access through PatientService (this will be logged in audit)
+      this.patientService.grantAccessViaAttestation(
+        patientId,
+        'current-user-id',
+        'Cross-facility patient access from Compliance Report'
+      );
+
+      this.grantedBreakGlassAccess.add(patientId);
       this.closeBreakGlassModal();
 
       // Navigate to patient page
