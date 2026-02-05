@@ -1582,44 +1582,97 @@ interface DoseAdministration {
         display: flex;
         flex-direction: column;
         flex: 1;
-        gap: 1rem;
-        padding: 1rem;
+        gap: 0;
+        padding: 0;
         background: white;
         overflow-y: auto;
         min-height: 0;
       }
 
-      .encounter-header {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding-bottom: 0.75rem;
+      .encounter-header-card {
+        padding: 1rem;
+        background: linear-gradient(to right, rgba(79, 70, 229, 0.05), rgba(79, 70, 229, 0.02));
         border-bottom: 1px solid #e5e7eb;
+        border-left: 4px solid #4f46e5;
+        flex-shrink: 0;
 
-        .btn-back {
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding: 0;
-          color: #6b7280;
+        .header-top {
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: space-between;
+          margin-bottom: 0.5rem;
 
-          i {
-            font-size: 1rem;
+          h3 {
+            margin: 0;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1f2937;
           }
 
-          &:hover {
-            color: #1f2937;
+          .btn-close-form {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+
+            i {
+              font-size: 0.875rem;
+            }
+
+            &:hover {
+              color: #1f2937;
+            }
           }
         }
 
-        h3 {
+        .header-subtitle {
           margin: 0;
-          font-size: 0.875rem;
-          font-weight: 600;
-          color: #1f2937;
+          font-size: 0.75rem;
+          color: #6b7280;
+        }
+      }
+
+      .patient-card {
+        padding: 1rem;
+        margin: 0.75rem;
+        background: #f9fafb;
+        border-radius: 0.375rem;
+        border-left: 4px solid #9ca3af;
+        flex-shrink: 0;
+
+        .patient-header {
+          margin-bottom: 0.5rem;
+
+          h4 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: #1f2937;
+          }
+
+          .patient-rx {
+            margin: 0.25rem 0 0 0;
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: #6b7280;
+          }
+        }
+
+        .patient-meta-info {
+          display: flex;
+          gap: 0.75rem;
+          flex-wrap: wrap;
+          font-size: 0.75rem;
+          color: #6b7280;
+
+          .meta-item {
+            display: flex;
+            align-items: center;
+          }
         }
       }
 
@@ -1628,20 +1681,117 @@ interface DoseAdministration {
         flex-direction: column;
         gap: 1rem;
         flex: 1;
+        padding: 1rem;
       }
 
       .form-section {
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
+        padding: 0.75rem;
+        border-radius: 0.375rem;
+        border: 1px solid #e5e7eb;
 
         h4 {
           margin: 0;
           font-size: 0.75rem;
           font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: #6b7280;
+          color: #1f2937;
+        }
+
+        .section-header {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.5rem;
+          margin-bottom: 0.5rem;
+
+          i {
+            font-size: 0.875rem;
+            margin-top: 0.125rem;
+            flex-shrink: 0;
+          }
+
+          > div {
+            flex: 1;
+
+            h4 {
+              margin: 0 0 0.25rem 0;
+              font-size: 0.75rem;
+              font-weight: 600;
+              text-transform: uppercase;
+              color: #374151;
+            }
+
+            .section-description {
+              margin: 0;
+              font-size: 0.7rem;
+              color: #6b7280;
+            }
+          }
+        }
+
+        &.observed-dose-section {
+          background: rgba(79, 70, 229, 0.02);
+          border-color: #ddd6fe;
+          border-left: 4px solid #4f46e5;
+
+          .section-header i {
+            color: #4f46e5;
+          }
+        }
+
+        &.take-home-section {
+          background: rgba(34, 197, 94, 0.02);
+          border-color: #dcfce7;
+          border-left: 4px solid #22c55e;
+
+          .section-header i {
+            color: #22c55e;
+          }
+        }
+
+        &.counseling-section {
+          background: rgba(147, 51, 234, 0.02);
+          border-color: #e9d5ff;
+          border-left: 4px solid #9333ea;
+
+          .section-header i {
+            color: #9333ea;
+          }
+        }
+      }
+
+      .warning-alert {
+        display: flex;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: #fef3c7;
+        border: 1px solid #fbbf24;
+        border-radius: 0.25rem;
+        margin: 0.5rem 0;
+
+        i {
+          font-size: 0.875rem;
+          color: #d97706;
+          flex-shrink: 0;
+          margin-top: 0.125rem;
+        }
+
+        > div {
+          flex: 1;
+
+          .warning-title {
+            margin: 0;
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: #92400e;
+          }
+
+          .warning-text {
+            margin: 0.25rem 0 0 0;
+            font-size: 0.7rem;
+            color: #78350f;
+          }
         }
       }
 
