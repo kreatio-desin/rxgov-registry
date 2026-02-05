@@ -1572,7 +1572,7 @@ interface DoseAdministration {
           width: 2.25rem;
           height: 2.25rem;
           min-width: 2.25rem;
-          background: #cbd5e1;
+          background: var(--color-border);
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -1954,7 +1954,7 @@ interface DoseAdministration {
           width: 2.25rem;
           height: 2.25rem;
           min-width: 2.25rem;
-          background: #cbd5e1;
+          background: var(--color-border);
           border-radius: 50%;
           display: flex;
           align-items: center;
