@@ -75,7 +75,7 @@ interface PatientRecord {
         </div>
 
         <!-- Right Column - Recent Patients -->
-        <div class="recent-patients-section lg:col-span-2">
+        <div class="recent-patients-section">
           <div class="section-header-compact">
             <i class="bi bi-clock"></i>
             <h3>Recent Patients</h3>
