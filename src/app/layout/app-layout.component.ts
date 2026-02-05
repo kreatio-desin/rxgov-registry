@@ -725,4 +725,8 @@ export class AppLayoutComponent implements OnInit {
       this.searchResults = [];
     }, 200);
   }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
 }
