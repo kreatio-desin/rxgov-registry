@@ -60,12 +60,15 @@ interface PatientRecord {
               <span class="badge badge-blue">{{ transfers.length }}</span>
             </div>
             <div class="transfers-list">
-              <div *ngFor="let transfer of transfers" class="transfer-item">
+              <div *ngIf="pendingTransfers.length === 0" class="empty-state">
+                <p>No pending transfers</p>
+              </div>
+              <div *ngFor="let transfer of pendingTransfers" class="transfer-item">
                 <div class="transfer-info">
                   <div class="transfer-name">{{ transfer.patientName }}</div>
-                  <div class="transfer-from">From: {{ transfer.fromFacility }}</div>
+                  <div class="transfer-from">From: {{ transfer.sourceClinic }}</div>
                 </div>
-                <button class="btn-review" (click)="reviewTransfer(transfer)">Review</button>
+                <button class="btn-review" (click)="reviewPendingTransfer(transfer)">Review</button>
               </div>
             </div>
           </div>
