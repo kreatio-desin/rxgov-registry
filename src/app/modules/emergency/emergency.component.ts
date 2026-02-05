@@ -115,11 +115,11 @@ import { CommonModule } from '@angular/common';
       font-size: 0.95rem;
       cursor: pointer;
       transition: all 0.2s;
-      background: #dc3545;
+      background: var(--color-error);
       color: white;
 
       &:hover {
-        background: #c82333;
+        background: #dc2626;
         transform: translateY(-2px);
       }
 
