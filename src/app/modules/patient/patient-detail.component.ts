@@ -1582,6 +1582,7 @@ export class PatientDetailComponent implements OnInit {
   showTransferModal = false;
   currentDateTime: string = '';
   currentTransferDate: string = '';
+  currentUser: AuthUser | null = null;
 
   transferForm: TransferForm = {
     transferDate: '',
