@@ -122,12 +122,12 @@ import { AuthService, AuthUser } from '../core/services/auth.service';
             <div class="facility-info">
               <div class="status-indicator"></div>
               <div class="facility-text">
-                <div class="facility-name hidden lg:block" *ngIf="currentUser?.facilityName">{{ currentUser.facilityName }}</div>
-                <div class="facility-name-short lg:hidden" *ngIf="currentUser?.facilityName">{{ (currentUser.facilityName | slice:0:15) + (currentUser.facilityName.length > 15 ? '...' : '') }}</div>
+                <div class="facility-name hidden lg:block" *ngIf="currentUser && currentUser.facilityName">{{ currentUser.facilityName }}</div>
+                <div class="facility-name-short lg:hidden" *ngIf="currentUser && currentUser.facilityName">{{ (currentUser.facilityName! | slice:0:15) + ((currentUser.facilityName?.length ?? 0) > 15 ? '...' : '') }}</div>
                 <div class="facility-name hidden lg:block" *ngIf="!currentUser?.facilityName && currentUser?.role === 'admin'">System Administrator</div>
                 <div class="facility-name-short lg:hidden" *ngIf="!currentUser?.facilityName && currentUser?.role === 'admin'">Admin</div>
                 <div class="user-name">{{ currentUser?.name || 'User' }}</div>
-                <div class="user-role" [attr.data-role]="currentUser?.role">{{ getRoleDisplayName(currentUser?.role) }}</div>
+                <div class="user-role" [attr.data-role]="currentUser?.role">{{ this.getRoleDisplayName(currentUser?.role) }}</div>
               </div>
             </div>
 
