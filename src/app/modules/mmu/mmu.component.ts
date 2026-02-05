@@ -674,7 +674,7 @@ interface DoseAdministration {
           margin: 0;
           font-size: 1.25rem;
           font-weight: 700;
-          color: #1f2937;
+          color: var(--color-text-primary);
         }
 
         p {
@@ -863,7 +863,7 @@ interface DoseAdministration {
       .stop-name {
         font-size: 0.625rem;
         font-weight: 600;
-        color: #1f2937;
+        color: var(--color-text-primary);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -968,7 +968,7 @@ interface DoseAdministration {
       .encounter-name {
         font-size: 0.7rem;
         font-weight: 500;
-        color: #1f2937;
+        color: var(--color-text-primary);
       }
 
       .encounter-service {
@@ -1108,7 +1108,7 @@ interface DoseAdministration {
         padding: 0;
         font-size: 0.875rem;
         outline: none;
-        color: #1f2937;
+        color: var(--color-text-primary);
 
         &::placeholder {
           color: #9ca3af;
@@ -1221,7 +1221,7 @@ interface DoseAdministration {
         margin-bottom: 0.75rem;
         font-size: 0.875rem;
         font-weight: 600;
-        color: #1f2937;
+        color: var(--color-text-primary);
         padding-bottom: 0.75rem;
         border-bottom: 1px solid #e5e7eb;
       }
@@ -1241,7 +1241,7 @@ interface DoseAdministration {
         }
 
         &:hover {
-          color: #1f2937;
+          color: var(--color-text-primary);
         }
       }
 
@@ -1397,7 +1397,7 @@ interface DoseAdministration {
           transition: color 0.2s;
 
           &:hover {
-            color: #1f2937;
+            color: var(--color-text-primary);
           }
 
           i {
@@ -1436,7 +1436,7 @@ interface DoseAdministration {
         padding: 0.25rem;
         font-size: 0.875rem;
         outline: none;
-        color: #1f2937;
+        color: var(--color-text-primary);
         min-width: 0;
 
         &::placeholder {
@@ -1504,7 +1504,7 @@ interface DoseAdministration {
 
         .patient-name {
           font-weight: 600;
-          color: #1f2937;
+          color: var(--color-text-primary);
           font-size: 0.875rem;
         }
 
@@ -1527,7 +1527,7 @@ interface DoseAdministration {
 
           .patient-rx {
             font-weight: 500;
-            color: #1f2937;
+            color: var(--color-text-primary);
           }
         }
 
@@ -1592,7 +1592,7 @@ interface DoseAdministration {
             margin: 0;
             font-size: 0.875rem;
             font-weight: 600;
-            color: #1f2937;
+            color: var(--color-text-primary);
             line-height: 1.2;
           }
 
@@ -1734,7 +1734,7 @@ interface DoseAdministration {
 
           .dose-amount {
             font-weight: 600;
-            color: #1f2937;
+            color: var(--color-text-primary);
             min-width: auto;
             text-align: right;
           }
@@ -1923,7 +1923,7 @@ interface DoseAdministration {
             }
 
             &:hover {
-              color: #1f2937;
+              color: var(--color-text-primary);
             }
           }
         }
@@ -1974,7 +1974,7 @@ interface DoseAdministration {
             margin: 0;
             font-size: 0.875rem;
             font-weight: 600;
-            color: #1f2937;
+            color: var(--color-text-primary);
             line-height: 1.2;
           }
 
@@ -2116,7 +2116,7 @@ interface DoseAdministration {
 
           .dose-amount {
             font-weight: 600;
-            color: #1f2937;
+            color: var(--color-text-primary);
             min-width: auto;
             text-align: right;
           }
@@ -2138,7 +2138,7 @@ interface DoseAdministration {
             margin: 0;
             font-weight: 600;
             font-size: 0.875rem;
-            color: #1f2937;
+            color: var(--color-text-primary);
           }
 
           .patient-rx {
@@ -2183,7 +2183,7 @@ interface DoseAdministration {
           margin: 0;
           font-size: 0.75rem;
           font-weight: 600;
-          color: #1f2937;
+          color: var(--color-text-primary);
         }
 
         .section-header {
@@ -2355,7 +2355,7 @@ interface DoseAdministration {
         label {
           margin: 0;
           font-size: 0.875rem;
-          color: #1f2937;
+          color: var(--color-text-primary);
           cursor: pointer;
         }
       }
@@ -2504,7 +2504,7 @@ interface DoseAdministration {
           margin: 0;
           font-size: 1.125rem;
           font-weight: 700;
-          color: #1f2937;
+          color: var(--color-text-primary);
           flex: 1;
         }
 
@@ -2526,7 +2526,7 @@ interface DoseAdministration {
           }
 
           &:hover {
-            color: #1f2937;
+            color: var(--color-text-primary);
           }
         }
       }
@@ -2599,7 +2599,7 @@ interface DoseAdministration {
             color: #374151;
 
             strong {
-              color: #1f2937;
+              color: var(--color-text-primary);
             }
           }
         }
