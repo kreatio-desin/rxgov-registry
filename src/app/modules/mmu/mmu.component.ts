@@ -827,8 +827,17 @@ interface AvailableStop extends RouteStop {
     }
   `]
 })
-export class MMUComponent implements OnInit {
+export class MMUComponent implements OnInit, AfterViewInit {
+  @ViewChild('addressInput') addressInput?: ElementRef;
+
   selectedUnit = 'unit1';
+
+  // Google Places Autocomplete
+  autocompleteService: any;
+  placesService: any;
+  sessionToken: any;
+  showAddressAutocomplete = false;
+  addressPredictions: any[] = [];
 
   routeStops: RouteStop[] = [
     {
