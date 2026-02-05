@@ -50,6 +50,35 @@ export class PatientService {
 
   constructor(private offlineStorage: OfflineStorageService) {
     this.initializeSamplePatients();
+    this.loadAccessTokensFromSessionStorage();
+  }
+
+  private loadAccessTokensFromSessionStorage(): void {
+    try {
+      const stored = sessionStorage.getItem('patientAccessTokens');
+      if (stored) {
+        const tokens = JSON.parse(stored);
+        for (const [patientId, hasAccess] of Object.entries(tokens)) {
+          if (hasAccess) {
+            this.patientAccessTokens.set(patientId, true);
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to load access tokens from session storage:', e);
+    }
+  }
+
+  private saveAccessTokensToSessionStorage(): void {
+    try {
+      const tokens: Record<string, boolean> = {};
+      for (const [patientId, hasAccess] of this.patientAccessTokens.entries()) {
+        tokens[patientId] = hasAccess;
+      }
+      sessionStorage.setItem('patientAccessTokens', JSON.stringify(tokens));
+    } catch (e) {
+      console.warn('Failed to save access tokens to session storage:', e);
+    }
   }
 
   private async initializeSamplePatients(): Promise<void> {
