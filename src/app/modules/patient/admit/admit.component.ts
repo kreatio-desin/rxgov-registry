@@ -636,7 +636,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
     .enrollment-card {
       background: var(--color-bg-primary);
       border-radius: 0.75rem;
-      border: 1px solid #e5e7eb;
+      border: 1px solid var(--color-border);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
@@ -1347,7 +1347,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
     .modal-dialog {
       background: white;
       border-radius: 0.75rem;
-      border: 1px solid #e5e7eb;
+      border: 1px solid var(--color-border);
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
       display: grid;
       gap: 1.5rem;
