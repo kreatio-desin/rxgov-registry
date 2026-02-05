@@ -368,10 +368,10 @@ import { SyncService, SyncConfig } from '../../core/services/sync.service';
     }
 
     .integration-card {
-      border: 1px solid #dee2e6;
+      border: 1px solid var(--color-border);
       border-radius: 8px;
       padding: 1.5rem;
-      background: white;
+      background: var(--color-bg-primary);
 
       .integration-header {
         display: flex;
@@ -381,7 +381,7 @@ import { SyncService, SyncConfig } from '../../core/services/sync.service';
 
         h3 {
           margin: 0;
-          color: #333;
+          color: var(--color-text-primary);
         }
       }
 
