@@ -31,6 +31,18 @@ interface AdministerDoseForm {
   clinicalNotes: string;
 }
 
+interface TransferForm {
+  transferDate: string;
+  destinationClinic: string;
+  transferNotes: string;
+  consentAttest: boolean;
+}
+
+interface Facility {
+  id: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-patient-detail',
   standalone: true,
