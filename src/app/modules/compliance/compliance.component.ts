@@ -10,6 +10,34 @@ interface Report {
   rowLevelBg: string;
 }
 
+interface PatientCensusRecord {
+  enrollmentId: string;
+  patientId: string;
+  firstName: string;
+  lastName: string;
+  medicaidId: string;
+  gender: string;
+  age: number;
+  dob: string;
+  county: string;
+  homeFacility: string;
+  facilityId: string;
+  activePrescription: string;
+  prescriptionDose: string;
+  lastDoseDate: string;
+  administeredBy: string;
+  enrollmentDate: string;
+  currentPhase: string;
+}
+
+interface BreakGlassAccess {
+  patientId: string;
+  patientName: string;
+  requestingFacilityId: string;
+  patientFacilityId: string;
+  attestationConfirmed: boolean;
+}
+
 @Component({
   selector: 'app-compliance',
   standalone: true,
