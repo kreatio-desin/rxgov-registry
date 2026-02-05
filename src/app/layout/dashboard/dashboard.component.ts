@@ -290,7 +290,7 @@ interface PatientRecord {
 
     .section-header {
       padding: 16px;
-      background: #f9fafb;
+      background: var(--color-bg-tertiary);
       border-bottom: 1px solid #e5e7eb;
       display: flex;
       align-items: center;
@@ -362,7 +362,7 @@ interface PatientRecord {
       transition: background 0.2s;
 
       &:hover {
-        background: #f9fafb;
+        background: var(--color-bg-tertiary);
       }
 
       &:last-child {
@@ -404,7 +404,7 @@ interface PatientRecord {
       flex-shrink: 0;
 
       &:hover {
-        background: #f9fafb;
+        background: var(--color-bg-tertiary);
         border-color: #9ca3af;
       }
     }
@@ -509,7 +509,7 @@ interface PatientRecord {
       transition: all 0.2s;
 
       &:active {
-        background: #f9fafb;
+        background: var(--color-bg-tertiary);
       }
 
       &.clickable-card:hover {
@@ -671,7 +671,7 @@ interface PatientRecord {
       border: 1px solid var(--color-border);
       border-radius: 0.5rem;
       padding: 0.75rem;
-      background: #f9fafb;
+      background: var(--color-bg-tertiary);
 
       h4 {
         margin: 0 0 0.5rem 0;
