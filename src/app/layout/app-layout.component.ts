@@ -52,7 +52,7 @@ import { ThemeService } from '../core/services/theme.service';
           <!-- Bottom Navigation -->
           <div class="nav-bottom">
             <div class="nav-divider"></div>
-            <button class="nav-item" title="Theme">
+            <button class="nav-item" title="Theme" (click)="toggleTheme()">
               <i class="bi bi-circle-half"></i>
               <span class="nav-label">Theme</span>
             </button>
