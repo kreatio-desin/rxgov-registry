@@ -645,6 +645,7 @@ export class AppLayoutComponent implements OnInit {
   isOnline = navigator.onLine;
   syncStatus$: any;
   sidebarOpen = false;
+  currentUser: AuthUser | null = null;
 
   constructor(
     private patientService: PatientService,
