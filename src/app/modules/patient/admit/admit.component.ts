@@ -634,7 +634,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
     }
 
     .enrollment-card {
-      background: white;
+      background: var(--color-bg-primary);
       border-radius: 0.75rem;
       border: 1px solid #e5e7eb;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
