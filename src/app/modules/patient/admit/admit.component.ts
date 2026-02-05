@@ -769,7 +769,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
         outline: 2px solid #0c5caa;
         outline-offset: 2px;
         border-color: #0c5caa;
-        background-color: white;
+        background-color: var(--color-bg-primary);
       }
 
       &:disabled {
@@ -889,7 +889,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       }
 
       &.pdmp-optional {
-        background-color: white;
+        background-color: var(--color-bg-primary);
         border-color: #d1d5db;
       }
     }
@@ -933,7 +933,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       }
 
       &.badge-optional {
-        background-color: white;
+        background-color: var(--color-bg-primary);
         border-color: #d1d5db;
         color: var(--color-text-primary);
       }
