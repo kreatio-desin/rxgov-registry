@@ -1134,17 +1134,20 @@ export class MMUComponent implements OnInit, AfterViewInit {
     {
       id: '1',
       name: 'Downtown Shelter',
-      address: '100 E 4th Ave'
+      address: '100 E 4th Ave',
+      facilityId: 'facility1'
     },
     {
       id: '2',
       name: 'Muldoon Library',
-      address: '1251 Muldoon Rd'
+      address: '1251 Muldoon Rd',
+      facilityId: 'facility1'
     },
     {
       id: '3',
       name: 'fairview street',
-      address: 'Fairview street'
+      address: 'Fairview street',
+      facilityId: 'facility1'
     }
   ];
 
