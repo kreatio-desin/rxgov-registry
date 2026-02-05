@@ -669,7 +669,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       grid-template-columns: auto 1fr;
       gap: 1rem;
       padding: 1.5rem;
-      border-bottom: 1px solid #e5e7eb;
+      border-bottom: 1px solid var(--color-border);
     }
 
     .header-icon {
@@ -1136,7 +1136,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       gap: 0.75rem;
       padding: 0.75rem;
       background-color: #f3f4f6;
-      border-bottom: 1px solid #e5e7eb;
+      border-bottom: 1px solid var(--color-border);
       flex-wrap: wrap;
     }
 
