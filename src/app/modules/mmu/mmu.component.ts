@@ -33,6 +33,17 @@ interface Patient {
   currentMedication?: string;
   dose?: string;
   rxNumber?: string;
+  lastDoseTime?: string;
+  lastDoseHours?: number;
+  takeHomeStatus?: string;
+  recentDoses?: DoseRecord[];
+}
+
+interface DoseRecord {
+  date: string;
+  time: string;
+  type: 'Observed' | 'Take-Home';
+  amount: string;
 }
 
 interface PatientMatch {
