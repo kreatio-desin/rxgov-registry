@@ -1381,7 +1381,8 @@ export class MMUComponent implements OnInit, AfterViewInit {
       const newStop: RouteStop = {
         id: Math.random().toString(36).substr(2, 9),
         name: this.newStopName,
-        address: this.newStopAddress
+        address: this.newStopAddress,
+        facilityId: 'facility1'
       };
 
       // Add to route stops
@@ -1391,7 +1392,8 @@ export class MMUComponent implements OnInit, AfterViewInit {
       this.availableStops.push({
         id: newStop.id,
         name: newStop.name,
-        address: newStop.address
+        address: newStop.address,
+        facilityId: 'facility1'
       });
 
       this.closeAddStopDialog();
