@@ -1357,7 +1357,8 @@ export class MMUComponent implements OnInit, AfterViewInit {
     this.routeStops.push({
       id: stop.id,
       name: stop.name,
-      address: stop.address
+      address: stop.address,
+      facilityId: stop.facilityId || 'facility1'
     });
 
     this.closeAddStopDialog();
