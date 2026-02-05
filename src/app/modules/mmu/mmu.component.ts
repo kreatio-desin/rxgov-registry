@@ -657,7 +657,7 @@ interface DoseAdministration {
 
       .mmu-header {
         padding: 0 1.5rem;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid var(--color-border);
       }
 
       .header-title {
@@ -1092,7 +1092,7 @@ interface DoseAdministration {
         align-items: center;
         gap: 0.5rem;
         padding: 0.75rem;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid var(--color-border);
 
         i {
           font-size: 0.875rem;
@@ -1223,7 +1223,7 @@ interface DoseAdministration {
         font-weight: 600;
         color: var(--color-text-primary);
         padding-bottom: 0.75rem;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid var(--color-border);
       }
 
       .btn-back {
@@ -2490,7 +2490,7 @@ interface DoseAdministration {
         align-items: flex-start;
         gap: 1rem;
         padding: 1.5rem;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid var(--color-border);
         position: relative;
 
         i {
