@@ -143,7 +143,7 @@ import { FacilityService } from '../../core/services/facility.service';
     }
 
     .patients-table-container {
-      background: white;
+      background: var(--color-bg-primary);
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -154,37 +154,37 @@ import { FacilityService } from '../../core/services/facility.service';
       border-collapse: collapse;
 
       thead {
-        background: #f8f9fa;
-        border-bottom: 2px solid #dee2e6;
+        background: var(--color-bg-tertiary);
+        border-bottom: 2px solid var(--color-border);
       }
 
       th {
         padding: 1rem;
         text-align: left;
         font-weight: 600;
-        color: #333;
+        color: var(--color-text-primary);
         white-space: nowrap;
       }
 
       td {
         padding: 1rem;
-        border-bottom: 1px solid #dee2e6;
-        color: #333;
+        border-bottom: 1px solid var(--color-border);
+        color: var(--color-text-primary);
       }
 
       tbody tr:hover {
-        background-color: #f8f9fa;
+        background-color: var(--color-bg-tertiary);
       }
     }
 
     .patient-name {
       font-weight: bold;
-      color: #0c5caa;
+      color: var(--color-primary);
     }
 
     .registry-id {
       font-family: monospace;
-      color: #666;
+      color: var(--color-text-secondary);
       font-size: 0.9rem;
     }
 
