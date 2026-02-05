@@ -582,7 +582,7 @@ interface BreakGlassAccess {
       border-radius: 0.375rem;
       font-size: 0.75rem;
       font-weight: 500;
-      color: #374151;
+      color: var(--color-text-primary);
       white-space: nowrap;
     }
 
@@ -594,7 +594,7 @@ interface BreakGlassAccess {
       border: none;
       border-radius: 0.375rem;
       background: transparent;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       font-size: 0.75rem;
       font-weight: 500;
       cursor: pointer;
@@ -606,8 +606,8 @@ interface BreakGlassAccess {
       }
 
       &:hover {
-        color: #3b82f6;
-        background: #f3f4f6;
+        color: var(--color-primary);
+        background: var(--color-bg-tertiary);
       }
     }
 
