@@ -9,6 +9,7 @@ export interface StorageDatabase {
   syncQueue: any[];
   userConsents: any[];
   transfers: any[];
+  auth_session: any[];
 }
 
 @Injectable({
