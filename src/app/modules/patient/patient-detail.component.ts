@@ -1594,13 +1594,7 @@ export class PatientDetailComponent implements OnInit {
     consentAttest: false
   };
 
-  availableFacilities: Facility[] = [
-    { id: 'facility-001', name: 'Downtown OTP Clinic' },
-    { id: 'facility-002', name: 'Northgate Treatment Center' },
-    { id: 'facility-003', name: 'Riverside Medical Center' },
-    { id: 'facility-004', name: 'Westside Addiction Services' },
-    { id: 'facility-005', name: 'Central Opioid Treatment Program' }
-  ];
+  availableFacilities: Facility[] = [];
 
   dosingHistory: DoseRecord[] = [
     {
