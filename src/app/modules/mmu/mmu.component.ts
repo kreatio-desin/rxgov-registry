@@ -1426,8 +1426,8 @@ interface DoseAdministration {
           font-size: 0.7rem;
           cursor: pointer;
           white-space: nowrap;
-          transition: background 0.2s;
-          opacity: 0.2s;
+          transition: background 0.2s, opacity 0.2s;
+          opacity: 0;
           flex-shrink: 0;
           height: fit-content;
 
@@ -1437,6 +1437,10 @@ interface DoseAdministration {
         }
       }
 
+      .facility-patient:hover .btn-log-encounter {
+        opacity: 1;
+      }
+
       .restricted-match-item {
         display: flex;
         align-items: center;
@@ -1444,6 +1448,10 @@ interface DoseAdministration {
         gap: 1rem;
         padding: 0.625rem;
         overflow: hidden;
+
+        &:hover .btn-log-encounter {
+          opacity: 1;
+        }
 
         .restricted-match {
           flex: 1;
@@ -1510,10 +1518,10 @@ interface DoseAdministration {
           font-size: 0.7rem;
           cursor: pointer;
           white-space: nowrap;
-          transition: background 0.2s;
+          transition: background 0.2s, opacity 0.2s;
           flex-shrink: 0;
           height: fit-content;
-          opacity: 0.2s;
+          opacity: 0;
 
           &:hover {
             background: #0a4a85;
