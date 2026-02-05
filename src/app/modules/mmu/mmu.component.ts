@@ -86,9 +86,11 @@ interface DoseAdministration {
                   <label>Route Stops</label>
                 </div>
                 <div class="stops-list">
-                  <div *ngFor="let stop of routeStops"
-                       class="stop-item"
-                       [class.selected]="selectedStopId === stop.id">
+                  <div
+                    *ngFor="let stop of routeStops"
+                    class="stop-item"
+                    [class.selected]="selectedStopId === stop.id"
+                  >
                     <div class="stop-info" (click)="selectStopForPatientQueue(stop)">
                       <i class="bi bi-geo-alt"></i>
                       <div class="stop-details">
@@ -96,7 +98,11 @@ interface DoseAdministration {
                         <div class="stop-address">{{ stop.address }}</div>
                       </div>
                     </div>
-                    <button class="btn-remove" (click)="removeStop(stop.id, $event)" title="Remove stop">
+                    <button
+                      class="btn-remove"
+                      (click)="removeStop(stop.id, $event)"
+                      title="Remove stop"
+                    >
                       <i class="bi bi-x"></i>
                     </button>
                   </div>
@@ -136,1213 +142,938 @@ interface DoseAdministration {
 
         <!-- Add Stop Dropdown (Moved outside of scrollable container) -->
         <div *ngIf="showAddStopDialog" class="dropdown-content dropdown-outside">
-                    <div *ngIf="!showCreateNewForm" class="dropdown-inner">
-                      <div class="dropdown-header">
-                        <i class="bi bi-search"></i>
-                        <input
-                          type="text"
-                          [(ngModel)]="searchQuery"
-                          (input)="searchStops()"
-                          placeholder="Search existing stops..."
-                          class="dropdown-search"
-                          autofocus
-                        />
-                      </div>
-                      <div class="dropdown-list">
-                        <div *ngIf="searchQuery === '' && recentStops.length > 0">
-                          <div class="list-group-title">Recent Stops</div>
-                          <button *ngFor="let stop of recentStops" class="list-item" (click)="selectStop(stop)">
-                            <i class="bi bi-geo-alt"></i>
-                            <div class="list-item-content">
-                              <div class="list-item-name">{{ stop.name }}</div>
-                              <div class="list-item-address">{{ stop.address }}</div>
-                            </div>
-                          </button>
-                        </div>
-                        <div *ngIf="searchQuery !== ''">
-                          <div *ngIf="filteredStops.length > 0">
-                            <button *ngFor="let stop of filteredStops" class="list-item" (click)="selectStop(stop)">
-                              <i class="bi bi-geo-alt"></i>
-                              <div class="list-item-content">
-                                <div class="list-item-name">{{ stop.name }}</div>
-                                <div class="list-item-address">{{ stop.address }}</div>
-                              </div>
-                            </button>
-                          </div>
-                          <div *ngIf="filteredStops.length === 0" class="no-results-container">
-                            <p class="no-results-text">No existing stop found.</p>
-                            <button class="btn-create-stop" (click)="startCreateNewStop()">
-                              Create "{{ searchQuery }}"
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+          <div *ngIf="!showCreateNewForm" class="dropdown-inner">
+            <div class="dropdown-header">
+              <i class="bi bi-search"></i>
+              <input
+                type="text"
+                [(ngModel)]="searchQuery"
+                (input)="searchStops()"
+                placeholder="Search existing stops..."
+                class="dropdown-search"
+                autofocus
+              />
+            </div>
+            <div class="dropdown-list">
+              <div *ngIf="searchQuery === '' && recentStops.length > 0">
+                <div class="list-group-title">Recent Stops</div>
+                <button
+                  *ngFor="let stop of recentStops"
+                  class="list-item"
+                  (click)="selectStop(stop)"
+                >
+                  <i class="bi bi-geo-alt"></i>
+                  <div class="list-item-content">
+                    <div class="list-item-name">{{ stop.name }}</div>
+                    <div class="list-item-address">{{ stop.address }}</div>
+                  </div>
+                </button>
+              </div>
+              <div *ngIf="searchQuery !== ''">
+                <div *ngIf="filteredStops.length > 0">
+                  <button
+                    *ngFor="let stop of filteredStops"
+                    class="list-item"
+                    (click)="selectStop(stop)"
+                  >
+                    <i class="bi bi-geo-alt"></i>
+                    <div class="list-item-content">
+                      <div class="list-item-name">{{ stop.name }}</div>
+                      <div class="list-item-address">{{ stop.address }}</div>
                     </div>
-                    <div *ngIf="showCreateNewForm" class="dropdown-inner form-mode">
-                      <div class="form-title">
-                        <button class="btn-back" (click)="backToSearch()">
-                          <i class="bi bi-chevron-left"></i>
-                        </button>
-                        <span>Add Stop</span>
-                      </div>
-                      <div class="form-group-inline">
-                        <label>Stop Name</label>
-                        <input type="text" [(ngModel)]="newStopName" placeholder="Enter stop name" class="form-input-inline" />
-                      </div>
-                      <div class="form-group-inline address-group">
-                        <label>Address</label>
-                        <input type="text"
-                               #addressInput
-                               [(ngModel)]="newStopAddress"
-                               (input)="onAddressInput()"
-                               placeholder="Enter address"
-                               class="form-input-inline"
-                               autocomplete="off" />
-                        <div *ngIf="showAddressAutocomplete && addressPredictions.length > 0" class="address-predictions">
-                          <div *ngFor="let prediction of addressPredictions"
-                               class="prediction-item"
-                               (click)="selectAddressPrediction(prediction)">
-                            <i class="bi bi-geo-alt"></i>
-                            <div class="prediction-text">
-                              <div class="prediction-main">{{ prediction.main_text }}</div>
-                              <div class="prediction-secondary">{{ prediction.secondary_text }}</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <button class="btn-add-stop-save" (click)="saveNewStop()">Add Stop</button>
-                    </div>
+                  </button>
+                </div>
+                <div *ngIf="filteredStops.length === 0" class="no-results-container">
+                  <p class="no-results-text">No existing stop found.</p>
+                  <button class="btn-create-stop" (click)="startCreateNewStop()">
+                    Create "{{ searchQuery }}"
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="showCreateNewForm" class="dropdown-inner form-mode">
+            <div class="form-title">
+              <button class="btn-back" (click)="backToSearch()">
+                <i class="bi bi-chevron-left"></i>
+              </button>
+              <span>Add Stop</span>
+            </div>
+            <div class="form-group-inline">
+              <label>Stop Name</label>
+              <input
+                type="text"
+                [(ngModel)]="newStopName"
+                placeholder="Enter stop name"
+                class="form-input-inline"
+              />
+            </div>
+            <div class="form-group-inline address-group">
+              <label>Address</label>
+              <input
+                type="text"
+                #addressInput
+                [(ngModel)]="newStopAddress"
+                (input)="onAddressInput()"
+                placeholder="Enter address"
+                class="form-input-inline"
+                autocomplete="off"
+              />
+              <div
+                *ngIf="showAddressAutocomplete && addressPredictions.length > 0"
+                class="address-predictions"
+              >
+                <div
+                  *ngFor="let prediction of addressPredictions"
+                  class="prediction-item"
+                  (click)="selectAddressPrediction(prediction)"
+                >
+                  <i class="bi bi-geo-alt"></i>
+                  <div class="prediction-text">
+                    <div class="prediction-main">{{ prediction.main_text }}</div>
+                    <div class="prediction-secondary">{{ prediction.secondary_text }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="btn-add-stop-save" (click)="saveNewStop()">Add Stop</button>
+          </div>
         </div>
         <!-- End of dropdown -->
 
-      <!-- Dropdown Overlay -->
-      <div *ngIf="showAddStopDialog" class="dropdown-overlay" (click)="closeAddStopDialog()"></div>
+        <!-- Dropdown Overlay -->
+        <div
+          *ngIf="showAddStopDialog"
+          class="dropdown-overlay"
+          (click)="closeAddStopDialog()"
+        ></div>
 
-      <!-- Right Panel - Patient Queue/Details -->
-      <div class="right-panel">
-        <!-- No Stop Selected -->
-        <div *ngIf="!selectedStopId" class="map-placeholder">
-          <i class="bi bi-geo-alt"></i>
-          <h3>No Stop Selected</h3>
-          <p>Please select an active stop from the route list to begin logging encounters.</p>
+        <!-- Right Panel - Patient Queue/Details -->
+        <div class="right-panel">
+          <!-- No Stop Selected -->
+          <div *ngIf="!selectedStopId" class="map-placeholder">
+            <i class="bi bi-geo-alt"></i>
+            <h3>No Stop Selected</h3>
+            <p>Please select an active stop from the route list to begin logging encounters.</p>
+          </div>
+
+          <!-- Patient Queue for Selected Stop -->
+          <div *ngIf="selectedStopId && !selectedPatient" class="patient-queue">
+            <div class="queue-header">
+              <h3>{{ getSelectedStopName() }}</h3>
+              <button class="btn-close" (click)="clearSelectedStop()" title="Close">
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+
+            <!-- Patient Search -->
+            <div class="patient-search">
+              <div class="search-input-group">
+                <i class="bi bi-search"></i>
+                <input
+                  type="text"
+                  [(ngModel)]="patientSearchQuery"
+                  (input)="searchPatients()"
+                  placeholder="Search patients by name or SSN..."
+                  class="search-input"
+                />
+              </div>
+            </div>
+
+            <!-- Search Results -->
+            <div class="search-results" *ngIf="patientSearchQuery.trim() !== ''">
+              <div *ngIf="patientSearchResults.length === 0" class="no-results">
+                <p>No patients found</p>
+              </div>
+              <div *ngFor="let result of patientSearchResults" class="patient-result-item">
+                <!-- Restricted Match -->
+                <div *ngIf="result.isRestricted" class="restricted-match">
+                  <div class="restricted-header">
+                    <i class="bi bi-shield-exclamation"></i>
+                    <span>Restricted Match</span>
+                  </div>
+                  <p class="restricted-note">
+                    Patient record is restricted. Emergency Guest Access required.
+                  </p>
+                </div>
+                <!-- Facility Patient -->
+                <div
+                  *ngIf="!result.isRestricted"
+                  class="facility-patient"
+                  (click)="selectPatientForEncounter(result.patient)"
+                >
+                  <div class="patient-info">
+                    <div class="patient-name">
+                      {{ result.patient.firstName }} {{ result.patient.lastName }}
+                    </div>
+                    <div class="patient-dob">DOB: {{ result.patient.dob }}</div>
+                    <div class="patient-ssn">SSN: {{ result.patient.ssn }}</div>
+                  </div>
+                  <button
+                    class="btn-log-encounter"
+                    (click)="selectPatientForEncounter(result.patient); $event.stopPropagation()"
+                  >
+                    Log Encounter
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Encounter Logging Form -->
+          <div *ngIf="selectedPatient && !showBreakGlassModal" class="encounter-form-container">
+            <div class="encounter-header">
+              <button class="btn-back" (click)="clearSelectedPatient()">
+                <i class="bi bi-chevron-left"></i>
+              </button>
+              <h3>{{ selectedPatient.firstName }} {{ selectedPatient.lastName }}</h3>
+            </div>
+
+            <form class="encounter-form">
+              <!-- Medication Info -->
+              <div class="form-section">
+                <h4>Medication Administration</h4>
+
+                <div class="form-group-full">
+                  <label>Medication Name</label>
+                  <input
+                    type="text"
+                    [(ngModel)]="doseData.medicationName"
+                    name="medicationName"
+                    placeholder="Enter medication name"
+                    class="form-input"
+                  />
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Dose</label>
+                    <input
+                      type="text"
+                      [(ngModel)]="doseData.dose"
+                      name="dose"
+                      placeholder="e.g. 500"
+                      class="form-input"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Unit</label>
+                    <select [(ngModel)]="doseData.unit" name="unit" class="form-input">
+                      <option value="">Select unit</option>
+                      <option value="mg">mg</option>
+                      <option value="mcg">mcg</option>
+                      <option value="g">g</option>
+                      <option value="ml">ml</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Route</label>
+                    <select [(ngModel)]="doseData.route" name="route" class="form-input">
+                      <option value="">Select route</option>
+                      <option value="oral">Oral</option>
+                      <option value="iv">IV</option>
+                      <option value="im">IM</option>
+                      <option value="sc">SC</option>
+                      <option value="topical">Topical</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Site</label>
+                    <input
+                      type="text"
+                      [(ngModel)]="doseData.site"
+                      name="site"
+                      placeholder="e.g. Left Arm"
+                      class="form-input"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group-full">
+                  <label>Time</label>
+                  <input
+                    type="datetime-local"
+                    [(ngModel)]="doseData.time"
+                    name="time"
+                    class="form-input"
+                  />
+                </div>
+
+                <div class="form-group-full">
+                  <label>Notes</label>
+                  <textarea
+                    [(ngModel)]="doseData.notes"
+                    name="notes"
+                    placeholder="Add any additional notes..."
+                    class="form-textarea"
+                    rows="3"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" class="btn-secondary" (click)="clearSelectedPatient()">
+                  Cancel
+                </button>
+                <button type="button" class="btn-primary" (click)="saveEncounter()">
+                  Save Encounter
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
 
-        <!-- Patient Queue for Selected Stop -->
-        <div *ngIf="selectedStopId && !selectedPatient" class="patient-queue">
-          <div class="queue-header">
-            <h3>{{ getSelectedStopName() }}</h3>
-            <button class="btn-close" (click)="clearSelectedStop()" title="Close">
-              <i class="bi bi-x-lg"></i>
-            </button>
-          </div>
-
-          <!-- Patient Search -->
-          <div class="patient-search">
-            <div class="search-input-group">
-              <i class="bi bi-search"></i>
-              <input type="text"
-                     [(ngModel)]="patientSearchQuery"
-                     (input)="searchPatients()"
-                     placeholder="Search patients by name or SSN..."
-                     class="search-input" />
+        <!-- Break Glass Modal -->
+        <div *ngIf="showBreakGlassModal" class="modal-overlay" (click)="closeBreakGlassModal()">
+          <div class="modal-content break-glass-modal" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+              <i class="bi bi-shield-exclamation"></i>
+              <h2>Emergency Guest Access Required</h2>
+              <button class="btn-close-modal" (click)="closeBreakGlassModal()">
+                <i class="bi bi-x"></i>
+              </button>
             </div>
-          </div>
 
-          <!-- Search Results -->
-          <div class="search-results" *ngIf="patientSearchQuery.trim() !== ''">
-            <div *ngIf="patientSearchResults.length === 0" class="no-results">
-              <p>No patients found</p>
-            </div>
-            <div *ngFor="let result of patientSearchResults" class="patient-result-item">
-              <!-- Restricted Match -->
-              <div *ngIf="result.isRestricted" class="restricted-match">
-                <div class="restricted-header">
-                  <i class="bi bi-shield-exclamation"></i>
-                  <span>Restricted Match</span>
+            <div class="modal-body">
+              <p class="modal-description">
+                You are attempting to access a restricted patient record from another facility. This
+                action will be audited.
+              </p>
+
+              <div class="match-details">
+                <h4>Search Match Details</h4>
+                <p class="match-text">"{{ patientSearchQuery }}" matched:</p>
+                <div class="matched-field">
+                  <i class="bi bi-check-circle"></i>
+                  <span>Mother's First Name</span>
                 </div>
-                <p class="restricted-note">Patient record is restricted. Emergency Guest Access required.</p>
+                <div class="facility-info">
+                  <p><strong>Home Facility:</strong> {{ breakGlassPatient?.facilityId }}</p>
+                </div>
               </div>
-              <!-- Facility Patient -->
-              <div *ngIf="!result.isRestricted" class="facility-patient" (click)="selectPatientForEncounter(result.patient)">
-                <div class="patient-info">
-                  <div class="patient-name">{{ result.patient.firstName }} {{ result.patient.lastName }}</div>
-                  <div class="patient-dob">DOB: {{ result.patient.dob }}</div>
-                  <div class="patient-ssn">SSN: {{ result.patient.ssn }}</div>
-                </div>
-                <button class="btn-log-encounter" (click)="selectPatientForEncounter(result.patient); $event.stopPropagation()">
-                  Log Encounter
+
+              <div class="policy-notice">
+                <i class="bi bi-info-circle"></i>
+                <p>
+                  [This language can be replaced or edited based on State Policy language needs]
+                </p>
+              </div>
+
+              <div class="attestation-section">
+                <label class="attestation-checkbox">
+                  <input type="checkbox" [(ngModel)]="attestationConfirmed" name="attestation" />
+                  <span
+                    >I attest that I am accessing this record solely for the purpose of
+                    administering emergency guest dosing and coordinating care, and that I have
+                    obtained written consent and filed the documentation on site.</span
+                  >
+                </label>
+                <p class="attestation-expiry">
+                  Access expires automatically on February 6, 2026 at 1:36 PM. This action is logged
+                  and auditable.
+                </p>
+              </div>
+
+              <div class="modal-actions">
+                <button class="btn-secondary" (click)="closeBreakGlassModal()">Cancel</button>
+                <button
+                  class="btn-primary"
+                  [disabled]="!attestationConfirmed"
+                  (click)="confirmBreakGlassAndContinue()"
+                >
+                  <i class="bi bi-shield-check"></i>
+                  Break Glass and Attest
                 </button>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Encounter Logging Form -->
-        <div *ngIf="selectedPatient && !showBreakGlassModal" class="encounter-form-container">
-          <div class="encounter-header">
-            <button class="btn-back" (click)="clearSelectedPatient()">
-              <i class="bi bi-chevron-left"></i>
-            </button>
-            <h3>{{ selectedPatient.firstName }} {{ selectedPatient.lastName }}</h3>
-          </div>
-
-          <form class="encounter-form">
-            <!-- Medication Info -->
-            <div class="form-section">
-              <h4>Medication Administration</h4>
-
-              <div class="form-group-full">
-                <label>Medication Name</label>
-                <input type="text"
-                       [(ngModel)]="doseData.medicationName"
-                       name="medicationName"
-                       placeholder="Enter medication name"
-                       class="form-input" />
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Dose</label>
-                  <input type="text"
-                         [(ngModel)]="doseData.dose"
-                         name="dose"
-                         placeholder="e.g. 500"
-                         class="form-input" />
-                </div>
-                <div class="form-group">
-                  <label>Unit</label>
-                  <select [(ngModel)]="doseData.unit" name="unit" class="form-input">
-                    <option value="">Select unit</option>
-                    <option value="mg">mg</option>
-                    <option value="mcg">mcg</option>
-                    <option value="g">g</option>
-                    <option value="ml">ml</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Route</label>
-                  <select [(ngModel)]="doseData.route" name="route" class="form-input">
-                    <option value="">Select route</option>
-                    <option value="oral">Oral</option>
-                    <option value="iv">IV</option>
-                    <option value="im">IM</option>
-                    <option value="sc">SC</option>
-                    <option value="topical">Topical</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label>Site</label>
-                  <input type="text"
-                         [(ngModel)]="doseData.site"
-                         name="site"
-                         placeholder="e.g. Left Arm"
-                         class="form-input" />
-                </div>
-              </div>
-
-              <div class="form-group-full">
-                <label>Time</label>
-                <input type="datetime-local"
-                       [(ngModel)]="doseData.time"
-                       name="time"
-                       class="form-input" />
-              </div>
-
-              <div class="form-group-full">
-                <label>Notes</label>
-                <textarea [(ngModel)]="doseData.notes"
-                          name="notes"
-                          placeholder="Add any additional notes..."
-                          class="form-textarea"
-                          rows="3"></textarea>
-              </div>
-            </div>
-
-            <div class="form-actions">
-              <button type="button" class="btn-secondary" (click)="clearSelectedPatient()">Cancel</button>
-              <button type="button" class="btn-primary" (click)="saveEncounter()">Save Encounter</button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <!-- Break Glass Modal -->
-      <div *ngIf="showBreakGlassModal" class="modal-overlay" (click)="closeBreakGlassModal()">
-        <div class="modal-content break-glass-modal" (click)="$event.stopPropagation()">
-          <div class="modal-header">
-            <i class="bi bi-shield-exclamation"></i>
-            <h2>Emergency Guest Access Required</h2>
-            <button class="btn-close-modal" (click)="closeBreakGlassModal()">
-              <i class="bi bi-x"></i>
-            </button>
-          </div>
-
-          <div class="modal-body">
-            <p class="modal-description">You are attempting to access a restricted patient record from another facility. This action will be audited.</p>
-
-            <div class="match-details">
-              <h4>Search Match Details</h4>
-              <p class="match-text">"{{ patientSearchQuery }}" matched:</p>
-              <div class="matched-field">
-                <i class="bi bi-check-circle"></i>
-                <span>Mother's First Name</span>
-              </div>
-              <div class="facility-info">
-                <p><strong>Home Facility:</strong> {{ breakGlassPatient?.facilityId }}</p>
-              </div>
-            </div>
-
-            <div class="policy-notice">
-              <i class="bi bi-info-circle"></i>
-              <p>[This language can be replaced or edited based on State Policy language needs]</p>
-            </div>
-
-            <div class="attestation-section">
-              <label class="attestation-checkbox">
-                <input type="checkbox" [(ngModel)]="attestationConfirmed" name="attestation">
-                <span>I attest that I am accessing this record solely for the purpose of administering emergency guest dosing and coordinating care, and that I have obtained written consent and filed the documentation on site.</span>
-              </label>
-              <p class="attestation-expiry">Access expires automatically on February 6, 2026 at 1:36 PM. This action is logged and auditable.</p>
-            </div>
-
-            <div class="modal-actions">
-              <button class="btn-secondary" (click)="closeBreakGlassModal()">Cancel</button>
-              <button class="btn-primary" [disabled]="!attestationConfirmed" (click)="confirmBreakGlassAndContinue()">
-                <i class="bi bi-shield-check"></i>
-                Break Glass and Attest
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
-  </div>
   `,
-  styles: [`
-    .mmu-wrapper {
-      display: flex;
-      flex-direction: column;
-      height: calc(100vh - 120px);
-      gap: 1rem;
-      padding: 0;
-    }
-
-    .mmu-header {
-      padding: 0 1.5rem;
-      border-bottom: 1px solid #e5e7eb;
-    }
-
-    .header-title {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-
-      i {
-        font-size: 1.5rem;
-        color: #4f46e5;
+  styles: [
+    `
+      .mmu-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 120px);
+        gap: 1rem;
+        padding: 0;
       }
 
-      h2 {
-        margin: 0;
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #1f2937;
+      .mmu-header {
+        padding: 0 1.5rem;
+        border-bottom: 1px solid #e5e7eb;
       }
 
-      p {
-        margin: 0.25rem 0 0 0;
-        font-size: 0.875rem;
-        color: #6b7280;
-      }
-    }
+      .header-title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
 
-    .mmu-content {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 1rem;
-      padding: 1rem;
-      flex: 1;
-      min-height: 0;
+        i {
+          font-size: 1.5rem;
+          color: #4f46e5;
+        }
 
-      @media (max-width: 1024px) {
-        grid-template-columns: 1fr;
-      }
-    }
+        h2 {
+          margin: 0;
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: #1f2937;
+        }
 
-    .left-panel {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      overflow-y: auto;
-    }
-
-    .route-card,
-    .encounters-card {
-      background: white;
-      border-radius: 0.5rem;
-      border: 1px solid #e5e7eb;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .route-card {
-      flex: 0 0 auto;
-      max-height: 55%;
-      overflow: visible;
-      position: relative;
-    }
-
-    .encounters-card {
-      flex: 1;
-      min-height: 0;
-    }
-
-    .card-header {
-      padding: 0.75rem;
-      background: #f9fafb;
-      border-bottom: 1px solid #e5e7eb;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #6b7280;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .card-body {
-      padding: 0.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      flex: 1;
-      min-height: 0;
-      overflow-y: auto;
-      overflow-x: visible;
-      position: relative;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .form-group label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #374151;
-    }
-
-    .form-select {
-      padding: 0.5rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.375rem;
-      font-size: 0.75rem;
-      background-color: #f3f4f6;
-      height: 1.75rem;
-      overflow: visible;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .route-stops-section {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      flex: 1;
-      min-height: 0;
-      position: relative;
-      overflow: visible;
-    }
-
-    .stops-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .stops-header label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #374151;
-    }
-
-    .stops-list {
-      display: grid;
-      gap: 0.375rem;
-      overflow-y: auto;
-      overflow-x: visible;
-      flex: 1;
-      min-height: 0;
-      clip-path: unset;
-    }
-
-    .stop-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      padding: 0.5rem;
-      border-radius: 0.25rem;
-      border: 1px solid #d1d5db;
-      background: #fafbfc;
-      cursor: pointer;
-      transition: all 0.2s;
-
-      &:hover {
-        background: #f0f1f3;
-      }
-
-      &.selected {
-        background: #dbeafe;
-        border-color: #0c5caa;
-        box-shadow: 0 0 0 2px rgba(12, 92, 170, 0.1);
-      }
-    }
-
-    .stop-info {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-      flex: 1;
-      min-width: 0;
-      cursor: pointer;
-      padding: 0.25rem;
-      border-radius: 0.25rem;
-      transition: background 0.15s;
-
-      &:hover {
-        background: rgba(12, 92, 170, 0.05);
-      }
-
-      i {
-        font-size: 0.625rem;
-        margin-top: 0.125rem;
-        color: #6b7280;
-        flex-shrink: 0;
-      }
-    }
-
-    .stop-details {
-      display: flex;
-      flex-direction: column;
-      gap: 0.125rem;
-      min-width: 0;
-    }
-
-    .stop-name {
-      font-size: 0.625rem;
-      font-weight: 600;
-      color: #1f2937;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .stop-address {
-      font-size: 0.5rem;
-      color: #6b7280;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .btn-remove {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.2s;
-
-      .stop-item:hover & {
-        opacity: 1;
-      }
-
-      i {
-        font-size: 0.625rem;
-        color: #6b7280;
-
-        &:hover {
-          color: #dc2626;
+        p {
+          margin: 0.25rem 0 0 0;
+          font-size: 0.875rem;
+          color: #6b7280;
         }
       }
-    }
 
-    .add-stop-container {
-      position: relative;
-      width: 100%;
-      z-index: 10;
-    }
+      .mmu-content {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 1rem;
+        padding: 1rem;
+        flex: 1;
+        min-height: 0;
 
-    .btn-add-stop {
-      width: 100%;
-      padding: 0.5rem;
-      border: 1px dashed #cbd5e1;
-      border-radius: 0.25rem;
-      background: transparent;
-      color: #64748b;
-      font-size: 0.7rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.25rem;
-      transition: all 0.2s;
-      margin-top: 0.25rem;
-
-      &:hover {
-        border-color: #94a3b8;
-        color: #1e293b;
+        @media (max-width: 1024px) {
+          grid-template-columns: 1fr;
+        }
       }
 
-      i {
+      .left-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        overflow-y: auto;
+      }
+
+      .route-card,
+      .encounters-card {
+        background: white;
+        border-radius: 0.5rem;
+        border: 1px solid #e5e7eb;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .route-card {
+        flex: 0 0 auto;
+        max-height: 55%;
+        overflow: visible;
+        position: relative;
+      }
+
+      .encounters-card {
+        flex: 1;
+        min-height: 0;
+      }
+
+      .card-header {
+        padding: 0.75rem;
+        background: #f9fafb;
+        border-bottom: 1px solid #e5e7eb;
         font-size: 0.75rem;
-      }
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.75rem;
-      color: #6b7280;
-    }
-
-    .encounters-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      overflow-y: auto;
-    }
-
-    .encounter-item {
-      padding: 0.5rem;
-      border-radius: 0.25rem;
-      background: #f9fafb;
-      border-left: 2px solid #3b82f6;
-    }
-
-    .encounter-time {
-      font-size: 0.625rem;
-      font-weight: 600;
-      color: #0c5caa;
-    }
-
-    .encounter-details {
-      margin-top: 0.25rem;
-    }
-
-    .encounter-name {
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: #1f2937;
-    }
-
-    .encounter-service {
-      font-size: 0.625rem;
-      color: #6b7280;
-    }
-
-    .right-panel {
-      background: white;
-      border-radius: 0.5rem;
-      border: 2px dashed #e5e7eb;
-      display: flex;
-      flex-direction: column;
-      min-height: 0;
-      overflow: hidden;
-    }
-
-    .map-placeholder {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      padding: 2rem;
-
-      i {
-        font-size: 2.5rem;
-        color: #d1d5db;
-        margin-bottom: 0.75rem;
-        opacity: 0.3;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #6b7280;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
       }
 
-      h3 {
-        margin: 0 0 0.5rem 0;
-        font-size: 0.875rem;
+      .card-body {
+        padding: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        overflow-x: visible;
+        position: relative;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-group label {
+        font-size: 0.75rem;
         font-weight: 600;
         color: #374151;
       }
 
-      p {
-        margin: 0;
+      .form-select {
+        padding: 0.5rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.375rem;
         font-size: 0.75rem;
-        color: #6b7280;
-      }
-    }
-
-    .btn-primary {
-      background: #0c5caa;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 0.375rem;
-      font-size: 0.875rem;
-      cursor: pointer;
-      transition: all 0.2s;
-
-      &:hover:not(:disabled) {
-        background: #0a4a85;
+        background-color: #f3f4f6;
+        height: 1.75rem;
+        overflow: visible;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
-      &:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-      }
-    }
-
-    .btn-secondary {
-      background: white;
-      color: #374151;
-      border: 1px solid #d1d5db;
-      padding: 0.5rem 1rem;
-      border-radius: 0.375rem;
-      font-size: 0.875rem;
-      cursor: pointer;
-      transition: all 0.2s;
-
-      &:hover {
-        background: #f9fafb;
-      }
-    }
-
-    /* Dropdown Styles */
-    .dropdown-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 50;
-    }
-
-    .dropdown-content {
-      position: absolute;
-      top: calc(100% + 0.25rem);
-      left: 0;
-      background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.375rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-      z-index: 1000;
-      min-width: 18rem;
-      max-height: 20rem;
-      overflow-y: auto;
-    }
-
-    .dropdown-outside {
-      /* Positioned below the add-stop button */
-      position: absolute !important;
-      top: 9.5rem !important;
-      left: 1rem !important;
-    }
-
-    .dropdown-inner {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .dropdown-header {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem;
-      border-bottom: 1px solid #e5e7eb;
-
-      i {
-        font-size: 0.875rem;
-        color: #9ca3af;
-        flex-shrink: 0;
-      }
-    }
-
-    .dropdown-search {
-      flex: 1;
-      border: none;
-      background: transparent;
-      padding: 0;
-      font-size: 0.875rem;
-      outline: none;
-      color: #1f2937;
-
-      &::placeholder {
-        color: #9ca3af;
-      }
-    }
-
-    .dropdown-list {
-      display: flex;
-      flex-direction: column;
-      padding: 0.5rem 0;
-      max-height: 16rem;
-      overflow-y: auto;
-    }
-
-    .list-group-title {
-      font-size: 0.625rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: #6b7280;
-      padding: 0.5rem 0.75rem 0.25rem 0.75rem;
-      letter-spacing: 0.05em;
-    }
-
-    .list-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-      padding: 0.625rem 0.75rem;
-      background: white;
-      border: none;
-      cursor: pointer;
-      transition: background 0.15s;
-      text-align: left;
-      width: 100%;
-      font-size: 0.75rem;
-
-      &:hover {
-        background: #f3f4f6;
+      .route-stops-section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        flex: 1;
+        min-height: 0;
+        position: relative;
+        overflow: visible;
       }
 
-      i {
-        flex-shrink: 0;
-        color: #0c5caa;
+      .stops-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .stops-header label {
         font-size: 0.75rem;
-        margin-top: 0.125rem;
-      }
-    }
-
-    .list-item-content {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.125rem;
-    }
-
-    .list-item-name {
-      font-weight: 500;
-      color: #1f2937;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .list-item-address {
-      color: #6b7280;
-      font-size: 0.7rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .no-results-container {
-      padding: 1rem 0.75rem;
-      text-align: center;
-      border-top: 1px solid #e5e7eb;
-    }
-
-    .no-results-text {
-      margin: 0 0 0.75rem 0;
-      font-size: 0.75rem;
-      color: #6b7280;
-    }
-
-    .btn-create-stop {
-      width: 100%;
-      padding: 0.625rem 0.75rem;
-      background: #0c5caa;
-      color: white;
-      border: none;
-      border-radius: 0.25rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.15s;
-
-      &:hover {
-        background: #0a4a85;
-      }
-    }
-
-    .form-mode {
-      padding: 0.75rem;
-    }
-
-    .form-title {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.75rem;
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: #1f2937;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid #e5e7eb;
-    }
-
-    .btn-back {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-      color: #6b7280;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      i {
-        font-size: 1rem;
-      }
-
-      &:hover {
-        color: #1f2937;
-      }
-    }
-
-    .form-group-inline {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      margin-bottom: 0.75rem;
-
-      label {
-        font-size: 0.75rem;
-        font-weight: 500;
+        font-weight: 600;
         color: #374151;
       }
-    }
 
-    .form-input-inline {
-      padding: 0.5rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.25rem;
-      font-size: 0.75rem;
-      background-color: #f9fafb;
-      transition: all 0.15s;
-
-      &:focus {
-        outline: none;
-        border-color: #0c5caa;
-        background-color: white;
-        box-shadow: 0 0 0 2px rgba(12, 92, 170, 0.1);
-      }
-    }
-
-    .btn-add-stop-save {
-      padding: 0.625rem;
-      background: #0c5caa;
-      color: white;
-      border: none;
-      border-radius: 0.25rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.15s;
-      margin-top: 0.5rem;
-
-      &:hover {
-        background: #0a4a85;
-      }
-    }
-
-    /* Address Autocomplete Styles */
-    .address-group {
-      position: relative;
-    }
-
-    .address-predictions {
-      position: absolute;
-      top: calc(100% + 0.25rem);
-      left: 0;
-      right: 0;
-      background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.25rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-      z-index: 100;
-      max-height: 200px;
-      overflow-y: auto;
-    }
-
-    .prediction-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-      padding: 0.625rem;
-      cursor: pointer;
-      transition: background 0.15s;
-      border-bottom: 1px solid #f3f4f6;
-      font-size: 0.75rem;
-
-      &:hover {
-        background: #f9fafb;
+      .stops-list {
+        display: grid;
+        gap: 0.375rem;
+        overflow-y: auto;
+        overflow-x: visible;
+        flex: 1;
+        min-height: 0;
+        clip-path: unset;
       }
 
-      &:last-child {
-        border-bottom: none;
+      .stop-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        border: 1px solid #d1d5db;
+        background: #fafbfc;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+          background: #f0f1f3;
+        }
+
+        &.selected {
+          background: #dbeafe;
+          border-color: #0c5caa;
+          box-shadow: 0 0 0 2px rgba(12, 92, 170, 0.1);
+        }
       }
 
-      i {
-        flex-shrink: 0;
-        color: #6b7280;
-        font-size: 0.75rem;
-        margin-top: 0.125rem;
+      .stop-info {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        flex: 1;
+        min-width: 0;
+        cursor: pointer;
+        padding: 0.25rem;
+        border-radius: 0.25rem;
+        transition: background 0.15s;
+
+        &:hover {
+          background: rgba(12, 92, 170, 0.05);
+        }
+
+        i {
+          font-size: 0.625rem;
+          margin-top: 0.125rem;
+          color: #6b7280;
+          flex-shrink: 0;
+        }
       }
-    }
 
-    .prediction-text {
-      flex: 1;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.125rem;
-    }
+      .stop-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+        min-width: 0;
+      }
 
-    .prediction-main {
-      font-weight: 500;
-      color: #1f2937;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .prediction-secondary {
-      color: #6b7280;
-      font-size: 0.7rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* Patient Queue Styles */
-    .patient-queue {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      gap: 0.75rem;
-      padding: 1rem;
-      background: white;
-      min-height: 0;
-      overflow: hidden;
-    }
-
-    .queue-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid #e5e7eb;
-
-      h3 {
-        margin: 0;
-        font-size: 0.875rem;
+      .stop-name {
+        font-size: 0.625rem;
         font-weight: 600;
         color: #1f2937;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
-      .btn-close {
+      .stop-address {
+        font-size: 0.5rem;
+        color: #6b7280;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .btn-remove {
         background: none;
         border: none;
         cursor: pointer;
         padding: 0.25rem;
-        color: #6b7280;
         display: flex;
         align-items: center;
-        transition: color 0.2s;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.2s;
 
-        &:hover {
-          color: #1f2937;
+        .stop-item:hover & {
+          opacity: 1;
         }
 
         i {
-          font-size: 0.875rem;
+          font-size: 0.625rem;
+          color: #6b7280;
+
+          &:hover {
+            color: #dc2626;
+          }
         }
       }
-    }
 
-    .patient-search {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      flex-shrink: 0;
-    }
+      .add-stop-container {
+        position: relative;
+        width: 100%;
+        z-index: 10;
+      }
 
-    .search-input-group {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 0.75rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.375rem;
-      background: white;
+      .btn-add-stop {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px dashed #cbd5e1;
+        border-radius: 0.25rem;
+        background: transparent;
+        color: #64748b;
+        font-size: 0.7rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+        transition: all 0.2s;
+        margin-top: 0.25rem;
 
-      i {
+        &:hover {
+          border-color: #94a3b8;
+          color: #1e293b;
+        }
+
+        i {
+          font-size: 0.75rem;
+        }
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 1rem;
+        font-size: 0.75rem;
+        color: #6b7280;
+      }
+
+      .encounters-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        overflow-y: auto;
+      }
+
+      .encounter-item {
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+        background: #f9fafb;
+        border-left: 2px solid #3b82f6;
+      }
+
+      .encounter-time {
+        font-size: 0.625rem;
+        font-weight: 600;
+        color: #0c5caa;
+      }
+
+      .encounter-details {
+        margin-top: 0.25rem;
+      }
+
+      .encounter-name {
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: #1f2937;
+      }
+
+      .encounter-service {
+        font-size: 0.625rem;
+        color: #6b7280;
+      }
+
+      .right-panel {
+        background: white;
+        border-radius: 0.5rem;
+        border: 2px dashed #e5e7eb;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .map-placeholder {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 2rem;
+
+        i {
+          font-size: 2.5rem;
+          color: #d1d5db;
+          margin-bottom: 0.75rem;
+          opacity: 0.3;
+        }
+
+        h3 {
+          margin: 0 0 0.5rem 0;
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: #374151;
+        }
+
+        p {
+          margin: 0;
+          font-size: 0.75rem;
+          color: #6b7280;
+        }
+      }
+
+      .btn-primary {
+        background: #0c5caa;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
         font-size: 0.875rem;
-        color: #9ca3af;
-        flex-shrink: 0;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover:not(:disabled) {
+          background: #0a4a85;
+        }
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
       }
-    }
 
-    .search-input {
-      flex: 1;
-      border: none;
-      background: transparent;
-      padding: 0.25rem;
-      font-size: 0.875rem;
-      outline: none;
-      color: #1f2937;
-      min-width: 0;
+      .btn-secondary {
+        background: white;
+        color: #374151;
+        border: 1px solid #d1d5db;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: all 0.2s;
 
-      &::placeholder {
-        color: #9ca3af;
+        &:hover {
+          background: #f9fafb;
+        }
       }
-    }
 
-    .search-results {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      overflow-y: auto;
-      flex: 1;
-      min-height: 0;
-    }
+      /* Dropdown Styles */
+      .dropdown-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 50;
+      }
 
-    .no-results {
-      text-align: center;
-      padding: 2rem 1rem;
-      color: #6b7280;
-      font-size: 0.875rem;
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      .dropdown-content {
+        position: absolute;
+        top: calc(100% + 0.25rem);
+        left: 0;
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.375rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        z-index: 1000;
+        min-width: 18rem;
+        max-height: 20rem;
+        overflow-y: auto;
+      }
 
-    .patient-result-item {
-      display: flex;
-      flex-direction: column;
-      border-radius: 0.375rem;
-      border: 1px solid #e5e7eb;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
+      .dropdown-outside {
+        /* Positioned below the add-stop button */
+        position: absolute !important;
+        top: 9.5rem !important;
+        left: 1rem !important;
+      }
 
-    .restricted-match {
-      padding: 1rem;
-      background: #fef3c7;
-      border-left: 4px solid #f59e0b;
+      .dropdown-inner {
+        display: flex;
+        flex-direction: column;
+      }
 
-      .restricted-header {
+      .dropdown-header {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-        color: #92400e;
-        font-size: 0.875rem;
+        padding: 0.75rem;
+        border-bottom: 1px solid #e5e7eb;
 
         i {
-          font-size: 1rem;
+          font-size: 0.875rem;
+          color: #9ca3af;
+          flex-shrink: 0;
         }
       }
 
-      .restricted-note {
-        margin: 0;
+      .dropdown-search {
+        flex: 1;
+        border: none;
+        background: transparent;
+        padding: 0;
+        font-size: 0.875rem;
+        outline: none;
+        color: #1f2937;
+
+        &::placeholder {
+          color: #9ca3af;
+        }
+      }
+
+      .dropdown-list {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem 0;
+        max-height: 16rem;
+        overflow-y: auto;
+      }
+
+      .list-group-title {
+        font-size: 0.625rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #6b7280;
+        padding: 0.5rem 0.75rem 0.25rem 0.75rem;
+        letter-spacing: 0.05em;
+      }
+
+      .list-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.625rem 0.75rem;
+        background: white;
+        border: none;
+        cursor: pointer;
+        transition: background 0.15s;
+        text-align: left;
+        width: 100%;
         font-size: 0.75rem;
-        color: #78350f;
-      }
-    }
 
-    .facility-patient {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 0.75rem;
-      background: #f9fafb;
-      cursor: pointer;
-      transition: background 0.2s;
+        &:hover {
+          background: #f3f4f6;
+        }
 
-      &:hover {
-        background: #f3f4f6;
+        i {
+          flex-shrink: 0;
+          color: #0c5caa;
+          font-size: 0.75rem;
+          margin-top: 0.125rem;
+        }
       }
 
-      .patient-info {
+      .list-item-content {
         flex: 1;
         min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
       }
 
-      .patient-name {
-        font-weight: 600;
+      .list-item-name {
+        font-weight: 500;
         color: #1f2937;
-        font-size: 0.875rem;
-        margin-bottom: 0.25rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
-      .patient-dob,
-      .patient-ssn {
+      .list-item-address {
+        color: #6b7280;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .no-results-container {
+        padding: 1rem 0.75rem;
+        text-align: center;
+        border-top: 1px solid #e5e7eb;
+      }
+
+      .no-results-text {
+        margin: 0 0 0.75rem 0;
         font-size: 0.75rem;
         color: #6b7280;
-        margin: 0.125rem 0;
       }
 
-      .btn-log-encounter {
-        padding: 0.5rem 0.75rem;
+      .btn-create-stop {
+        width: 100%;
+        padding: 0.625rem 0.75rem;
         background: #0c5caa;
         color: white;
         border: none;
         border-radius: 0.25rem;
         font-size: 0.75rem;
+        font-weight: 500;
         cursor: pointer;
-        white-space: nowrap;
-        transition: background 0.2s;
-        flex-shrink: 0;
+        transition: background 0.15s;
 
         &:hover {
           background: #0a4a85;
         }
       }
-    }
 
-    /* Encounter Form Styles */
-    .encounter-form-container {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      gap: 1rem;
-      padding: 1rem;
-      background: white;
-      overflow-y: auto;
-      min-height: 0;
-    }
+      .form-mode {
+        padding: 0.75rem;
+      }
 
-    .encounter-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid #e5e7eb;
+      .form-title {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #1f2937;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid #e5e7eb;
+      }
 
       .btn-back {
         background: none;
@@ -1363,369 +1094,713 @@ interface DoseAdministration {
         }
       }
 
-      h3 {
-        margin: 0;
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: #1f2937;
-      }
-    }
-
-    .encounter-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      flex: 1;
-    }
-
-    .form-section {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-
-      h4 {
-        margin: 0;
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #6b7280;
-      }
-    }
-
-    .form-group-full {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-
-      label {
-        font-size: 0.75rem;
-        font-weight: 500;
-        color: #374151;
-      }
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-
-      label {
-        font-size: 0.75rem;
-        font-weight: 500;
-        color: #374151;
-      }
-    }
-
-    .form-input,
-    .form-textarea {
-      padding: 0.5rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.25rem;
-      font-size: 0.875rem;
-      background-color: #f9fafb;
-      font-family: inherit;
-      transition: all 0.15s;
-
-      &:focus {
-        outline: none;
-        border-color: #0c5caa;
-        background-color: white;
-        box-shadow: 0 0 0 2px rgba(12, 92, 170, 0.1);
-      }
-    }
-
-    .form-textarea {
-      resize: vertical;
-    }
-
-    .form-actions {
-      display: flex;
-      gap: 0.75rem;
-      padding-top: 0.75rem;
-      border-top: 1px solid #e5e7eb;
-      margin-top: auto;
-    }
-
-    .btn-primary,
-    .btn-secondary {
-      padding: 0.625rem 1rem;
-      border-radius: 0.375rem;
-      font-size: 0.875rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: none;
-      flex: 1;
-    }
-
-    .btn-primary {
-      background: #0c5caa;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-
-      &:hover:not(:disabled) {
-        background: #0a4a85;
-      }
-
-      &:disabled {
-        background: #9ca3af;
-        cursor: not-allowed;
-      }
-
-      i {
-        font-size: 0.875rem;
-      }
-    }
-
-    .btn-secondary {
-      background: white;
-      color: #374151;
-      border: 1px solid #d1d5db;
-
-      &:hover {
-        background: #f9fafb;
-      }
-    }
-
-    /* Break Glass Modal Styles */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-    }
-
-    .modal-content {
-      background: white;
-      border-radius: 0.5rem;
-      box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
-      max-width: 500px;
-      width: 90%;
-      max-height: 90vh;
-      overflow-y: auto;
-      animation: slideUp 0.3s ease-out;
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .break-glass-modal {
-      max-width: 550px;
-    }
-
-    .modal-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1.5rem;
-      border-bottom: 1px solid #e5e7eb;
-      position: relative;
-
-      i {
-        font-size: 1.5rem;
-        color: #f59e0b;
-        flex-shrink: 0;
-        margin-top: 0.125rem;
-      }
-
-      h2 {
-        margin: 0;
-        font-size: 1.125rem;
-        font-weight: 700;
-        color: #1f2937;
-        flex: 1;
-      }
-
-      .btn-close-modal {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0.25rem;
-        color: #6b7280;
+      .form-group-inline {
         display: flex;
-        align-items: center;
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
+        flex-direction: column;
+        gap: 0.25rem;
+        margin-bottom: 0.75rem;
 
-        i {
-          font-size: 1.25rem;
-          margin: 0;
+        label {
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: #374151;
         }
+      }
+
+      .form-input-inline {
+        padding: 0.5rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        background-color: #f9fafb;
+        transition: all 0.15s;
+
+        &:focus {
+          outline: none;
+          border-color: #0c5caa;
+          background-color: white;
+          box-shadow: 0 0 0 2px rgba(12, 92, 170, 0.1);
+        }
+      }
+
+      .btn-add-stop-save {
+        padding: 0.625rem;
+        background: #0c5caa;
+        color: white;
+        border: none;
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.15s;
+        margin-top: 0.5rem;
 
         &:hover {
-          color: #1f2937;
+          background: #0a4a85;
         }
       }
-    }
 
-    .modal-body {
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
+      /* Address Autocomplete Styles */
+      .address-group {
+        position: relative;
+      }
 
-    .modal-description {
-      margin: 0;
-      font-size: 0.875rem;
-      color: #6b7280;
-      line-height: 1.5;
-    }
+      .address-predictions {
+        position: absolute;
+        top: calc(100% + 0.25rem);
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.25rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        z-index: 100;
+        max-height: 200px;
+        overflow-y: auto;
+      }
 
-    .match-details {
-      background: #f9fafb;
-      padding: 1rem;
-      border-radius: 0.375rem;
-      border: 1px solid #e5e7eb;
-
-      h4 {
-        margin: 0 0 0.75rem 0;
+      .prediction-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.625rem;
+        cursor: pointer;
+        transition: background 0.15s;
+        border-bottom: 1px solid #f3f4f6;
         font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        color: #6b7280;
+
+        &:hover {
+          background: #f9fafb;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        i {
+          flex-shrink: 0;
+          color: #6b7280;
+          font-size: 0.75rem;
+          margin-top: 0.125rem;
+        }
       }
 
-      .match-text {
-        margin: 0 0 0.75rem 0;
-        font-size: 0.875rem;
-        color: #6b7280;
-        font-style: italic;
+      .prediction-text {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
       }
 
-      .matched-field {
+      .prediction-main {
+        font-weight: 500;
+        color: #1f2937;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .prediction-secondary {
+        color: #6b7280;
+        font-size: 0.7rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* Patient Queue Styles */
+      .patient-queue {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 0.75rem;
+        padding: 1rem;
+        background: white;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .queue-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid #e5e7eb;
+
+        h3 {
+          margin: 0;
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: #1f2937;
+        }
+
+        .btn-close {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0.25rem;
+          color: #6b7280;
+          display: flex;
+          align-items: center;
+          transition: color 0.2s;
+
+          &:hover {
+            color: #1f2937;
+          }
+
+          i {
+            font-size: 0.875rem;
+          }
+        }
+      }
+
+      .patient-search {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        flex-shrink: 0;
+      }
+
+      .search-input-group {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        padding: 0.5rem;
-        background: #d1fae5;
-        border-radius: 0.25rem;
-        margin-bottom: 0.75rem;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.375rem;
+        background: white;
 
         i {
-          color: #059669;
           font-size: 0.875rem;
-        }
-
-        span {
-          font-size: 0.875rem;
-          color: #065f46;
-          font-weight: 500;
+          color: #9ca3af;
+          flex-shrink: 0;
         }
       }
 
-      .facility-info {
-        background: white;
-        padding: 0.75rem;
-        border-radius: 0.25rem;
-        border: 1px solid #e5e7eb;
+      .search-input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        padding: 0.25rem;
+        font-size: 0.875rem;
+        outline: none;
+        color: #1f2937;
+        min-width: 0;
 
-        p {
+        &::placeholder {
+          color: #9ca3af;
+        }
+      }
+
+      .search-results {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        overflow-y: auto;
+        flex: 1;
+        min-height: 0;
+      }
+
+      .no-results {
+        text-align: center;
+        padding: 2rem 1rem;
+        color: #6b7280;
+        font-size: 0.875rem;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .patient-result-item {
+        display: flex;
+        flex-direction: column;
+        border-radius: 0.375rem;
+        border: 1px solid #e5e7eb;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .restricted-match {
+        padding: 1rem;
+        background: #fef3c7;
+        border-left: 4px solid #f59e0b;
+
+        .restricted-header {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+          color: #92400e;
+          font-size: 0.875rem;
+
+          i {
+            font-size: 1rem;
+          }
+        }
+
+        .restricted-note {
+          margin: 0;
+          font-size: 0.75rem;
+          color: #78350f;
+        }
+      }
+
+      .facility-patient {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.75rem;
+        background: #f9fafb;
+        cursor: pointer;
+        transition: background 0.2s;
+
+        &:hover {
+          background: #f3f4f6;
+        }
+
+        .patient-info {
+          flex: 1;
+          min-width: 0;
+        }
+
+        .patient-name {
+          font-weight: 600;
+          color: #1f2937;
+          font-size: 0.875rem;
+          margin-bottom: 0.25rem;
+        }
+
+        .patient-dob,
+        .patient-ssn {
+          font-size: 0.75rem;
+          color: #6b7280;
+          margin: 0.125rem 0;
+        }
+
+        .btn-log-encounter {
+          padding: 0.5rem 0.75rem;
+          background: #0c5caa;
+          color: white;
+          border: none;
+          border-radius: 0.25rem;
+          font-size: 0.75rem;
+          cursor: pointer;
+          white-space: nowrap;
+          transition: background 0.2s;
+          flex-shrink: 0;
+
+          &:hover {
+            background: #0a4a85;
+          }
+        }
+      }
+
+      /* Encounter Form Styles */
+      .encounter-form-container {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: 1rem;
+        padding: 1rem;
+        background: white;
+        overflow-y: auto;
+        min-height: 0;
+      }
+
+      .encounter-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid #e5e7eb;
+
+        .btn-back {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+          color: #6b7280;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          i {
+            font-size: 1rem;
+          }
+
+          &:hover {
+            color: #1f2937;
+          }
+        }
+
+        h3 {
           margin: 0;
           font-size: 0.875rem;
-          color: #374151;
+          font-weight: 600;
+          color: #1f2937;
+        }
+      }
 
-          strong {
+      .encounter-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        flex: 1;
+      }
+
+      .form-section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+
+        h4 {
+          margin: 0;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          color: #6b7280;
+        }
+      }
+
+      .form-group-full {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        label {
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: #374151;
+        }
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        label {
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: #374151;
+        }
+      }
+
+      .form-input,
+      .form-textarea {
+        padding: 0.5rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.25rem;
+        font-size: 0.875rem;
+        background-color: #f9fafb;
+        font-family: inherit;
+        transition: all 0.15s;
+
+        &:focus {
+          outline: none;
+          border-color: #0c5caa;
+          background-color: white;
+          box-shadow: 0 0 0 2px rgba(12, 92, 170, 0.1);
+        }
+      }
+
+      .form-textarea {
+        resize: vertical;
+      }
+
+      .form-actions {
+        display: flex;
+        gap: 0.75rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid #e5e7eb;
+        margin-top: auto;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        padding: 0.625rem 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+        flex: 1;
+      }
+
+      .btn-primary {
+        background: #0c5caa;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+
+        &:hover:not(:disabled) {
+          background: #0a4a85;
+        }
+
+        &:disabled {
+          background: #9ca3af;
+          cursor: not-allowed;
+        }
+
+        i {
+          font-size: 0.875rem;
+        }
+      }
+
+      .btn-secondary {
+        background: white;
+        color: #374151;
+        border: 1px solid #d1d5db;
+
+        &:hover {
+          background: #f9fafb;
+        }
+      }
+
+      /* Break Glass Modal Styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+        max-width: 500px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        animation: slideUp 0.3s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .break-glass-modal {
+        max-width: 550px;
+      }
+
+      .modal-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.5rem;
+        border-bottom: 1px solid #e5e7eb;
+        position: relative;
+
+        i {
+          font-size: 1.5rem;
+          color: #f59e0b;
+          flex-shrink: 0;
+          margin-top: 0.125rem;
+        }
+
+        h2 {
+          margin: 0;
+          font-size: 1.125rem;
+          font-weight: 700;
+          color: #1f2937;
+          flex: 1;
+        }
+
+        .btn-close-modal {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0.25rem;
+          color: #6b7280;
+          display: flex;
+          align-items: center;
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+
+          i {
+            font-size: 1.25rem;
+            margin: 0;
+          }
+
+          &:hover {
             color: #1f2937;
           }
         }
       }
-    }
 
-    .policy-notice {
-      display: flex;
-      gap: 0.75rem;
-      padding: 0.75rem;
-      background: #f0f9ff;
-      border-radius: 0.375rem;
-      border: 1px solid #bfdbfe;
-
-      i {
-        font-size: 1rem;
-        color: #0284c7;
-        flex-shrink: 0;
-        margin-top: 0.125rem;
+      .modal-body {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
       }
 
-      p {
+      .modal-description {
         margin: 0;
-        font-size: 0.75rem;
-        color: #0369a1;
+        font-size: 0.875rem;
+        color: #6b7280;
+        line-height: 1.5;
       }
-    }
 
-    .attestation-section {
-      padding: 1rem;
-      background: #fffbeb;
-      border: 1px solid #fbbf24;
-      border-radius: 0.375rem;
+      .match-details {
+        background: #f9fafb;
+        padding: 1rem;
+        border-radius: 0.375rem;
+        border: 1px solid #e5e7eb;
 
-      .attestation-checkbox {
+        h4 {
+          margin: 0 0 0.75rem 0;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          color: #6b7280;
+        }
+
+        .match-text {
+          margin: 0 0 0.75rem 0;
+          font-size: 0.875rem;
+          color: #6b7280;
+          font-style: italic;
+        }
+
+        .matched-field {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.5rem;
+          background: #d1fae5;
+          border-radius: 0.25rem;
+          margin-bottom: 0.75rem;
+
+          i {
+            color: #059669;
+            font-size: 0.875rem;
+          }
+
+          span {
+            font-size: 0.875rem;
+            color: #065f46;
+            font-weight: 500;
+          }
+        }
+
+        .facility-info {
+          background: white;
+          padding: 0.75rem;
+          border-radius: 0.25rem;
+          border: 1px solid #e5e7eb;
+
+          p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: #374151;
+
+            strong {
+              color: #1f2937;
+            }
+          }
+        }
+      }
+
+      .policy-notice {
         display: flex;
         gap: 0.75rem;
-        margin-bottom: 0.75rem;
-        cursor: pointer;
-        user-select: none;
+        padding: 0.75rem;
+        background: #f0f9ff;
+        border-radius: 0.375rem;
+        border: 1px solid #bfdbfe;
 
-        input[type="checkbox"] {
-          margin-top: 0.125rem;
-          cursor: pointer;
+        i {
+          font-size: 1rem;
+          color: #0284c7;
           flex-shrink: 0;
+          margin-top: 0.125rem;
         }
 
-        span {
+        p {
+          margin: 0;
           font-size: 0.75rem;
-          color: #78350f;
-          line-height: 1.5;
+          color: #0369a1;
         }
       }
 
-      .attestation-expiry {
-        margin: 0;
-        font-size: 0.7rem;
-        color: #92400e;
-        font-style: italic;
+      .attestation-section {
+        padding: 1rem;
+        background: #fffbeb;
+        border: 1px solid #fbbf24;
+        border-radius: 0.375rem;
+
+        .attestation-checkbox {
+          display: flex;
+          gap: 0.75rem;
+          margin-bottom: 0.75rem;
+          cursor: pointer;
+          user-select: none;
+
+          input[type='checkbox'] {
+            margin-top: 0.125rem;
+            cursor: pointer;
+            flex-shrink: 0;
+          }
+
+          span {
+            font-size: 0.75rem;
+            color: #78350f;
+            line-height: 1.5;
+          }
+        }
+
+        .attestation-expiry {
+          margin: 0;
+          font-size: 0.7rem;
+          color: #92400e;
+          font-style: italic;
+        }
       }
-    }
 
-    .modal-actions {
-      display: flex;
-      gap: 0.75rem;
-      padding-top: 1rem;
-      border-top: 1px solid #e5e7eb;
-    }
+      .modal-actions {
+        display: flex;
+        gap: 0.75rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e5e7eb;
+      }
 
-    .modal-actions .btn-primary,
-    .modal-actions .btn-secondary {
-      flex: 1;
-      margin: 0;
-    }
-  `]
+      .modal-actions .btn-primary,
+      .modal-actions .btn-secondary {
+        flex: 1;
+        margin: 0;
+      }
+    `,
+  ],
 })
 export class MMUComponent implements OnInit, AfterViewInit {
   @ViewChild('addressInput') addressInput?: ElementRef;
@@ -1744,20 +1819,20 @@ export class MMUComponent implements OnInit, AfterViewInit {
       id: '1',
       name: 'Downtown Shelter',
       address: '100 E 4th Ave',
-      facilityId: 'facility1'
+      facilityId: 'facility1',
     },
     {
       id: '2',
       name: 'Muldoon Library',
       address: '1251 Muldoon Rd',
-      facilityId: 'facility1'
+      facilityId: 'facility1',
     },
     {
       id: '3',
       name: 'fairview street',
       address: 'Fairview street',
-      facilityId: 'facility1'
-    }
+      facilityId: 'facility1',
+    },
   ];
 
   // Available stops database (for search)
@@ -1766,44 +1841,44 @@ export class MMUComponent implements OnInit, AfterViewInit {
       id: '1',
       name: 'Downtown Shelter',
       address: '100 E 4th Ave',
-      facilityId: 'facility1'
+      facilityId: 'facility1',
     },
     {
       id: '2',
       name: 'Muldoon Library',
       address: '1251 Muldoon Rd',
-      facilityId: 'facility1'
+      facilityId: 'facility1',
     },
     {
       id: '3',
       name: 'fairview street',
       address: 'Fairview street',
-      facilityId: 'facility1'
+      facilityId: 'facility1',
     },
     {
       id: '4',
       name: 'Fairview Rec Center',
       address: '1121 E 10th Ave',
-      facilityId: 'facility1'
+      facilityId: 'facility1',
     },
     {
       id: '5',
       name: 'Eldercare Center',
       address: '456 Park Ave',
-      facilityId: 'facility1'
+      facilityId: 'facility1',
     },
     {
       id: '6',
       name: 'Community Clinic',
       address: '789 Market St',
-      facilityId: 'facility1'
+      facilityId: 'facility1',
     },
     {
       id: '7',
       name: 'Youth Services',
       address: '321 Main St',
-      facilityId: 'facility1'
-    }
+      facilityId: 'facility1',
+    },
   ];
 
   // Patient database
@@ -1815,7 +1890,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
       dob: '1985-05-15',
       ssn: '123-45-6789',
       facilityId: 'facility1',
-      isRestricted: false
+      isRestricted: false,
     },
     {
       id: 'pat2',
@@ -1824,7 +1899,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
       dob: '1990-08-20',
       ssn: '987-65-4321',
       facilityId: 'facility1',
-      isRestricted: false
+      isRestricted: false,
     },
     {
       id: 'pat3',
@@ -1833,7 +1908,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
       dob: '1975-03-10',
       ssn: '456-78-9012',
       facilityId: 'facility2',
-      isRestricted: true
+      isRestricted: true,
     },
     {
       id: 'pat4',
@@ -1842,8 +1917,8 @@ export class MMUComponent implements OnInit, AfterViewInit {
       dob: '1988-12-25',
       ssn: '789-01-2345',
       facilityId: 'facility1',
-      isRestricted: false
-    }
+      isRestricted: false,
+    },
   ];
 
   todayEncounters: Encounter[] = [];
@@ -1869,7 +1944,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
     route: '',
     site: '',
     time: '',
-    notes: ''
+    notes: '',
   };
   showBreakGlassModal = false;
   breakGlassPatient: Patient | null = null;
@@ -1897,7 +1972,9 @@ export class MMUComponent implements OnInit, AfterViewInit {
     // Load Google Maps script dynamically with API key from environment
     const apiKey = environment.googleMapsApiKey;
     if (!apiKey || apiKey === 'YOUR_GOOGLE_PLACES_API_KEY') {
-      console.warn('Google Places API key is not configured. Please set GOOGLE_PLACES_API_KEY in your environment.');
+      console.warn(
+        'Google Places API key is not configured. Please set GOOGLE_PLACES_API_KEY in your environment.',
+      );
       return;
     }
 
@@ -1917,7 +1994,9 @@ export class MMUComponent implements OnInit, AfterViewInit {
   private setupGooglePlacesServices(): void {
     if (typeof (window as any).google !== 'undefined' && (window as any).google.maps) {
       this.autocompleteService = new (window as any).google.maps.places.AutocompleteService();
-      this.placesService = new (window as any).google.maps.places.PlacesService(document.createElement('div'));
+      this.placesService = new (window as any).google.maps.places.PlacesService(
+        document.createElement('div'),
+      );
       this.sessionToken = new (window as any).google.maps.places.AutocompleteSessionToken();
     }
   }
@@ -1947,15 +2026,15 @@ export class MMUComponent implements OnInit, AfterViewInit {
     }
 
     const query = this.searchQuery.toLowerCase();
-    this.filteredStops = this.availableStops.filter(stop =>
-      stop.name.toLowerCase().includes(query) ||
-      stop.address.toLowerCase().includes(query)
+    this.filteredStops = this.availableStops.filter(
+      (stop) =>
+        stop.name.toLowerCase().includes(query) || stop.address.toLowerCase().includes(query),
     );
   }
 
   selectStop(stop: AvailableStop): void {
     // Check if stop is already in route
-    const existingStop = this.routeStops.find(s => s.id === stop.id);
+    const existingStop = this.routeStops.find((s) => s.id === stop.id);
     if (existingStop) {
       // Stop already added, just close dialog
       this.closeAddStopDialog();
@@ -1967,7 +2046,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
       id: stop.id,
       name: stop.name,
       address: stop.address,
-      facilityId: stop.facilityId || 'facility1'
+      facilityId: stop.facilityId || 'facility1',
     });
 
     this.closeAddStopDialog();
@@ -1991,7 +2070,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
         id: Math.random().toString(36).substr(2, 9),
         name: this.newStopName,
         address: this.newStopAddress,
-        facilityId: 'facility1'
+        facilityId: 'facility1',
       };
 
       // Add to route stops
@@ -2002,7 +2081,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
         id: newStop.id,
         name: newStop.name,
         address: newStop.address,
-        facilityId: 'facility1'
+        facilityId: 'facility1',
       });
 
       this.closeAddStopDialog();
@@ -2013,7 +2092,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
     if (event) {
       event.stopPropagation();
     }
-    this.routeStops = this.routeStops.filter(stop => stop.id !== stopId);
+    this.routeStops = this.routeStops.filter((stop) => stop.id !== stopId);
     if (this.selectedStopId === stopId) {
       this.clearSelectedStop();
     }
@@ -2031,7 +2110,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
     const request = {
       input: this.newStopAddress,
       sessionToken: this.sessionToken,
-      componentRestrictions: { country: 'us' } // Restrict to US
+      componentRestrictions: { country: 'us' }, // Restrict to US
     };
 
     this.autocompleteService.getPlacePredictions(request, (predictions: any[], status: any) => {
@@ -2078,7 +2157,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
   }
 
   getSelectedStopName(): string {
-    const stop = this.routeStops.find(s => s.id === this.selectedStopId);
+    const stop = this.routeStops.find((s) => s.id === this.selectedStopId);
     return stop?.name || 'Selected Stop';
   }
 
@@ -2088,7 +2167,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    const selectedStop = this.routeStops.find(s => s.id === this.selectedStopId);
+    const selectedStop = this.routeStops.find((s) => s.id === this.selectedStopId);
     if (!selectedStop) {
       return;
     }
@@ -2097,20 +2176,21 @@ export class MMUComponent implements OnInit, AfterViewInit {
 
     // Search in patient database
     this.patientSearchResults = this.patientsDatabase
-      .filter(patient =>
-        patient.firstName.toLowerCase().includes(query) ||
-        patient.lastName.toLowerCase().includes(query) ||
-        patient.ssn.includes(query)
+      .filter(
+        (patient) =>
+          patient.firstName.toLowerCase().includes(query) ||
+          patient.lastName.toLowerCase().includes(query) ||
+          patient.ssn.includes(query),
       )
-      .map(patient => ({
+      .map((patient) => ({
         patient,
-        isRestricted: patient.facilityId !== selectedStop.facilityId || patient.isRestricted
+        isRestricted: patient.facilityId !== selectedStop.facilityId || patient.isRestricted,
       }));
   }
 
   selectPatientForEncounter(patient: Patient): void {
     // Check if patient is restricted
-    const selectedStop = this.routeStops.find(s => s.id === this.selectedStopId);
+    const selectedStop = this.routeStops.find((s) => s.id === this.selectedStopId);
     if (!selectedStop) {
       return;
     }
@@ -2163,7 +2243,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
       route: '',
       site: '',
       time: new Date().toISOString().slice(0, 16), // Current datetime
-      notes: ''
+      notes: '',
     };
   }
 
@@ -2178,7 +2258,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
       id: Math.random().toString(36).substr(2, 9),
       patientName: `${this.selectedPatient.firstName} ${this.selectedPatient.lastName}`,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      service: `${this.doseData.medicationName} - ${this.doseData.dose} ${this.doseData.unit}`
+      service: `${this.doseData.medicationName} - ${this.doseData.dose} ${this.doseData.unit}`,
     };
 
     // Add to today's encounters
