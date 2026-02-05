@@ -825,6 +825,75 @@ interface AvailableStop extends RouteStop {
         background: #0a4a85;
       }
     }
+
+    /* Address Autocomplete Styles */
+    .address-group {
+      position: relative;
+    }
+
+    .address-predictions {
+      position: absolute;
+      top: calc(100% + 0.25rem);
+      left: 0;
+      right: 0;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.25rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      z-index: 100;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .prediction-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.625rem;
+      cursor: pointer;
+      transition: background 0.15s;
+      border-bottom: 1px solid #f3f4f6;
+      font-size: 0.75rem;
+
+      &:hover {
+        background: #f9fafb;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      i {
+        flex-shrink: 0;
+        color: #6b7280;
+        font-size: 0.75rem;
+        margin-top: 0.125rem;
+      }
+    }
+
+    .prediction-text {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
+    }
+
+    .prediction-main {
+      font-weight: 500;
+      color: #1f2937;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .prediction-secondary {
+      color: #6b7280;
+      font-size: 0.7rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   `]
 })
 export class MMUComponent implements OnInit, AfterViewInit {
