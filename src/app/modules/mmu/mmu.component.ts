@@ -53,9 +53,9 @@ interface PatientMatch {
 
 interface DoseAdministration {
   medicationName: string;
-  observedDose: string;
-  takeHomeDoses: string;
-  takeHomeDoseAmount: string;
+  observedDose: number | string;
+  takeHomeDoses: number | string;
+  takeHomeDoseAmount: number | string;
   individualCounseling: boolean;
   groupCounseling: boolean;
   notes: string;
