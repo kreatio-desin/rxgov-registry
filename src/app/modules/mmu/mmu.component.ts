@@ -1397,8 +1397,14 @@ export class MMUComponent implements OnInit, AfterViewInit {
     }
   }
 
-  removeStop(stopId: string): void {
+  removeStop(stopId: string, event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
     this.routeStops = this.routeStops.filter(stop => stop.id !== stopId);
+    if (this.selectedStopId === stopId) {
+      this.clearSelectedStop();
+    }
   }
 
   onAddressInput(): void {
