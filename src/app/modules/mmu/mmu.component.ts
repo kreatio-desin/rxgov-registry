@@ -1201,10 +1201,11 @@ interface DoseAdministration {
       flex: 1;
       border: none;
       background: transparent;
-      padding: 0;
+      padding: 0.25rem;
       font-size: 0.875rem;
       outline: none;
       color: #1f2937;
+      min-width: 0;
 
       &::placeholder {
         color: #9ca3af;
