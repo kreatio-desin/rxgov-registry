@@ -732,4 +732,9 @@ export class AppLayoutComponent implements OnInit {
   toggleTheme(): void {
     this.themeService.toggleTheme();
   }
+
+  async logout(): Promise<void> {
+    await this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }
