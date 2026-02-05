@@ -608,7 +608,7 @@ interface AdministerDoseForm {
       align-items: center;
       gap: 0.5rem;
       padding: 0.625rem 1rem;
-      background: #2563eb;
+      background: var(--color-button-bg);
       color: white;
       border: none;
       border-radius: 0.375rem;
@@ -620,7 +620,7 @@ interface AdministerDoseForm {
     }
 
     .administer-dose-btn:hover {
-      background: #1d4ed8;
+      background: var(--color-button-hover);
     }
 
     .administer-dose-btn svg {
