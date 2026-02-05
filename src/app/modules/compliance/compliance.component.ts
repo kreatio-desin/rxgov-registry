@@ -1069,8 +1069,8 @@ export class ComplianceComponent implements OnInit {
   patientSearchQuery = '';
   selectedReport: Report | null = null;
 
-  // Current user's facility
-  currentUserFacilityId = 'facility1';
+  // Current user's facility - Wasilla facility
+  currentUserFacilityId = 'fac-cms-001';
 
   // Patient Census Data - Must match PatientService sample patients
   patientCensusData: PatientCensusRecord[] = [
