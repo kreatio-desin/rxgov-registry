@@ -1328,8 +1328,7 @@ export class ComplianceComponent implements OnInit {
       this.closeBreakGlassModal();
 
       // Navigate to patient page
-      console.log('Break glass access granted. Navigating to patient page for:', patientId);
-      // router.navigate(['/patient', patientId]);
+      this.router.navigate(['/patient', patientId]);
     }
   }
 }
