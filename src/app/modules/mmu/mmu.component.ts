@@ -1132,10 +1132,12 @@ interface DoseAdministration {
     .patient-queue {
       display: flex;
       flex-direction: column;
-      height: 100%;
+      flex: 1;
       gap: 0.75rem;
       padding: 1rem;
       background: white;
+      min-height: 0;
+      overflow: hidden;
     }
 
     .queue-header {
