@@ -1420,7 +1420,7 @@ interface DoseAdministration {
         padding: 0.5rem 0.75rem;
         border: 1px solid #e5e7eb;
         border-radius: 0.375rem;
-        background: white;
+        background: var(--color-bg-primary);
 
         i {
           font-size: 0.875rem;
@@ -1651,7 +1651,7 @@ interface DoseAdministration {
           }
 
           &.badge-info {
-            background: white;
+            background: var(--color-bg-primary);
             border-color: #cbd5e1;
             color: var(--color-text-secondary);
           }
@@ -1766,7 +1766,7 @@ interface DoseAdministration {
         }
 
         .btn-view-record {
-          background: white;
+          background: var(--color-bg-primary);
           color: #6b7280;
           border: 1px solid #d1d5db;
           opacity: 0;
@@ -2033,7 +2033,7 @@ interface DoseAdministration {
           }
 
           &.badge-info {
-            background: white;
+            background: var(--color-bg-primary);
             border-color: #cbd5e1;
             color: var(--color-text-secondary);
           }
@@ -2436,7 +2436,7 @@ interface DoseAdministration {
       }
 
       .btn-secondary {
-        background: white;
+        background: var(--color-bg-primary);
         color: #374151;
         border: 1px solid #d1d5db;
 
@@ -2460,7 +2460,7 @@ interface DoseAdministration {
       }
 
       .modal-content {
-        background: white;
+        background: var(--color-bg-primary);
         border-radius: 0.5rem;
         box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
         max-width: 500px;
@@ -2588,7 +2588,7 @@ interface DoseAdministration {
         }
 
         .facility-info {
-          background: white;
+          background: var(--color-bg-primary);
           padding: 0.75rem;
           border-radius: 0.25rem;
           border: 1px solid #e5e7eb;
