@@ -358,7 +358,7 @@ interface PatientRecord {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #f3f4f6;
+      border-bottom: 1px solid var(--color-border-light);
       transition: background 0.2s;
 
       &:hover {
