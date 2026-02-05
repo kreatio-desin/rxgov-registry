@@ -182,7 +182,7 @@ import { ThemeService } from '../core/services/theme.service';
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      border-bottom: 1px solid #e5e7eb;
+      border-bottom: 1px solid var(--color-border);
       width: 100%;
       padding: 0 12px;
       gap: 8px;
@@ -206,7 +206,7 @@ import { ThemeService } from '../core/services/theme.service';
     .logo-title {
       font-size: 10px;
       font-weight: 700;
-      color: #1f2937;
+      color: var(--color-text-primary);
       letter-spacing: 1px;
       text-transform: uppercase;
       line-height: 1;
@@ -214,7 +214,7 @@ import { ThemeService } from '../core/services/theme.service';
 
     .logo-subtitle {
       font-size: 11px;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       line-height: 1;
     }
 
@@ -234,7 +234,7 @@ import { ThemeService } from '../core/services/theme.service';
       align-items: center;
       gap: 12px;
       border-radius: 6px;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       border: none;
       background: none;
       cursor: pointer;
@@ -250,13 +250,13 @@ import { ThemeService } from '../core/services/theme.service';
       }
 
       &:hover {
-        background: #f3f4f6;
-        color: #0066cc;
+        background: var(--color-sidebar-hover);
+        color: var(--color-primary);
       }
 
       &.active {
-        background: #dbeafe;
-        color: #0066cc;
+        background: var(--color-active-bg);
+        color: var(--color-active-text);
       }
     }
 
@@ -267,6 +267,7 @@ import { ThemeService } from '../core/services/theme.service';
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      color: inherit;
     }
 
     .nav-bottom {
@@ -274,11 +275,11 @@ import { ThemeService } from '../core/services/theme.service';
       flex-direction: column;
       gap: 4px;
       padding: 8px;
-      border-top: 1px solid #e5e7eb;
+      border-top: 1px solid var(--color-border);
 
       .nav-divider {
         height: 1px;
-        background: #e5e7eb;
+        background: var(--color-border);
         margin: 4px 0;
       }
 
@@ -290,11 +291,11 @@ import { ThemeService } from '../core/services/theme.service';
         gap: 12px;
 
         &.nav-logout {
-          color: #ef4444;
+          color: var(--color-error);
 
           &:hover {
-            background: #fee2e2;
-            color: #dc2626;
+            background: var(--color-error-light);
+            color: var(--color-error);
           }
         }
       }
@@ -310,8 +311,8 @@ import { ThemeService } from '../core/services/theme.service';
 
     /* Header Styles */
     .main-header {
-      background: white;
-      border-bottom: 1px solid #e5e7eb;
+      background: var(--color-bg-primary);
+      border-bottom: 1px solid var(--color-border);
       height: 56px;
       display: flex;
       align-items: center;
@@ -333,12 +334,12 @@ import { ThemeService } from '../core/services/theme.service';
     .menu-toggle {
       display: none;
       background: none;
-      border: 1px solid #e5e7eb;
+      border: 1px solid var(--color-border);
       width: 36px;
       height: 36px;
       border-radius: 6px;
       cursor: pointer;
-      color: #374151;
+      color: var(--color-text-secondary);
       font-size: 18px;
 
       @media (max-width: 768px) {
@@ -351,7 +352,7 @@ import { ThemeService } from '../core/services/theme.service';
     .page-title {
       font-size: 18px;
       font-weight: 600;
-      color: #1f2937;
+      color: var(--color-text-primary);
       margin: 0;
       white-space: nowrap;
       display: none;
@@ -374,14 +375,14 @@ import { ThemeService } from '../core/services/theme.service';
       position: relative;
       display: flex;
       align-items: center;
-      background: white;
-      border: 1px solid #e5e7eb;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
       border-radius: 6px;
       padding: 8px 12px;
       gap: 8px;
 
       i {
-        color: #6b7280;
+        color: var(--color-text-secondary);
         font-size: 16px;
       }
     }
@@ -392,21 +393,21 @@ import { ThemeService } from '../core/services/theme.service';
       outline: none;
       flex: 1;
       font-size: 14px;
-      color: #1f2937;
+      color: var(--color-text-primary);
 
       &::placeholder {
-        color: #9ca3af;
+        color: var(--color-text-tertiary);
       }
     }
 
     .search-kbd {
       font-size: 11px;
-      color: #6b7280;
-      background: #f3f4f6;
+      color: var(--color-text-secondary);
+      background: var(--color-bg-tertiary);
       padding: 2px 6px;
       border-radius: 3px;
       font-family: monospace;
-      border: 1px solid #e5e7eb;
+      border: 1px solid var(--color-border);
       display: none;
 
       @media (min-width: 640px) {
@@ -419,8 +420,8 @@ import { ThemeService } from '../core/services/theme.service';
       top: 100%;
       left: 0;
       right: 0;
-      background: white;
-      border: 1px solid #e5e7eb;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
       border-top: none;
       border-radius: 0 0 6px 6px;
       max-height: 300px;
@@ -431,12 +432,12 @@ import { ThemeService } from '../core/services/theme.service';
 
     .search-result-item {
       padding: 12px;
-      border-bottom: 1px solid #f3f4f6;
+      border-bottom: 1px solid var(--color-border-light);
       cursor: pointer;
       transition: background 0.2s;
 
       &:hover {
-        background: #f9fafb;
+        background: var(--color-bg-tertiary);
       }
 
       &:last-child {
@@ -445,7 +446,7 @@ import { ThemeService } from '../core/services/theme.service';
     }
 
     .result-name {
-      color: #1f2937;
+      color: var(--color-text-primary);
       font-weight: 500;
       font-size: 14px;
     }
@@ -470,7 +471,7 @@ import { ThemeService } from '../core/services/theme.service';
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #10b981;
+      background: var(--color-status-online);
       title: 'Clinic Online';
     }
 
@@ -482,19 +483,19 @@ import { ThemeService } from '../core/services/theme.service';
 
     .facility-name {
       font-size: 13px;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       line-height: 1.2;
     }
 
     .facility-name-short {
       font-size: 13px;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       line-height: 1.2;
     }
 
     .user-name {
       font-size: 12px;
-      color: #9ca3af;
+      color: var(--color-text-tertiary);
       font-weight: 500;
     }
 
@@ -502,13 +503,13 @@ import { ThemeService } from '../core/services/theme.service';
       position: relative;
       background: none;
       border: none;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       font-size: 20px;
       cursor: pointer;
       transition: color 0.2s;
 
       &:hover {
-        color: #374151;
+        color: var(--color-text-primary);
       }
     }
 
@@ -516,7 +517,7 @@ import { ThemeService } from '../core/services/theme.service';
       position: absolute;
       top: -4px;
       right: -4px;
-      background: #ef4444;
+      background: var(--color-error);
       color: white;
       border-radius: 50%;
       width: 18px;
@@ -543,7 +544,7 @@ import { ThemeService } from '../core/services/theme.service';
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: #0066cc;
+      background: var(--color-primary);
       color: white;
       border: none;
       cursor: pointer;
@@ -556,7 +557,7 @@ import { ThemeService } from '../core/services/theme.service';
       z-index: 999;
 
       &:hover {
-        background: #0052a3;
+        background: var(--color-primary-dark);
         box-shadow: 0 6px 16px rgba(0, 102, 204, 0.4);
         transform: scale(1.05);
       }
