@@ -153,6 +153,151 @@ export class PatientService {
           pdmpConsent: true,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
+        },
+        {
+          id: 'patient-004',
+          registryId: 'RX-5544332211',
+          firstName: 'Michael',
+          lastName: 'Chen',
+          dateOfBirth: '1983-09-18',
+          ssn: '234-56-2345',
+          motherFirstName: 'Linda',
+          demographics: {
+            gender: 'Male',
+            race: 'Asian',
+            ethnicity: 'Non-Hispanic',
+            address: '321 Elm St',
+            city: 'Wasilla',
+            state: 'AK',
+            zip: '99654',
+            phone: '(907) 555-0456'
+          },
+          currentEnrollment: {
+            facilityId: 'fac-cms-001',
+            facilityName: 'Community Medical Services – Wasilla',
+            moudType: 'Methadone',
+            enrollmentDate: '2023-11-05',
+            status: 'active'
+          },
+          pdmpConsent: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: 'patient-005',
+          registryId: 'RX-7766554433',
+          firstName: 'Jessica',
+          lastName: 'Rodriguez',
+          dateOfBirth: '1996-04-28',
+          ssn: '567-89-5678',
+          motherFirstName: 'Carmen',
+          demographics: {
+            gender: 'Female',
+            race: 'Hispanic',
+            ethnicity: 'Hispanic',
+            address: '654 Spruce Ave',
+            city: 'Ketchikan',
+            state: 'AK',
+            zip: '99901',
+            phone: '(907) 555-0567'
+          },
+          currentEnrollment: {
+            facilityId: 'fac-searhc-001',
+            facilityName: 'SEARHC – Ketchikan',
+            moudType: 'Buprenorphine',
+            enrollmentDate: '2024-01-17',
+            status: 'active'
+          },
+          pdmpConsent: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: 'patient-006',
+          registryId: 'RX-6655443322',
+          firstName: 'Robert',
+          lastName: 'Williams',
+          dateOfBirth: '1970-11-03',
+          ssn: '789-01-7890',
+          motherFirstName: 'Dorothy',
+          demographics: {
+            gender: 'Male',
+            race: 'White',
+            ethnicity: 'Non-Hispanic',
+            address: '963 Ash Ln',
+            city: 'Juneau',
+            state: 'AK',
+            zip: '99801',
+            phone: '(907) 555-0678'
+          },
+          currentEnrollment: {
+            facilityId: 'fac-searhc-002',
+            facilityName: 'SEARHC – Juneau',
+            moudType: 'Methadone',
+            enrollmentDate: '2023-06-22',
+            status: 'active'
+          },
+          pdmpConsent: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: 'patient-007',
+          registryId: 'RX-4433221100',
+          firstName: 'Angela',
+          lastName: 'Martinez',
+          dateOfBirth: '1987-05-14',
+          ssn: '345-67-3456',
+          motherFirstName: 'Rosa',
+          demographics: {
+            gender: 'Female',
+            race: 'Hispanic',
+            ethnicity: 'Hispanic',
+            address: '852 Walnut St',
+            city: 'Wasilla',
+            state: 'AK',
+            zip: '99654',
+            phone: '(907) 555-0789'
+          },
+          currentEnrollment: {
+            facilityId: 'fac-cms-001',
+            facilityName: 'Community Medical Services – Wasilla',
+            moudType: 'Buprenorphine',
+            enrollmentDate: '2024-03-08',
+            status: 'active'
+          },
+          pdmpConsent: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: 'patient-008',
+          registryId: 'RX-3322110099',
+          firstName: 'David',
+          lastName: 'Thompson',
+          dateOfBirth: '1978-08-30',
+          ssn: '678-90-6789',
+          motherFirstName: 'Joyce',
+          demographics: {
+            gender: 'Male',
+            race: 'White',
+            ethnicity: 'Non-Hispanic',
+            address: '741 Maple Dr',
+            city: 'Ketchikan',
+            state: 'AK',
+            zip: '99901',
+            phone: '(907) 555-0890'
+          },
+          currentEnrollment: {
+            facilityId: 'fac-searhc-001',
+            facilityName: 'SEARHC – Ketchikan',
+            moudType: 'Methadone',
+            enrollmentDate: '2024-07-15',
+            status: 'active'
+          },
+          pdmpConsent: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
         }
       ];
 
