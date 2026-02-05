@@ -17,7 +17,7 @@ export interface StorageDatabase {
 export class OfflineStorageService {
   private db: IDBDatabase | null = null;
   private readonly DB_NAME = 'rxgov-registry';
-  private readonly DB_VERSION = 1;
+  private readonly DB_VERSION = 2;
   private dbPromise: Promise<IDBDatabase>;
 
   constructor() {
