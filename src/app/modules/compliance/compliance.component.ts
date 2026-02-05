@@ -47,22 +47,36 @@ interface BreakGlassAccess {
       <!-- Header Section -->
       <div class="page-header">
         <div class="header-content">
-          <h2>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-icon">
-              <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path>
-              <path d="M14 2v5a1 1 0 0 0 1 1h5"></path>
-              <path d="M10 9H8"></path>
-              <path d="M16 13H8"></path>
-              <path d="M16 17H8"></path>
-            </svg>
-            Standard Reports
-          </h2>
-          <p>Export standard operational and compliance reports.</p>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <button
+              *ngIf="selectedReport"
+              class="btn-back"
+              (click)="backToReportsList()"
+              title="Back to reports"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m15 18-6-6 6-6"></path>
+              </svg>
+            </button>
+            <div>
+              <h2>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="header-icon">
+                  <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path>
+                  <path d="M14 2v5a1 1 0 0 0 1 1h5"></path>
+                  <path d="M10 9H8"></path>
+                  <path d="M16 13H8"></path>
+                  <path d="M16 17H8"></path>
+                </svg>
+                {{ selectedReport ? selectedReport.name : 'Standard Reports' }}
+              </h2>
+              <p>{{ selectedReport ? selectedReport.description : 'Export standard operational and compliance reports.' }}</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Reports Card -->
-      <div class="reports-card">
+      <!-- Reports List View -->
+      <div *ngIf="!selectedReport" class="reports-card">
         <!-- Card Header -->
         <div class="card-header">
           <div class="header-title">
