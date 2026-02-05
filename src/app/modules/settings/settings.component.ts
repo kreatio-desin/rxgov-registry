@@ -444,9 +444,9 @@ import { SyncService, SyncConfig } from '../../core/services/sync.service';
     .issue-card {
       border-left: 4px solid #ffc107;
       padding: 1.5rem;
-      background: white;
+      background: var(--color-bg-primary);
       border-radius: 6px;
-      border: 1px solid #dee2e6;
+      border: 1px solid var(--color-border);
 
       .issue-header {
         display: flex;
@@ -460,10 +460,10 @@ import { SyncService, SyncConfig } from '../../core/services/sync.service';
           justify-content: center;
           width: 40px;
           height: 40px;
-          background: #fff3cd;
+          background: var(--color-bg-tertiary);
           border-radius: 6px;
           font-weight: bold;
-          color: #856404;
+          color: var(--color-text-primary);
           font-size: 1.3rem;
         }
 
