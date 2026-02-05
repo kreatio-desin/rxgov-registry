@@ -86,7 +86,10 @@ interface DoseAdministration {
                   <label>Route Stops</label>
                 </div>
                 <div class="stops-list">
-                  <div *ngFor="let stop of routeStops" class="stop-item">
+                  <div *ngFor="let stop of routeStops"
+                       class="stop-item"
+                       [class.selected]="selectedStopId === stop.id"
+                       (click)="selectStopForPatientQueue(stop)">
                     <div class="stop-info">
                       <i class="bi bi-geo-alt"></i>
                       <div class="stop-details">
@@ -94,7 +97,7 @@ interface DoseAdministration {
                         <div class="stop-address">{{ stop.address }}</div>
                       </div>
                     </div>
-                    <button class="btn-remove" (click)="removeStop(stop.id)" title="Remove stop">
+                    <button class="btn-remove" (click)="removeStop(stop.id, $event)" title="Remove stop">
                       <i class="bi bi-x"></i>
                     </button>
                   </div>
