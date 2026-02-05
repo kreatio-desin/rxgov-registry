@@ -40,11 +40,6 @@ interface TransferForm {
   consentAttest: boolean;
 }
 
-interface Facility {
-  id: string;
-  name: string;
-}
-
 @Component({
   selector: 'app-patient-detail',
   standalone: true,
