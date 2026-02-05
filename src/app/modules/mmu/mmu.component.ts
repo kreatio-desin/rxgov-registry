@@ -910,6 +910,22 @@ export class MMUComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Load today's encounters
     this.recentStops = this.availableStops.slice(0, 3);
+
+    // Initialize Google Places services
+    this.initializeGooglePlaces();
+  }
+
+  ngAfterViewInit(): void {
+    // Autocomplete is now initialized via onAddressInput
+  }
+
+  private initializeGooglePlaces(): void {
+    // Check if Google Maps API is loaded
+    if (typeof (window as any).google !== 'undefined') {
+      this.autocompleteService = new (window as any).google.maps.places.AutocompleteService();
+      this.placesService = new (window as any).google.maps.places.PlacesService(document.createElement('div'));
+      this.sessionToken = new (window as any).google.maps.places.AutocompleteSessionToken();
+    }
   }
 
   openAddStopDialog(): void {
