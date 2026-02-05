@@ -723,44 +723,6 @@ export class SettingsComponent implements OnInit {
 
     // Load current user
     this.currentUser = this.authService.getCurrentUser();
-
-    // Filter users based on role
-    this.filterUsers();
-  }
-
-  private filterUsers(): void {
-    if (!this.currentUser) {
-      this.filteredUsers = [];
-      return;
-    }
-
-    if (this.currentUser.role === 'admin') {
-      // Admin can see all users
-      this.filteredUsers = this.allUsers;
-    } else if (this.currentUser.role === 'facility-manager') {
-      // Facility manager can see only their facility's users
-      this.filteredUsers = this.allUsers.filter(user =>
-        user.facilityId === this.currentUser!.facilityId
-      );
-    } else {
-      // Facility staff can see users from their facility
-      this.filteredUsers = this.allUsers.filter(user =>
-        user.facilityId === this.currentUser!.facilityId
-      );
-    }
-  }
-
-  getRoleDisplayName(role: string): string {
-    switch (role) {
-      case 'admin':
-        return 'Administrator';
-      case 'facility-manager':
-        return 'Facility Manager';
-      case 'facility-staff':
-        return 'Facility Staff';
-      default:
-        return role;
-    }
   }
 
   onSyncEnabledChange(): void {
