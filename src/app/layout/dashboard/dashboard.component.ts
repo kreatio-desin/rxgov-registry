@@ -1010,24 +1010,62 @@ export class DashboardComponent implements OnInit {
     this.selectedTransfer = null;
   }
 
-  acceptTransfer(): void {
+  async acceptTransfer(): Promise<void> {
     if (this.selectedTransfer) {
-      // Update transfer status to approved
-      const transferIndex = this.transfers.findIndex(t => t.id === this.selectedTransfer!.id);
-      if (transferIndex !== -1) {
-        this.transfers[transferIndex].status = 'approved';
+      try {
+        // If this is a pending transfer from the service, approve it
+        const transferId = this.selectedTransfer.id;
+        const currentUser = this.authService.getCurrentUser();
+        if (currentUser) {
+          await this.transferService.approveTransfer(transferId, currentUser.name);
+          // Remove from pending transfers list
+          this.pendingTransfers = this.pendingTransfers.filter(t => t.id !== transferId);
+          alert(`Transfer for ${this.selectedTransfer.patientName} has been approved.`);
+        }
+      } catch (error) {
+        console.error('Error approving transfer:', error);
+        alert('Failed to approve transfer');
       }
       // Close modal
       this.closeTransferModal();
     }
   }
 
-  rejectTransfer(): void {
+  async rejectTransfer(): Promise<void> {
     if (this.selectedTransfer) {
-      // Remove transfer from queue or mark as rejected
-      this.transfers = this.transfers.filter(t => t.id !== this.selectedTransfer!.id);
+      try {
+        // If this is a pending transfer from the service, reject it
+        const transferId = this.selectedTransfer.id;
+        const currentUser = this.authService.getCurrentUser();
+        if (currentUser) {
+          await this.transferService.rejectTransfer(transferId, 'Not approved by receiving facility', currentUser.name);
+          // Remove from pending transfers list
+          this.pendingTransfers = this.pendingTransfers.filter(t => t.id !== transferId);
+          alert(`Transfer for ${this.selectedTransfer.patientName} has been rejected.`);
+        }
+      } catch (error) {
+        console.error('Error rejecting transfer:', error);
+        alert('Failed to reject transfer');
+      }
       // Close modal
       this.closeTransferModal();
     }
+  }
+
+  reviewPendingTransfer(transfer: PatientTransfer): void {
+    // Map PatientTransfer to Transfer interface for display
+    this.selectedTransfer = {
+      id: transfer.id,
+      patientName: transfer.patientName,
+      fromFacility: transfer.sourceClinic,
+      status: transfer.status as any,
+      patientRxId: transfer.patientId,
+      patientMedication: 'Pending details',
+      patientDose: 'Pending details',
+      initiatedBy: 'Transfer initiated',
+      initiatedDate: new Date(transfer.createdAt).toLocaleDateString(),
+      transferNotes: transfer.transferNotes
+    };
+    this.showTransferModal = true;
   }
 }
