@@ -249,7 +249,7 @@ interface PatientRecord {
     }
 
     .add-patient-btn {
-      background: #0066cc;
+      background: var(--color-button-bg);
       color: white;
       border: none;
       padding: 8px 16px;
@@ -263,7 +263,7 @@ interface PatientRecord {
       transition: background 0.2s;
 
       &:hover {
-        background: #0052a3;
+        background: var(--color-button-hover);
       }
 
       i {
