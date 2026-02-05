@@ -25,10 +25,14 @@ interface Patient {
   id: string;
   firstName: string;
   lastName: string;
+  nickName?: string;
   dob: string;
   ssn: string;
   facilityId: string;
   isRestricted: boolean;
+  currentMedication?: string;
+  dose?: string;
+  rxNumber?: string;
 }
 
 interface PatientMatch {
