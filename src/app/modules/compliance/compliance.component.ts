@@ -481,7 +481,7 @@ interface BreakGlassAccess {
       font-size: 0.875rem;
 
       thead {
-        background: white;
+        background: var(--color-bg-primary);
         position: sticky;
         top: 0;
         z-index: 10;
@@ -491,15 +491,15 @@ interface BreakGlassAccess {
         padding: 0.75rem 1rem;
         text-align: left;
         font-weight: 600;
-        color: #374151;
+        color: var(--color-text-primary);
         white-space: nowrap;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid var(--color-border);
         height: 2rem;
       }
 
       td {
         padding: 1rem;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid var(--color-border);
         vertical-align: middle;
       }
 
@@ -507,7 +507,7 @@ interface BreakGlassAccess {
         transition: background-color 0.2s;
 
         &:hover {
-          background-color: #f9fafb;
+          background-color: var(--color-bg-tertiary);
         }
       }
     }
