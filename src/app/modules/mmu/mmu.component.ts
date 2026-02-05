@@ -1178,6 +1178,7 @@ interface DoseAdministration {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      flex-shrink: 0;
     }
 
     .search-input-group {
@@ -1188,7 +1189,6 @@ interface DoseAdministration {
       border: 1px solid #e5e7eb;
       border-radius: 0.375rem;
       background: white;
-      flex: 1;
 
       i {
         font-size: 0.875rem;
