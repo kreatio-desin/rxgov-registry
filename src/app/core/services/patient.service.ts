@@ -416,19 +416,25 @@ export class PatientService {
 
   /**
    * Get patient (with privacy check)
+   * @param patientId - Patient ID to retrieve
+   * @param userFacilityId - Optional facility ID of the user. If patient is enrolled at this facility, access is granted
+   * @param userId - Optional user ID for audit logging
    */
-  async getPatient(patientId: string, userId?: string): Promise<Patient | undefined> {
+  async getPatient(patientId: string, userFacilityId?: string, userId?: string): Promise<Patient | undefined> {
     const patient = await this.offlineStorage.get<Patient>('patients', patientId);
 
     if (!patient) {
       return undefined;
     }
 
-    // Privacy check: if patient is active elsewhere and no token, don't return
-    if (
-      patient.currentEnrollment?.status === 'active' &&
-      !this.hasAccessToken(patientId)
-    ) {
+    // Privacy check:
+    // 1. If patient is enrolled at user's facility, allow access
+    // 2. If user has a break glass access token, allow access
+    // 3. Otherwise, deny access
+    const patientAtUserFacility = patient.currentEnrollment?.facilityId === userFacilityId;
+    const hasAccessToken = this.hasAccessToken(patientId);
+
+    if (!patientAtUserFacility && !hasAccessToken) {
       throw new Error('Access denied: Attestation required');
     }
 
