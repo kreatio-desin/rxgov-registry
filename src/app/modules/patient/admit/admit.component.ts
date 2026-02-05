@@ -1034,7 +1034,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
         color: white;
 
         &:hover:not(:disabled) {
-          background-color: #0a4a85;
+          background-color: var(--color-button-hover);
           transform: translateY(-2px);
         }
       }
@@ -1117,7 +1117,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       }
 
       &:hover {
-        background-color: #0a4a85;
+        background-color: var(--color-button-hover);
         transform: scale(1.1);
       }
     }
