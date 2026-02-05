@@ -1889,12 +1889,16 @@ export class MMUComponent implements OnInit, AfterViewInit {
   patientsDatabase: Patient[] = [
     {
       id: 'pat1',
-      firstName: 'John',
+      firstName: 'Oliver',
       lastName: 'Smith',
-      dob: '1985-05-15',
-      ssn: '123-45-6789',
+      nickName: 'Ollie',
+      dob: '1990-08-23',
+      ssn: '5678',
       facilityId: 'facility1',
       isRestricted: false,
+      currentMedication: 'Methadone',
+      dose: '90mg',
+      rxNumber: 'RX-0987654321',
     },
     {
       id: 'pat2',
@@ -1904,15 +1908,22 @@ export class MMUComponent implements OnInit, AfterViewInit {
       ssn: '987-65-4321',
       facilityId: 'facility1',
       isRestricted: false,
+      currentMedication: 'Buprenorphine',
+      dose: '8mg',
+      rxNumber: 'RX-1234567890',
     },
     {
       id: 'pat3',
       firstName: 'Michael',
       lastName: 'Williams',
+      nickName: 'Mike',
       dob: '1975-03-10',
       ssn: '456-78-9012',
       facilityId: 'facility2',
       isRestricted: true,
+      currentMedication: 'Naltrexone',
+      dose: '50mg',
+      rxNumber: 'RX-5555555555',
     },
     {
       id: 'pat4',
@@ -1922,6 +1933,9 @@ export class MMUComponent implements OnInit, AfterViewInit {
       ssn: '789-01-2345',
       facilityId: 'facility1',
       isRestricted: false,
+      currentMedication: 'Methadone',
+      dose: '60mg',
+      rxNumber: 'RX-4444444444',
     },
   ];
 
