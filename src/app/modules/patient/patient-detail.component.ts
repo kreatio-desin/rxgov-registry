@@ -655,7 +655,7 @@ interface AdministerDoseForm {
 
     .card-header {
       padding: 1rem;
-      background: #f9fafb;
+      background: var(--color-bg-tertiary);
       border-bottom: 1px solid #e5e7eb;
       display: flex;
       align-items: center;
@@ -809,7 +809,7 @@ interface AdministerDoseForm {
         padding: 1rem;
         border: 1px solid #e5e7eb;
         border-radius: 0.5rem;
-        background: #f9fafb;
+        background: var(--color-bg-tertiary);
       }
 
       .dose-header {
@@ -939,7 +939,7 @@ interface AdministerDoseForm {
       padding: 0.75rem;
       border: 1px solid #e5e7eb;
       border-radius: 0.5rem;
-      background: #f9fafb;
+      background: var(--color-bg-tertiary);
     }
 
     .prescription-name {
