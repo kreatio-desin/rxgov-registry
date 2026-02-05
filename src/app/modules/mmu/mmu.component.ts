@@ -1196,7 +1196,7 @@ interface DoseAdministration {
       .btn-create-stop {
         width: 100%;
         padding: 0.625rem 0.75rem;
-        background: #0c5caa;
+        background: var(--color-button-bg);
         color: white;
         border: none;
         border-radius: 0.25rem;
@@ -1276,7 +1276,7 @@ interface DoseAdministration {
 
       .btn-add-stop-save {
         padding: 0.625rem;
-        background: #0c5caa;
+        background: var(--color-button-bg);
         color: white;
         border: none;
         border-radius: 0.25rem;
@@ -1540,7 +1540,7 @@ interface DoseAdministration {
 
         .btn-log-encounter {
           padding: 0.375rem 0.75rem;
-          background: #0c5caa;
+          background: var(--color-button-bg);
           color: white;
           border: none;
           border-radius: 0.25rem;
@@ -1778,7 +1778,7 @@ interface DoseAdministration {
         }
 
         .btn-log-encounter-large {
-          background: #0c5caa;
+          background: var(--color-button-bg);
           color: white;
           opacity: 0;
 
@@ -1858,7 +1858,7 @@ interface DoseAdministration {
 
         .btn-log-encounter {
           padding: 0.375rem 0.75rem;
-          background: #0c5caa;
+          background: var(--color-button-bg);
           color: white;
           border: none;
           border-radius: 0.25rem;
@@ -2392,7 +2392,7 @@ interface DoseAdministration {
       }
 
       .btn-primary {
-        background: #0c5caa;
+        background: var(--color-button-bg);
         color: white;
         display: flex;
         align-items: center;
