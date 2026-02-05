@@ -400,7 +400,7 @@ import { SyncService, SyncConfig } from '../../core/services/sync.service';
       }
 
       .description {
-        color: #666;
+        color: var(--color-text-secondary);
         margin-bottom: 1.5rem;
         font-size: 0.95rem;
       }
@@ -412,7 +412,7 @@ import { SyncService, SyncConfig } from '../../core/services/sync.service';
           label {
             display: block;
             font-weight: 600;
-            color: #333;
+            color: var(--color-text-primary);
             font-size: 0.85rem;
             margin-bottom: 0.25rem;
           }
