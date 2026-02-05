@@ -7,6 +7,7 @@ interface RouteStop {
   id: string;
   name: string;
   address: string;
+  facilityId: string;
 }
 
 interface Encounter {
@@ -18,6 +19,31 @@ interface Encounter {
 
 interface AvailableStop extends RouteStop {
   // Extends RouteStop with same properties
+}
+
+interface Patient {
+  id: string;
+  firstName: string;
+  lastName: string;
+  dob: string;
+  ssn: string;
+  facilityId: string;
+  isRestricted: boolean;
+}
+
+interface PatientMatch {
+  patient: Patient;
+  isRestricted: boolean;
+}
+
+interface DoseAdministration {
+  medicationName: string;
+  dose: string;
+  unit: string;
+  route: string;
+  site: string;
+  time: string;
+  notes: string;
 }
 
 @Component({
