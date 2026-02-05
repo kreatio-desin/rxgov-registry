@@ -1700,4 +1700,73 @@ export class PatientDetailComponent implements OnInit {
     this.dosingHistory.unshift(newDose);
     this.closeAdministerDoseModal();
   }
+
+  openTransferModal(): void {
+    // Initialize transfer date to today
+    const today = new Date();
+    this.currentTransferDate = today.toISOString().split('T')[0];
+    this.transferForm = {
+      transferDate: this.currentTransferDate,
+      destinationClinic: '',
+      transferNotes: '',
+      consentAttest: false
+    };
+    this.showTransferModal = true;
+  }
+
+  closeTransferModal(): void {
+    this.showTransferModal = false;
+    this.transferForm = {
+      transferDate: '',
+      destinationClinic: '',
+      transferNotes: '',
+      consentAttest: false
+    };
+  }
+
+  confirmTransfer(): void {
+    if (!this.transferForm.consentAttest || !this.transferForm.destinationClinic) {
+      alert('Please complete all required fields and attest to patient consent.');
+      return;
+    }
+
+    // Find the destination facility name
+    const destinationFacility = this.availableFacilities.find(
+      f => f.id === this.transferForm.destinationClinic
+    );
+
+    const transferData = {
+      patientId: this.patient?.registryId,
+      patientName: `${this.patient?.firstName} ${this.patient?.lastName}`,
+      sourceClinic: this.patient?.currentEnrollment?.facilityName,
+      destinationClinic: destinationFacility?.name,
+      transferDate: this.transferForm.transferDate,
+      transferNotes: this.transferForm.transferNotes,
+      status: 'pending',
+      timestamp: new Date().toISOString()
+    };
+
+    // Log the transfer data (in production, this would be sent to a backend service)
+    console.log('Transfer initiated:', transferData);
+
+    // Add to transfer queue (simulated - would be backend in production)
+    this.addToTransferQueue(transferData);
+
+    alert(`Transfer initiated for ${this.patient?.lastName}, ${this.patient?.firstName} to ${destinationFacility?.name}. The patient will be hidden from staff until the transfer is accepted.`);
+    this.closeTransferModal();
+  }
+
+  private addToTransferQueue(transferData: any): void {
+    // In production, this would call a backend service to add the patient to the transfer queue
+    // of the destination facility
+    // For now, we'll just store it in localStorage as a demo
+    const transferQueue = JSON.parse(localStorage.getItem('transferQueue') || '[]');
+    transferQueue.push(transferData);
+    localStorage.setItem('transferQueue', JSON.stringify(transferQueue));
+  }
+
+  openInactiveModal(): void {
+    // Placeholder for inactive functionality
+    alert('Mark patient as Inactive functionality coming soon.');
+  }
 }
