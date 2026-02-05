@@ -583,7 +583,7 @@ interface AdministerDoseForm {
     }
 
     .reveal-ssn:hover {
-      background: #f3f4f6;
+      background: var(--color-bg-tertiary);
     }
 
     .reveal-ssn svg {
