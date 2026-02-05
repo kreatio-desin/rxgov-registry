@@ -403,7 +403,7 @@ interface BreakGlassAccess {
     /* Card Header */
     .card-header {
       padding: 1.5rem;
-      border-bottom: 1px solid #e5e7eb;
+      border-bottom: 1px solid var(--color-border);
       background: var(--color-bg-tertiary);
       display: flex;
       flex-direction: column;
@@ -926,7 +926,7 @@ interface BreakGlassAccess {
         display: flex;
         justify-content: space-between;
         padding: 0.5rem 0;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid var(--color-border);
 
         &:last-child {
           border-bottom: none;
