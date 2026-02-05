@@ -1290,23 +1290,23 @@ interface AdministerDoseForm {
     }
 
     .btn-cancel {
-      background: white;
-      border: 1px solid #d1d5db;
-      color: #1f2937;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-primary);
     }
 
     .btn-cancel:hover {
-      background: #f9fafb;
-      border-color: #9ca3af;
+      background: var(--color-bg-tertiary);
+      border-color: var(--color-text-tertiary);
     }
 
     .btn-record {
-      background: #1f2937;
+      background: var(--color-button-bg);
       color: white;
     }
 
     .btn-record:hover {
-      background: #111827;
+      background: var(--color-button-hover);
     }
 
     @media (max-width: 640px) {
