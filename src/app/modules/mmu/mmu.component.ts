@@ -990,8 +990,34 @@ export class MMUComponent implements OnInit, AfterViewInit {
   }
 
   private initializeGooglePlaces(): void {
-    // Check if Google Maps API is loaded
-    if (typeof (window as any).google !== 'undefined') {
+    // Check if Google Maps API is already loaded
+    if (typeof (window as any).google !== 'undefined' && (window as any).google.maps) {
+      this.setupGooglePlacesServices();
+      return;
+    }
+
+    // Load Google Maps script dynamically with API key from environment
+    const apiKey = environment.googleMapsApiKey;
+    if (!apiKey || apiKey === 'YOUR_GOOGLE_PLACES_API_KEY') {
+      console.warn('Google Places API key is not configured. Please set GOOGLE_PLACES_API_KEY in your environment.');
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      this.setupGooglePlacesServices();
+    };
+    script.onerror = () => {
+      console.error('Failed to load Google Maps API');
+    };
+    document.head.appendChild(script);
+  }
+
+  private setupGooglePlacesServices(): void {
+    if (typeof (window as any).google !== 'undefined' && (window as any).google.maps) {
       this.autocompleteService = new (window as any).google.maps.places.AutocompleteService();
       this.placesService = new (window as any).google.maps.places.PlacesService(document.createElement('div'));
       this.sessionToken = new (window as any).google.maps.places.AutocompleteSessionToken();
