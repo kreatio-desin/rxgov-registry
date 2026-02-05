@@ -72,7 +72,7 @@ import { CommonModule } from '@angular/common';
     }
 
     .emergency-card {
-      background: white;
+      background: var(--color-bg-primary);
       border-radius: 8px;
       padding: 2rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
