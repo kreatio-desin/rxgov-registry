@@ -832,23 +832,23 @@ interface PatientRecord {
     }
 
     .btn-reject {
-      border: 1px solid #e5e7eb;
-      background: white;
-      color: #1f2937;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
 
       &:hover {
-        background: #f9fafb;
-        border-color: #9ca3af;
+        background: var(--color-bg-tertiary);
+        border-color: var(--color-text-secondary);
       }
     }
 
     .btn-accept {
-      background: #2563eb;
+      background: var(--color-button-bg);
       color: white;
-      border: 1px solid #1d4ed8;
+      border: 1px solid var(--color-button-hover);
 
       &:hover {
-        background: #1d4ed8;
+        background: var(--color-button-hover);
       }
     }
 
