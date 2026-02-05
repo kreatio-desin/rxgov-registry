@@ -1226,6 +1226,10 @@ interface DoseAdministration {
       padding: 2rem 1rem;
       color: #6b7280;
       font-size: 0.875rem;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .patient-result-item {
@@ -1234,6 +1238,7 @@ interface DoseAdministration {
       border-radius: 0.375rem;
       border: 1px solid #e5e7eb;
       overflow: hidden;
+      flex-shrink: 0;
     }
 
     .restricted-match {
