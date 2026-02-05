@@ -39,8 +39,7 @@ export class AuthService {
       email: 'admin@rxgov.gov',
       password: 'admin123',
       name: 'Dr. Lisa Johnson',
-      role: 'admin',
-      permissions: ['all']
+      role: 'admin'
     },
     {
       email: 'manager@anchorage-ctc.org',
