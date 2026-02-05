@@ -42,11 +42,11 @@ interface PatientMatch {
 
 interface DoseAdministration {
   medicationName: string;
-  dose: string;
-  unit: string;
-  route: string;
-  site: string;
-  time: string;
+  observedDose: string;
+  takeHomeDoses: string;
+  takeHomeDoseAmount: string;
+  individualCounseling: boolean;
+  groupCounseling: boolean;
   notes: string;
 }
 
