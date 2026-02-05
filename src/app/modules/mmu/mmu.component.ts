@@ -1560,6 +1560,261 @@ interface DoseAdministration {
         opacity: 1;
       }
 
+      .patient-card-detailed {
+        display: flex;
+        flex-direction: column;
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-left: 4px solid #64748b;
+        border-radius: 0.375rem;
+        overflow: hidden;
+        cursor: pointer;
+        transition: background 0.2s;
+
+        &:hover {
+          background: #f0f1f3;
+
+          .btn-log-encounter-large {
+            opacity: 1;
+          }
+
+          .btn-view-record {
+            opacity: 1;
+          }
+        }
+      }
+
+      .patient-card-content {
+        padding: 0.75rem;
+        flex: 1;
+      }
+
+      .patient-header-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+
+        .patient-avatar {
+          width: 2.25rem;
+          height: 2.25rem;
+          min-width: 2.25rem;
+          background: #cbd5e1;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #64748b;
+
+          i {
+            font-size: 1rem;
+          }
+        }
+
+        .patient-header-info {
+          flex: 1;
+          min-width: 0;
+
+          h3 {
+            margin: 0;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1f2937;
+            line-height: 1.2;
+          }
+
+          .patient-rx-mono {
+            margin: 0.25rem 0 0 0;
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: #6b7280;
+          }
+        }
+      }
+
+      .patient-meta-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0.375rem;
+        margin-bottom: 0.75rem;
+
+        .meta-item {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 0.75rem;
+          color: #6b7280;
+
+          i {
+            font-size: 0.75rem;
+            flex-shrink: 0;
+          }
+
+          .medication-highlight {
+            font-weight: 600;
+            color: #4f46e5;
+          }
+        }
+      }
+
+      .status-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+
+        .badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.375rem;
+          padding: 0.25rem 0.75rem;
+          border-radius: 0.25rem;
+          font-size: 0.7rem;
+          font-weight: 500;
+          border: 1px solid;
+
+          i {
+            font-size: 0.75rem;
+          }
+
+          &.badge-info {
+            background: white;
+            border-color: #cbd5e1;
+            color: #64748b;
+          }
+
+          &.badge-success {
+            background: #dcfce7;
+            border-color: #86efac;
+            color: #15803d;
+          }
+
+          &.badge-danger {
+            background: #fee2e2;
+            border-color: #fca5a5;
+            color: #991b1b;
+          }
+        }
+      }
+
+      .recent-doses {
+        padding-top: 0.75rem;
+        border-top: 1px solid #d1d5db;
+        margin-bottom: 0.5rem;
+
+        .section-title {
+          margin: 0 0 0.5rem 0;
+          font-size: 0.7rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          color: #6b7280;
+        }
+
+        .doses-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0.375rem;
+        }
+
+        .dose-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.5rem;
+          font-size: 0.75rem;
+
+          .dose-datetime {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            min-width: 0;
+            flex: 1;
+
+            .dose-date,
+            .dose-time {
+              color: #6b7280;
+            }
+
+            .dose-date {
+              font-weight: 500;
+            }
+          }
+
+          .dose-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+
+            &.badge-observed {
+              background: #dbeafe;
+              color: #0c4a6e;
+            }
+
+            &.badge-takehome {
+              background: #dcfce7;
+              color: #15803d;
+            }
+          }
+
+          .dose-amount {
+            font-weight: 600;
+            color: #1f2937;
+            min-width: auto;
+            text-align: right;
+          }
+        }
+      }
+
+      .patient-actions {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.75rem;
+        background: #f0f1f3;
+        border-top: 1px solid #e5e7eb;
+
+        .btn-view-record,
+        .btn-log-encounter-large {
+          flex: 1;
+          padding: 0.375rem 0.75rem;
+          border: none;
+          border-radius: 0.25rem;
+          font-size: 0.75rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s;
+          white-space: nowrap;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.375rem;
+        }
+
+        .btn-view-record {
+          background: white;
+          color: #6b7280;
+          border: 1px solid #d1d5db;
+          opacity: 0;
+
+          &:hover {
+            background: #f9fafb;
+            color: #374151;
+          }
+        }
+
+        .btn-log-encounter-large {
+          background: #0c5caa;
+          color: white;
+          opacity: 0;
+
+          &:hover {
+            background: #0a4a85;
+          }
+        }
+      }
+
       .restricted-match-item {
         display: flex;
         align-items: center;
