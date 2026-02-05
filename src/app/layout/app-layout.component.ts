@@ -6,6 +6,7 @@ import { PatientService, SearchResult } from '../core/services/patient.service';
 import { OfflineStorageService } from '../core/services/offline-storage.service';
 import { SyncService } from '../core/services/sync.service';
 import { ThemeService } from '../core/services/theme.service';
+import { AuthService, AuthUser } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-layout',
