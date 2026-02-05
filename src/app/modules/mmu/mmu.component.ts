@@ -1137,7 +1137,7 @@ interface DoseAdministration {
         align-items: flex-start;
         gap: 0.5rem;
         padding: 0.625rem 0.75rem;
-        background: white;
+        background: var(--color-bg-primary);
         border: none;
         cursor: pointer;
         transition: background 0.15s;
@@ -1146,12 +1146,12 @@ interface DoseAdministration {
         font-size: 0.75rem;
 
         &:hover {
-          background: #f3f4f6;
+          background: var(--color-bg-tertiary);
         }
 
         i {
           flex-shrink: 0;
-          color: #0c5caa;
+          color: var(--color-primary);
           font-size: 0.75rem;
           margin-top: 0.125rem;
         }
@@ -1167,14 +1167,14 @@ interface DoseAdministration {
 
       .list-item-name {
         font-weight: 500;
-        color: #1f2937;
+        color: var(--color-text-primary);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
       .list-item-address {
-        color: #6b7280;
+        color: var(--color-text-secondary);
         font-size: 0.7rem;
         white-space: nowrap;
         overflow: hidden;
@@ -1301,8 +1301,8 @@ interface DoseAdministration {
         top: calc(100% + 0.25rem);
         left: 0;
         right: 0;
-        background: white;
-        border: 1px solid #e5e7eb;
+        background: var(--color-bg-primary);
+        border: 1px solid var(--color-border);
         border-radius: 0.25rem;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         z-index: 100;
@@ -1317,11 +1317,11 @@ interface DoseAdministration {
         padding: 0.625rem;
         cursor: pointer;
         transition: background 0.15s;
-        border-bottom: 1px solid #f3f4f6;
+        border-bottom: 1px solid var(--color-border-light);
         font-size: 0.75rem;
 
         &:hover {
-          background: #f9fafb;
+          background: var(--color-bg-tertiary);
         }
 
         &:last-child {
@@ -1346,14 +1346,14 @@ interface DoseAdministration {
 
       .prediction-main {
         font-weight: 500;
-        color: #1f2937;
+        color: var(--color-text-primary);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
       .prediction-secondary {
-        color: #6b7280;
+        color: var(--color-text-secondary);
         font-size: 0.7rem;
         white-space: nowrap;
         overflow: hidden;
