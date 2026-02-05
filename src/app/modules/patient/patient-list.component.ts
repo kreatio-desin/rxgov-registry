@@ -121,7 +121,7 @@ import { FacilityService } from '../../core/services/facility.service';
     .empty-state {
       text-align: center;
       padding: 4rem 2rem;
-      background: white;
+      background: var(--color-bg-primary);
       border-radius: 8px;
 
       i {
