@@ -599,7 +599,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
         color: #0c5caa;
 
         .step-number {
-          background-color: #0c5caa;
+          background-color: var(--color-button-bg);
           color: white;
           border-color: #0c5caa;
         }
@@ -609,7 +609,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
         color: #0c5caa;
 
         .step-number {
-          background-color: #0c5caa;
+          background-color: var(--color-button-bg);
           color: white;
           border-color: #0c5caa;
 
@@ -1030,7 +1030,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       }
 
       &.btn-primary {
-        background-color: #0c5caa;
+        background-color: var(--color-button-bg);
         color: white;
 
         &:hover:not(:disabled) {
