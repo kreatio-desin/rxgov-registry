@@ -219,12 +219,204 @@ interface DoseAdministration {
       <!-- Dropdown Overlay -->
       <div *ngIf="showAddStopDialog" class="dropdown-overlay" (click)="closeAddStopDialog()"></div>
 
-      <!-- Right Panel - Map/Details -->
+      <!-- Right Panel - Patient Queue/Details -->
       <div class="right-panel">
-        <div class="map-placeholder">
+        <!-- No Stop Selected -->
+        <div *ngIf="!selectedStopId" class="map-placeholder">
           <i class="bi bi-geo-alt"></i>
           <h3>No Stop Selected</h3>
           <p>Please select an active stop from the route list to begin logging encounters.</p>
+        </div>
+
+        <!-- Patient Queue for Selected Stop -->
+        <div *ngIf="selectedStopId && !selectedPatient" class="patient-queue">
+          <div class="queue-header">
+            <h3>{{ getSelectedStopName() }}</h3>
+            <button class="btn-close" (click)="clearSelectedStop()" title="Close">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+
+          <!-- Patient Search -->
+          <div class="patient-search">
+            <div class="search-input-group">
+              <i class="bi bi-search"></i>
+              <input type="text"
+                     [(ngModel)]="patientSearchQuery"
+                     (input)="searchPatients()"
+                     placeholder="Search patients by name or SSN..."
+                     class="search-input" />
+            </div>
+          </div>
+
+          <!-- Search Results -->
+          <div class="search-results" *ngIf="patientSearchQuery.trim() !== ''">
+            <div *ngIf="patientSearchResults.length === 0" class="no-results">
+              <p>No patients found</p>
+            </div>
+            <div *ngFor="let result of patientSearchResults" class="patient-result-item">
+              <!-- Restricted Match -->
+              <div *ngIf="result.isRestricted" class="restricted-match">
+                <div class="restricted-header">
+                  <i class="bi bi-shield-exclamation"></i>
+                  <span>Restricted Match</span>
+                </div>
+                <p class="restricted-note">Patient record is restricted. Emergency Guest Access required.</p>
+              </div>
+              <!-- Facility Patient -->
+              <div *ngIf="!result.isRestricted" class="facility-patient" (click)="selectPatientForEncounter(result.patient)">
+                <div class="patient-info">
+                  <div class="patient-name">{{ result.patient.firstName }} {{ result.patient.lastName }}</div>
+                  <div class="patient-dob">DOB: {{ result.patient.dob }}</div>
+                  <div class="patient-ssn">SSN: {{ result.patient.ssn }}</div>
+                </div>
+                <button class="btn-log-encounter" (click)="selectPatientForEncounter(result.patient); $event.stopPropagation()">
+                  Log Encounter
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Encounter Logging Form -->
+        <div *ngIf="selectedPatient && !showBreakGlassModal" class="encounter-form-container">
+          <div class="encounter-header">
+            <button class="btn-back" (click)="clearSelectedPatient()">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <h3>{{ selectedPatient.firstName }} {{ selectedPatient.lastName }}</h3>
+          </div>
+
+          <form class="encounter-form">
+            <!-- Medication Info -->
+            <div class="form-section">
+              <h4>Medication Administration</h4>
+
+              <div class="form-group-full">
+                <label>Medication Name</label>
+                <input type="text"
+                       [(ngModel)]="doseData.medicationName"
+                       name="medicationName"
+                       placeholder="Enter medication name"
+                       class="form-input" />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Dose</label>
+                  <input type="text"
+                         [(ngModel)]="doseData.dose"
+                         name="dose"
+                         placeholder="e.g. 500"
+                         class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label>Unit</label>
+                  <select [(ngModel)]="doseData.unit" name="unit" class="form-input">
+                    <option value="">Select unit</option>
+                    <option value="mg">mg</option>
+                    <option value="mcg">mcg</option>
+                    <option value="g">g</option>
+                    <option value="ml">ml</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Route</label>
+                  <select [(ngModel)]="doseData.route" name="route" class="form-input">
+                    <option value="">Select route</option>
+                    <option value="oral">Oral</option>
+                    <option value="iv">IV</option>
+                    <option value="im">IM</option>
+                    <option value="sc">SC</option>
+                    <option value="topical">Topical</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Site</label>
+                  <input type="text"
+                         [(ngModel)]="doseData.site"
+                         name="site"
+                         placeholder="e.g. Left Arm"
+                         class="form-input" />
+                </div>
+              </div>
+
+              <div class="form-group-full">
+                <label>Time</label>
+                <input type="datetime-local"
+                       [(ngModel)]="doseData.time"
+                       name="time"
+                       class="form-input" />
+              </div>
+
+              <div class="form-group-full">
+                <label>Notes</label>
+                <textarea [(ngModel)]="doseData.notes"
+                          name="notes"
+                          placeholder="Add any additional notes..."
+                          class="form-textarea"
+                          rows="3"></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-secondary" (click)="clearSelectedPatient()">Cancel</button>
+              <button type="button" class="btn-primary" (click)="saveEncounter()">Save Encounter</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Break Glass Modal -->
+      <div *ngIf="showBreakGlassModal" class="modal-overlay" (click)="closeBreakGlassModal()">
+        <div class="modal-content break-glass-modal" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <i class="bi bi-shield-exclamation"></i>
+            <h2>Emergency Guest Access Required</h2>
+            <button class="btn-close-modal" (click)="closeBreakGlassModal()">
+              <i class="bi bi-x"></i>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <p class="modal-description">You are attempting to access a restricted patient record from another facility. This action will be audited.</p>
+
+            <div class="match-details">
+              <h4>Search Match Details</h4>
+              <p class="match-text">"{{ patientSearchQuery }}" matched:</p>
+              <div class="matched-field">
+                <i class="bi bi-check-circle"></i>
+                <span>Mother's First Name</span>
+              </div>
+              <div class="facility-info">
+                <p><strong>Home Facility:</strong> {{ breakGlassPatient?.facilityId }}</p>
+              </div>
+            </div>
+
+            <div class="policy-notice">
+              <i class="bi bi-info-circle"></i>
+              <p>[This language can be replaced or edited based on State Policy language needs]</p>
+            </div>
+
+            <div class="attestation-section">
+              <label class="attestation-checkbox">
+                <input type="checkbox" [(ngModel)]="attestationConfirmed" name="attestation">
+                <span>I attest that I am accessing this record solely for the purpose of administering emergency guest dosing and coordinating care, and that I have obtained written consent and filed the documentation on site.</span>
+              </label>
+              <p class="attestation-expiry">Access expires automatically on February 6, 2026 at 1:36 PM. This action is logged and auditable.</p>
+            </div>
+
+            <div class="modal-actions">
+              <button class="btn-secondary" (click)="closeBreakGlassModal()">Cancel</button>
+              <button class="btn-primary" [disabled]="!attestationConfirmed" (click)="confirmBreakGlassAndContinue()">
+                <i class="bi bi-shield-check"></i>
+                Break Glass and Attest
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
