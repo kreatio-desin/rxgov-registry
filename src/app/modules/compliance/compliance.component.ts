@@ -404,7 +404,7 @@ interface BreakGlassAccess {
     .card-header {
       padding: 1.5rem;
       border-bottom: 1px solid #e5e7eb;
-      background: #f9fafb;
+      background: var(--color-bg-tertiary);
       display: flex;
       flex-direction: column;
       md-flex-direction: row;
@@ -795,7 +795,7 @@ interface BreakGlassAccess {
     .report-footer {
       padding: 1rem 1.5rem;
       border-top: 1px solid #e5e7eb;
-      background: #f9fafb;
+      background: var(--color-bg-tertiary);
       text-align: right;
       font-size: 0.875rem;
       color: #6b7280;
@@ -908,7 +908,7 @@ interface BreakGlassAccess {
     }
 
     .access-details {
-      background: #f9fafb;
+      background: var(--color-bg-tertiary);
       padding: 1rem;
       border-radius: 0.375rem;
       border: 1px solid #e5e7eb;
