@@ -92,23 +92,23 @@ import { FacilityService } from '../../core/services/facility.service';
       text-decoration: none;
 
       &.btn-primary {
-        background: #0c5caa;
+        background: var(--color-button-bg);
         color: white;
 
         &:hover {
-          background: #0a4a85;
+          background: var(--color-button-hover);
           transform: translateY(-2px);
         }
       }
 
       &.btn-secondary {
-        background: #6c757d;
+        background: var(--color-text-secondary);
         color: white;
         padding: 0.5rem 1rem;
         font-size: 0.85rem;
 
         &:hover {
-          background: #5a6268;
+          background: var(--color-text-primary);
         }
       }
 
