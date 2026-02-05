@@ -743,7 +743,7 @@ export class AppLayoutComponent implements OnInit {
   }
 
   navigateToUsers(): void {
-    this.router.navigate(['/settings']);
+    this.router.navigate(['/users']);
   }
 
   async logout(): Promise<void> {
