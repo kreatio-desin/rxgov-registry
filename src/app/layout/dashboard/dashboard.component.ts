@@ -425,8 +425,8 @@ interface PatientRecord {
     }
 
     .table-container {
-      background: white;
-      border: 1px solid #e5e7eb;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
       border-radius: 8px;
       overflow: hidden;
     }
@@ -437,15 +437,15 @@ interface PatientRecord {
       font-size: 14px;
 
       thead {
-        background: #f9fafb;
-        border-bottom: 1px solid #e5e7eb;
+        background: var(--color-bg-tertiary);
+        border-bottom: 1px solid var(--color-border);
       }
 
       th {
         padding: 12px;
         text-align: left;
         font-weight: 600;
-        color: #374151;
+        color: var(--color-text-primary);
         font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
@@ -453,12 +453,12 @@ interface PatientRecord {
 
       td {
         padding: 12px;
-        border-bottom: 1px solid #f3f4f6;
-        color: #1f2937;
+        border-bottom: 1px solid var(--color-border-light);
+        color: var(--color-text-primary);
       }
 
       tbody tr:hover {
-      background: #f9fafb;
+      background: var(--color-bg-tertiary);
     }
 
     tbody tr:last-child td {
@@ -471,14 +471,14 @@ interface PatientRecord {
     }
 
     tbody tr.clickable-row:hover {
-      background: #e5e7eb;
+      background: var(--color-bg-tertiary);
     }
     }
 
     .cell-rxid {
       font-family: monospace;
       font-size: 12px;
-      color: #0066cc;
+      color: var(--color-primary);
       font-weight: 600;
     }
 
