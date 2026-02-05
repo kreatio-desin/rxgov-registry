@@ -598,6 +598,12 @@ interface DoseAdministration {
       &:hover {
         background: #f0f1f3;
       }
+
+      &.selected {
+        background: #dbeafe;
+        border-color: #0c5caa;
+        box-shadow: 0 0 0 2px rgba(12, 92, 170, 0.1);
+      }
     }
 
     .stop-info {
