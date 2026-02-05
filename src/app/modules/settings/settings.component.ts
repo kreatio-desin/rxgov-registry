@@ -529,21 +529,21 @@ import { SyncService, SyncConfig } from '../../core/services/sync.service';
       transition: all 0.2s;
 
       &.btn-primary {
-        background: #0c5caa;
+        background: var(--color-button-bg);
         color: white;
 
         &:hover:not(:disabled) {
-          background: #0a4a85;
+          background: var(--color-button-hover);
           transform: translateY(-2px);
         }
       }
 
       &.btn-secondary {
-        background: #6c757d;
+        background: var(--color-text-secondary);
         color: white;
 
         &:hover:not(:disabled) {
-          background: #5a6268;
+          background: var(--color-text-primary);
           transform: translateY(-2px);
         }
       }
