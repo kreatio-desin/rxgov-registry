@@ -1450,6 +1450,131 @@ interface Facility {
     .space-y-3 > * + * {
       margin-top: 0.75rem;
     }
+
+    /* Clinical Management Styles */
+    .management-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 1rem;
+    }
+
+    .management-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.625rem 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+    }
+
+    .management-btn:hover {
+      background: var(--color-bg-tertiary);
+      border-color: var(--color-text-secondary);
+    }
+
+    .management-btn svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .transfer-btn {
+      border-color: #93c5fd;
+      color: #1e40af;
+    }
+
+    .transfer-btn:hover {
+      background: #eff6ff;
+      border-color: #3b82f6;
+    }
+
+    .inactive-btn {
+      border-color: #fecaca;
+      color: #991b1b;
+    }
+
+    .inactive-btn:hover {
+      background: #fef2f2;
+      border-color: #ef4444;
+    }
+
+    /* Transfer Modal Styles */
+    .form-hint {
+      margin: 0;
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+      margin-top: 0.25rem;
+    }
+
+    .consent-box {
+      padding: 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: 0.375rem;
+      background: var(--color-bg-tertiary);
+    }
+
+    .consent-checkbox {
+      display: flex;
+      gap: 0.75rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: var(--color-text-primary);
+      line-height: 1.5;
+    }
+
+    .consent-checkbox input {
+      margin-top: 0.125rem;
+      flex-shrink: 0;
+    }
+
+    .info-box {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      padding: 0.75rem 1rem;
+      background: #dbeafe;
+      border: 1px solid #bfdbfe;
+      border-radius: 0.375rem;
+      border-left: 4px solid #3b82f6;
+    }
+
+    .info-box svg {
+      flex-shrink: 0;
+      color: #1d4ed8;
+      margin-top: 0.125rem;
+    }
+
+    .info-box span {
+      font-size: 0.875rem;
+      color: #1e40af;
+    }
+
+    .btn-confirm {
+      background: var(--color-button-bg);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .btn-confirm:hover:not(:disabled) {
+      background: var(--color-button-hover);
+    }
+
+    .btn-confirm:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   `]
 })
 export class PatientDetailComponent implements OnInit {
