@@ -820,7 +820,7 @@ interface BreakGlassAccess {
     }
 
     .modal-content {
-      background: white;
+      background: var(--color-bg-primary);
       border-radius: 0.75rem;
       box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
       max-width: 500px;
@@ -850,7 +850,7 @@ interface BreakGlassAccess {
       align-items: flex-start;
       gap: 1rem;
       padding: 1.5rem;
-      border-bottom: 1px solid #e5e7eb;
+      border-bottom: 1px solid var(--color-border);
       position: relative;
 
       svg {
