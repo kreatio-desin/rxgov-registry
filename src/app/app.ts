@@ -13,7 +13,7 @@ import { AuthService } from './core/services/auth.service';
     <ng-template #loginScreen>
       <app-login></app-login>
     </ng-template>
-  `
+  `,
 })
 export class App implements OnInit {
   isAuthenticated = false;
@@ -21,7 +21,7 @@ export class App implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.authService.isAuthenticated$.subscribe(isAuth => {
+    this.authService.isAuthenticated$.subscribe((isAuth) => {
       this.isAuthenticated = isAuth;
     });
 

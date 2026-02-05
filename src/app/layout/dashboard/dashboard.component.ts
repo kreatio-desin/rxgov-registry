@@ -50,7 +50,10 @@ interface PatientRecord {
       <!-- Main Grid -->
       <div class="dashboard-grid">
         <!-- Left Column - Transfer Queue (Facility Manager Only - Hidden on mobile, visible on desktop) -->
-        <div class="transfer-queue-section hidden lg:block" *ngIf="currentUser && currentUser.role === 'facility-manager'">
+        <div
+          class="transfer-queue-section hidden lg:block"
+          *ngIf="currentUser && currentUser.role === 'facility-manager'"
+        >
           <div class="section-card">
             <div class="section-header">
               <h3 class="section-title">
@@ -95,7 +98,11 @@ interface PatientRecord {
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let patient of recentPatients" class="clickable-row" (click)="navigateToPatient(patient.id)">
+                <tr
+                  *ngFor="let patient of recentPatients"
+                  class="clickable-row"
+                  (click)="navigateToPatient(patient.id)"
+                >
                   <td class="cell-rxid">{{ patient.rxId }}</td>
                   <td class="cell-name">{{ patient.name }}</td>
                   <td>{{ patient.dob }}</td>
@@ -125,7 +132,17 @@ interface PatientRecord {
         <div class="modal-content" (click)="$event.stopPropagation()">
           <!-- Close Button -->
           <button class="modal-close" (click)="closeTransferModal()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <path d="M18 6 6 18"></path>
               <path d="m6 6 12 12"></path>
             </svg>
@@ -192,8 +209,21 @@ interface PatientRecord {
             <!-- Transfer Notes -->
             <div class="info-section notes-section">
               <div class="notes-header">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="notes-icon">
-                  <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"></path>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="notes-icon"
+                >
+                  <path
+                    d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"
+                  ></path>
                   <path d="M14 2v5a1 1 0 0 0 1 1h5"></path>
                   <path d="M10 9H8"></path>
                   <path d="M16 13H8"></path>
@@ -207,7 +237,18 @@ interface PatientRecord {
             <!-- Responsibility Statement -->
             <div class="responsibility-section">
               <div class="responsibility-header">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="warning-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="warning-icon"
+                >
                   <circle cx="12" cy="12" r="10"></circle>
                   <line x1="12" x2="12" y1="8" y2="12"></line>
                   <line x1="12" x2="12.01" y1="16" y2="16"></line>
@@ -215,14 +256,27 @@ interface PatientRecord {
                 <h4>Provider Responsibility Statement</h4>
               </div>
               <p class="responsibility-text">[Configurable legal language based on state policy]</p>
-              <p class="responsibility-footer">By accepting this transfer, you acknowledge responsibility for this patient's ongoing care and treatment.</p>
+              <p class="responsibility-footer">
+                By accepting this transfer, you acknowledge responsibility for this patient's
+                ongoing care and treatment.
+              </p>
             </div>
           </div>
 
           <!-- Modal Footer -->
           <div class="modal-footer">
             <button class="btn-reject" (click)="rejectTransfer()">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <circle cx="12" cy="12" r="10"></circle>
                 <path d="m15 9-6 6"></path>
                 <path d="m9 9 6 6"></path>
@@ -230,7 +284,17 @@ interface PatientRecord {
               Reject Transfer
             </button>
             <button class="btn-accept" (click)="acceptTransfer()">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <circle cx="12" cy="12" r="10"></circle>
                 <path d="m9 12 2 2 4-4"></path>
               </svg>
@@ -241,642 +305,644 @@ interface PatientRecord {
       </div>
     </div>
   `,
-  styles: [`
-    .dashboard-container {
-      width: 100%;
-      padding: 0 1.5rem;
-    }
-
-    .dashboard-header {
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 24px;
-    }
-
-    .add-patient-btn {
-      background: var(--color-button-bg);
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: background 0.2s;
-
-      &:hover {
-        background: var(--color-button-hover);
+  styles: [
+    `
+      .dashboard-container {
+        width: 100%;
+        padding: 0 1.5rem;
       }
 
-      i {
-        font-size: 16px;
-      }
-    }
-
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 24px;
-
-      @media (max-width: 1024px) {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .section-card {
-      background: var(--color-bg-primary);
-      border-radius: 8px;
-      border: 1px solid var(--color-border);
-      overflow: hidden;
-    }
-
-    .section-header {
-      padding: 16px;
-      background: var(--color-bg-tertiary);
-      border-bottom: 1px solid #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .section-title {
-      margin: 0;
-      font-size: 14px;
-      font-weight: 600;
-      color: #1f2937;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      i {
-        font-size: 16px;
-        color: #2563eb;
-      }
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4px 12px;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: 600;
-
-      &.badge-blue {
-        background: #dbeafe;
-        color: #1e40af;
+      .dashboard-header {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 24px;
       }
 
-      &.badge-active {
-        background: #d1fae5;
-        color: #065f46;
-      }
+      .add-patient-btn {
+        background: var(--color-button-bg);
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: background 0.2s;
 
-      &.badge-inactive {
-        background: #e5e7eb;
-        color: #374151;
-      }
+        &:hover {
+          background: var(--color-button-hover);
+        }
 
-      &.badge-transferred {
-        background: #cffafe;
-        color: #164e63;
-      }
-
-      &.badge-terminated {
-        background: #fee2e2;
-        color: #7f1d1d;
-      }
-    }
-
-    .transfers-list {
-      display: flex;
-      flex-direction: column;
-      divide-y: 1px;
-    }
-
-    .transfer-item {
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--color-border-light);
-      transition: background 0.2s;
-
-      &:hover {
-        background: var(--color-bg-tertiary);
-      }
-
-      &:last-child {
-        border-bottom: none;
-      }
-    }
-
-    .transfer-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .transfer-name {
-      font-weight: 600;
-      color: #1f2937;
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    .transfer-from {
-      font-size: 12px;
-      color: #6b7280;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .btn-review {
-      background: var(--color-bg-primary);
-      border: 1px solid var(--color-border);
-      color: #374151;
-      padding: 6px 12px;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      margin-left: 12px;
-      transition: all 0.2s;
-      flex-shrink: 0;
-
-      &:hover {
-        background: var(--color-bg-tertiary);
-        border-color: #9ca3af;
-      }
-    }
-
-    .section-header-compact {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #1f2937;
-
-      i {
-        font-size: 16px;
-        color: #6b7280;
-      }
-    }
-
-    .table-container {
-      background: var(--color-bg-primary);
-      border: 1px solid var(--color-border);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .patients-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-
-      thead {
-        background: var(--color-bg-tertiary);
-        border-bottom: 1px solid var(--color-border);
-      }
-
-      th {
-        padding: 12px;
-        text-align: left;
-        font-weight: 600;
-        color: var(--color-text-primary);
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-
-      td {
-        padding: 12px;
-        border-bottom: 1px solid var(--color-border-light);
-        color: var(--color-text-primary);
-      }
-
-      tbody tr:hover {
-      background: var(--color-bg-tertiary);
-    }
-
-    tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-    tbody tr.clickable-row {
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-
-    tbody tr.clickable-row:hover {
-      background: var(--color-bg-tertiary);
-    }
-    }
-
-    .cell-rxid {
-      font-family: monospace;
-      font-size: 12px;
-      color: var(--color-primary);
-      font-weight: 600;
-    }
-
-    .cell-name {
-      font-weight: 500;
-    }
-
-    .ssn-masked {
-      font-family: monospace;
-      font-size: 13px;
-    }
-
-    .last-dose {
-      line-height: 1.4;
-    }
-
-    .dose-info {
-      font-size: 12px;
-      color: #6b7280;
-    }
-
-    .patient-card {
-      background: var(--color-bg-primary);
-      border: 1px solid var(--color-border);
-      border-radius: 8px;
-      padding: 16px;
-      cursor: pointer;
-      transition: all 0.2s;
-
-      &:active {
-        background: var(--color-bg-tertiary);
-      }
-
-      &.clickable-card:hover {
-        border-color: #d1d5db;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      }
-    }
-
-    .card-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
-
-    .card-rxid {
-      font-family: monospace;
-      font-size: 12px;
-      color: #0066cc;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .card-name {
-      font-weight: 600;
-      color: #1f2937;
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 12px;
-      padding-top: 12px;
-      border-top: 1px solid #f3f4f6;
-    }
-
-    .card-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .card-label {
-      font-size: 12px;
-      color: #6b7280;
-    }
-
-    .card-dose {
-      padding-top: 12px;
-      border-top: 1px solid #f3f4f6;
-    }
-
-    .dose-time {
-      font-size: 14px;
-      color: #1f2937;
-    }
-
-    @media (max-width: 1024px) {
-      .dashboard-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .recent-patients-section {
-        &.lg\\:col-span-2 {
-          grid-column: 1;
+        i {
+          font-size: 16px;
         }
       }
-    }
 
-    /* Modal Styles */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 1rem;
-    }
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 24px;
 
-    .modal-content {
-      background: var(--color-bg-primary);
-      border-radius: 0.5rem;
-      padding: 1.5rem;
-      max-width: 448px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      box-shadow: 0 10px 38px rgba(0, 0, 0, 0.1);
-      animation: modalSlideIn 0.2s ease-out;
-    }
-
-    @keyframes modalSlideIn {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
+        @media (max-width: 1024px) {
+          grid-template-columns: 1fr;
+        }
       }
-      to {
-        opacity: 1;
-        transform: scale(1);
+
+      .section-card {
+        background: var(--color-bg-primary);
+        border-radius: 8px;
+        border: 1px solid var(--color-border);
+        overflow: hidden;
       }
-    }
 
-    .modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #6b7280;
-      padding: 0.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: color 0.2s;
+      .section-header {
+        padding: 16px;
+        background: var(--color-bg-tertiary);
+        border-bottom: 1px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
 
-      &:hover {
+      .section-title {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
         color: #1f2937;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        i {
+          font-size: 16px;
+          color: #2563eb;
+        }
       }
 
-      svg {
-        width: 1.25rem;
-        height: 1.25rem;
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+
+        &.badge-blue {
+          background: #dbeafe;
+          color: #1e40af;
+        }
+
+        &.badge-active {
+          background: #d1fae5;
+          color: #065f46;
+        }
+
+        &.badge-inactive {
+          background: #e5e7eb;
+          color: #374151;
+        }
+
+        &.badge-transferred {
+          background: #cffafe;
+          color: #164e63;
+        }
+
+        &.badge-terminated {
+          background: #fee2e2;
+          color: #7f1d1d;
+        }
       }
-    }
 
-    .modal-header {
-      margin-bottom: 1.5rem;
+      .transfers-list {
+        display: flex;
+        flex-direction: column;
+        divide-y: 1px;
+      }
 
-      h2 {
-        margin: 0 0 0.5rem 0;
-        font-size: 1.125rem;
+      .transfer-item {
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--color-border-light);
+        transition: background 0.2s;
+
+        &:hover {
+          background: var(--color-bg-tertiary);
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+      .transfer-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .transfer-name {
+        font-weight: 600;
+        color: #1f2937;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+
+      .transfer-from {
+        font-size: 12px;
+        color: #6b7280;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .btn-review {
+        background: var(--color-bg-primary);
+        border: 1px solid var(--color-border);
+        color: #374151;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        margin-left: 12px;
+        transition: all 0.2s;
+        flex-shrink: 0;
+
+        &:hover {
+          background: var(--color-bg-tertiary);
+          border-color: #9ca3af;
+        }
+      }
+
+      .section-header-compact {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #1f2937;
+
+        i {
+          font-size: 16px;
+          color: #6b7280;
+        }
+      }
+
+      .table-container {
+        background: var(--color-bg-primary);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .patients-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+
+        thead {
+          background: var(--color-bg-tertiary);
+          border-bottom: 1px solid var(--color-border);
+        }
+
+        th {
+          padding: 12px;
+          text-align: left;
+          font-weight: 600;
+          color: var(--color-text-primary);
+          font-size: 12px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        td {
+          padding: 12px;
+          border-bottom: 1px solid var(--color-border-light);
+          color: var(--color-text-primary);
+        }
+
+        tbody tr:hover {
+          background: var(--color-bg-tertiary);
+        }
+
+        tbody tr:last-child td {
+          border-bottom: none;
+        }
+
+        tbody tr.clickable-row {
+          cursor: pointer;
+          transition: background 0.15s;
+        }
+
+        tbody tr.clickable-row:hover {
+          background: var(--color-bg-tertiary);
+        }
+      }
+
+      .cell-rxid {
+        font-family: monospace;
+        font-size: 12px;
+        color: var(--color-primary);
+        font-weight: 600;
+      }
+
+      .cell-name {
+        font-weight: 500;
+      }
+
+      .ssn-masked {
+        font-family: monospace;
+        font-size: 13px;
+      }
+
+      .last-dose {
+        line-height: 1.4;
+      }
+
+      .dose-info {
+        font-size: 12px;
+        color: #6b7280;
+      }
+
+      .patient-card {
+        background: var(--color-bg-primary);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        padding: 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:active {
+          background: var(--color-bg-tertiary);
+        }
+
+        &.clickable-card:hover {
+          border-color: #d1d5db;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      .card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+
+      .card-rxid {
+        font-family: monospace;
+        font-size: 12px;
+        color: #0066cc;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      .card-name {
         font-weight: 600;
         color: #1f2937;
       }
 
-      p {
-        margin: 0;
-        font-size: 0.75rem;
+      .card-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 12px;
+        padding-top: 12px;
+        border-top: 1px solid #f3f4f6;
+      }
+
+      .card-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .card-label {
+        font-size: 12px;
         color: #6b7280;
       }
-    }
 
-    .modal-body {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
+      .card-dose {
+        padding-top: 12px;
+        border-top: 1px solid #f3f4f6;
+      }
 
-    .info-section {
-      border: 1px solid var(--color-border);
-      border-radius: 0.5rem;
-      padding: 0.75rem;
-      background: var(--color-bg-tertiary);
-
-      h4 {
-        margin: 0 0 0.5rem 0;
-        font-size: 0.875rem;
-        font-weight: 500;
+      .dose-time {
+        font-size: 14px;
         color: #1f2937;
       }
-    }
 
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.5rem;
-      font-size: 0.75rem;
-    }
+      @media (max-width: 1024px) {
+        .dashboard-grid {
+          grid-template-columns: 1fr;
+        }
 
-    .info-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.375rem;
-      font-size: 0.75rem;
-    }
-
-    .info-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.125rem;
-    }
-
-    .info-label {
-      color: #6b7280;
-      font-size: 0.75rem;
-    }
-
-    .info-value {
-      margin: 0;
-      font-weight: 500;
-      color: #1f2937;
-    }
-
-    .font-mono {
-      font-family: monospace;
-    }
-
-    .notes-section {
-      background: #eff6ff;
-      border-color: #dbeafe;
-
-      h4 {
-        color: #1e40af;
+        .recent-patients-section {
+          &.lg\\:col-span-2 {
+            grid-column: 1;
+          }
+        }
       }
-    }
 
-    .notes-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-      margin-bottom: 0.75rem;
-
-      h4 {
-        margin: 0;
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: #1e40af;
+      /* Modal Styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        padding: 1rem;
       }
-    }
 
-    .notes-icon {
-      width: 0.875rem;
-      height: 0.875rem;
-      color: #1e40af;
-      flex-shrink: 0;
-      margin-top: 0.125rem;
-    }
-
-    .notes-text {
-      margin: 0;
-      font-size: 0.75rem;
-      color: #1f2937;
-      line-height: 1.5;
-      max-height: 6rem;
-      overflow-y: auto;
-    }
-
-    .responsibility-section {
-      border: 2px solid #fcd34d;
-      border-radius: 0.5rem;
-      padding: 0.75rem;
-      background: #fef3c7;
-
-      h4 {
-        margin: 0;
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: #78350f;
-      }
-    }
-
-    .responsibility-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-      margin-bottom: 0.375rem;
-
-      h4 {
-        margin: 0;
-      }
-    }
-
-    .warning-icon {
-      width: 1rem;
-      height: 1rem;
-      color: #b45309;
-      flex-shrink: 0;
-      margin-top: 0.125rem;
-    }
-
-    .responsibility-text {
-      margin: 0 0 0.5rem 0;
-      font-size: 0.75rem;
-      color: #78350f;
-    }
-
-    .responsibility-footer {
-      margin: 0;
-      font-size: 0.75rem;
-      color: #92400e;
-      font-weight: 500;
-    }
-
-    .modal-footer {
-      display: flex;
-      flex-direction: column-reverse;
-      sm-flex-direction: row;
-      gap: 0.5rem;
-      sm-justify-content: flex-end;
-      padding-top: 0.5rem;
-      border-top: 1px solid #e5e7eb;
-    }
-
-    .btn-reject,
-    .btn-accept {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.375rem;
-      padding: 0.5rem 1rem;
-      border: 1px solid transparent;
-      border-radius: 0.375rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-
-      svg {
-        width: 0.875rem;
-        height: 0.875rem;
-      }
-    }
-
-    .btn-reject {
-      border: 1px solid var(--color-border);
-      background: var(--color-bg-primary);
-      color: var(--color-text-primary);
-
-      &:hover {
-        background: var(--color-bg-tertiary);
-        border-color: var(--color-text-secondary);
-      }
-    }
-
-    .btn-accept {
-      background: var(--color-button-bg);
-      color: white;
-      border: 1px solid var(--color-button-hover);
-
-      &:hover {
-        background: var(--color-button-hover);
-      }
-    }
-
-    @media (max-width: 640px) {
       .modal-content {
-        max-width: 100%;
+        background: var(--color-bg-primary);
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        max-width: 448px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        box-shadow: 0 10px 38px rgba(0, 0, 0, 0.1);
+        animation: modalSlideIn 0.2s ease-out;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #6b7280;
+        padding: 0.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.2s;
+
+        &:hover {
+          color: #1f2937;
+        }
+
+        svg {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+      }
+
+      .modal-header {
+        margin-bottom: 1.5rem;
+
+        h2 {
+          margin: 0 0 0.5rem 0;
+          font-size: 1.125rem;
+          font-weight: 600;
+          color: #1f2937;
+        }
+
+        p {
+          margin: 0;
+          font-size: 0.75rem;
+          color: #6b7280;
+        }
+      }
+
+      .modal-body {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .info-section {
+        border: 1px solid var(--color-border);
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        background: var(--color-bg-tertiary);
+
+        h4 {
+          margin: 0 0 0.5rem 0;
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: #1f2937;
+        }
       }
 
       .info-grid {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        font-size: 0.75rem;
+      }
+
+      .info-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.375rem;
+        font-size: 0.75rem;
+      }
+
+      .info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+      }
+
+      .info-label {
+        color: #6b7280;
+        font-size: 0.75rem;
+      }
+
+      .info-value {
+        margin: 0;
+        font-weight: 500;
+        color: #1f2937;
+      }
+
+      .font-mono {
+        font-family: monospace;
+      }
+
+      .notes-section {
+        background: #eff6ff;
+        border-color: #dbeafe;
+
+        h4 {
+          color: #1e40af;
+        }
+      }
+
+      .notes-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+
+        h4 {
+          margin: 0;
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: #1e40af;
+        }
+      }
+
+      .notes-icon {
+        width: 0.875rem;
+        height: 0.875rem;
+        color: #1e40af;
+        flex-shrink: 0;
+        margin-top: 0.125rem;
+      }
+
+      .notes-text {
+        margin: 0;
+        font-size: 0.75rem;
+        color: #1f2937;
+        line-height: 1.5;
+        max-height: 6rem;
+        overflow-y: auto;
+      }
+
+      .responsibility-section {
+        border: 2px solid #fcd34d;
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        background: #fef3c7;
+
+        h4 {
+          margin: 0;
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: #78350f;
+        }
+      }
+
+      .responsibility-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 0.375rem;
+
+        h4 {
+          margin: 0;
+        }
+      }
+
+      .warning-icon {
+        width: 1rem;
+        height: 1rem;
+        color: #b45309;
+        flex-shrink: 0;
+        margin-top: 0.125rem;
+      }
+
+      .responsibility-text {
+        margin: 0 0 0.5rem 0;
+        font-size: 0.75rem;
+        color: #78350f;
+      }
+
+      .responsibility-footer {
+        margin: 0;
+        font-size: 0.75rem;
+        color: #92400e;
+        font-weight: 500;
       }
 
       .modal-footer {
-        flex-direction: column;
+        display: flex;
+        flex-direction: column-reverse;
+        sm-flex-direction: row;
+        gap: 0.5rem;
+        sm-justify-content: flex-end;
+        padding-top: 0.5rem;
+        border-top: 1px solid #e5e7eb;
       }
 
       .btn-reject,
       .btn-accept {
-        width: 100%;
-        justify-content: center;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.5rem 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.375rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        svg {
+          width: 0.875rem;
+          height: 0.875rem;
+        }
       }
-    }
-  `]
+
+      .btn-reject {
+        border: 1px solid var(--color-border);
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+
+        &:hover {
+          background: var(--color-bg-tertiary);
+          border-color: var(--color-text-secondary);
+        }
+      }
+
+      .btn-accept {
+        background: var(--color-button-bg);
+        color: white;
+        border: 1px solid var(--color-button-hover);
+
+        &:hover {
+          background: var(--color-button-hover);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .modal-content {
+          max-width: 100%;
+        }
+
+        .info-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .modal-footer {
+          flex-direction: column;
+        }
+
+        .btn-reject,
+        .btn-accept {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    `,
+  ],
 })
 export class DashboardComponent implements OnInit {
   showTransferModal = false;
@@ -897,7 +963,8 @@ export class DashboardComponent implements OnInit {
       patientDose: '85 mg',
       initiatedBy: 'Dr. Willow Martinez',
       initiatedDate: 'Feb 1, 2026',
-      transferNotes: 'Patient relocating to Anchorage for employment. Currently stable on 85mg methadone daily with 6 take-home doses per week. Last dose 12/16/24. No recent UA violations. Patient has been compliant with all treatment requirements. Recommend continuing current regimen.'
+      transferNotes:
+        'Patient relocating to Anchorage for employment. Currently stable on 85mg methadone daily with 6 take-home doses per week. Last dose 12/16/24. No recent UA violations. Patient has been compliant with all treatment requirements. Recommend continuing current regimen.',
     },
     {
       id: '2',
@@ -911,7 +978,8 @@ export class DashboardComponent implements OnInit {
       patientDose: '12 mg',
       initiatedBy: 'Dr. James Wilson',
       initiatedDate: 'Feb 2, 2026',
-      transferNotes: 'Transfer requested for family reunification. Patient has maintained sobriety for 18 months with consistent attendance. Recommend transfer to Anchorage clinic for continuity of care.'
+      transferNotes:
+        'Transfer requested for family reunification. Patient has maintained sobriety for 18 months with consistent attendance. Recommend transfer to Anchorage clinic for continuity of care.',
     },
     {
       id: '3',
@@ -925,8 +993,9 @@ export class DashboardComponent implements OnInit {
       patientDose: '70 mg',
       initiatedBy: 'Dr. River White',
       initiatedDate: 'Feb 3, 2026',
-      transferNotes: 'Patient requested transfer for employment opportunity. Currently stable on current regimen. No clinical contraindications to transfer. Please accept and coordinate care continuation.'
-    }
+      transferNotes:
+        'Patient requested transfer for employment opportunity. Currently stable on current regimen. No clinical contraindications to transfer. Please accept and coordinate care continuation.',
+    },
   ];
 
   recentPatients: PatientRecord[] = [
@@ -938,7 +1007,7 @@ export class DashboardComponent implements OnInit {
       ssn: '***-**-1234',
       status: 'active',
       lastDose: 'Feb 4, 1:33 PM',
-      lastDoseInfo: '60mg Methadone'
+      lastDoseInfo: '60mg Methadone',
     },
     {
       id: 'patient-002',
@@ -948,7 +1017,7 @@ export class DashboardComponent implements OnInit {
       ssn: '***-**-5678',
       status: 'active',
       lastDose: 'Feb 3, 10:20 AM',
-      lastDoseInfo: '55mg Methadone'
+      lastDoseInfo: '55mg Methadone',
     },
     {
       id: 'patient-003',
@@ -958,8 +1027,8 @@ export class DashboardComponent implements OnInit {
       ssn: '***-**-9012',
       status: 'active',
       lastDose: 'Feb 2, 2:45 PM',
-      lastDoseInfo: '70mg Methadone'
-    }
+      lastDoseInfo: '70mg Methadone',
+    },
   ];
 
   constructor(
@@ -968,7 +1037,7 @@ export class DashboardComponent implements OnInit {
     private syncService: SyncService,
     private router: Router,
     private authService: AuthService,
-    private transferService: TransferService
+    private transferService: TransferService,
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -978,7 +1047,9 @@ export class DashboardComponent implements OnInit {
     // Load pending transfers for facility managers
     if (this.currentUser?.role === 'facility-manager' && this.currentUser.facilityId) {
       try {
-        this.pendingTransfers = await this.transferService.getPendingTransfersForFacility(this.currentUser.facilityId);
+        this.pendingTransfers = await this.transferService.getPendingTransfersForFacility(
+          this.currentUser.facilityId,
+        );
       } catch (error) {
         console.error('Failed to load pending transfers:', error);
         this.pendingTransfers = [];
@@ -995,7 +1066,7 @@ export class DashboardComponent implements OnInit {
     this.patientService.grantAccessViaAttestation(
       patientId,
       'clinic-user',
-      'Patient record access from clinic dashboard'
+      'Patient record access from clinic dashboard',
     );
     this.router.navigate(['/patient', patientId]);
   }
@@ -1019,7 +1090,7 @@ export class DashboardComponent implements OnInit {
         if (currentUser) {
           await this.transferService.approveTransfer(transferId, currentUser.name);
           // Remove from pending transfers list
-          this.pendingTransfers = this.pendingTransfers.filter(t => t.id !== transferId);
+          this.pendingTransfers = this.pendingTransfers.filter((t) => t.id !== transferId);
           alert(`Transfer for ${this.selectedTransfer.patientName} has been approved.`);
         }
       } catch (error) {
@@ -1038,9 +1109,13 @@ export class DashboardComponent implements OnInit {
         const transferId = this.selectedTransfer.id;
         const currentUser = this.authService.getCurrentUser();
         if (currentUser) {
-          await this.transferService.rejectTransfer(transferId, 'Not approved by receiving facility', currentUser.name);
+          await this.transferService.rejectTransfer(
+            transferId,
+            'Not approved by receiving facility',
+            currentUser.name,
+          );
           // Remove from pending transfers list
-          this.pendingTransfers = this.pendingTransfers.filter(t => t.id !== transferId);
+          this.pendingTransfers = this.pendingTransfers.filter((t) => t.id !== transferId);
           alert(`Transfer for ${this.selectedTransfer.patientName} has been rejected.`);
         }
       } catch (error) {
@@ -1064,7 +1139,7 @@ export class DashboardComponent implements OnInit {
       patientDose: 'Pending details',
       initiatedBy: 'Transfer initiated',
       initiatedDate: new Date(transfer.createdAt).toLocaleDateString(),
-      transferNotes: transfer.transferNotes
+      transferNotes: transfer.transferNotes,
     };
     this.showTransferModal = true;
   }

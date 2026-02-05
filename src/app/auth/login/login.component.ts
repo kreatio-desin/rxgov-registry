@@ -19,8 +19,18 @@ import { ThemeService } from '../../core/services/theme.service';
         <!-- Logo Section -->
         <div class="logo-section">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="logo-icon">
-            <rect fill="var(--color-button-bg)" width="32" height="32" rx="6"/>
-            <text x="50%" y="50%" font-size="18" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">Rx</text>
+            <rect fill="var(--color-button-bg)" width="32" height="32" rx="6" />
+            <text
+              x="50%"
+              y="50%"
+              font-size="18"
+              font-weight="bold"
+              fill="white"
+              text-anchor="middle"
+              dominant-baseline="middle"
+            >
+              Rx
+            </text>
           </svg>
           <div class="logo-text">
             <h1>RXGOV Registry</h1>
@@ -35,7 +45,17 @@ import { ThemeService } from '../../core/services/theme.service';
 
           <div class="role-cards">
             <button class="role-card admin-card" (click)="selectRole('admin')">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"></path>
                 <path d="M12 6v6l4 2"></path>
               </svg>
@@ -44,11 +64,23 @@ import { ThemeService } from '../../core/services/theme.service';
             </button>
 
             <button class="role-card manager-card" (click)="selectRole('facility-manager')">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <path d="M10 12h4"></path>
                 <path d="M10 8h4"></path>
                 <path d="M14 21v-3a2 2 0 0 0-4 0v3"></path>
-                <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"></path>
+                <path
+                  d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"
+                ></path>
                 <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path>
               </svg>
               <h3>Facility Manager</h3>
@@ -56,7 +88,17 @@ import { ThemeService } from '../../core/services/theme.service';
             </button>
 
             <button class="role-card staff-card" (click)="selectRole('facility-staff')">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
@@ -69,7 +111,17 @@ import { ThemeService } from '../../core/services/theme.service';
         <!-- Account Selection -->
         <div class="account-selection" *ngIf="selectedRole && !selectedAccount">
           <button class="back-btn" (click)="selectedRole = null">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <path d="m12 19-7-7 7-7"></path>
               <path d="M19 12H5"></path>
             </svg>
@@ -77,16 +129,28 @@ import { ThemeService } from '../../core/services/theme.service';
           </button>
 
           <h2>Select Demo Account</h2>
-          <p>Choose an account for <strong>{{ getRoleDisplayName(selectedRole) }}</strong></p>
+          <p>
+            Choose an account for <strong>{{ getRoleDisplayName(selectedRole) }}</strong>
+          </p>
 
           <div class="account-list">
-            <button 
-              *ngFor="let account of demoAccounts" 
+            <button
+              *ngFor="let account of demoAccounts"
               class="account-card"
               (click)="selectAccount(account)"
             >
               <div class="account-avatar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                   <circle cx="12" cy="7" r="4"></circle>
                 </svg>
@@ -99,7 +163,17 @@ import { ThemeService } from '../../core/services/theme.service';
                 </div>
               </div>
               <div class="account-arrow">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <path d="m9 18 6-6-6-6"></path>
                 </svg>
               </div>
@@ -110,7 +184,17 @@ import { ThemeService } from '../../core/services/theme.service';
         <!-- Login Form -->
         <div class="login-form" *ngIf="selectedAccount">
           <button class="back-btn" (click)="selectedAccount = null">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <path d="m12 19-7-7 7-7"></path>
               <path d="M19 12H5"></path>
             </svg>
@@ -147,11 +231,7 @@ import { ThemeService } from '../../core/services/theme.service';
               <small class="password-hint">Demo account: use {{ selectedAccount.password }}</small>
             </div>
 
-            <button 
-              type="submit" 
-              class="login-btn"
-              [disabled]="isLoading"
-            >
+            <button type="submit" class="login-btn" [disabled]="isLoading">
               <span *ngIf="!isLoading">Sign In</span>
               <span *ngIf="isLoading">Signing In...</span>
             </button>
@@ -163,12 +243,24 @@ import { ThemeService } from '../../core/services/theme.service';
 
           <!-- Demo Info Box -->
           <div class="demo-info">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="12" x2="12" y1="8" y2="12"></line>
               <line x1="12" x2="12.01" y1="16" y2="16"></line>
             </svg>
-            <span>This is a demo environment. All credentials are visible for testing purposes.</span>
+            <span
+              >This is a demo environment. All credentials are visible for testing purposes.</span
+            >
           </div>
         </div>
       </div>
@@ -179,381 +271,387 @@ import { ThemeService } from '../../core/services/theme.service';
       </div>
     </div>
   `,
-  styles: [`
-    .login-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: var(--color-bg-primary);
-      position: relative;
-      overflow: hidden;
-      padding: 1rem;
-    }
-
-    .login-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-button-bg) 100%);
-      opacity: 0.05;
-      pointer-events: none;
-    }
-
-    .login-card {
-      background: var(--color-bg-primary);
-      border: 1px solid var(--color-border);
-      border-radius: 0.75rem;
-      padding: 2rem;
-      max-width: 500px;
-      width: 100%;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-      position: relative;
-      z-index: 1;
-      animation: slideUp 0.3s ease-out;
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+  styles: [
+    `
+      .login-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: var(--color-bg-primary);
+        position: relative;
+        overflow: hidden;
+        padding: 1rem;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+
+      .login-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-button-bg) 100%);
+        opacity: 0.05;
+        pointer-events: none;
       }
-    }
 
-    .logo-section {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--color-border);
-    }
+      .login-card {
+        background: var(--color-bg-primary);
+        border: 1px solid var(--color-border);
+        border-radius: 0.75rem;
+        padding: 2rem;
+        max-width: 500px;
+        width: 100%;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 1;
+        animation: slideUp 0.3s ease-out;
+      }
 
-    .logo-icon {
-      width: 48px;
-      height: 48px;
-      flex-shrink: 0;
-    }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-    .logo-text h1 {
-      margin: 0;
-      font-size: 1.375rem;
-      font-weight: 700;
-      color: var(--color-text-primary);
-    }
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--color-border);
+      }
 
-    .logo-text p {
-      margin: 0.25rem 0 0 0;
-      font-size: 0.75rem;
-      color: var(--color-text-secondary);
-    }
+      .logo-icon {
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
+      }
 
-    .role-selection,
-    .account-selection,
-    .login-form {
-      animation: fadeIn 0.2s ease-out;
-    }
+      .logo-text h1 {
+        margin: 0;
+        font-size: 1.375rem;
+        font-weight: 700;
+        color: var(--color-text-primary);
+      }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+      .logo-text p {
+        margin: 0.25rem 0 0 0;
+        font-size: 0.75rem;
+        color: var(--color-text-secondary);
+      }
 
-    h2 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--color-text-primary);
-    }
+      .role-selection,
+      .account-selection,
+      .login-form {
+        animation: fadeIn 0.2s ease-out;
+      }
 
-    > p {
-      margin: 0 0 1.5rem 0;
-      font-size: 0.875rem;
-      color: var(--color-text-secondary);
-    }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
 
-    .role-cards {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
+      h2 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
+      }
 
-    @media (min-width: 640px) {
+      > p {
+        margin: 0 0 1.5rem 0;
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+      }
+
       .role-cards {
-        grid-template-columns: 1fr 1fr 1fr;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
       }
-    }
 
-    .role-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 1.5rem 1rem;
-      border: 2px solid var(--color-border);
-      border-radius: 0.5rem;
-      background: var(--color-bg-primary);
-      cursor: pointer;
-      transition: all 0.2s;
-      text-align: center;
-    }
+      @media (min-width: 640px) {
+        .role-cards {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+      }
 
-    .role-card:hover {
-      border-color: var(--color-primary);
-      background: var(--color-bg-tertiary);
-    }
+      .role-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1.5rem 1rem;
+        border: 2px solid var(--color-border);
+        border-radius: 0.5rem;
+        background: var(--color-bg-primary);
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: center;
+      }
 
-    .role-card svg {
-      width: 2rem;
-      height: 2rem;
-    }
+      .role-card:hover {
+        border-color: var(--color-primary);
+        background: var(--color-bg-tertiary);
+      }
 
-    .admin-card:hover svg {
-      color: #3b82f6;
-    }
+      .role-card svg {
+        width: 2rem;
+        height: 2rem;
+      }
 
-    .manager-card:hover svg {
-      color: #8b5cf6;
-    }
+      .admin-card:hover svg {
+        color: #3b82f6;
+      }
 
-    .staff-card:hover svg {
-      color: #10b981;
-    }
+      .manager-card:hover svg {
+        color: #8b5cf6;
+      }
 
-    .role-card h3 {
-      margin: 0;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--color-text-primary);
-    }
+      .staff-card:hover svg {
+        color: #10b981;
+      }
 
-    .role-card p {
-      margin: 0;
-      font-size: 0.75rem;
-      color: var(--color-text-secondary);
-    }
+      .role-card h3 {
+        margin: 0;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
+      }
 
-    .account-selection {
-      position: relative;
-    }
+      .role-card p {
+        margin: 0;
+        font-size: 0.75rem;
+        color: var(--color-text-secondary);
+      }
 
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: transparent;
-      border: none;
-      color: var(--color-primary);
-      font-size: 0.875rem;
-      font-weight: 500;
-      cursor: pointer;
-      padding: 0.5rem;
-      margin-left: -0.5rem;
-      margin-bottom: 1rem;
-      transition: color 0.2s;
-    }
+      .account-selection {
+        position: relative;
+      }
 
-    .back-btn:hover {
-      color: var(--color-button-hover);
-    }
+      .back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: transparent;
+        border: none;
+        color: var(--color-primary);
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 0.5rem;
+        margin-left: -0.5rem;
+        margin-bottom: 1rem;
+        transition: color 0.2s;
+      }
 
-    .back-btn svg {
-      width: 1rem;
-      height: 1rem;
-    }
+      .back-btn:hover {
+        color: var(--color-button-hover);
+      }
 
-    .account-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-    }
+      .back-btn svg {
+        width: 1rem;
+        height: 1rem;
+      }
 
-    .account-card {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem;
-      border: 1px solid var(--color-border);
-      border-radius: 0.5rem;
-      background: var(--color-bg-primary);
-      cursor: pointer;
-      transition: all 0.2s;
-      text-align: left;
-    }
+      .account-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
 
-    .account-card:hover {
-      border-color: var(--color-primary);
-      background: var(--color-bg-tertiary);
-    }
+      .account-card {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.5rem;
+        background: var(--color-bg-primary);
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: left;
+      }
 
-    .account-avatar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--color-bg-tertiary);
-      flex-shrink: 0;
-      color: var(--color-primary);
-    }
+      .account-card:hover {
+        border-color: var(--color-primary);
+        background: var(--color-bg-tertiary);
+      }
 
-    .account-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
+      .account-avatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--color-bg-tertiary);
+        flex-shrink: 0;
+        color: var(--color-primary);
+      }
 
-    .account-name {
-      font-weight: 600;
-      font-size: 0.875rem;
-      color: var(--color-text-primary);
-    }
+      .account-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
 
-    .account-email {
-      font-size: 0.75rem;
-      color: var(--color-text-secondary);
-    }
+      .account-name {
+        font-weight: 600;
+        font-size: 0.875rem;
+        color: var(--color-text-primary);
+      }
 
-    .account-facility {
-      font-size: 0.7rem;
-      color: var(--color-text-tertiary);
-      margin-top: 0.25rem;
-    }
+      .account-email {
+        font-size: 0.75rem;
+        color: var(--color-text-secondary);
+      }
 
-    .account-arrow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-text-secondary);
-    }
+      .account-facility {
+        font-size: 0.7rem;
+        color: var(--color-text-tertiary);
+        margin-top: 0.25rem;
+      }
 
-    .account-arrow svg {
-      width: 1rem;
-      height: 1rem;
-    }
+      .account-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-secondary);
+      }
 
-    .login-form {
-      position: relative;
-    }
+      .account-arrow svg {
+        width: 1rem;
+        height: 1rem;
+      }
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
+      .login-form {
+        position: relative;
+      }
 
-    label {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--color-text-primary);
-    }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
 
-    .form-input {
-      padding: 0.625rem;
-      border: 1px solid var(--color-border);
-      border-radius: 0.375rem;
-      font-size: 0.875rem;
-      background: var(--color-bg-primary);
-      color: var(--color-text-primary);
-      transition: border-color 0.2s;
-    }
+      label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--color-text-primary);
+      }
 
-    .form-input:focus {
-      outline: none;
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    }
+      .form-input {
+        padding: 0.625rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        transition: border-color 0.2s;
+      }
 
-    .form-input:read-only {
-      background: var(--color-bg-tertiary);
-      cursor: not-allowed;
-    }
+      .form-input:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
 
-    .password-hint {
-      font-size: 0.7rem;
-      color: var(--color-text-tertiary);
-      margin-top: 0.25rem;
-    }
+      .form-input:read-only {
+        background: var(--color-bg-tertiary);
+        cursor: not-allowed;
+      }
 
-    .login-btn {
-      width: 100%;
-      padding: 0.625rem;
-      background: var(--color-button-bg);
-      color: white;
-      border: none;
-      border-radius: 0.375rem;
-      font-size: 0.875rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
+      .password-hint {
+        font-size: 0.7rem;
+        color: var(--color-text-tertiary);
+        margin-top: 0.25rem;
+      }
 
-    .login-btn:hover:not(:disabled) {
-      background: var(--color-button-hover);
-    }
+      .login-btn {
+        width: 100%;
+        padding: 0.625rem;
+        background: var(--color-button-bg);
+        color: white;
+        border: none;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
 
-    .login-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
+      .login-btn:hover:not(:disabled) {
+        background: var(--color-button-hover);
+      }
 
-    .error-message {
-      margin-top: 1rem;
-      padding: 0.75rem;
-      background: #fee2e2;
-      border: 1px solid #fecaca;
-      border-radius: 0.375rem;
-      color: #dc2626;
-      font-size: 0.875rem;
-      text-align: center;
-    }
+      .login-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
 
-    .demo-info {
-      display: flex;
-      gap: 0.75rem;
-      align-items: flex-start;
-      margin-top: 1rem;
-      padding: 0.75rem;
-      background: #dbeafe;
-      border: 1px solid #bfdbfe;
-      border-radius: 0.375rem;
-      font-size: 0.75rem;
-      color: #1e40af;
-    }
+      .error-message {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        background: #fee2e2;
+        border: 1px solid #fecaca;
+        border-radius: 0.375rem;
+        color: #dc2626;
+        font-size: 0.875rem;
+        text-align: center;
+      }
 
-    .demo-info svg {
-      flex-shrink: 0;
-      margin-top: 0.125rem;
-    }
+      .demo-info {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        margin-top: 1rem;
+        padding: 0.75rem;
+        background: #dbeafe;
+        border: 1px solid #bfdbfe;
+        border-radius: 0.375rem;
+        font-size: 0.75rem;
+        color: #1e40af;
+      }
 
-    .login-footer {
-      position: absolute;
-      bottom: 1rem;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-size: 0.75rem;
-      color: var(--color-text-tertiary);
-    }
-  `]
+      .demo-info svg {
+        flex-shrink: 0;
+        margin-top: 0.125rem;
+      }
+
+      .login-footer {
+        position: absolute;
+        bottom: 1rem;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 0.75rem;
+        color: var(--color-text-tertiary);
+      }
+    `,
+  ],
 })
 export class LoginComponent implements OnInit {
   selectedRole: UserRole | null = null;
   selectedAccount: DemoAccount | null = null;
   demoAccounts: DemoAccount[] = [];
-  
+
   loginEmail = '';
   loginPassword = '';
   isLoading = false;
@@ -562,7 +660,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private themeService: ThemeService
+    private themeService: ThemeService,
   ) {}
 
   ngOnInit(): void {

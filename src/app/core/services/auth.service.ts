@@ -24,12 +24,12 @@ export interface DemoAccount {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<AuthUser | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
-  
+
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
@@ -39,7 +39,7 @@ export class AuthService {
       email: 'admin@rxgov.gov',
       password: 'admin123',
       name: 'Dr. Lisa Johnson',
-      role: 'admin'
+      role: 'admin',
     },
     {
       email: 'manager@anchorage-ctc.org',
@@ -47,7 +47,7 @@ export class AuthService {
       name: 'Robert Chen',
       role: 'facility-manager',
       facilityId: 'fac-act-001',
-      facilityName: 'Anchorage Comprehensive Treatment Center'
+      facilityName: 'Anchorage Comprehensive Treatment Center',
     },
     {
       email: 'manager2@cms-anc.org',
@@ -55,7 +55,7 @@ export class AuthService {
       name: 'Maria Rodriguez',
       role: 'facility-manager',
       facilityId: 'fac-cms-anc-001',
-      facilityName: 'Community Medical Services – Anchorage'
+      facilityName: 'Community Medical Services – Anchorage',
     },
     {
       email: 'staff@anchorage-ctc.org',
@@ -63,7 +63,7 @@ export class AuthService {
       name: 'James Wilson',
       role: 'facility-staff',
       facilityId: 'fac-act-001',
-      facilityName: 'Anchorage Comprehensive Treatment Center'
+      facilityName: 'Anchorage Comprehensive Treatment Center',
     },
     {
       email: 'staff2@cms-anc.org',
@@ -71,8 +71,8 @@ export class AuthService {
       name: 'Emily Davis',
       role: 'facility-staff',
       facilityId: 'fac-cms-anc-001',
-      facilityName: 'Community Medical Services – Anchorage'
-    }
+      facilityName: 'Community Medical Services – Anchorage',
+    },
   ];
 
   constructor(private offlineStorage: OfflineStorageService) {
@@ -90,7 +90,7 @@ export class AuthService {
    * Get demo accounts by role
    */
   getDemoAccountsByRole(role: UserRole): DemoAccount[] {
-    return this.DEMO_ACCOUNTS.filter(account => account.role === role);
+    return this.DEMO_ACCOUNTS.filter((account) => account.role === role);
   }
 
   /**
@@ -99,7 +99,7 @@ export class AuthService {
   async login(email: string, password: string): Promise<AuthUser | null> {
     // Find the demo account
     const account = this.DEMO_ACCOUNTS.find(
-      acc => acc.email === email && acc.password === password
+      (acc) => acc.email === email && acc.password === password,
     );
 
     if (!account) {
@@ -114,7 +114,7 @@ export class AuthService {
       role: account.role,
       facilityId: account.facilityId,
       facilityName: account.facilityName,
-      permissions: this.getPermissionsByRole(account.role)
+      permissions: this.getPermissionsByRole(account.role),
     };
 
     // Save to offline storage
@@ -179,7 +179,7 @@ export class AuthService {
           'manage_users',
           'manage_facilities',
           'view_analytics',
-          'manage_settings'
+          'manage_settings',
         ];
       case 'facility-manager':
         return [
@@ -189,7 +189,7 @@ export class AuthService {
           'manage_facility_staff',
           'approve_transfers',
           'view_facility_analytics',
-          'view_facility_settings'
+          'view_facility_settings',
         ];
       case 'facility-staff':
         return [
@@ -197,7 +197,7 @@ export class AuthService {
           'record_doses',
           'view_patient_history',
           'initiate_transfers',
-          'view_prescriptions'
+          'view_prescriptions',
         ];
       default:
         return [];

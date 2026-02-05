@@ -40,7 +40,7 @@ export interface SearchResult {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PatientService {
   private currentPatientSubject = new BehaviorSubject<Patient | null>(null);
@@ -87,9 +87,8 @@ export class PatientService {
     const existingPatients = await this.offlineStorage.getAll<Patient>('patients');
 
     // Check if we need to reload - if SSN is in old format (just last 4 digits)
-    const needsReload = existingPatients.length > 0 &&
-      existingPatients[0].ssn &&
-      existingPatients[0].ssn.length <= 4; // Old format was just '1234'
+    const needsReload =
+      existingPatients.length > 0 && existingPatients[0].ssn && existingPatients[0].ssn.length <= 4; // Old format was just '1234'
 
     if (existingPatients.length === 0 || needsReload) {
       if (needsReload) {
@@ -112,18 +111,18 @@ export class PatientService {
             city: 'Anchorage',
             state: 'AK',
             zip: '99501',
-            phone: '(907) 555-0105'
+            phone: '(907) 555-0105',
           },
           currentEnrollment: {
             facilityId: 'fac-cms-001',
             facilityName: 'Community Medical Services – Wasilla',
             moudType: 'Methadone',
             enrollmentDate: '2024-05-12',
-            status: 'active'
+            status: 'active',
           },
           pdmpConsent: true,
           createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         },
         {
           id: 'patient-002',
@@ -141,18 +140,18 @@ export class PatientService {
             city: 'Anchorage',
             state: 'AK',
             zip: '99502',
-            phone: '(907) 555-0234'
+            phone: '(907) 555-0234',
           },
           currentEnrollment: {
             facilityId: 'fac-searhc-001',
             facilityName: 'SEARHC – Ketchikan',
             moudType: 'Methadone',
             enrollmentDate: '2024-08-20',
-            status: 'active'
+            status: 'active',
           },
           pdmpConsent: true,
           createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         },
         {
           id: 'patient-003',
@@ -170,18 +169,18 @@ export class PatientService {
             city: 'Anchorage',
             state: 'AK',
             zip: '99503',
-            phone: '(907) 555-0345'
+            phone: '(907) 555-0345',
           },
           currentEnrollment: {
             facilityId: 'fac-searhc-002',
             facilityName: 'SEARHC – Juneau',
             moudType: 'Buprenorphine',
             enrollmentDate: '2024-02-10',
-            status: 'active'
+            status: 'active',
           },
           pdmpConsent: true,
           createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         },
         {
           id: 'patient-004',
@@ -199,18 +198,18 @@ export class PatientService {
             city: 'Wasilla',
             state: 'AK',
             zip: '99654',
-            phone: '(907) 555-0456'
+            phone: '(907) 555-0456',
           },
           currentEnrollment: {
             facilityId: 'fac-cms-001',
             facilityName: 'Community Medical Services – Wasilla',
             moudType: 'Methadone',
             enrollmentDate: '2023-11-05',
-            status: 'active'
+            status: 'active',
           },
           pdmpConsent: true,
           createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         },
         {
           id: 'patient-005',
@@ -228,18 +227,18 @@ export class PatientService {
             city: 'Ketchikan',
             state: 'AK',
             zip: '99901',
-            phone: '(907) 555-0567'
+            phone: '(907) 555-0567',
           },
           currentEnrollment: {
             facilityId: 'fac-searhc-001',
             facilityName: 'SEARHC – Ketchikan',
             moudType: 'Buprenorphine',
             enrollmentDate: '2024-01-17',
-            status: 'active'
+            status: 'active',
           },
           pdmpConsent: true,
           createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         },
         {
           id: 'patient-006',
@@ -257,18 +256,18 @@ export class PatientService {
             city: 'Juneau',
             state: 'AK',
             zip: '99801',
-            phone: '(907) 555-0678'
+            phone: '(907) 555-0678',
           },
           currentEnrollment: {
             facilityId: 'fac-searhc-002',
             facilityName: 'SEARHC – Juneau',
             moudType: 'Methadone',
             enrollmentDate: '2023-06-22',
-            status: 'active'
+            status: 'active',
           },
           pdmpConsent: true,
           createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         },
         {
           id: 'patient-007',
@@ -286,18 +285,18 @@ export class PatientService {
             city: 'Wasilla',
             state: 'AK',
             zip: '99654',
-            phone: '(907) 555-0789'
+            phone: '(907) 555-0789',
           },
           currentEnrollment: {
             facilityId: 'fac-cms-001',
             facilityName: 'Community Medical Services – Wasilla',
             moudType: 'Buprenorphine',
             enrollmentDate: '2024-03-08',
-            status: 'active'
+            status: 'active',
           },
           pdmpConsent: true,
           createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         },
         {
           id: 'patient-008',
@@ -315,19 +314,19 @@ export class PatientService {
             city: 'Ketchikan',
             state: 'AK',
             zip: '99901',
-            phone: '(907) 555-0890'
+            phone: '(907) 555-0890',
           },
           currentEnrollment: {
             facilityId: 'fac-searhc-001',
             facilityName: 'SEARHC – Ketchikan',
             moudType: 'Methadone',
             enrollmentDate: '2024-07-15',
-            status: 'active'
+            status: 'active',
           },
           pdmpConsent: true,
           createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        }
+          updatedAt: new Date().toISOString(),
+        },
       ];
 
       for (const patient of samplePatients) {
@@ -350,7 +349,7 @@ export class PatientService {
     lastName: string,
     dateOfBirth: string,
     ssn?: string,
-    motherFirstName?: string
+    motherFirstName?: string,
   ): Promise<SearchResult> {
     // Get all patients to search
     const allPatients = await this.offlineStorage.getAll<Patient>('patients');
@@ -360,9 +359,7 @@ export class PatientService {
 
     if (ssn) {
       // Search by SSN first - this is the primary duplicate identifier
-      exactMatches = allPatients.filter(
-        (p) => p.ssn === ssn
-      );
+      exactMatches = allPatients.filter((p) => p.ssn === ssn);
     }
 
     // If no SSN match, search by name + DOB
@@ -371,7 +368,7 @@ export class PatientService {
         (p) =>
           p.firstName.toLowerCase() === firstName.toLowerCase() &&
           p.lastName.toLowerCase() === lastName.toLowerCase() &&
-          p.dateOfBirth === dateOfBirth
+          p.dateOfBirth === dateOfBirth,
       );
     }
 
@@ -379,7 +376,7 @@ export class PatientService {
       // No match found
       return {
         type: 'no-match',
-        requiresAttestation: false
+        requiresAttestation: false,
       };
     }
 
@@ -393,7 +390,7 @@ export class PatientService {
       return {
         type: 'conditional-match',
         hash: this.generateHash(patient),
-        requiresAttestation: true
+        requiresAttestation: true,
       };
     }
 
@@ -401,7 +398,7 @@ export class PatientService {
     return {
       type: 'unconditional-match',
       patient: patient,
-      requiresAttestation: false
+      requiresAttestation: false,
     };
   }
 
@@ -437,13 +434,15 @@ export class PatientService {
   /**
    * Create new patient with auto-generated registry ID
    */
-  async createPatient(patientData: Omit<Patient, 'id' | 'registryId' | 'createdAt' | 'updatedAt'>): Promise<Patient> {
+  async createPatient(
+    patientData: Omit<Patient, 'id' | 'registryId' | 'createdAt' | 'updatedAt'>,
+  ): Promise<Patient> {
     const patient: Patient = {
       ...patientData,
       id: this.generateUUID(),
       registryId: this.generateRegistryId(),
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      updatedAt: new Date().toISOString(),
     };
 
     await this.offlineStorage.put('patients', patient);
@@ -455,7 +454,11 @@ export class PatientService {
    * Note: Access control is handled at the component/page level, not here.
    * This allows the patient detail page to load after access has been granted via break glass.
    */
-  async getPatient(patientId: string, userFacilityId?: string, userId?: string): Promise<Patient | undefined> {
+  async getPatient(
+    patientId: string,
+    userFacilityId?: string,
+    userId?: string,
+  ): Promise<Patient | undefined> {
     const patient = await this.offlineStorage.get<Patient>('patients', patientId);
 
     if (!patient) {
@@ -480,7 +483,8 @@ export class PatientService {
   async getPatientsByFacility(facilityId: string): Promise<Patient[]> {
     const allPatients = await this.offlineStorage.getAll<Patient>('patients');
     return allPatients.filter(
-      (p) => p.currentEnrollment?.facilityId === facilityId && p.currentEnrollment?.status === 'active'
+      (p) =>
+        p.currentEnrollment?.facilityId === facilityId && p.currentEnrollment?.status === 'active',
     );
   }
 
@@ -498,7 +502,7 @@ export class PatientService {
     patientId: string,
     facilityId: string,
     facilityName: string,
-    moudType: string
+    moudType: string,
   ): Promise<Patient> {
     const patient = await this.getPatient(patientId);
     if (!patient) throw new Error('Patient not found');
@@ -508,7 +512,7 @@ export class PatientService {
       facilityName,
       moudType,
       enrollmentDate: new Date().toISOString(),
-      status: 'active'
+      status: 'active',
     };
 
     return this.updatePatient(patient);
@@ -520,7 +524,7 @@ export class PatientService {
   async transferPatient(
     patientId: string,
     newFacilityId: string,
-    newFacilityName: string
+    newFacilityName: string,
   ): Promise<Patient> {
     const patient = await this.getPatient(patientId);
     if (!patient) throw new Error('Patient not found');
@@ -539,7 +543,7 @@ export class PatientService {
   async terminatePatient(
     patientId: string,
     reason: string,
-    finalDosage?: string
+    finalDosage?: string,
   ): Promise<Patient> {
     const patient = await this.getPatient(patientId);
     if (!patient) throw new Error('Patient not found');

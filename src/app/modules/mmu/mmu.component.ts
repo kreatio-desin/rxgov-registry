@@ -366,7 +366,9 @@ interface DoseAdministration {
             <!-- Header -->
             <div class="encounter-header-card">
               <div class="header-top">
-                <h3>Administer Dose: {{ selectedPatient.lastName }}, {{ selectedPatient.firstName }}</h3>
+                <h3>
+                  Administer Dose: {{ selectedPatient.lastName }}, {{ selectedPatient.firstName }}
+                </h3>
                 <button class="btn-close-form" (click)="clearSelectedPatient()">
                   <i class="bi bi-x"></i>
                 </button>
@@ -426,7 +428,10 @@ interface DoseAdministration {
               </div>
 
               <!-- Recent Doses Section -->
-              <div class="recent-doses" *ngIf="selectedPatient.recentDoses && selectedPatient.recentDoses.length > 0">
+              <div
+                class="recent-doses"
+                *ngIf="selectedPatient.recentDoses && selectedPatient.recentDoses.length > 0"
+              >
                 <p class="section-title">RECENT DOSES</p>
                 <div class="doses-list">
                   <div *ngFor="let dose of selectedPatient.recentDoses" class="dose-item">
@@ -459,7 +464,11 @@ interface DoseAdministration {
                 <div class="form-row">
                   <div class="form-group">
                     <label>Medication</label>
-                    <select [(ngModel)]="doseData.medicationName" name="medicationName" class="form-input">
+                    <select
+                      [(ngModel)]="doseData.medicationName"
+                      name="medicationName"
+                      class="form-input"
+                    >
                       <option value="">Select medication</option>
                       <option value="Methadone">Methadone</option>
                       <option value="Buprenorphine">Buprenorphine</option>
@@ -485,14 +494,18 @@ interface DoseAdministration {
                   <i class="bi bi-box"></i>
                   <div>
                     <h4>Take-Home Doses</h4>
-                    <p class="section-description">Additional doses dispensed for at-home administration</p>
+                    <p class="section-description">
+                      Additional doses dispensed for at-home administration
+                    </p>
                   </div>
                 </div>
                 <div class="warning-alert">
                   <i class="bi bi-exclamation-circle"></i>
                   <div>
                     <p class="warning-title">Take-Home Not Recommended</p>
-                    <p class="warning-text">Patient record indicates take-home doses not currently permitted.</p>
+                    <p class="warning-text">
+                      Patient record indicates take-home doses not currently permitted.
+                    </p>
                   </div>
                 </div>
                 <div class="form-row">
@@ -1547,7 +1560,9 @@ interface DoseAdministration {
           font-size: 0.7rem;
           cursor: pointer;
           white-space: nowrap;
-          transition: background 0.2s, opacity 0.2s;
+          transition:
+            background 0.2s,
+            opacity 0.2s;
           opacity: 0;
           flex-shrink: 0;
           height: fit-content;
@@ -1865,7 +1880,9 @@ interface DoseAdministration {
           font-size: 0.7rem;
           cursor: pointer;
           white-space: nowrap;
-          transition: background 0.2s, opacity 0.2s;
+          transition:
+            background 0.2s,
+            opacity 0.2s;
           flex-shrink: 0;
           height: fit-content;
           opacity: 0;
@@ -3167,7 +3184,11 @@ export class MMUComponent implements OnInit, AfterViewInit {
   }
 
   saveEncounter(): void {
-    if (!this.selectedPatient || !this.doseData.medicationName.trim() || !this.doseData.observedDose) {
+    if (
+      !this.selectedPatient ||
+      !this.doseData.medicationName.trim() ||
+      !this.doseData.observedDose
+    ) {
       console.warn('Missing required fields');
       return;
     }

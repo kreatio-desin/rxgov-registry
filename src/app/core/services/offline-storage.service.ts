@@ -13,7 +13,7 @@ export interface StorageDatabase {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OfflineStorageService {
   private db: IDBDatabase | null = null;
@@ -101,7 +101,7 @@ export class OfflineStorageService {
       'syncQueue',
       'userConsents',
       'transfers',
-      'auth_session'
+      'auth_session',
     ];
 
     for (const storeName of requiredStores) {
@@ -167,7 +167,9 @@ export class OfflineStorageService {
       const transferStore = db.createObjectStore('transfers', { keyPath: 'id' });
       transferStore.createIndex('patientId', 'patientId', { unique: false });
       transferStore.createIndex('status', 'status', { unique: false });
-      transferStore.createIndex('destinationFacilityId', 'destinationFacilityId', { unique: false });
+      transferStore.createIndex('destinationFacilityId', 'destinationFacilityId', {
+        unique: false,
+      });
     }
 
     // Auth session store

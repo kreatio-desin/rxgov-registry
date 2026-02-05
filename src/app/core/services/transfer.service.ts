@@ -23,7 +23,7 @@ export interface PatientTransfer {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TransferService {
   private transferQueueSubject = new BehaviorSubject<PatientTransfer[]>([]);
@@ -53,20 +53,22 @@ export class TransferService {
   /**
    * Initiate a patient transfer
    */
-  async initiateTransfer(transfer: Omit<PatientTransfer, 'id' | 'createdAt' | 'updatedAt'>): Promise<PatientTransfer> {
+  async initiateTransfer(
+    transfer: Omit<PatientTransfer, 'id' | 'createdAt' | 'updatedAt'>,
+  ): Promise<PatientTransfer> {
     await this.initializationPromise;
-    
+
     const newTransfer: PatientTransfer = {
       ...transfer,
       id: this.generateTransferId(),
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      status: 'pending'
+      status: 'pending',
     };
 
     await this.offlineStorage.put('transfers', newTransfer);
     await this.loadTransfers();
-    
+
     return newTransfer;
   }
 
@@ -76,8 +78,8 @@ export class TransferService {
   async getPendingTransfersForFacility(facilityId: string): Promise<PatientTransfer[]> {
     await this.initializationPromise;
     const transfers = await this.offlineStorage.getAll<PatientTransfer>('transfers');
-    return transfers.filter(t => 
-      t.destinationFacilityId === facilityId && t.status === 'pending'
+    return transfers.filter(
+      (t) => t.destinationFacilityId === facilityId && t.status === 'pending',
     );
   }
 
@@ -86,7 +88,7 @@ export class TransferService {
    */
   async approveTransfer(transferId: string, approvedBy: string): Promise<PatientTransfer> {
     await this.initializationPromise;
-    
+
     const transfer = await this.offlineStorage.get<PatientTransfer>('transfers', transferId);
     if (!transfer) {
       throw new Error(`Transfer ${transferId} not found`);
@@ -99,16 +101,20 @@ export class TransferService {
 
     await this.offlineStorage.put('transfers', transfer);
     await this.loadTransfers();
-    
+
     return transfer;
   }
 
   /**
    * Reject a transfer
    */
-  async rejectTransfer(transferId: string, rejectionReason: string, rejectedBy: string): Promise<PatientTransfer> {
+  async rejectTransfer(
+    transferId: string,
+    rejectionReason: string,
+    rejectedBy: string,
+  ): Promise<PatientTransfer> {
     await this.initializationPromise;
-    
+
     const transfer = await this.offlineStorage.get<PatientTransfer>('transfers', transferId);
     if (!transfer) {
       throw new Error(`Transfer ${transferId} not found`);
@@ -122,7 +128,7 @@ export class TransferService {
 
     await this.offlineStorage.put('transfers', transfer);
     await this.loadTransfers();
-    
+
     return transfer;
   }
 
@@ -148,16 +154,16 @@ export class TransferService {
   async getPatientTransfers(patientId: string): Promise<PatientTransfer[]> {
     await this.initializationPromise;
     const transfers = await this.offlineStorage.getAll<PatientTransfer>('transfers');
-    return transfers.filter(t => t.patientId === patientId);
+    return transfers.filter((t) => t.patientId === patientId);
   }
 
   /**
    * Get observable of all pending transfers
    */
   getPendingTransfers$(): Observable<PatientTransfer[]> {
-    return new Observable(observer => {
-      this.transferQueue$.subscribe(transfers => {
-        observer.next(transfers.filter(t => t.status === 'pending'));
+    return new Observable((observer) => {
+      this.transferQueue$.subscribe((transfers) => {
+        observer.next(transfers.filter((t) => t.status === 'pending'));
       });
     });
   }

@@ -14,7 +14,7 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
       <p class="subtitle">Configure integrations, sync behavior, and system preferences</p>
 
       <div class="settings-tabs">
-        <button 
+        <button
           class="tab-button"
           [class.active]="activeTab === 'sync'"
           (click)="activeTab = 'sync'"
@@ -22,7 +22,7 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
           <i class="bi bi-cloud-sync"></i>
           Synchronization
         </button>
-        <button 
+        <button
           class="tab-button"
           [class.active]="activeTab === 'integrations'"
           (click)="activeTab = 'integrations'"
@@ -45,15 +45,18 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
         <div *ngIf="activeTab === 'sync'" class="tab-content">
           <section class="settings-section">
             <h2>Sync Configuration</h2>
-            <p class="section-desc">Configure automatic synchronization with central registry and PDMP</p>
+            <p class="section-desc">
+              Configure automatic synchronization with central registry and PDMP
+            </p>
 
             <div class="setting-group">
               <label>
-                <input type="checkbox" [(ngModel)]="syncEnabled" (change)="onSyncEnabledChange()">
+                <input type="checkbox" [(ngModel)]="syncEnabled" (change)="onSyncEnabledChange()" />
                 Enable automatic synchronization
               </label>
               <p class="help-text">
-                When enabled, the system will automatically sync records when connectivity is restored
+                When enabled, the system will automatically sync records when connectivity is
+                restored
               </p>
             </div>
 
@@ -81,7 +84,8 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
                 <option [value]="10">10 attempts</option>
               </select>
               <p class="help-text">
-                Failed syncs will be retried up to this many times before manual intervention is needed
+                Failed syncs will be retried up to this many times before manual intervention is
+                needed
               </p>
             </div>
 
@@ -114,11 +118,13 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
                   <h3>Alaska PDMP</h3>
                   <span class="status-badge active">Connected</span>
                 </div>
-                <p class="description">Alaska Prescription Monitoring Program for daily dosage reporting</p>
+                <p class="description">
+                  Alaska Prescription Monitoring Program for daily dosage reporting
+                </p>
                 <div class="settings-form">
                   <div class="form-group">
                     <label>API Endpoint</label>
-                    <input type="text" value="https://pdmp.alaska.gov/api/v1" disabled>
+                    <input type="text" value="https://pdmp.alaska.gov/api/v1" disabled />
                   </div>
                   <div class="form-group">
                     <label>Last Submission</label>
@@ -150,7 +156,9 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
                 </div>
                 <p class="description">Alternative dispensing system integration</p>
                 <div class="settings-form">
-                  <p class="help-text">Configure if your facility uses Methware for medication management</p>
+                  <p class="help-text">
+                    Configure if your facility uses Methware for medication management
+                  </p>
                   <button class="btn btn-primary">Configure Integration</button>
                 </div>
               </div>
@@ -214,372 +222,373 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
             </div>
           </section>
         </div>
-
       </div>
     </div>
   `,
-  styles: [`
-    .settings-container {
-      max-width: 1000px;
-      margin: 0 auto;
+  styles: [
+    `
+      .settings-container {
+        max-width: 1000px;
+        margin: 0 auto;
 
-      h1 {
-        color: #333;
-        margin-bottom: 0.5rem;
-      }
+        h1 {
+          color: #333;
+          margin-bottom: 0.5rem;
+        }
 
-      .subtitle {
-        color: #666;
-        margin-bottom: 2rem;
-      }
-    }
-
-    .settings-tabs {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #dee2e6;
-    }
-
-    .tab-button {
-      padding: 1rem 1.5rem;
-      background: none;
-      border: none;
-      border-bottom: 3px solid transparent;
-      color: #666;
-      cursor: pointer;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.2s;
-
-      i {
-        font-size: 1.1rem;
-      }
-
-      &:hover {
-        color: #0c5caa;
-      }
-
-      &.active {
-        color: #0c5caa;
-        border-bottom-color: #0c5caa;
-      }
-    }
-
-    .tab-content {
-      animation: fadeIn 0.2s;
-    }
-
-    .settings-section {
-      background: var(--color-bg-primary);
-      border-radius: 8px;
-      padding: 2rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
-
-      h2 {
-        margin: 0 0 0.5rem 0;
-        color: var(--color-text-primary);
-      }
-
-      .section-desc {
-        margin: 0 0 1.5rem 0;
-        color: var(--color-text-secondary);
-        font-size: 0.95rem;
-      }
-    }
-
-    .setting-group {
-      margin-bottom: 2rem;
-
-      label {
-        display: block;
-        font-weight: 600;
-        color: var(--color-text-primary);
-        margin-bottom: 0.5rem;
-      }
-
-      input[type="checkbox"] {
-        margin-right: 0.5rem;
-        width: 18px;
-        height: 18px;
-        cursor: pointer;
-      }
-
-      select {
-        width: 100%;
-        padding: 0.75rem;
-        border: 1px solid var(--color-border);
-        border-radius: 6px;
-        font-size: 0.95rem;
-        background: var(--color-bg-primary);
-        color: var(--color-text-primary);
-
-        &:focus {
-          outline: none;
-          border-color: var(--color-button-bg);
+        .subtitle {
+          color: #666;
+          margin-bottom: 2rem;
         }
       }
 
-      .help-text {
-        margin: 0.5rem 0 0 0;
+      .settings-tabs {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      .tab-button {
+        padding: 1rem 1.5rem;
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent;
         color: #666;
-        font-size: 0.85rem;
-      }
-    }
-
-    .pending-syncs {
-      padding: 1.5rem;
-      background: #f8f9fa;
-      border-radius: 6px;
-      margin-top: 2rem;
-
-      h3 {
-        margin: 0 0 1rem 0;
-        color: #333;
-      }
-
-      p {
-        margin: 0 0 1rem 0;
+        cursor: pointer;
+        font-size: 0.95rem;
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        font-size: 0.95rem;
-
-        &.success {
-          color: #155724;
-        }
-
-        &.warning {
-          color: #856404;
-        }
+        transition: all 0.2s;
 
         i {
-          font-size: 1.2rem;
+          font-size: 1.1rem;
         }
-      }
-    }
 
-    .integration-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .integration-card {
-      border: 1px solid var(--color-border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      background: var(--color-bg-primary);
-
-      .integration-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1rem;
-
-        h3 {
-          margin: 0;
-          color: var(--color-text-primary);
+        &:hover {
+          color: #0c5caa;
         }
-      }
-
-      .status-badge {
-        padding: 0.4rem 0.8rem;
-        border-radius: 4px;
-        font-size: 0.8rem;
-        font-weight: bold;
-        background: #e2e3e5;
-        color: #383d41;
 
         &.active {
-          background: #d4edda;
-          color: #155724;
+          color: #0c5caa;
+          border-bottom-color: #0c5caa;
         }
       }
 
-      .description {
-        color: var(--color-text-secondary);
-        margin-bottom: 1.5rem;
-        font-size: 0.95rem;
+      .tab-content {
+        animation: fadeIn 0.2s;
       }
 
-      .settings-form {
-        .form-group {
-          margin-bottom: 1rem;
+      .settings-section {
+        background: var(--color-bg-primary);
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
 
-          label {
-            display: block;
-            font-weight: 600;
-            color: var(--color-text-primary);
-            font-size: 0.85rem;
-            margin-bottom: 0.25rem;
+        h2 {
+          margin: 0 0 0.5rem 0;
+          color: var(--color-text-primary);
+        }
+
+        .section-desc {
+          margin: 0 0 1.5rem 0;
+          color: var(--color-text-secondary);
+          font-size: 0.95rem;
+        }
+      }
+
+      .setting-group {
+        margin-bottom: 2rem;
+
+        label {
+          display: block;
+          font-weight: 600;
+          color: var(--color-text-primary);
+          margin-bottom: 0.5rem;
+        }
+
+        input[type='checkbox'] {
+          margin-right: 0.5rem;
+          width: 18px;
+          height: 18px;
+          cursor: pointer;
+        }
+
+        select {
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid var(--color-border);
+          border-radius: 6px;
+          font-size: 0.95rem;
+          background: var(--color-bg-primary);
+          color: var(--color-text-primary);
+
+          &:focus {
+            outline: none;
+            border-color: var(--color-button-bg);
+          }
+        }
+
+        .help-text {
+          margin: 0.5rem 0 0 0;
+          color: #666;
+          font-size: 0.85rem;
+        }
+      }
+
+      .pending-syncs {
+        padding: 1.5rem;
+        background: #f8f9fa;
+        border-radius: 6px;
+        margin-top: 2rem;
+
+        h3 {
+          margin: 0 0 1rem 0;
+          color: #333;
+        }
+
+        p {
+          margin: 0 0 1rem 0;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 0.95rem;
+
+          &.success {
+            color: #155724;
           }
 
-          input,
-          p {
+          &.warning {
+            color: #856404;
+          }
+
+          i {
+            font-size: 1.2rem;
+          }
+        }
+      }
+
+      .integration-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .integration-card {
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        padding: 1.5rem;
+        background: var(--color-bg-primary);
+
+        .integration-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1rem;
+
+          h3 {
+            margin: 0;
+            color: var(--color-text-primary);
+          }
+        }
+
+        .status-badge {
+          padding: 0.4rem 0.8rem;
+          border-radius: 4px;
+          font-size: 0.8rem;
+          font-weight: bold;
+          background: #e2e3e5;
+          color: #383d41;
+
+          &.active {
+            background: #d4edda;
+            color: #155724;
+          }
+        }
+
+        .description {
+          color: var(--color-text-secondary);
+          margin-bottom: 1.5rem;
+          font-size: 0.95rem;
+        }
+
+        .settings-form {
+          .form-group {
+            margin-bottom: 1rem;
+
+            label {
+              display: block;
+              font-weight: 600;
+              color: var(--color-text-primary);
+              font-size: 0.85rem;
+              margin-bottom: 0.25rem;
+            }
+
+            input,
+            p {
+              margin: 0;
+              color: #666;
+              font-size: 0.9rem;
+            }
+
+            input {
+              width: 100%;
+              padding: 0.5rem;
+              border: 1px solid #dee2e6;
+              border-radius: 4px;
+            }
+          }
+        }
+      }
+
+      .quality-issues {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .issue-card {
+        border-left: 4px solid #ffc107;
+        padding: 1.5rem;
+        background: var(--color-bg-primary);
+        border-radius: 6px;
+        border: 1px solid var(--color-border);
+
+        .issue-header {
+          display: flex;
+          align-items: flex-start;
+          gap: 1rem;
+          margin-bottom: 0.5rem;
+
+          .issue-count {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--color-bg-tertiary);
+            border-radius: 6px;
+            font-weight: bold;
+            color: var(--color-text-primary);
+            font-size: 1.3rem;
+          }
+
+          h3 {
+            margin: 0;
+            color: #333;
+            flex: 1;
+          }
+        }
+
+        p {
+          color: #666;
+          font-size: 0.9rem;
+          margin-bottom: 1rem;
+        }
+      }
+
+      .data-validation {
+        background: #f8f9fa;
+        border-radius: 6px;
+        padding: 1.5rem;
+
+        h3 {
+          margin: 0 0 1rem 0;
+          color: #333;
+        }
+
+        .validation-items {
+          display: grid;
+          gap: 1rem;
+        }
+
+        .validation-item {
+          display: flex;
+          gap: 1rem;
+
+          i {
+            font-size: 1.5rem;
+            color: #28a745;
+            flex-shrink: 0;
+          }
+
+          .item-title {
+            margin: 0 0 0.25rem 0;
+            font-weight: bold;
+            color: #333;
+          }
+
+          .item-desc {
             margin: 0;
             color: #666;
             font-size: 0.9rem;
           }
+        }
+      }
 
-          input {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &.btn-primary {
+          background: var(--color-button-bg);
+          color: white;
+
+          &:hover:not(:disabled) {
+            background: var(--color-button-hover);
+            transform: translateY(-2px);
           }
         }
-      }
-    }
 
-    .quality-issues {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
+        &.btn-secondary {
+          background: var(--color-text-secondary);
+          color: white;
 
-    .issue-card {
-      border-left: 4px solid #ffc107;
-      padding: 1.5rem;
-      background: var(--color-bg-primary);
-      border-radius: 6px;
-      border: 1px solid var(--color-border);
-
-      .issue-header {
-        display: flex;
-        align-items: flex-start;
-        gap: 1rem;
-        margin-bottom: 0.5rem;
-
-        .issue-count {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 40px;
-          height: 40px;
-          background: var(--color-bg-tertiary);
-          border-radius: 6px;
-          font-weight: bold;
-          color: var(--color-text-primary);
-          font-size: 1.3rem;
+          &:hover:not(:disabled) {
+            background: var(--color-text-primary);
+            transform: translateY(-2px);
+          }
         }
 
-        h3 {
-          margin: 0;
-          color: #333;
-          flex: 1;
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
         }
       }
 
-      p {
-        color: #666;
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-      }
-    }
-
-    .data-validation {
-      background: #f8f9fa;
-      border-radius: 6px;
-      padding: 1.5rem;
-
-      h3 {
-        margin: 0 0 1rem 0;
-        color: #333;
-      }
-
-      .validation-items {
-        display: grid;
-        gap: 1rem;
-      }
-
-      .validation-item {
-        display: flex;
-        gap: 1rem;
-
-        i {
-          font-size: 1.5rem;
-          color: #28a745;
-          flex-shrink: 0;
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
-
-        .item-title {
-          margin: 0 0 0.25rem 0;
-          font-weight: bold;
-          color: #333;
-        }
-
-        .item-desc {
-          margin: 0;
-          color: #666;
-          font-size: 0.9rem;
-        }
-      }
-    }
-
-    .btn {
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 6px;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: all 0.2s;
-
-      &.btn-primary {
-        background: var(--color-button-bg);
-        color: white;
-
-        &:hover:not(:disabled) {
-          background: var(--color-button-hover);
-          transform: translateY(-2px);
+        to {
+          opacity: 1;
         }
       }
 
-      &.btn-secondary {
-        background: var(--color-text-secondary);
-        color: white;
+      @media (max-width: 768px) {
+        .settings-tabs {
+          flex-direction: column;
+        }
 
-        &:hover:not(:disabled) {
-          background: var(--color-text-primary);
-          transform: translateY(-2px);
+        .tab-button {
+          width: 100%;
+        }
+
+        .integration-cards,
+        .quality-issues {
+          grid-template-columns: 1fr;
         }
       }
-
-      &:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-      }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .settings-tabs {
-        flex-direction: column;
-      }
-
-      .tab-button {
-        width: 100%;
-      }
-
-      .integration-cards,
-      .quality-issues {
-        grid-template-columns: 1fr;
-      }
-    }
-  `]
+    `,
+  ],
 })
 export class SettingsComponent implements OnInit {
   activeTab = 'sync';
@@ -589,7 +598,10 @@ export class SettingsComponent implements OnInit {
   pendingCount = 0;
   currentUser: AuthUser | null = null;
 
-  constructor(private syncService: SyncService, private authService: AuthService) {}
+  constructor(
+    private syncService: SyncService,
+    private authService: AuthService,
+  ) {}
 
   async ngOnInit(): Promise<void> {
     const pending = await this.syncService.getPendingItems();

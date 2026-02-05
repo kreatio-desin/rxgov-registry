@@ -4,12 +4,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export type Theme = 'light' | 'dark';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
   private readonly THEME_STORAGE_KEY = 'app-theme';
   private readonly defaultTheme: Theme = 'light';
-  
+
   private themeSubject = new BehaviorSubject<Theme>(this.getStoredTheme());
   public theme$: Observable<Theme> = this.themeSubject.asObservable();
 
@@ -59,7 +59,7 @@ export class ThemeService {
 
   private applyTheme(theme: Theme): void {
     const root = document.documentElement;
-    
+
     if (theme === 'dark') {
       root.setAttribute('data-theme', 'dark');
     } else {
