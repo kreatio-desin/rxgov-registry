@@ -794,7 +794,7 @@ interface BreakGlassAccess {
 
     .report-footer {
       padding: 1rem 1.5rem;
-      border-top: 1px solid #e5e7eb;
+      border-top: 1px solid var(--color-border);
       background: var(--color-bg-tertiary);
       text-align: right;
       font-size: 0.875rem;
@@ -978,7 +978,7 @@ interface BreakGlassAccess {
       display: flex;
       gap: 1rem;
       padding-top: 1rem;
-      border-top: 1px solid #e5e7eb;
+      border-top: 1px solid var(--color-border);
     }
 
     .btn-cancel,
