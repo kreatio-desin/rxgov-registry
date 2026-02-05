@@ -1644,7 +1644,8 @@ export class PatientDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private patientService: PatientService,
-    private transferService: TransferService
+    private transferService: TransferService,
+    private facilityService: FacilityService
   ) {
     // Initialize datetime to current time
     const now = new Date();
