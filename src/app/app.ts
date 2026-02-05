@@ -1,10 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 import { AppLayoutComponent } from './layout/app-layout.component';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [AppLayoutComponent],
-  template: '<app-layout></app-layout>'
+  imports: [CommonModule, RouterOutlet, AppLayoutComponent, LoginComponent],
+  template: `
+    <app-layout *ngIf="isAuthenticated; else loginScreen"></app-layout>
+    <ng-template #loginScreen>
+      <app-login></app-login>
+    </ng-template>
+  `
 })
-export class App {}
+export class App implements OnInit {
+  isAuthenticated = false;
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.authService.isAuthenticated$.subscribe(isAuth => {
+      this.isAuthenticated = isAuth;
+    });
+
+    // Check if user is already logged in
+    const currentUser = this.authService.getCurrentUser();
+    if (currentUser) {
+      this.isAuthenticated = true;
+    }
+  }
+}
