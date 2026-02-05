@@ -680,7 +680,7 @@ interface DoseAdministration {
         p {
           margin: 0.25rem 0 0 0;
           font-size: 0.875rem;
-          color: #6b7280;
+          color: var(--color-text-secondary);
         }
       }
 
@@ -848,7 +848,7 @@ interface DoseAdministration {
         i {
           font-size: 0.625rem;
           margin-top: 0.125rem;
-          color: #6b7280;
+          color: var(--color-text-secondary);
           flex-shrink: 0;
         }
       }
@@ -871,7 +871,7 @@ interface DoseAdministration {
 
       .stop-address {
         font-size: 0.5rem;
-        color: #6b7280;
+        color: var(--color-text-secondary);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -894,7 +894,7 @@ interface DoseAdministration {
 
         i {
           font-size: 0.625rem;
-          color: #6b7280;
+          color: var(--color-text-secondary);
 
           &:hover {
             color: #dc2626;
@@ -938,7 +938,7 @@ interface DoseAdministration {
         text-align: center;
         padding: 1rem;
         font-size: 0.75rem;
-        color: #6b7280;
+        color: var(--color-text-secondary);
       }
 
       .encounters-list {
@@ -973,7 +973,7 @@ interface DoseAdministration {
 
       .encounter-service {
         font-size: 0.625rem;
-        color: #6b7280;
+        color: var(--color-text-secondary);
       }
 
       .right-panel {
@@ -1127,7 +1127,7 @@ interface DoseAdministration {
         font-size: 0.625rem;
         font-weight: 600;
         text-transform: uppercase;
-        color: #6b7280;
+        color: var(--color-text-secondary);
         padding: 0.5rem 0.75rem 0.25rem 0.75rem;
         letter-spacing: 0.05em;
       }
@@ -1190,7 +1190,7 @@ interface DoseAdministration {
       .no-results-text {
         margin: 0 0 0.75rem 0;
         font-size: 0.75rem;
-        color: #6b7280;
+        color: var(--color-text-secondary);
       }
 
       .btn-create-stop {
@@ -1231,7 +1231,7 @@ interface DoseAdministration {
         border: none;
         cursor: pointer;
         padding: 0;
-        color: #6b7280;
+        color: var(--color-text-secondary);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1330,7 +1330,7 @@ interface DoseAdministration {
 
         i {
           flex-shrink: 0;
-          color: #6b7280;
+          color: var(--color-text-secondary);
           font-size: 0.75rem;
           margin-top: 0.125rem;
         }
@@ -1456,7 +1456,7 @@ interface DoseAdministration {
       .no-results {
         text-align: center;
         padding: 2rem 1rem;
-        color: #6b7280;
+        color: var(--color-text-secondary);
         font-size: 0.875rem;
         flex: 1;
         display: flex;
@@ -1510,12 +1510,12 @@ interface DoseAdministration {
 
         .patient-nickname {
           font-size: 0.75rem;
-          color: #6b7280;
+          color: var(--color-text-secondary);
         }
 
         .patient-meta {
           font-size: 0.7rem;
-          color: #6b7280;
+          color: var(--color-text-secondary);
           display: flex;
           align-items: center;
           gap: 0.25rem;
@@ -1600,7 +1600,7 @@ interface DoseAdministration {
             margin: 0.25rem 0 0 0;
             font-family: monospace;
             font-size: 0.75rem;
-            color: #6b7280;
+            color: var(--color-text-secondary);
           }
         }
       }
@@ -1616,7 +1616,7 @@ interface DoseAdministration {
           align-items: center;
           gap: 0.5rem;
           font-size: 0.75rem;
-          color: #6b7280;
+          color: var(--color-text-secondary);
 
           i {
             font-size: 0.75rem;
@@ -1680,7 +1680,7 @@ interface DoseAdministration {
           font-size: 0.7rem;
           font-weight: 600;
           text-transform: uppercase;
-          color: #6b7280;
+          color: var(--color-text-secondary);
         }
 
         .doses-list {
@@ -1705,7 +1705,7 @@ interface DoseAdministration {
 
             .dose-date,
             .dose-time {
-              color: #6b7280;
+              color: var(--color-text-secondary);
             }
 
             .dose-date {
@@ -1767,7 +1767,7 @@ interface DoseAdministration {
 
         .btn-view-record {
           background: var(--color-bg-primary);
-          color: #6b7280;
+          color: var(--color-text-secondary);
           border: 1px solid #d1d5db;
           opacity: 0;
 
@@ -1848,7 +1848,7 @@ interface DoseAdministration {
             align-items: center;
             gap: 0.375rem;
             font-size: 0.7rem;
-            color: #6b7280;
+            color: var(--color-text-secondary);
 
             i {
               font-size: 0.75rem;
@@ -1982,7 +1982,7 @@ interface DoseAdministration {
             margin: 0.25rem 0 0 0;
             font-family: monospace;
             font-size: 0.75rem;
-            color: #6b7280;
+            color: var(--color-text-secondary);
           }
         }
       }
@@ -1998,7 +1998,7 @@ interface DoseAdministration {
           align-items: center;
           gap: 0.5rem;
           font-size: 0.75rem;
-          color: #6b7280;
+          color: var(--color-text-secondary);
 
           i {
             font-size: 0.75rem;
@@ -2062,7 +2062,7 @@ interface DoseAdministration {
           font-size: 0.7rem;
           font-weight: 600;
           text-transform: uppercase;
-          color: #6b7280;
+          color: var(--color-text-secondary);
         }
 
         .doses-list {
@@ -2087,7 +2087,7 @@ interface DoseAdministration {
 
             .dose-date,
             .dose-time {
-              color: #6b7280;
+              color: var(--color-text-secondary);
             }
 
             .dose-date {
@@ -2145,7 +2145,7 @@ interface DoseAdministration {
             margin: 0.25rem 0 0 0;
             font-family: monospace;
             font-size: 0.75rem;
-            color: #6b7280;
+            color: var(--color-text-secondary);
           }
         }
 
@@ -2154,7 +2154,7 @@ interface DoseAdministration {
           gap: 0.75rem;
           flex-wrap: wrap;
           font-size: 0.75rem;
-          color: #6b7280;
+          color: var(--color-text-secondary);
 
           .meta-item {
             display: flex;
@@ -2212,7 +2212,7 @@ interface DoseAdministration {
             .section-description {
               margin: 0;
               font-size: 0.7rem;
-              color: #6b7280;
+              color: var(--color-text-secondary);
             }
           }
         }
@@ -2513,7 +2513,7 @@ interface DoseAdministration {
           border: none;
           cursor: pointer;
           padding: 0.25rem;
-          color: #6b7280;
+          color: var(--color-text-secondary);
           display: flex;
           align-items: center;
           position: absolute;
@@ -2541,7 +2541,7 @@ interface DoseAdministration {
       .modal-description {
         margin: 0;
         font-size: 0.875rem;
-        color: #6b7280;
+        color: var(--color-text-secondary);
         line-height: 1.5;
       }
 
@@ -2556,13 +2556,13 @@ interface DoseAdministration {
           font-size: 0.75rem;
           font-weight: 600;
           text-transform: uppercase;
-          color: #6b7280;
+          color: var(--color-text-secondary);
         }
 
         .match-text {
           margin: 0 0 0.75rem 0;
           font-size: 0.875rem;
-          color: #6b7280;
+          color: var(--color-text-secondary);
           font-style: italic;
         }
 
