@@ -745,4 +745,17 @@ export class AppLayoutComponent implements OnInit {
     await this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+  getRoleDisplayName(role: string | null | undefined): string {
+    switch (role) {
+      case 'admin':
+        return 'Administrator';
+      case 'facility-manager':
+        return 'Facility Manager';
+      case 'facility-staff':
+        return 'Facility Staff';
+      default:
+        return '';
+    }
+  }
 }
