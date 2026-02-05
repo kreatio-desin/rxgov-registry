@@ -1383,7 +1383,7 @@ interface DoseAdministration {
         align-items: center;
         justify-content: space-between;
         gap: 1rem;
-        padding: 0.75rem;
+        padding: 0.625rem;
         background: #f9fafb;
         cursor: pointer;
         transition: background 0.2s;
@@ -1395,33 +1395,151 @@ interface DoseAdministration {
         .patient-info {
           flex: 1;
           min-width: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+        }
+
+        .patient-name-section {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          flex-wrap: wrap;
         }
 
         .patient-name {
           font-weight: 600;
           color: #1f2937;
           font-size: 0.875rem;
-          margin-bottom: 0.25rem;
         }
 
-        .patient-dob,
-        .patient-ssn {
+        .patient-nickname {
           font-size: 0.75rem;
           color: #6b7280;
-          margin: 0.125rem 0;
+        }
+
+        .patient-meta {
+          font-size: 0.7rem;
+          color: #6b7280;
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+          flex-wrap: wrap;
+
+          .separator {
+            opacity: 0.5;
+          }
+
+          .patient-rx {
+            font-weight: 500;
+            color: #1f2937;
+          }
+        }
+
+        .patient-medication {
+          font-size: 0.75rem;
+          color: #4f46e5;
+          font-weight: 500;
+          margin-top: 0.125rem;
         }
 
         .btn-log-encounter {
-          padding: 0.5rem 0.75rem;
+          padding: 0.375rem 0.75rem;
           background: #0c5caa;
           color: white;
           border: none;
           border-radius: 0.25rem;
-          font-size: 0.75rem;
+          font-size: 0.7rem;
+          cursor: pointer;
+          white-space: nowrap;
+          transition: background 0.2s;
+          opacity: 0.2s;
+          flex-shrink: 0;
+          height: fit-content;
+
+          &:hover {
+            background: #0a4a85;
+          }
+        }
+      }
+
+      .restricted-match-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.625rem;
+        overflow: hidden;
+
+        .restricted-match {
+          flex: 1;
+          padding: 0.75rem;
+          background: #fef3c7;
+          border-radius: 0.375rem;
+          border-left: 4px solid #f59e0b;
+
+          .restricted-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+
+            > span {
+              font-weight: 600;
+              color: #92400e;
+              font-size: 0.875rem;
+            }
+
+            .restricted-badge {
+              display: flex;
+              align-items: center;
+              gap: 0.375rem;
+              font-size: 0.7rem;
+              color: #b45309;
+              background: #fcd34d;
+              padding: 0.25rem 0.5rem;
+              border-radius: 0.25rem;
+              border: 1px solid #f59e0b;
+
+              i {
+                font-size: 0.75rem;
+              }
+            }
+          }
+
+          .restricted-match-detail {
+            font-size: 0.75rem;
+            color: #78350f;
+            margin-bottom: 0.5rem;
+          }
+
+          .restricted-facility {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.7rem;
+            color: #6b7280;
+
+            i {
+              font-size: 0.75rem;
+            }
+          }
+        }
+
+        .btn-log-encounter {
+          padding: 0.375rem 0.75rem;
+          background: #0c5caa;
+          color: white;
+          border: none;
+          border-radius: 0.25rem;
+          font-size: 0.7rem;
           cursor: pointer;
           white-space: nowrap;
           transition: background 0.2s;
           flex-shrink: 0;
+          height: fit-content;
+          opacity: 0.2s;
 
           &:hover {
             background: #0a4a85;
