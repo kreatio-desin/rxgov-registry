@@ -760,7 +760,7 @@ interface DoseAdministration {
       .form-group label {
         font-size: 0.75rem;
         font-weight: 600;
-        color: #374151;
+        color: var(--color-text-primary);
       }
 
       .form-select {
@@ -794,7 +794,7 @@ interface DoseAdministration {
       .stops-header label {
         font-size: 0.75rem;
         font-weight: 600;
-        color: #374151;
+        color: var(--color-text-primary);
       }
 
       .stops-list {
@@ -1254,7 +1254,7 @@ interface DoseAdministration {
         label {
           font-size: 0.75rem;
           font-weight: 500;
-          color: #374151;
+          color: var(--color-text-primary);
         }
       }
 
@@ -1773,7 +1773,7 @@ interface DoseAdministration {
 
           &:hover {
             background: #f9fafb;
-            color: #374151;
+            color: var(--color-text-primary);
           }
         }
 
@@ -2206,7 +2206,7 @@ interface DoseAdministration {
               font-size: 0.75rem;
               font-weight: 600;
               text-transform: uppercase;
-              color: #374151;
+              color: var(--color-text-primary);
             }
 
             .section-description {
@@ -2290,7 +2290,7 @@ interface DoseAdministration {
         label {
           font-size: 0.75rem;
           font-weight: 500;
-          color: #374151;
+          color: var(--color-text-primary);
         }
       }
 
@@ -2308,7 +2308,7 @@ interface DoseAdministration {
         label {
           font-size: 0.75rem;
           font-weight: 500;
-          color: #374151;
+          color: var(--color-text-primary);
         }
       }
 
@@ -2437,7 +2437,7 @@ interface DoseAdministration {
 
       .btn-secondary {
         background: var(--color-bg-primary);
-        color: #374151;
+        color: var(--color-text-primary);
         border: 1px solid #d1d5db;
 
         &:hover {
@@ -2596,7 +2596,7 @@ interface DoseAdministration {
           p {
             margin: 0;
             font-size: 0.875rem;
-            color: #374151;
+            color: var(--color-text-primary);
 
             strong {
               color: var(--color-text-primary);
