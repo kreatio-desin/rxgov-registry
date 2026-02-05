@@ -96,13 +96,13 @@ import { CommonModule } from '@angular/common';
 
         h2 {
           margin: 0;
-          color: #333;
+          color: var(--color-text-primary);
           font-size: 1.1rem;
         }
       }
 
       p {
-        color: #666;
+        color: var(--color-text-secondary);
         margin-bottom: 1.5rem;
         font-size: 0.95rem;
       }
