@@ -169,12 +169,18 @@ export class OfflineStorageService {
         return;
       }
 
-      const transaction = this.db.transaction([storeName], 'readwrite');
-      const store = transaction.objectStore(storeName);
-      const request = store.put(data);
+      try {
+        const transaction = this.db.transaction([storeName], 'readwrite');
+        const store = transaction.objectStore(storeName);
+        const request = store.put(data);
 
-      request.onsuccess = () => resolve(data);
-      request.onerror = () => reject(request.error);
+        request.onsuccess = () => resolve(data);
+        request.onerror = () => reject(request.error);
+      } catch (error) {
+        // Store might not exist, try to reinitialize
+        console.error('Error in put operation:', error);
+        reject(error);
+      }
     });
   }
 
