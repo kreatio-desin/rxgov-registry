@@ -49,8 +49,8 @@ interface PatientRecord {
 
       <!-- Main Grid -->
       <div class="dashboard-grid">
-        <!-- Left Column - Transfer Queue (Hidden on mobile, visible on desktop) -->
-        <div class="transfer-queue-section hidden lg:block">
+        <!-- Left Column - Transfer Queue (Facility Manager Only - Hidden on mobile, visible on desktop) -->
+        <div class="transfer-queue-section hidden lg:block" *ngIf="currentUser && currentUser.role === 'facility-manager'">
           <div class="section-card">
             <div class="section-header">
               <h3 class="section-title">
