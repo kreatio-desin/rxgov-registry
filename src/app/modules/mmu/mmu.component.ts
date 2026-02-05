@@ -1446,4 +1446,139 @@ export class MMUComponent implements OnInit, AfterViewInit {
     // If you want to get more detailed information about the place, use place_id
     // This can be useful to get coordinates, phone numbers, etc. in the future
   }
+
+  // Patient Queue Methods
+  selectStopForPatientQueue(stop: RouteStop): void {
+    this.selectedStopId = stop.id;
+    this.patientSearchQuery = '';
+    this.patientSearchResults = [];
+    this.selectedPatient = null;
+    this.breakGlassPatient = null;
+    this.showBreakGlassModal = false;
+    this.attestationConfirmed = false;
+  }
+
+  clearSelectedStop(): void {
+    this.selectedStopId = null;
+    this.patientSearchQuery = '';
+    this.patientSearchResults = [];
+    this.selectedPatient = null;
+    this.breakGlassPatient = null;
+    this.showBreakGlassModal = false;
+    this.attestationConfirmed = false;
+  }
+
+  getSelectedStopName(): string {
+    const stop = this.routeStops.find(s => s.id === this.selectedStopId);
+    return stop?.name || 'Selected Stop';
+  }
+
+  searchPatients(): void {
+    if (!this.selectedStopId || !this.patientSearchQuery.trim()) {
+      this.patientSearchResults = [];
+      return;
+    }
+
+    const selectedStop = this.routeStops.find(s => s.id === this.selectedStopId);
+    if (!selectedStop) {
+      return;
+    }
+
+    const query = this.patientSearchQuery.toLowerCase();
+
+    // Search in patient database
+    this.patientSearchResults = this.patientsDatabase
+      .filter(patient =>
+        patient.firstName.toLowerCase().includes(query) ||
+        patient.lastName.toLowerCase().includes(query) ||
+        patient.ssn.includes(query)
+      )
+      .map(patient => ({
+        patient,
+        isRestricted: patient.facilityId !== selectedStop.facilityId || patient.isRestricted
+      }));
+  }
+
+  selectPatientForEncounter(patient: Patient): void {
+    // Check if patient is restricted
+    const selectedStop = this.routeStops.find(s => s.id === this.selectedStopId);
+    if (!selectedStop) {
+      return;
+    }
+
+    if (patient.facilityId !== selectedStop.facilityId || patient.isRestricted) {
+      // Show break glass modal
+      this.breakGlassPatient = patient;
+      this.showBreakGlassModal = true;
+      this.attestationConfirmed = false;
+    } else {
+      // Patient is in facility, show encounter form
+      this.selectedPatient = patient;
+      this.resetDoseData();
+    }
+  }
+
+  closeBreakGlassModal(): void {
+    this.showBreakGlassModal = false;
+    this.breakGlassPatient = null;
+    this.attestationConfirmed = false;
+  }
+
+  confirmBreakGlassAndContinue(): void {
+    if (this.attestationConfirmed && this.breakGlassPatient) {
+      this.selectedPatient = this.breakGlassPatient;
+      this.showBreakGlassModal = false;
+      this.breakGlassPatient = null;
+      this.resetDoseData();
+    }
+  }
+
+  selectPatientForEncounterFromModal(): void {
+    if (this.attestationConfirmed && this.breakGlassPatient) {
+      this.confirmBreakGlassAndContinue();
+    }
+  }
+
+  clearSelectedPatient(): void {
+    this.selectedPatient = null;
+    this.resetDoseData();
+    this.patientSearchQuery = '';
+    this.patientSearchResults = [];
+  }
+
+  resetDoseData(): void {
+    this.doseData = {
+      medicationName: '',
+      dose: '',
+      unit: '',
+      route: '',
+      site: '',
+      time: new Date().toISOString().slice(0, 16), // Current datetime
+      notes: ''
+    };
+  }
+
+  saveEncounter(): void {
+    if (!this.selectedPatient || !this.doseData.medicationName.trim()) {
+      console.warn('Missing required fields');
+      return;
+    }
+
+    // Create new encounter record
+    const encounter: Encounter = {
+      id: Math.random().toString(36).substr(2, 9),
+      patientName: `${this.selectedPatient.firstName} ${this.selectedPatient.lastName}`,
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      service: `${this.doseData.medicationName} - ${this.doseData.dose} ${this.doseData.unit}`
+    };
+
+    // Add to today's encounters
+    this.todayEncounters.push(encounter);
+
+    // Clear the form
+    this.clearSelectedPatient();
+
+    // Show success feedback (could be a toast notification)
+    console.log('Encounter saved successfully', encounter);
+  }
 }
