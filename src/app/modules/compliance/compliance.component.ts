@@ -1296,7 +1296,10 @@ export class ComplianceComponent implements OnInit {
 
   filteredReports: Report[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private patientService: PatientService
+  ) {}
 
   ngOnInit(): void {
     this.filteredReports = [...this.reports];
