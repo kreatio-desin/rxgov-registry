@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService, Patient } from '../../core/services/patient.service';
 import { TransferService } from '../../core/services/transfer.service';
+import { FacilityService, Facility } from '../../core/services/facility.service';
 
 interface DoseRecord {
   dateTime: string;
