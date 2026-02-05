@@ -641,7 +641,124 @@ interface BreakGlassAccess {
 })
 export class ComplianceComponent implements OnInit {
   searchQuery = '';
-  
+  patientSearchQuery = '';
+  selectedReport: Report | null = null;
+
+  // Current user's facility
+  currentUserFacilityId = 'facility1';
+
+  // Patient Census Data
+  patientCensusData: PatientCensusRecord[] = [
+    {
+      enrollmentId: 'ENR-001',
+      patientId: 'P-001',
+      firstName: 'Oliver',
+      lastName: 'Smith',
+      medicaidId: 'MAI-12345678',
+      gender: 'Male',
+      age: 34,
+      dob: '1990-08-23',
+      county: 'Anchorage',
+      homeFacility: 'Anchorage OTP',
+      facilityId: 'facility1',
+      activePrescription: 'Methadone',
+      prescriptionDose: '90mg',
+      lastDoseDate: '02/05/2026',
+      administeredBy: 'Dr. Sarah Johnson',
+      enrollmentDate: '2023-01-15',
+      currentPhase: 'Stable Maintenance'
+    },
+    {
+      enrollmentId: 'ENR-002',
+      patientId: 'P-002',
+      firstName: 'Sarah',
+      lastName: 'Johnson',
+      medicaidId: 'MAI-87654321',
+      gender: 'Female',
+      age: 28,
+      dob: '1997-11-14',
+      county: 'Fairbanks',
+      homeFacility: 'Fairbanks OTP',
+      facilityId: 'facility2',
+      activePrescription: 'Buprenorphine',
+      prescriptionDose: '16mg',
+      lastDoseDate: '02/04/2026',
+      administeredBy: 'Nurse John Doe',
+      enrollmentDate: '2022-03-20',
+      currentPhase: 'Early Stabilization'
+    },
+    {
+      enrollmentId: 'ENR-003',
+      patientId: 'P-003',
+      firstName: 'Michael',
+      lastName: 'Brown',
+      medicaidId: 'MAI-55555555',
+      gender: 'Male',
+      age: 45,
+      dob: '1980-05-10',
+      county: 'Juneau',
+      homeFacility: 'Juneau OTP',
+      facilityId: 'facility1',
+      activePrescription: 'Methadone',
+      prescriptionDose: '80mg',
+      lastDoseDate: '02/05/2026',
+      administeredBy: 'Dr. Sarah Johnson',
+      enrollmentDate: '2020-07-08',
+      currentPhase: 'Stable Maintenance'
+    },
+    {
+      enrollmentId: 'ENR-004',
+      patientId: 'P-004',
+      firstName: 'Jessica',
+      lastName: 'Davis',
+      medicaidId: 'MAI-66666666',
+      gender: 'Female',
+      age: 31,
+      dob: '1994-12-25',
+      county: 'Anchorage',
+      homeFacility: 'Anchorage OTP',
+      facilityId: 'facility1',
+      activePrescription: 'Buprenorphine',
+      prescriptionDose: '12mg',
+      lastDoseDate: '02/03/2026',
+      administeredBy: 'Nurse Elena Martinez',
+      enrollmentDate: '2021-09-12',
+      currentPhase: 'Maintenance'
+    },
+    {
+      enrollmentId: 'ENR-005',
+      patientId: 'P-005',
+      firstName: 'Robert',
+      lastName: 'Wilson',
+      medicaidId: 'MAI-77777777',
+      gender: 'Male',
+      age: 52,
+      dob: '1973-04-18',
+      county: 'Fairbanks',
+      homeFacility: 'Fairbanks OTP',
+      facilityId: 'facility2',
+      activePrescription: 'Methadone',
+      prescriptionDose: '95mg',
+      lastDoseDate: '02/05/2026',
+      administeredBy: 'Dr. Tom Richardson',
+      enrollmentDate: '2019-02-01',
+      currentPhase: 'Stable Maintenance'
+    }
+  ];
+
+  filteredPatientRecords: PatientCensusRecord[] = [];
+  grantedBreakGlassAccess: Set<string> = new Set();
+
+  // Break Glass Modal
+  showBreakGlassModal = false;
+  breakGlassData: BreakGlassAccess = {
+    patientId: '',
+    patientName: '',
+    requestingFacilityId: this.currentUserFacilityId,
+    patientFacilityId: '',
+    attestationConfirmed: false
+  };
+
   reports: Report[] = [
     {
       id: 'active-census',
