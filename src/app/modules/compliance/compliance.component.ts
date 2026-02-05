@@ -1306,9 +1306,8 @@ export class ComplianceComponent implements OnInit {
       return;
     }
 
-    // Navigate to patient page (would use router in real implementation)
-    console.log('Navigating to patient page for:', record.patientId);
-    // router.navigate(['/patient', record.patientId]);
+    // Navigate to patient page
+    this.router.navigate(['/patient', record.patientId]);
   }
 
   closeBreakGlassModal(): void {
