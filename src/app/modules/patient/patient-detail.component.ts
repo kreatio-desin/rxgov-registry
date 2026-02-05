@@ -1581,7 +1581,9 @@ export class PatientDetailComponent implements OnInit {
   patient: Patient | null = null;
   patientNickname = '"Mav"';
   showAdministerDoseModal = false;
+  showTransferModal = false;
   currentDateTime: string;
+  currentTransferDate: string;
 
   dosingHistory: DoseRecord[] = [
     {
