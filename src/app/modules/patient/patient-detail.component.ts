@@ -726,28 +726,28 @@ interface AdministerDoseForm {
     }
 
     .dosing-table thead {
-      background: #f9fafb;
+      background: var(--color-bg-tertiary);
     }
 
     .dosing-table th {
       padding: 0.75rem;
       text-align: left;
       font-weight: 600;
-      color: #374151;
+      color: var(--color-text-primary);
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      border-bottom: 1px solid #e5e7eb;
+      border-bottom: 1px solid var(--color-border);
     }
 
     .dosing-table td {
       padding: 0.75rem;
-      border-bottom: 1px solid #f3f4f6;
-      color: #1f2937;
+      border-bottom: 1px solid var(--color-border-light);
+      color: var(--color-text-primary);
     }
 
     .dosing-table tbody tr:hover {
-      background: #f9fafb;
+      background: var(--color-bg-tertiary);
     }
 
     .dosing-table tbody tr:last-child td {
