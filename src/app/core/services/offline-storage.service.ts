@@ -29,13 +29,14 @@ export class OfflineStorageService {
       const request = indexedDB.open(this.DB_NAME, this.DB_VERSION);
 
       request.onerror = () => {
-        console.error('Failed to open IndexedDB');
-        reject(new Error('Failed to open IndexedDB'));
+        console.error('Failed to open IndexedDB', request.error);
+        // Try to delete and recreate the database
+        this.deleteAndRecreate().then(resolve).catch(reject);
       };
 
       request.onsuccess = () => {
         this.db = request.result;
-        console.log('IndexedDB initialized');
+        console.log('IndexedDB initialized with version', this.db.version);
         resolve(this.db);
       };
 
