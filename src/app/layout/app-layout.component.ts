@@ -69,7 +69,7 @@ import { AuthService, AuthUser } from '../core/services/auth.service';
               <i class="bi bi-arrow-repeat"></i>
               <span class="nav-label">Offline Sync</span>
             </button>
-            <button class="nav-item nav-logout" title="Sign Out">
+            <button class="nav-item nav-logout" title="Sign Out" (click)="logout()">
               <i class="bi bi-box-arrow-right"></i>
               <span class="nav-label">Sign Out</span>
             </button>
