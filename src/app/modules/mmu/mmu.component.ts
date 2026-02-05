@@ -1352,32 +1352,6 @@ interface DoseAdministration {
         flex-shrink: 0;
       }
 
-      .restricted-match {
-        padding: 1rem;
-        background: #fef3c7;
-        border-left: 4px solid #f59e0b;
-
-        .restricted-header {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          margin-bottom: 0.5rem;
-          font-weight: 600;
-          color: #92400e;
-          font-size: 0.875rem;
-
-          i {
-            font-size: 1rem;
-          }
-        }
-
-        .restricted-note {
-          margin: 0;
-          font-size: 0.75rem;
-          color: #78350f;
-        }
-      }
-
       .facility-patient {
         display: flex;
         align-items: center;
