@@ -304,95 +304,35 @@ interface DoseAdministration {
                 <!-- Facility Patient -->
                 <div
                   *ngIf="!result.isRestricted"
-                  class="patient-card-detailed"
+                  class="facility-patient"
+                  (click)="selectPatientForEncounter(result.patient)"
                 >
-                  <div class="patient-card-content">
-                    <!-- Header with Avatar and Name -->
-                    <div class="patient-header-row">
-                      <div class="patient-avatar">
-                        <i class="bi bi-person"></i>
-                      </div>
-                      <div class="patient-header-info">
-                        <h3>{{ result.patient.lastName }}, {{ result.patient.firstName }}</h3>
-                        <p class="patient-rx-mono">{{ result.patient.rxNumber }}</p>
-                      </div>
-                    </div>
-
-                    <!-- Patient Metadata -->
-                    <div class="patient-meta-grid">
-                      <div class="meta-item">
-                        <i class="bi bi-calendar"></i>
-                        <span>DOB: {{ result.patient.dob }}</span>
-                      </div>
-                      <div class="meta-item">
-                        <i class="bi bi-capsule"></i>
-                        <span class="medication-highlight">
-                          {{ result.patient.currentMedication }} {{ result.patient.dose }}
-                        </span>
-                      </div>
-                    </div>
-
-                    <!-- Status Badges -->
-                    <div class="status-badges">
-                      <span class="badge badge-info" *ngIf="result.patient.lastDoseHours !== undefined">
-                        <i class="bi bi-clock"></i>
-                        Last dose: {{ result.patient.lastDoseHours }}h ago
+                  <div class="patient-info">
+                    <div class="patient-name-section">
+                      <span class="patient-name">
+                        {{ result.patient.lastName }}, {{ result.patient.firstName }}
                       </span>
-                      <span
-                        class="badge"
-                        [ngClass]="{
-                          'badge-danger': result.patient.takeHomeStatus?.includes('No'),
-                          'badge-success': result.patient.takeHomeStatus?.includes('Permitted'),
-                        }"
-                      >
-                        <i
-                          class="bi"
-                          [ngClass]="{
-                            'bi-x-circle': result.patient.takeHomeStatus?.includes('No'),
-                            'bi-check-circle': result.patient.takeHomeStatus?.includes('Permitted'),
-                          }"
-                        ></i>
-                        {{ result.patient.takeHomeStatus }}
+                      <span *ngIf="result.patient.nickName" class="patient-nickname">
+                        "{{ result.patient.nickName }}"
                       </span>
                     </div>
-
-                    <!-- Recent Doses Section -->
-                    <div class="recent-doses" *ngIf="result.patient.recentDoses && result.patient.recentDoses.length > 0">
-                      <p class="section-title">RECENT DOSES</p>
-                      <div class="doses-list">
-                        <div *ngFor="let dose of result.patient.recentDoses" class="dose-item">
-                          <div class="dose-datetime">
-                            <span class="dose-date">{{ dose.date }}</span>
-                            <span class="dose-time">{{ dose.time }}</span>
-                          </div>
-                          <span
-                            class="dose-badge"
-                            [ngClass]="{
-                              'badge-observed': dose.type === 'Observed',
-                              'badge-takehome': dose.type === 'Take-Home',
-                            }"
-                          >
-                            {{ dose.type }}
-                          </span>
-                          <span class="dose-amount">{{ dose.amount }}</span>
-                        </div>
-                      </div>
+                    <div class="patient-meta">
+                      <span class="patient-rx">{{ result.patient.rxNumber }}</span>
+                      <span class="separator">•</span>
+                      <span class="patient-dob">DOB: {{ result.patient.dob }}</span>
+                      <span class="separator">•</span>
+                      <span class="patient-ssn">SSN: {{ result.patient.ssn }}</span>
+                    </div>
+                    <div *ngIf="result.patient.currentMedication" class="patient-medication">
+                      {{ result.patient.currentMedication }} {{ result.patient.dose }}
                     </div>
                   </div>
-
-                  <!-- Action Buttons -->
-                  <div class="patient-actions">
-                    <button class="btn-view-record">
-                      View Record
-                      <i class="bi bi-chevron-right"></i>
-                    </button>
-                    <button
-                      class="btn-log-encounter-large"
-                      (click)="selectPatientForEncounter(result.patient)"
-                    >
-                      Log Encounter
-                    </button>
-                  </div>
+                  <button
+                    class="btn-log-encounter"
+                    (click)="selectPatientForEncounter(result.patient); $event.stopPropagation()"
+                  >
+                    Log Encounter
+                  </button>
                 </div>
                 <!-- Restricted Match -->
                 <div *ngIf="result.isRestricted" class="restricted-match-item">
