@@ -1316,11 +1316,12 @@ interface DoseAdministration {
     .encounter-form-container {
       display: flex;
       flex-direction: column;
-      height: 100%;
+      flex: 1;
       gap: 1rem;
       padding: 1rem;
       background: white;
       overflow-y: auto;
+      min-height: 0;
     }
 
     .encounter-header {
