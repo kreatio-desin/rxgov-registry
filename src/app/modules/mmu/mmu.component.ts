@@ -88,9 +88,8 @@ interface DoseAdministration {
                 <div class="stops-list">
                   <div *ngFor="let stop of routeStops"
                        class="stop-item"
-                       [class.selected]="selectedStopId === stop.id"
-                       (click)="selectStopForPatientQueue(stop)">
-                    <div class="stop-info">
+                       [class.selected]="selectedStopId === stop.id">
+                    <div class="stop-info" (click)="selectStopForPatientQueue(stop)">
                       <i class="bi bi-geo-alt"></i>
                       <div class="stop-details">
                         <div class="stop-name">{{ stop.name }}</div>
