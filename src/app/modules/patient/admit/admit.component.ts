@@ -753,7 +753,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       min-width: 0;
       border-radius: 0.375rem;
       border: 1px solid var(--color-border);
-      background-color: #f9fafb;
+      background-color: var(--color-bg-tertiary);
       padding: 0.5rem 0.75rem;
       font-size: 0.875rem;
       background-color: #fafbfc;
@@ -829,7 +829,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       border-radius: 0.375rem;
       border: 1px solid var(--color-border);
       padding: 1rem;
-      background-color: #f9fafb;
+      background-color: var(--color-bg-tertiary);
 
       &:hover {
         background-color: #f3f4f6;
@@ -999,7 +999,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       align-items: center;
       gap: 1rem;
       padding: 1rem 1.5rem;
-      background-color: #f9fafb;
+      background-color: var(--color-bg-tertiary);
       border-top: 1px solid #e5e7eb;
       justify-content: space-between;
 
@@ -1207,7 +1207,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
 
     .match-note {
       padding: 0.75rem 1rem;
-      background-color: #f9fafb;
+      background-color: var(--color-bg-tertiary);
       border-top: 1px solid #e5e7eb;
 
       p {
