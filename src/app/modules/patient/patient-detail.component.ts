@@ -656,7 +656,7 @@ interface AdministerDoseForm {
     .card-header {
       padding: 1rem;
       background: var(--color-bg-tertiary);
-      border-bottom: 1px solid #e5e7eb;
+      border-bottom: 1px solid var(--color-border);
       display: flex;
       align-items: center;
       gap: 0.75rem;
