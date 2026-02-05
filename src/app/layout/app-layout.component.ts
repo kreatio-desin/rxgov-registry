@@ -651,7 +651,8 @@ export class AppLayoutComponent implements OnInit {
     private offlineStorage: OfflineStorageService,
     private syncService: SyncService,
     private router: Router,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private authService: AuthService
   ) {
     this.syncStatus$ = this.syncService.syncStatus$;
     this.setupKeyboardShortcuts();
