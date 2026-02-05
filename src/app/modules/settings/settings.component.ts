@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SyncService, SyncConfig } from '../../core/services/sync.service';
+import { AuthService, AuthUser } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-settings',
