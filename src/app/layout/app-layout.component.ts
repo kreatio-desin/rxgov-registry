@@ -648,7 +648,8 @@ export class AppLayoutComponent implements OnInit {
     private patientService: PatientService,
     private offlineStorage: OfflineStorageService,
     private syncService: SyncService,
-    private router: Router
+    private router: Router,
+    private themeService: ThemeService
   ) {
     this.syncStatus$ = this.syncService.syncStatus$;
     this.setupKeyboardShortcuts();
