@@ -807,7 +807,7 @@ interface AdministerDoseForm {
 
       .dose-card {
         padding: 1rem;
-        border: 1px solid #e5e7eb;
+        border: 1px solid var(--color-border);
         border-radius: 0.5rem;
         background: var(--color-bg-tertiary);
       }
@@ -937,7 +937,7 @@ interface AdministerDoseForm {
 
     .prescription-card {
       padding: 0.75rem;
-      border: 1px solid #e5e7eb;
+      border: 1px solid var(--color-border);
       border-radius: 0.5rem;
       background: var(--color-bg-tertiary);
     }
@@ -1160,7 +1160,7 @@ interface AdministerDoseForm {
     }
 
     .form-section {
-      border: 1px solid #e5e7eb;
+      border: 1px solid var(--color-border);
       border-radius: 0.375rem;
       padding: 0.75rem;
     }
