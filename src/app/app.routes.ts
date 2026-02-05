@@ -28,5 +28,9 @@ export const routes: Routes = [
   {
     path: 'settings',
     loadComponent: () => import('./modules/settings/settings.component').then(m => m.SettingsComponent)
+  },
+  {
+    path: 'users',
+    loadComponent: () => import('./modules/users/users.component').then(m => m.UsersComponent)
   }
 ];
