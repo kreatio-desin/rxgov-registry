@@ -557,7 +557,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       font-weight: 700;
       letter-spacing: -0.025em;
       margin: 0 0 0.5rem 0;
-      color: #1f2937;
+      color: var(--color-text-primary);
     }
 
     .enrollment-subtitle {
@@ -694,7 +694,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       margin: 0;
       font-size: 1.125rem;
       font-weight: 600;
-      color: #1f2937;
+      color: var(--color-text-primary);
     }
 
     .card-description {
@@ -738,7 +738,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       display: block;
       font-size: 0.875rem;
       font-weight: 500;
-      color: #1f2937;
+      color: var(--color-text-primary);
       line-height: 1.25rem;
 
       .required {
@@ -859,7 +859,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
     .checkbox-title {
       font-weight: 600;
       font-size: 0.875rem;
-      color: #1f2937;
+      color: var(--color-text-primary);
       margin: 0;
     }
 
@@ -910,7 +910,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
     .consent-title {
       font-weight: 600;
       font-size: 1rem;
-      color: #1f2937;
+      color: var(--color-text-primary);
       margin: 0;
       cursor: pointer;
       line-height: 1.5;
@@ -935,13 +935,13 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       &.badge-optional {
         background-color: white;
         border-color: #d1d5db;
-        color: #1f2937;
+        color: var(--color-text-primary);
       }
     }
 
     .consent-description {
       font-size: 0.875rem;
-      color: #1f2937;
+      color: var(--color-text-primary);
       margin: 0;
       line-height: 1.5;
 
@@ -1041,7 +1041,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
 
       &.btn-secondary {
         background-color: white;
-        color: #1f2937;
+        color: var(--color-text-primary);
         border: 1px solid #d1d5db;
 
         &:hover:not(:disabled) {
@@ -1195,7 +1195,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
         margin: 0 0 0.25rem 0;
         font-size: 1rem;
         font-weight: 600;
-        color: #1f2937;
+        color: var(--color-text-primary);
       }
     }
 
