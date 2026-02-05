@@ -160,8 +160,8 @@ import { ThemeService } from '../core/services/theme.service';
 
     /* Sidebar Styles */
     .sidebar {
-      background: white;
-      border-right: 1px solid #e5e7eb;
+      background: var(--color-bg-primary);
+      border-right: 1px solid var(--color-border);
       width: 200px;
       height: 100vh;
       display: flex;
