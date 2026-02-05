@@ -1015,4 +1015,40 @@ export class MMUComponent implements OnInit, AfterViewInit {
   removeStop(stopId: string): void {
     this.routeStops = this.routeStops.filter(stop => stop.id !== stopId);
   }
+
+  onAddressInput(): void {
+    // Only use Google Places if API is available
+    if (!this.autocompleteService || !this.newStopAddress.trim()) {
+      this.showAddressAutocomplete = false;
+      this.addressPredictions = [];
+      return;
+    }
+
+    // Get autocomplete predictions from Google Places API
+    const request = {
+      input: this.newStopAddress,
+      sessionToken: this.sessionToken,
+      componentRestrictions: { country: 'us' } // Restrict to US
+    };
+
+    this.autocompleteService.getPlacePredictions(request, (predictions: any[]) => {
+      if (predictions) {
+        this.addressPredictions = predictions.slice(0, 5); // Limit to 5 predictions
+        this.showAddressAutocomplete = this.addressPredictions.length > 0;
+      } else {
+        this.showAddressAutocomplete = false;
+        this.addressPredictions = [];
+      }
+    });
+  }
+
+  selectAddressPrediction(prediction: any): void {
+    // Update the address with the selected prediction
+    this.newStopAddress = prediction.description;
+    this.showAddressAutocomplete = false;
+    this.addressPredictions = [];
+
+    // If you want to get more detailed information about the place, use place_id
+    // This can be useful to get coordinates, phone numbers, etc. in the future
+  }
 }
