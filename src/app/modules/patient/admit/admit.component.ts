@@ -528,13 +528,13 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      background-color: #f8f9fa;
+      background-color: var(--color-bg-secondary);
     }
 
     .enrollment-main {
       flex: 1;
       overflow-y: auto;
-      background-color: #f8f9fa;
+      background-color: var(--color-bg-secondary);
     }
 
     .enrollment-container {
