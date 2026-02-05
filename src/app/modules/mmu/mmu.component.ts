@@ -1127,8 +1127,9 @@ export class MMUComponent implements OnInit, AfterViewInit {
       componentRestrictions: { country: 'us' } // Restrict to US
     };
 
-    this.autocompleteService.getPlacePredictions(request, (predictions: any[]) => {
-      if (predictions) {
+    this.autocompleteService.getPlacePredictions(request, (predictions: any[], status: any) => {
+      const google = (window as any).google;
+      if (status === google.maps.places.PlacesServiceStatus.OK && predictions) {
         this.addressPredictions = predictions.slice(0, 5); // Limit to 5 predictions
         this.showAddressAutocomplete = this.addressPredictions.length > 0;
       } else {
