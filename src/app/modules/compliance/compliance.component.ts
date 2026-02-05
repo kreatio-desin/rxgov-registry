@@ -147,6 +147,207 @@ interface BreakGlassAccess {
           </table>
         </div>
       </div>
+
+      <!-- Detailed Report View -->
+      <div *ngIf="selectedReport && selectedReport.id === 'active-census'" class="detailed-report-card">
+        <div class="report-controls">
+          <div class="controls-left">
+            <input
+              type="text"
+              placeholder="Search by patient name, ID, or enrollment ID..."
+              [(ngModel)]="patientSearchQuery"
+              (input)="filterPatientRecords()"
+              class="search-input-detailed"
+            >
+          </div>
+          <div class="controls-right">
+            <button class="btn-export">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v20M2 12h20"></path>
+              </svg>
+              Export
+            </button>
+          </div>
+        </div>
+
+        <div class="table-wrapper-detailed">
+          <table class="detail-table">
+            <thead>
+              <tr>
+                <th>Enrollment ID</th>
+                <th>Patient ID</th>
+                <th>Patient Name</th>
+                <th>Medicaid ID</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>DOB</th>
+                <th>County</th>
+                <th>Home Facility</th>
+                <th>Active Prescription</th>
+                <th>Last Dose Date</th>
+                <th>Administered By</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let record of filteredPatientRecords" class="patient-row">
+                <td>{{ record.enrollmentId }}</td>
+                <td class="patient-id-cell">
+                  <button
+                    class="patient-link"
+                    (click)="navigateToPatient(record)"
+                  >
+                    {{ record.patientId }}
+                  </button>
+                </td>
+                <td class="patient-name-cell">
+                  <span *ngIf="canViewPatientData(record)">
+                    {{ record.lastName }}, {{ record.firstName }}
+                  </span>
+                  <span *ngIf="!canViewPatientData(record)" class="restricted-text">
+                    [Restricted Access]
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="canViewPatientData(record)">
+                    {{ record.medicaidId }}
+                  </span>
+                  <span *ngIf="!canViewPatientData(record)" class="restricted-text">
+                    ***
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="canViewPatientData(record)">
+                    {{ record.gender }}
+                  </span>
+                  <span *ngIf="!canViewPatientData(record)" class="restricted-text">
+                    ***
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="canViewPatientData(record)">
+                    {{ record.age }}
+                  </span>
+                  <span *ngIf="!canViewPatientData(record)" class="restricted-text">
+                    ***
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="canViewPatientData(record)">
+                    {{ record.dob }}
+                  </span>
+                  <span *ngIf="!canViewPatientData(record)" class="restricted-text">
+                    ***
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="canViewPatientData(record)">
+                    {{ record.county }}
+                  </span>
+                  <span *ngIf="!canViewPatientData(record)" class="restricted-text">
+                    ***
+                  </span>
+                </td>
+                <td>{{ record.homeFacility }}</td>
+                <td>
+                  <span *ngIf="canViewPatientData(record)">
+                    {{ record.activePrescription }} {{ record.prescriptionDose }}
+                  </span>
+                  <span *ngIf="!canViewPatientData(record)" class="restricted-text">
+                    ***
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="canViewPatientData(record)">
+                    {{ record.lastDoseDate }}
+                  </span>
+                  <span *ngIf="!canViewPatientData(record)" class="restricted-text">
+                    ***
+                  </span>
+                </td>
+                <td>
+                  <span *ngIf="canViewPatientData(record)">
+                    {{ record.administeredBy }}
+                  </span>
+                  <span *ngIf="!canViewPatientData(record)" class="restricted-text">
+                    ***
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="report-footer">
+          <span class="record-count">
+            Showing {{ filteredPatientRecords.length }} of {{ patientCensusData.length }} records
+          </span>
+        </div>
+      </div>
+
+      <!-- Break Glass Modal -->
+      <div *ngIf="showBreakGlassModal" class="modal-overlay" (click)="closeBreakGlassModal()">
+        <div class="modal-content break-glass-modal" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <path d="M12 12v5"></path>
+              <path d="M12 19h.01"></path>
+            </svg>
+            <h2>Patient Access Restricted</h2>
+            <button class="btn-close-modal" (click)="closeBreakGlassModal()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6l-12 12M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <p class="modal-description">
+              You are attempting to access patient data from another facility. This action will be audited.
+            </p>
+
+            <div class="access-details">
+              <h4>Patient Information</h4>
+              <div class="detail-row">
+                <span class="detail-label">Patient ID:</span>
+                <span class="detail-value">{{ breakGlassData?.patientId }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Patient Name:</span>
+                <span class="detail-value">{{ breakGlassData?.patientName }}</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Home Facility:</span>
+                <span class="detail-value">{{ breakGlassData?.patientFacilityId }}</span>
+              </div>
+            </div>
+
+            <div class="attestation-section">
+              <label class="attestation-checkbox">
+                <input
+                  type="checkbox"
+                  [(ngModel)]="breakGlassData.attestationConfirmed"
+                  name="attestation"
+                />
+                <span>
+                  I attest that I am accessing this patient record for the purpose of authorized care coordination and have obtained necessary documentation and approvals. This action is audited.
+                </span>
+              </label>
+            </div>
+
+            <div class="modal-actions">
+              <button class="btn-cancel" (click)="closeBreakGlassModal()">Cancel</button>
+              <button
+                class="btn-confirm"
+                [disabled]="!breakGlassData?.attestationConfirmed"
+                (click)="confirmBreakGlassAccess()"
+              >
+                Grant Access
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `,
   styles: [`
