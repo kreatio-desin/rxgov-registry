@@ -758,7 +758,7 @@ interface BreakGlassAccess {
 
     .patient-row {
       &:hover {
-        background-color: #f3f4f6;
+        background-color: var(--color-bg-tertiary);
       }
     }
 
