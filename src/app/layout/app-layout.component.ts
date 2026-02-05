@@ -661,7 +661,11 @@ export class AppLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Initialize
+    // Load current user
+    this.currentUser = this.authService.getCurrentUser();
+    this.authService.currentUser$.subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
   private setupKeyboardShortcuts(): void {
