@@ -878,6 +878,8 @@ interface PatientRecord {
 export class DashboardComponent implements OnInit {
   showTransferModal = false;
   selectedTransfer: Transfer | null = null;
+  currentUser: AuthUser | null = null;
+  pendingTransfers: PatientTransfer[] = [];
 
   transfers: Transfer[] = [
     {
