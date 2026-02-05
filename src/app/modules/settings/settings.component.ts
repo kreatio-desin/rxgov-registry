@@ -271,7 +271,7 @@ import { SyncService, SyncConfig } from '../../core/services/sync.service';
     }
 
     .settings-section {
-      background: white;
+      background: var(--color-bg-primary);
       border-radius: 8px;
       padding: 2rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -279,12 +279,12 @@ import { SyncService, SyncConfig } from '../../core/services/sync.service';
 
       h2 {
         margin: 0 0 0.5rem 0;
-        color: #333;
+        color: var(--color-text-primary);
       }
 
       .section-desc {
         margin: 0 0 1.5rem 0;
-        color: #666;
+        color: var(--color-text-secondary);
         font-size: 0.95rem;
       }
     }
