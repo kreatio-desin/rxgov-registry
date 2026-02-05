@@ -969,7 +969,18 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    // Load dashboard data
+    // Load current user
+    this.currentUser = this.authService.getCurrentUser();
+
+    // Load pending transfers for facility managers
+    if (this.currentUser?.role === 'facility-manager' && this.currentUser.facilityId) {
+      try {
+        this.pendingTransfers = await this.transferService.getPendingTransfersForFacility(this.currentUser.facilityId);
+      } catch (error) {
+        console.error('Failed to load pending transfers:', error);
+        this.pendingTransfers = [];
+      }
+    }
   }
 
   navigateToAdmit(): void {
