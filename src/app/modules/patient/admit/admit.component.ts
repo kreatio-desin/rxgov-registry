@@ -1040,7 +1040,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
       }
 
       &.btn-secondary {
-        background-color: white;
+        background-color: var(--color-bg-primary);
         color: var(--color-text-primary);
         border: 1px solid var(--color-border);
 
