@@ -178,13 +178,13 @@ import { FacilityService, Facility } from '../../core/services/facility.service'
         margin: 0 0 0.25rem 0;
         font-size: 1.5rem;
         font-weight: bold;
-        color: #1f2937;
+        color: var(--color-text-primary);
       }
 
       p {
         margin: 0;
         font-size: 0.875rem;
-        color: #6b7280;
+        color: var(--color-text-secondary);
       }
     }
 
@@ -200,35 +200,35 @@ import { FacilityService, Facility } from '../../core/services/facility.service'
         transform: translateY(-50%);
         width: 1rem;
         height: 1rem;
-        color: #6b7280;
+        color: var(--color-text-secondary);
         pointer-events: none;
       }
 
       input {
         width: 100%;
         padding: 0.5rem 0.75rem 0.5rem 2.25rem;
-        border: 1px solid #d1d5db;
+        border: 1px solid var(--color-border);
         border-radius: 0.375rem;
         font-size: 0.875rem;
-        background: white;
+        background: var(--color-bg-primary);
         transition: border-color 0.2s, box-shadow 0.2s;
 
         &:focus {
           outline: none;
-          border-color: #3b82f6;
+          border-color: var(--color-primary);
           box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
         &::placeholder {
-          color: #9ca3af;
+          color: var(--color-text-tertiary);
         }
       }
     }
 
     .table-wrapper {
-      border: 1px solid #e5e7eb;
+      border: 1px solid var(--color-border);
       border-radius: 0.5rem;
-      background: white;
+      background: var(--color-bg-primary);
       overflow: auto;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
@@ -239,22 +239,22 @@ import { FacilityService, Facility } from '../../core/services/facility.service'
       font-size: 0.875rem;
 
       thead {
-        background: white;
-        border-bottom: 1px solid #e5e7eb;
+        background: var(--color-bg-primary);
+        border-bottom: 1px solid var(--color-border);
       }
 
       th {
         padding: 0.75rem 0.5rem;
         text-align: left;
         font-weight: 600;
-        color: #374151;
+        color: var(--color-text-primary);
         white-space: nowrap;
         height: 2rem;
       }
 
       td {
         padding: 0.75rem 0.5rem;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid var(--color-border);
         vertical-align: top;
       }
 
@@ -262,7 +262,7 @@ import { FacilityService, Facility } from '../../core/services/facility.service'
         transition: background-color 0.2s;
 
         &:hover {
-          background-color: #f9fafb;
+          background-color: var(--color-bg-tertiary);
         }
       }
     }
@@ -292,14 +292,14 @@ import { FacilityService, Facility } from '../../core/services/facility.service'
     .facility-icon {
       width: 1rem;
       height: 1rem;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       flex-shrink: 0;
       margin-top: 0.125rem;
     }
 
     .facility-name-text {
       font-weight: 500;
-      color: #1f2937;
+      color: var(--color-text-primary);
     }
 
     .location-info {
@@ -318,13 +318,13 @@ import { FacilityService, Facility } from '../../core/services/facility.service'
     .icon-small {
       width: 0.75rem;
       height: 0.75rem;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       flex-shrink: 0;
       margin-top: 0.125rem;
     }
 
     .location-item span {
-      color: #4b5563;
+      color: var(--color-text-secondary);
       line-height: 1.4;
     }
 
@@ -348,16 +348,16 @@ import { FacilityService, Facility } from '../../core/services/facility.service'
 
     .role-label {
       font-weight: 600;
-      color: #6b7280;
+      color: var(--color-text-secondary);
     }
 
     .person-name {
-      color: #4b5563;
+      color: var(--color-text-secondary);
       word-break: break-word;
     }
 
     .verified-date {
-      color: #6b7280;
+      color: var(--color-text-secondary);
       font-size: 0.625rem;
       display: block;
       margin-top: 0.125rem;
@@ -387,17 +387,17 @@ import { FacilityService, Facility } from '../../core/services/facility.service'
       }
 
       .facility-card {
-        border: 1px solid #e5e7eb;
+        border: 1px solid var(--color-border);
         border-radius: 0.5rem;
-        background: white;
+        background: var(--color-bg-primary);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         overflow: hidden;
       }
 
       .card-header {
         padding: 0.75rem;
-        border-bottom: 1px solid #e5e7eb;
-        background: white;
+        border-bottom: 1px solid var(--color-border);
+        background: var(--color-bg-primary);
       }
 
       .facility-name-mobile {
@@ -405,14 +405,14 @@ import { FacilityService, Facility } from '../../core/services/facility.service'
         align-items: center;
         gap: 0.5rem;
         font-weight: 600;
-        color: #1f2937;
+        color: var(--color-text-primary);
         font-size: 0.875rem;
       }
 
       .facility-icon-small {
         width: 1rem;
         height: 1rem;
-        color: #6b7280;
+        color: var(--color-text-secondary);
         flex-shrink: 0;
       }
 
@@ -425,7 +425,7 @@ import { FacilityService, Facility } from '../../core/services/facility.service'
       }
 
       .info-section {
-        border-top: 1px solid #e5e7eb;
+        border-top: 1px solid var(--color-border);
         padding-top: 0.75rem;
         display: flex;
         flex-direction: column;
@@ -441,20 +441,20 @@ import { FacilityService, Facility } from '../../core/services/facility.service'
       .icon-tiny {
         width: 0.75rem;
         height: 0.75rem;
-        color: #6b7280;
+        color: var(--color-text-secondary);
         flex-shrink: 0;
         margin-top: 0.125rem;
       }
 
       .text-xs {
-        color: #4b5563;
+        color: var(--color-text-secondary);
         line-height: 1.4;
       }
 
       .card-footer {
         padding: 0.75rem;
-        border-top: 1px solid #e5e7eb;
-        background: #f9fafb;
+        border-top: 1px solid var(--color-border);
+        background: var(--color-bg-tertiary);
         font-size: 0.625rem;
       }
 
@@ -465,7 +465,7 @@ import { FacilityService, Facility } from '../../core/services/facility.service'
       }
 
       .text-xs-muted {
-        color: #6b7280;
+        color: var(--color-text-secondary);
       }
 
       .page-header {
@@ -480,10 +480,10 @@ import { FacilityService, Facility } from '../../core/services/facility.service'
     .empty-state {
       text-align: center;
       padding: 2rem;
-      background: white;
-      border: 1px solid #e5e7eb;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
       border-radius: 0.5rem;
-      color: #6b7280;
+      color: var(--color-text-secondary);
 
       svg {
         width: 3rem;
