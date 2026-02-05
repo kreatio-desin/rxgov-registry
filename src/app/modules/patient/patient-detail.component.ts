@@ -470,8 +470,8 @@ interface AdministerDoseForm {
     /* Header Styles */
     .patient-header {
       padding: 1.5rem;
-      background: white;
-      border-bottom: 1px solid #e5e7eb;
+      background: var(--color-bg-primary);
+      border-bottom: 1px solid var(--color-border);
     }
 
     .header-top {
@@ -645,8 +645,8 @@ interface AdministerDoseForm {
 
     /* Card Styles */
     .card {
-      background: white;
-      border: 1px solid #e5e7eb;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
       border-radius: 0.75rem;
       overflow: hidden;
       display: flex;
@@ -960,7 +960,7 @@ interface AdministerDoseForm {
       align-items: center;
       gap: 0.5rem;
       padding: 0.5rem 0.75rem;
-      background: white;
+      background: var(--color-bg-primary);
       border: 1px solid #fecaca;
       border-radius: 0.375rem;
     }
@@ -1043,7 +1043,7 @@ interface AdministerDoseForm {
     }
 
     .modal-content {
-      background: white;
+      background: var(--color-bg-primary);
       border-radius: 0.5rem;
       padding: 1.5rem;
       max-width: 512px;
