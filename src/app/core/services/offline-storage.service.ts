@@ -169,6 +169,11 @@ export class OfflineStorageService {
       transferStore.createIndex('status', 'status', { unique: false });
       transferStore.createIndex('destinationFacilityId', 'destinationFacilityId', { unique: false });
     }
+
+    // Auth session store
+    if (!db.objectStoreNames.contains('auth_session')) {
+      db.createObjectStore('auth_session', { keyPath: 'id' });
+    }
   }
 
   async ensureDbReady(): Promise<void> {
