@@ -611,6 +611,14 @@ interface DoseAdministration {
       gap: 0.5rem;
       flex: 1;
       min-width: 0;
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 0.25rem;
+      transition: background 0.15s;
+
+      &:hover {
+        background: rgba(12, 92, 170, 0.05);
+      }
 
       i {
         font-size: 0.625rem;
