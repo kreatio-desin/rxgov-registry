@@ -1646,6 +1646,9 @@ export class PatientDetailComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    // Load current user
+    this.currentUser = this.authService.getCurrentUser();
+
     // Load facilities for transfer dropdown
     try {
       this.availableFacilities = await this.facilityService.getAllFacilities();
