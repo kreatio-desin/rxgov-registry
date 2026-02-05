@@ -303,7 +303,30 @@ interface Facility {
               <h3 class="card-title">Clinical Management</h3>
             </div>
             <div class="card-content">
-              <!-- Clinical management content -->
+              <div class="management-actions">
+                <button class="management-btn transfer-btn" (click)="openTransferModal()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m14 7 5 5-5 5"></path>
+                    <path d="M3.5 14H19"></path>
+                    <path d="m10 17-7-7 7-7"></path>
+                  </svg>
+                  Transfer
+                </button>
+                <button class="management-btn inactive-btn" (click)="openInactiveModal()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="1"></circle>
+                    <path d="M12 1v6"></path>
+                    <path d="M12 17v6"></path>
+                    <path d="M4.22 4.22l4.24 4.24"></path>
+                    <path d="M15.54 15.54l4.24 4.24"></path>
+                    <path d="M1 12h6"></path>
+                    <path d="M17 12h6"></path>
+                    <path d="M4.22 19.78l4.24-4.24"></path>
+                    <path d="M15.54 8.46l4.24-4.24"></path>
+                  </svg>
+                  Inactive
+                </button>
+              </div>
             </div>
           </div>
         </div>
