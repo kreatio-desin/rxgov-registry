@@ -44,7 +44,8 @@ import { AuthService, AuthUser } from '../core/services/auth.service';
               <span class="nav-label">Facilities</span>
             </a>
             <a routerLink="/compliance" routerLinkActive="active"
-               class="nav-item" title="Reports">
+               class="nav-item" title="Reports"
+               *ngIf="currentUser && (currentUser.role === 'facility-manager' || currentUser.role === 'admin')">
               <i class="bi bi-file-earmark-bar-graph"></i>
               <span class="nav-label">Reports</span>
             </a>
