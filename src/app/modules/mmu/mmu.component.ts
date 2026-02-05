@@ -951,7 +951,7 @@ interface DoseAdministration {
       .encounter-item {
         padding: 0.5rem;
         border-radius: 0.25rem;
-        background: #f9fafb;
+        background: var(--color-bg-tertiary);
         border-left: 2px solid #3b82f6;
       }
 
@@ -1479,7 +1479,7 @@ interface DoseAdministration {
         justify-content: space-between;
         gap: 1rem;
         padding: 0.625rem;
-        background: #f9fafb;
+        background: var(--color-bg-tertiary);
         cursor: pointer;
         transition: background 0.2s;
 
@@ -1772,7 +1772,7 @@ interface DoseAdministration {
           opacity: 0;
 
           &:hover {
-            background: #f9fafb;
+            background: var(--color-bg-tertiary);
             color: var(--color-text-primary);
           }
         }
@@ -2126,7 +2126,7 @@ interface DoseAdministration {
       .patient-card {
         padding: 1rem;
         margin: 0.75rem;
-        background: #f9fafb;
+        background: var(--color-bg-tertiary);
         border-radius: 0.375rem;
         border-left: 4px solid #9ca3af;
         flex-shrink: 0;
@@ -2372,7 +2372,7 @@ interface DoseAdministration {
         display: flex;
         gap: 0.75rem;
         padding: 1rem;
-        background: #f9fafb;
+        background: var(--color-bg-tertiary);
         border-top: 1px solid #e5e7eb;
         border-radius: 0 0 0.375rem 0.375rem;
         flex-shrink: 0;
@@ -2441,7 +2441,7 @@ interface DoseAdministration {
         border: 1px solid #d1d5db;
 
         &:hover {
-          background: #f9fafb;
+          background: var(--color-bg-tertiary);
         }
       }
 
@@ -2546,7 +2546,7 @@ interface DoseAdministration {
       }
 
       .match-details {
-        background: #f9fafb;
+        background: var(--color-bg-tertiary);
         padding: 1rem;
         border-radius: 0.375rem;
         border: 1px solid #e5e7eb;
