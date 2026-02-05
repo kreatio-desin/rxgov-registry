@@ -2430,11 +2430,11 @@ export class MMUComponent implements OnInit, AfterViewInit {
   resetDoseData(): void {
     this.doseData = {
       medicationName: '',
-      dose: '',
-      unit: '',
-      route: '',
-      site: '',
-      time: new Date().toISOString().slice(0, 16), // Current datetime
+      observedDose: '',
+      takeHomeDoses: '',
+      takeHomeDoseAmount: '',
+      individualCounseling: false,
+      groupCounseling: false,
       notes: '',
     };
   }
