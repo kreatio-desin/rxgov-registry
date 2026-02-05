@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
 import { AppLayoutComponent } from './layout/app-layout.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthService } from './core/services/auth.service';
@@ -8,7 +7,7 @@ import { AuthService } from './core/services/auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, AppLayoutComponent, LoginComponent],
+  imports: [CommonModule, AppLayoutComponent, LoginComponent],
   template: `
     <app-layout *ngIf="isAuthenticated; else loginScreen"></app-layout>
     <ng-template #loginScreen>
