@@ -1847,6 +1847,32 @@ interface DoseAdministration {
         resize: vertical;
       }
 
+      .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        .form-checkbox {
+          width: 1rem;
+          height: 1rem;
+          cursor: pointer;
+          accent-color: #4f46e5;
+        }
+
+        label {
+          margin: 0;
+          font-size: 0.875rem;
+          color: #1f2937;
+          cursor: pointer;
+        }
+      }
+
       .form-actions {
         display: flex;
         gap: 0.75rem;
@@ -1855,8 +1881,19 @@ interface DoseAdministration {
         margin-top: auto;
       }
 
+      .form-actions-footer {
+        display: flex;
+        gap: 0.75rem;
+        padding: 1rem;
+        background: #f9fafb;
+        border-top: 1px solid #e5e7eb;
+        border-radius: 0 0 0.375rem 0.375rem;
+        flex-shrink: 0;
+      }
+
       .btn-primary,
-      .btn-secondary {
+      .btn-secondary,
+      .btn-primary-save {
         padding: 0.625rem 1rem;
         border-radius: 0.375rem;
         font-size: 0.875rem;
@@ -1877,6 +1914,28 @@ interface DoseAdministration {
 
         &:hover:not(:disabled) {
           background: #0a4a85;
+        }
+
+        &:disabled {
+          background: #9ca3af;
+          cursor: not-allowed;
+        }
+
+        i {
+          font-size: 0.875rem;
+        }
+      }
+
+      .btn-primary-save {
+        background: #4f46e5;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+
+        &:hover:not(:disabled) {
+          background: #4338ca;
         }
 
         &:disabled {
