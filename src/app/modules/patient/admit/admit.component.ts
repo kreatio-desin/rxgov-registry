@@ -601,7 +601,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
         .step-number {
           background-color: var(--color-button-bg);
           color: white;
-          border-color: #0c5caa;
+          border-color: var(--color-button-bg);
         }
       }
 
@@ -611,7 +611,7 @@ type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consent
         .step-number {
           background-color: var(--color-button-bg);
           color: white;
-          border-color: #0c5caa;
+          border-color: var(--color-button-bg);
 
           &::after {
             content: '✓';
