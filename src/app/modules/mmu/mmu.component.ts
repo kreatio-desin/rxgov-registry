@@ -1577,7 +1577,7 @@ interface DoseAdministration {
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #64748b;
+          color: var(--color-text-secondary);
 
           i {
             font-size: 1rem;
@@ -1653,7 +1653,7 @@ interface DoseAdministration {
           &.badge-info {
             background: white;
             border-color: #cbd5e1;
-            color: #64748b;
+            color: var(--color-text-secondary);
           }
 
           &.badge-success {
@@ -1959,7 +1959,7 @@ interface DoseAdministration {
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #64748b;
+          color: var(--color-text-secondary);
 
           i {
             font-size: 1rem;
@@ -2035,7 +2035,7 @@ interface DoseAdministration {
           &.badge-info {
             background: white;
             border-color: #cbd5e1;
-            color: #64748b;
+            color: var(--color-text-secondary);
           }
 
           &.badge-success {
