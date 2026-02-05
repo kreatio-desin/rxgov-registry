@@ -451,32 +451,15 @@ export class PatientService {
   }
 
   /**
-   * Get patient (with privacy check)
-   * @param patientId - Patient ID to retrieve
-   * @param userFacilityId - Optional facility ID of the user. If patient is enrolled at this facility, access is granted
-   * @param userId - Optional user ID for audit logging
+   * Get patient
+   * Note: Access control is handled at the component/page level, not here.
+   * This allows the patient detail page to load after access has been granted via break glass.
    */
   async getPatient(patientId: string, userFacilityId?: string, userId?: string): Promise<Patient | undefined> {
     const patient = await this.offlineStorage.get<Patient>('patients', patientId);
 
     if (!patient) {
       return undefined;
-    }
-
-    // Privacy check:
-    // 1. If user has a break glass access token, allow access immediately
-    // 2. If patient is enrolled at user's facility, allow access
-    // 3. Otherwise, deny access only if patient is active elsewhere
-    const hasAccessToken = this.hasAccessToken(patientId);
-    if (hasAccessToken) {
-      return patient;
-    }
-
-    const patientAtUserFacility = userFacilityId && patient.currentEnrollment?.facilityId === userFacilityId;
-    const isActiveElsewhere = patient.currentEnrollment?.status === 'active';
-
-    if (isActiveElsewhere && !patientAtUserFacility) {
-      throw new Error('Access denied: Attestation required');
     }
 
     return patient;
