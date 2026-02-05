@@ -18,9 +18,9 @@ interface UserWithStatus extends AuthUser {
         <div>
           <h1>Users Management</h1>
           <p class="subtitle">
-            <span *ngIf="currentUser?.role === 'facility-manager'">Manage team members for {{ currentUser.facilityName }}</span>
-            <span *ngIf="currentUser?.role === 'admin'">View and manage all system users</span>
-            <span *ngIf="currentUser?.role === 'facility-staff'">Users in {{ currentUser.facilityName }}</span>
+            <span *ngIf="currentUser && currentUser.role === 'facility-manager'">Manage team members for {{ currentUser.facilityName }}</span>
+            <span *ngIf="currentUser && currentUser.role === 'admin'">View and manage all system users</span>
+            <span *ngIf="currentUser && currentUser.role === 'facility-staff'">Users in {{ currentUser.facilityName }}</span>
           </p>
         </div>
         <button class="btn-add-user" *ngIf="currentUser && (currentUser.role === 'facility-manager' || currentUser.role === 'admin')">
