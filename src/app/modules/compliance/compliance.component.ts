@@ -617,7 +617,7 @@ interface BreakGlassAccess {
       border: none;
       cursor: pointer;
       padding: 0.5rem;
-      color: #6b7280;
+      color: var(--color-text-secondary);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -625,8 +625,8 @@ interface BreakGlassAccess {
       transition: all 0.2s;
 
       &:hover {
-        background: #f3f4f6;
-        color: #1f2937;
+        background: var(--color-bg-tertiary);
+        color: var(--color-text-primary);
       }
 
       svg {
@@ -637,8 +637,8 @@ interface BreakGlassAccess {
 
     /* Detailed Report Card */
     .detailed-report-card {
-      background: white;
-      border: 1px solid #e5e7eb;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
       border-radius: 0.75rem;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
       overflow: hidden;
@@ -649,8 +649,8 @@ interface BreakGlassAccess {
 
     .report-controls {
       padding: 1.5rem;
-      border-bottom: 1px solid #e5e7eb;
-      background: #f9fafb;
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-bg-tertiary);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -664,20 +664,20 @@ interface BreakGlassAccess {
     .search-input-detailed {
       width: 100%;
       padding: 0.625rem 0.875rem;
-      border: 1px solid #d1d5db;
+      border: 1px solid var(--color-border);
       border-radius: 0.375rem;
       font-size: 0.875rem;
-      background: white;
+      background: var(--color-bg-primary);
       transition: border-color 0.2s, box-shadow 0.2s;
 
       &:focus {
         outline: none;
-        border-color: #3b82f6;
+        border-color: var(--color-primary);
         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
       }
 
       &::placeholder {
-        color: #9ca3af;
+        color: var(--color-text-tertiary);
       }
     }
 
@@ -688,7 +688,7 @@ interface BreakGlassAccess {
 
     .btn-export {
       padding: 0.625rem 1rem;
-      background: #3b82f6;
+      background: var(--color-button-bg);
       color: white;
       border: none;
       border-radius: 0.375rem;
@@ -701,7 +701,7 @@ interface BreakGlassAccess {
       transition: background 0.2s;
 
       &:hover {
-        background: #2563eb;
+        background: var(--color-button-hover);
       }
 
       svg {
@@ -722,7 +722,7 @@ interface BreakGlassAccess {
       font-size: 0.875rem;
 
       thead {
-        background: #f9fafb;
+        background: var(--color-bg-tertiary);
         position: sticky;
         top: 0;
         z-index: 10;
@@ -732,10 +732,10 @@ interface BreakGlassAccess {
         padding: 0.875rem 1rem;
         text-align: left;
         font-weight: 600;
-        color: #374151;
+        color: var(--color-text-primary);
         white-space: nowrap;
-        border-bottom: 1px solid #e5e7eb;
-        background: #f9fafb;
+        border-bottom: 1px solid var(--color-border);
+        background: var(--color-bg-tertiary);
         font-size: 0.75rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -743,7 +743,7 @@ interface BreakGlassAccess {
 
       td {
         padding: 0.875rem 1rem;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid var(--color-border);
         vertical-align: middle;
       }
 
@@ -994,25 +994,25 @@ interface BreakGlassAccess {
     }
 
     .btn-cancel {
-      background: white;
-      color: #374151;
-      border: 1px solid #d1d5db;
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
 
       &:hover {
-        background: #f9fafb;
+        background: var(--color-bg-tertiary);
       }
     }
 
     .btn-confirm {
-      background: #dc2626;
+      background: var(--color-button-bg);
       color: white;
 
       &:hover:not(:disabled) {
-        background: #b91c1c;
+        background: var(--color-button-hover);
       }
 
       &:disabled {
-        background: #d1d5db;
+        background: var(--color-border);
         cursor: not-allowed;
       }
     }
