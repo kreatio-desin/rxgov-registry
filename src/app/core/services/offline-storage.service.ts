@@ -102,6 +102,98 @@ export class OfflineStorageService {
     });
   }
 
+  private deleteAndRecreate(): Promise<IDBDatabase> {
+    return new Promise((resolve, reject) => {
+      console.warn('Attempting to delete and recreate database');
+      const deleteRequest = indexedDB.deleteDatabase(this.DB_NAME);
+
+      deleteRequest.onsuccess = () => {
+        console.log('Database deleted, recreating...');
+        // Now try to open again
+        const createRequest = indexedDB.open(this.DB_NAME, this.DB_VERSION);
+
+        createRequest.onsuccess = () => {
+          this.db = createRequest.result;
+          console.log('Database recreated');
+          resolve(this.db);
+        };
+
+        createRequest.onerror = () => {
+          console.error('Failed to recreate database');
+          reject(new Error('Failed to recreate database'));
+        };
+
+        createRequest.onupgradeneeded = (event) => {
+          console.log('Database upgrade needed during recreation');
+          this.createObjectStores((event.target as IDBOpenDBRequest).result);
+        };
+      };
+
+      deleteRequest.onerror = () => {
+        console.error('Failed to delete database');
+        reject(new Error('Failed to delete database'));
+      };
+    });
+  }
+
+  private createObjectStores(db: IDBDatabase): void {
+    // Patients store
+    if (!db.objectStoreNames.contains('patients')) {
+      const patientStore = db.createObjectStore('patients', { keyPath: 'id' });
+      patientStore.createIndex('lastName', 'lastName', { unique: false });
+      patientStore.createIndex('firstName', 'firstName', { unique: false });
+      patientStore.createIndex('ssn', 'ssn', { unique: false });
+      patientStore.createIndex('registryId', 'registryId', { unique: true });
+    }
+
+    // Facilities store
+    if (!db.objectStoreNames.contains('facilities')) {
+      db.createObjectStore('facilities', { keyPath: 'id' });
+    }
+
+    // Encounters store
+    if (!db.objectStoreNames.contains('encounters')) {
+      const encounterStore = db.createObjectStore('encounters', { keyPath: 'id' });
+      encounterStore.createIndex('patientId', 'patientId', { unique: false });
+      encounterStore.createIndex('syncStatus', 'syncStatus', { unique: false });
+    }
+
+    // Dosages store
+    if (!db.objectStoreNames.contains('dosages')) {
+      const dosageStore = db.createObjectStore('dosages', { keyPath: 'id' });
+      dosageStore.createIndex('patientId', 'patientId', { unique: false });
+      dosageStore.createIndex('date', 'date', { unique: false });
+    }
+
+    // Audit logs store
+    if (!db.objectStoreNames.contains('auditLogs')) {
+      const auditStore = db.createObjectStore('auditLogs', { keyPath: 'id' });
+      auditStore.createIndex('userId', 'userId', { unique: false });
+      auditStore.createIndex('timestamp', 'timestamp', { unique: false });
+    }
+
+    // Sync queue store
+    if (!db.objectStoreNames.contains('syncQueue')) {
+      const syncStore = db.createObjectStore('syncQueue', { keyPath: 'id' });
+      syncStore.createIndex('status', 'status', { unique: false });
+    }
+
+    // User consents store
+    if (!db.objectStoreNames.contains('userConsents')) {
+      const consentStore = db.createObjectStore('userConsents', { keyPath: 'id' });
+      consentStore.createIndex('patientId', 'patientId', { unique: false });
+      consentStore.createIndex('userId', 'userId', { unique: false });
+    }
+
+    // Transfers store
+    if (!db.objectStoreNames.contains('transfers')) {
+      const transferStore = db.createObjectStore('transfers', { keyPath: 'id' });
+      transferStore.createIndex('patientId', 'patientId', { unique: false });
+      transferStore.createIndex('status', 'status', { unique: false });
+      transferStore.createIndex('destinationFacilityId', 'destinationFacilityId', { unique: false });
+    }
+  }
+
   async ensureDbReady(): Promise<void> {
     await this.dbPromise;
   }
