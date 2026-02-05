@@ -428,13 +428,18 @@ export class PatientService {
     }
 
     // Privacy check:
-    // 1. If patient is enrolled at user's facility, allow access
-    // 2. If user has a break glass access token, allow access
-    // 3. Otherwise, deny access
-    const patientAtUserFacility = patient.currentEnrollment?.facilityId === userFacilityId;
+    // 1. If user has a break glass access token, allow access immediately
+    // 2. If patient is enrolled at user's facility, allow access
+    // 3. Otherwise, deny access only if patient is active elsewhere
     const hasAccessToken = this.hasAccessToken(patientId);
+    if (hasAccessToken) {
+      return patient;
+    }
 
-    if (!patientAtUserFacility && !hasAccessToken) {
+    const patientAtUserFacility = userFacilityId && patient.currentEnrollment?.facilityId === userFacilityId;
+    const isActiveElsewhere = patient.currentEnrollment?.status === 'active';
+
+    if (isActiveElsewhere && !patientAtUserFacility) {
       throw new Error('Access denied: Attestation required');
     }
 
