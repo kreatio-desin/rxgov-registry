@@ -1609,10 +1609,12 @@ export class AdminFacilitiesComponent implements OnInit {
       this.facilities = await this.facilityService.getAllFacilities();
       // Generate integration metrics for each facility
       this.facilityMetrics = {};
-      for (const facility of this.facilities) {
+      for (let i = 0; i < this.facilities.length; i++) {
+        const facility = this.facilities[i];
         this.facilityMetrics[facility.id] = {
           messageCount: Math.floor(Math.random() * 2000),
-          errorRate: Math.floor(Math.random() * 50) / 10
+          errorRate: Math.floor(Math.random() * 50) / 10,
+          vendor: this.vendorOptions[i % this.vendorOptions.length]
         };
       }
     } catch (error) {
