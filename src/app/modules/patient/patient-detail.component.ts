@@ -438,7 +438,7 @@ interface TransferForm {
                   </svg>
                   Transfer
                 </button>
-                <button class="management-btn inactive-btn" (click)="openInactiveModal()">
+                <button class="management-btn inactive-btn" *ngIf="currentUser && currentUser.role === 'facility-manager'" (click)="openInactiveModal()">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
