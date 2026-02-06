@@ -1834,6 +1834,11 @@ export class PatientDetailComponent implements OnInit {
     consentAttest: false,
   };
 
+  breakGlassTransferForm = {
+    destinationClinic: '',
+    consentAttest: false,
+  };
+
   availableFacilities: Facility[] = [];
 
   dosingHistory: DoseRecord[] = [
