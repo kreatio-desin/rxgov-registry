@@ -201,7 +201,7 @@ export class PatientService {
             phone: '(907) 555-0456',
           },
           currentEnrollment: {
-            facilityId: 'fac-cms-001',
+            facilityId: 'fac-cms-was-001',
             facilityName: 'Community Medical Services – Wasilla',
             moudType: 'Methadone',
             enrollmentDate: '2023-11-05',
@@ -230,7 +230,7 @@ export class PatientService {
             phone: '(907) 555-0567',
           },
           currentEnrollment: {
-            facilityId: 'fac-searhc-001',
+            facilityId: 'fac-searhc-ket-001',
             facilityName: 'SEARHC – Ketchikan',
             moudType: 'Buprenorphine',
             enrollmentDate: '2024-01-17',
