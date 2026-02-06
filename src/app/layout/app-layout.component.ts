@@ -38,11 +38,12 @@ import { AuthService, AuthUser } from '../core/services/auth.service';
               [routerLinkActiveOptions]="{ exact: true }"
               class="nav-item"
               title="My Clinic"
+              *ngIf="!currentUser || currentUser.role !== 'admin'"
             >
               <i class="bi bi-layout-dashboard"></i>
               <span class="nav-label">My Clinic</span>
             </a>
-            <a routerLink="/mmu" routerLinkActive="active" class="nav-item" title="Mobile Unit">
+            <a routerLink="/mmu" routerLinkActive="active" class="nav-item" title="Mobile Unit" *ngIf="!currentUser || currentUser.role !== 'admin'">
               <i class="bi bi-bus"></i>
               <span class="nav-label">Mobile Unit</span>
             </a>
