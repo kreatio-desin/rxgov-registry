@@ -2028,4 +2028,48 @@ export class PatientDetailComponent implements OnInit {
     // Placeholder for inactive functionality
     alert('Mark patient as Inactive functionality coming soon.');
   }
+
+  openBreakGlassTransferModal(): void {
+    this.breakGlassTransferForm = {
+      destinationClinic: '',
+      consentAttest: false,
+    };
+    this.showBreakGlassTransferModal = true;
+  }
+
+  closeBreakGlassTransferModal(): void {
+    this.showBreakGlassTransferModal = false;
+  }
+
+  async confirmBreakGlassTransfer(): Promise<void> {
+    if (!this.breakGlassTransferForm.consentAttest || !this.breakGlassTransferForm.destinationClinic) {
+      alert('Please select a facility and confirm patient consent.');
+      return;
+    }
+
+    const destinationFacility = this.availableFacilities.find(
+      (f) => f.id === this.breakGlassTransferForm.destinationClinic,
+    );
+
+    try {
+      await this.transferService.initiateTransfer({
+        patientId: this.patient?.registryId || '',
+        patientName: `${this.patient?.firstName} ${this.patient?.lastName}`,
+        sourceClinic: this.patient?.currentEnrollment?.facilityName || '',
+        destinationClinic: destinationFacility?.name || '',
+        destinationFacilityId: this.breakGlassTransferForm.destinationClinic,
+        transferDate: new Date().toISOString().split('T')[0],
+        transferNotes: 'Break glass access - emergency transfer',
+        status: 'pending',
+      });
+
+      alert(
+        `Transfer initiated for ${this.patient?.lastName}, ${this.patient?.firstName} to ${destinationFacility?.name}. The patient will be hidden from staff until the transfer is accepted.`,
+      );
+      this.closeBreakGlassTransferModal();
+    } catch (error) {
+      console.error('Error initiating transfer:', error);
+      alert('Failed to initiate transfer. Please try again.');
+    }
+  }
 }
