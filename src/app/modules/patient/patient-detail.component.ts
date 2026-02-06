@@ -2309,7 +2309,7 @@ export class PatientDetailComponent implements OnInit {
 
   openBreakGlassTransferModal(): void {
     this.breakGlassTransferForm = {
-      destinationClinic: '',
+      transferReason: '',
       consentAttest: false,
     };
     this.showBreakGlassTransferModal = true;
@@ -2320,29 +2320,28 @@ export class PatientDetailComponent implements OnInit {
   }
 
   async confirmBreakGlassTransfer(): Promise<void> {
-    if (!this.breakGlassTransferForm.consentAttest || !this.breakGlassTransferForm.destinationClinic) {
-      alert('Please select a facility and confirm patient consent.');
+    if (!this.breakGlassTransferForm.consentAttest) {
+      alert('Please confirm patient consent before proceeding with the transfer.');
       return;
     }
 
-    const destinationFacility = this.availableFacilities.find(
-      (f) => f.id === this.breakGlassTransferForm.destinationClinic,
-    );
-
     try {
+      // Get current user's facility (destination)
+      const currentUserFacility = await this.facilityService.getFacility(this.currentUser?.facilityId || '');
+
       await this.transferService.initiateTransfer({
         patientId: this.patient?.registryId || '',
         patientName: `${this.patient?.firstName} ${this.patient?.lastName}`,
         sourceClinic: this.patient?.currentEnrollment?.facilityName || '',
-        destinationClinic: destinationFacility?.name || '',
-        destinationFacilityId: this.breakGlassTransferForm.destinationClinic,
+        destinationClinic: currentUserFacility?.name || this.currentUser?.facilityName || '',
+        destinationFacilityId: this.currentUser?.facilityId || '',
         transferDate: new Date().toISOString().split('T')[0],
-        transferNotes: 'Break glass access - emergency transfer',
+        transferNotes: this.breakGlassTransferForm.transferReason || 'Emergency guest access transfer',
         status: 'pending',
       });
 
       alert(
-        `Transfer initiated for ${this.patient?.lastName}, ${this.patient?.firstName} to ${destinationFacility?.name}. The patient will be hidden from staff until the transfer is accepted.`,
+        `Transfer initiated for ${this.patient?.lastName}, ${this.patient?.firstName}. The patient will be added to the transfer queue and the facility manager will review the request.`,
       );
       this.closeBreakGlassTransferModal();
     } catch (error) {
