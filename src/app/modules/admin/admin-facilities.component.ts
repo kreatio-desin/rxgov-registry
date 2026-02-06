@@ -4,15 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { FacilityService } from '../../core/services/facility.service';
 import { AuthService } from '../../core/services/auth.service';
 
-interface Facility {
-  id: string;
-  name: string;
-  address: string;
-  phone: string;
-  autoInactivationDays: number;
-  createdAt?: string;
-  updatedAt?: string;
-}
 
 interface FacilityForm {
   name: string;
