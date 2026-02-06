@@ -1820,9 +1820,12 @@ export class PatientDetailComponent implements OnInit {
   patientNickname = '"Mav"';
   showAdministerDoseModal = false;
   showTransferModal = false;
+  showBreakGlassTransferModal = false;
   currentDateTime: string = '';
   currentTransferDate: string = '';
   currentUser: AuthUser | null = null;
+  hasBreakGlassAccess = false;
+  breakGlassAccessTime: Date | null = null;
 
   transferForm: TransferForm = {
     transferDate: '',
