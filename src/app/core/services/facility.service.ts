@@ -27,6 +27,7 @@ export interface Facility {
   updatedAt: string;
   lastVerified?: string;
   lastReviewedDate?: string;
+  autoInactivationDays?: number;
 }
 
 export interface MMUStop {
