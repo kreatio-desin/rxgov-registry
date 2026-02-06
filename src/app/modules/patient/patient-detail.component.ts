@@ -1918,79 +1918,79 @@ interface TransferForm {
         cursor: not-allowed;
       }
 
-      /* Break Glass Alert Styles */
-      .break-glass-alert {
-        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-        padding: 1rem 1.5rem;
-        margin: 0;
-        border-bottom: 2px solid #991b1b;
-      }
-
-      .alert-content {
+      /* Emergency Guest Access Banner */
+      .emergency-guest-banner {
+        background: #fef3c7;
+        border: 1px solid #fcd34d;
+        border-radius: 0.5rem;
+        padding: 0.75rem 1rem;
+        margin: 1.5rem;
         display: flex;
-        align-items: center;
-        gap: 1rem;
-        color: white;
-        max-width: 100%;
+        align-items: flex-start;
+        gap: 0.75rem;
       }
 
-      .alert-icon {
+      .banner-icon {
         flex-shrink: 0;
-        width: 24px;
-        height: 24px;
-        color: white;
-        animation: pulse 2s ease-in-out infinite;
+        width: 20px;
+        height: 20px;
+        color: #92400e;
+        margin-top: 0.125rem;
       }
 
-      @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.7; }
-      }
-
-      .alert-text {
+      .banner-content {
         flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
       }
 
-      .alert-title {
+      .banner-title {
+        margin: 0;
+        font-size: 0.875rem;
         font-weight: 600;
-        font-size: 0.95rem;
-        display: block;
+        color: #78350f;
       }
 
-      .alert-message {
-        font-size: 0.85rem;
-        opacity: 0.95;
-        display: block;
+      .banner-message {
+        margin: 0.25rem 0 0;
+        font-size: 0.875rem;
+        color: #92400e;
+        line-height: 1.5;
       }
 
-      .transfer-action-btn {
-        flex-shrink: 0;
-        background: white;
-        color: #dc2626;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 0.375rem;
-        font-size: 0.85rem;
+      .banner-message strong {
         font-weight: 600;
-        cursor: pointer;
+        color: #78350f;
+      }
+
+      /* Button Group for Header Actions */
+      .button-group {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        transition: all 0.2s;
-        white-space: nowrap;
+        gap: 0.75rem;
       }
 
-      .transfer-action-btn:hover {
-        background: #f3f4f6;
+      .transfer-to-facility-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: #f97316;
+        color: white;
+        border: none;
+        padding: 0.625rem 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .transfer-to-facility-btn:hover {
+        background: #ea580c;
         transform: translateY(-1px);
       }
 
-      .transfer-action-btn svg {
-        width: 16px;
-        height: 16px;
+      .transfer-to-facility-btn svg {
+        width: 18px;
+        height: 18px;
       }
 
       /* Alert Styles for Modal */
