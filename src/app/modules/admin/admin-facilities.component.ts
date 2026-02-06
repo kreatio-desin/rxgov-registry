@@ -585,6 +585,66 @@ interface MMUForm {
           </div>
         </div>
       </div>
+
+      <!-- Add/Edit MMU Modal -->
+      <div *ngIf="showMMUModal" class="modal-overlay" (click)="closeMMUModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <!-- Close Button -->
+          <button class="modal-close" (click)="closeMMUModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          </button>
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h2>{{ isEditingMMU ? 'Edit MMU' : 'Add New MMU' }}</h2>
+            <p>{{ isEditingMMU ? 'Update the Mobile Medication Unit information.' : 'Add a new Mobile Medication Unit to the system.' }}</p>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <div class="form-section">
+              <h4 class="section-title">Basic Information</h4>
+              <div class="form-group">
+                <label for="mmuName" class="form-label">
+                  MMU Name <span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="mmuName"
+                  name="mmuName"
+                  class="form-input"
+                  placeholder="e.g., Anchorage Mobile Unit 1"
+                  [(ngModel)]="mmuForm.name"
+                />
+              </div>
+              <div class="form-group">
+                <label for="clinicId" class="form-label">
+                  Assigned Facility <span class="required">*</span>
+                </label>
+                <select
+                  id="clinicId"
+                  name="clinicId"
+                  class="form-input"
+                  [(ngModel)]="mmuForm.facilityId"
+                >
+                  <option value="">-- Select a facility --</option>
+                  <option *ngFor="let facility of facilities" [value]="facility.id">{{ facility.name }}</option>
+                </select>
+                <p class="help-text">Select the facility that manages this MMU</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <button class="btn-cancel" (click)="closeMMUModal()">Cancel</button>
+            <button class="btn-save" (click)="saveMMU()">{{ isEditingMMU ? 'Update MMU' : 'Add MMU' }}</button>
+          </div>
+        </div>
+      </div>
     </div>
   `,
   styles: [`
