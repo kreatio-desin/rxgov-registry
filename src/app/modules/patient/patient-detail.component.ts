@@ -212,7 +212,7 @@ interface TransferForm {
       </div>
 
       <!-- Main Content -->
-      <div class="content-grid">
+      <div class="content-grid" *ngIf="!hidePatientContent">
         <!-- Left Column - Dosing History -->
         <div class="dosing-history-section">
           <div class="card">
