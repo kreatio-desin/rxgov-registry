@@ -1911,10 +1911,21 @@ export class PatientDetailComponent implements OnInit {
       try {
         const result = await this.patientService.getPatient(patientId);
         this.patient = result || null;
+
+        // Check if this is a break glass access scenario
+        this.checkBreakGlassStatus(patientId);
       } catch (error) {
         console.error('Failed to load patient:', error);
         this.patient = null;
       }
+    }
+  }
+
+  private checkBreakGlassStatus(patientId: string): void {
+    // Check if user has break glass access to this patient
+    if (this.patientService.hasAccessToken(patientId)) {
+      this.hasBreakGlassAccess = true;
+      this.breakGlassAccessTime = new Date();
     }
   }
 
