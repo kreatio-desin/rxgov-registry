@@ -172,7 +172,7 @@ export class PatientService {
             phone: '(907) 555-0345',
           },
           currentEnrollment: {
-            facilityId: 'fac-searhc-002',
+            facilityId: 'fac-searhc-jun-001',
             facilityName: 'SEARHC – Juneau',
             moudType: 'Buprenorphine',
             enrollmentDate: '2024-02-10',
