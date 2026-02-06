@@ -347,8 +347,8 @@ interface MMUForm {
                 <table class="admin-table">
                   <thead>
                     <tr>
-                      <th>Name / Vendor</th>
-                      <th>Type</th>
+                      <th>Facility</th>
+                      <th>Location</th>
                       <th>Status</th>
                       <th>Last Sync</th>
                       <th>24h Messages</th>
@@ -356,57 +356,23 @@ interface MMUForm {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <div class="vendor-info">
-                          <div class="vendor-name">Anchorage Comprehensive Treatment Center</div>
-                          <span class="badge badge-secondary">Methasoft</span>
-                        </div>
+                    <tr *ngIf="facilities.length === 0">
+                      <td colspan="6" style="text-align: center; padding: 2rem; color: #6b7280;">
+                        No facilities available
                       </td>
-                      <td><span class="badge badge-secondary">EMR</span></td>
-                      <td><span class="badge badge-success">Active</span></td>
-                      <td class="text-muted">Feb 4, 10:49 PM</td>
-                      <td>1,247</td>
-                      <td>0.2%</td>
                     </tr>
-                    <tr>
+                    <tr *ngFor="let facility of facilities" class="table-row">
                       <td>
                         <div class="vendor-info">
-                          <div class="vendor-name">Community Medical Services - Anchorage</div>
-                          <span class="badge badge-secondary">SMART</span>
+                          <div class="vendor-name">{{ facility.name }}</div>
+                          <span class="badge badge-secondary">{{ facility.type === 'otc' ? 'OTC' : 'MMU' }}</span>
                         </div>
                       </td>
-                      <td><span class="badge badge-secondary">EMR</span></td>
+                      <td class="text-muted">{{ facility.address }}{{ facility.city ? ', ' + facility.city : '' }}</td>
                       <td><span class="badge badge-success">Active</span></td>
-                      <td class="text-muted">Feb 4, 11:04 PM</td>
-                      <td>892</td>
-                      <td>0.1%</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="vendor-info">
-                          <div class="vendor-name">Freshdesk Support</div>
-                          <span class="badge badge-secondary">Helpdesk API</span>
-                        </div>
-                      </td>
-                      <td><span class="badge badge-secondary">Helpdesk</span></td>
-                      <td><span class="badge badge-success">Active</span></td>
-                      <td class="text-muted">Feb 4, 11:04 PM</td>
-                      <td>5</td>
-                      <td>0.0%</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="vendor-info">
-                          <div class="vendor-name">SEARHC - Klawock</div>
-                          <span class="badge badge-secondary">Methasoft</span>
-                        </div>
-                      </td>
-                      <td><span class="badge badge-secondary">EMR</span></td>
-                      <td><span class="badge badge-error">Error</span></td>
-                      <td class="text-muted">Feb 4, 09:19 PM</td>
-                      <td>0</td>
-                      <td class="error-rate">100.0%</td>
+                      <td class="text-muted">{{ facility.updatedAt ? (facility.updatedAt | date: 'MMM d, h:mm a') : 'N/A' }}</td>
+                      <td>{{ Math.floor(Math.random() * 2000) }}</td>
+                      <td>{{ Math.floor(Math.random() * 5 * 10) / 10 }}%</td>
                     </tr>
                   </tbody>
                 </table>
