@@ -62,7 +62,7 @@ interface FacilityForm {
                 </td>
                 <td>{{ facility.address }}{{ facility.city ? ', ' + facility.city : '' }}{{ facility.state ? ', ' + facility.state : '' }}</td>
                 <td>{{ facility.phone }}</td>
-                <td class="text-center">{{ facility.autoInactivationDays }}</td>
+                <td class="text-center">{{ facility.autoInactivationDays || 30 }}</td>
                 <td class="text-right">
                   <button class="btn-action edit" (click)="openEditModal(facility)" title="Edit facility">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
