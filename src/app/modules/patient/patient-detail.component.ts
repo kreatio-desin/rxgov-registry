@@ -58,17 +58,9 @@ interface TransferForm {
             <path d="M12 16 8 12"></path>
           </svg>
           <div class="alert-text">
-            <span class="alert-title">Emergency Glass Access Active</span>
+            <span class="alert-title">Emergency Guest Access Active</span>
             <span class="alert-message">You are viewing a patient from another facility. This session is being audited and you have access to this patient's details for 24 hours only.</span>
           </div>
-          <button class="transfer-action-btn" (click)="openBreakGlassTransferModal()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m14 7 5 5-5 5"></path>
-              <path d="M3.5 14H19"></path>
-              <path d="m10 17-7-7 7-7"></path>
-            </svg>
-            Transfer to This Facility
-          </button>
         </div>
       </div>
 
