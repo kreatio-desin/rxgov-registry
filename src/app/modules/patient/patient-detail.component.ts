@@ -827,6 +827,76 @@ interface TransferForm {
           </div>
         </div>
       </div>
+
+      <!-- Break Glass Transfer Modal -->
+      <div *ngIf="showBreakGlassTransferModal" class="modal-overlay" (click)="closeBreakGlassTransferModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <!-- Close Button -->
+          <button class="modal-close" (click)="closeBreakGlassTransferModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          </button>
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h2>Transfer Patient to Your Clinic</h2>
+            <p>Transfer {{ patient?.lastName }}, {{ patient?.firstName }} from {{ patient?.currentEnrollment?.facilityName }} to {{ currentUser?.facilityName }}.</p>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <!-- Patient Consent Alert -->
+            <div class="alert alert-info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="alert-icon">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+              </svg>
+              <div>
+                <strong>Patient Consent Required</strong>
+                <p>This action requires documented patient consent for transfer of care. Ensure you have obtained verbal or written consent before proceeding.</p>
+              </div>
+            </div>
+
+            <!-- Destination Facility Selection -->
+            <div class="form-group">
+              <label class="form-label">Select Destination Facility</label>
+              <select class="form-input" [(ngModel)]="breakGlassTransferForm.destinationClinic">
+                <option value="">-- Select a facility --</option>
+                <option *ngFor="let facility of availableFacilities" [value]="facility.id">
+                  {{ facility.name }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Consent Checkbox -->
+            <div class="checkbox-group">
+              <input
+                type="checkbox"
+                id="break-glass-consent"
+                [(ngModel)]="breakGlassTransferForm.consentAttest"
+                class="form-checkbox"
+              />
+              <label for="break-glass-consent" class="checkbox-label">
+                I confirm that patient consent has been obtained and documented for this transfer of care.
+              </label>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <button class="btn-cancel" (click)="closeBreakGlassTransferModal()">Cancel</button>
+            <button
+              class="btn-confirm"
+              (click)="confirmBreakGlassTransfer()"
+              [disabled]="!breakGlassTransferForm.consentAttest || !breakGlassTransferForm.destinationClinic"
+            >
+              Complete Transfer
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   `,
   styles: [
