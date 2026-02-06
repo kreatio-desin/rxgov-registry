@@ -663,8 +663,7 @@ export class AdminFacilitiesComponent implements OnInit {
     return (
       this.facilityForm.name.trim().length > 0 &&
       this.facilityForm.address.trim().length > 0 &&
-      this.facilityForm.phone.trim().length > 0 &&
-      this.facilityForm.autoInactivationDays > 0
+      this.facilityForm.phone.trim().length > 0
     );
   }
 }
