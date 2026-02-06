@@ -604,7 +604,7 @@ export class AdminFacilitiesComponent implements OnInit {
       name: facility.name,
       address: facility.address,
       phone: facility.phone,
-      autoInactivationDays: facility.autoInactivationDays
+      autoInactivationDays: facility.autoInactivationDays || 30
     };
     this.showModal = true;
   }
