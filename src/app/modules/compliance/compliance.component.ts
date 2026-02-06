@@ -385,15 +385,15 @@ interface BreakGlassAccess {
               <h4>Patient Information</h4>
               <div class="detail-row">
                 <span class="detail-label">Patient ID:</span>
-                <span class="detail-value">{{ breakGlassData?.patientId }}</span>
+                <span class="detail-value">{{ breakGlassData.patientId }}</span>
               </div>
               <div class="detail-row">
                 <span class="detail-label">Patient Name:</span>
-                <span class="detail-value">{{ breakGlassData?.patientName }}</span>
+                <span class="detail-value">{{ breakGlassData.patientName }}</span>
               </div>
               <div class="detail-row">
                 <span class="detail-label">Home Facility:</span>
-                <span class="detail-value">{{ breakGlassData?.patientFacilityId }}</span>
+                <span class="detail-value">{{ breakGlassData.patientFacilityId }}</span>
               </div>
             </div>
 
