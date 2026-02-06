@@ -1559,16 +1559,27 @@ interface MMUForm {
 })
 export class AdminFacilitiesComponent implements OnInit {
   facilities: Facility[] = [];
+  mmus: any[] = [];
   showModal = false;
   isEditMode = false;
   editingFacilityId: string | null = null;
+  showMMUModal = false;
+  isEditingMMU = false;
+  editingMMUId: string | null = null;
   activeTab: 'facilities' | 'mmus' | 'audit' | 'integrations' | 'emergency' = 'facilities';
+  selectedFacilityForEmergency = '';
+  Math = Math;
 
   facilityForm: FacilityForm = {
     name: '',
     address: '',
     phone: '',
     autoInactivationDays: 30
+  };
+
+  mmuForm: MMUForm = {
+    name: '',
+    facilityId: ''
   };
 
   constructor(
