@@ -3117,6 +3117,8 @@ export class MMUComponent implements OnInit, AfterViewInit {
     const query = this.patientSearchQuery.toLowerCase();
 
     // Search in patient database
+    // Patients are restricted if they belong to a different facility than the current user
+    // (not based on the stop's facility, but the user's facility)
     this.patientSearchResults = this.patientsDatabase
       .filter(
         (patient) =>
@@ -3126,7 +3128,8 @@ export class MMUComponent implements OnInit, AfterViewInit {
       )
       .map((patient) => ({
         patient,
-        isRestricted: patient.facilityId !== selectedStop.facilityId || patient.isRestricted,
+        // Patient is restricted if they belong to a different facility than the current user
+        isRestricted: patient.facilityId !== this.currentUser?.facilityId,
       }));
   }
 
