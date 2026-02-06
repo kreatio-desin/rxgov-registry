@@ -2710,19 +2710,19 @@ export class MMUComponent implements OnInit, AfterViewInit {
       id: '1',
       name: 'Downtown Shelter',
       address: '100 E 4th Ave',
-      facilityId: 'facility1',
+      facilityId: 'fac-act-001',
     },
     {
       id: '2',
       name: 'Muldoon Library',
       address: '1251 Muldoon Rd',
-      facilityId: 'facility1',
+      facilityId: 'fac-act-001',
     },
     {
       id: '3',
       name: 'fairview street',
       address: 'Fairview street',
-      facilityId: 'facility1',
+      facilityId: 'fac-act-001',
     },
   ];
 
@@ -2732,43 +2732,43 @@ export class MMUComponent implements OnInit, AfterViewInit {
       id: '1',
       name: 'Downtown Shelter',
       address: '100 E 4th Ave',
-      facilityId: 'facility1',
+      facilityId: 'fac-act-001',
     },
     {
       id: '2',
       name: 'Muldoon Library',
       address: '1251 Muldoon Rd',
-      facilityId: 'facility1',
+      facilityId: 'fac-act-001',
     },
     {
       id: '3',
       name: 'fairview street',
       address: 'Fairview street',
-      facilityId: 'facility1',
+      facilityId: 'fac-act-001',
     },
     {
       id: '4',
       name: 'Fairview Rec Center',
       address: '1121 E 10th Ave',
-      facilityId: 'facility1',
+      facilityId: 'fac-act-001',
     },
     {
       id: '5',
       name: 'Eldercare Center',
       address: '456 Park Ave',
-      facilityId: 'facility1',
+      facilityId: 'fac-act-001',
     },
     {
       id: '6',
       name: 'Community Clinic',
       address: '789 Market St',
-      facilityId: 'facility1',
+      facilityId: 'fac-act-001',
     },
     {
       id: '7',
       name: 'Youth Services',
       address: '321 Main St',
-      facilityId: 'facility1',
+      facilityId: 'fac-act-001',
     },
   ];
 
@@ -3006,7 +3006,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
         id: Math.random().toString(36).substr(2, 9),
         name: this.newStopName,
         address: this.newStopAddress,
-        facilityId: 'facility1',
+        facilityId: 'fac-act-001',
       };
 
       // Add to route stops
@@ -3017,7 +3017,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
         id: newStop.id,
         name: newStop.name,
         address: newStop.address,
-        facilityId: 'facility1',
+        facilityId: 'fac-act-001',
       });
 
       this.closeAddStopDialog();
