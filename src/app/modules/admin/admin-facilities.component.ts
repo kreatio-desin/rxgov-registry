@@ -308,8 +308,100 @@ interface FacilityForm {
       <!-- Integrations Tab -->
       <div *ngIf="activeTab === 'integrations'" class="tab-content">
         <div class="tab-section">
-          <div class="empty-state">
-            <p>Integrations coming soon...</p>
+          <div class="integrations-header">
+            <div>
+              <h3 class="section-title flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="integration-icon">
+                  <path d="M17 19a1 1 0 0 1-1-1v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2a1 1 0 0 1-1 1z"></path>
+                  <path d="M17 21v-2"></path>
+                  <path d="M19 14V6.5a1 1 0 0 0-7 0v11a1 1 0 0 1-7 0V10"></path>
+                  <path d="M21 21v-2"></path>
+                  <path d="M3 5V3"></path>
+                  <path d="M4 10a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2a2 2 0 0 1-2 2z"></path>
+                  <path d="M7 5V3"></path>
+                </svg>
+                OTP System Integrations
+              </h3>
+              <p class="section-description">Manage modern FHIR R4 and legacy HL7 v2.5.1 connections to external OTP systems.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Configured Connections</h4>
+              <p class="card-description">Manage MLLP listeners, IP whitelisting, and HL7 message mappings for each vendor.</p>
+            </div>
+
+            <div class="card-content">
+              <div class="table-wrapper">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Name / Vendor</th>
+                      <th>Type</th>
+                      <th>Status</th>
+                      <th>Last Sync</th>
+                      <th>24h Messages</th>
+                      <th>Error Rate</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="vendor-info">
+                          <div class="vendor-name">Anchorage Comprehensive Treatment Center</div>
+                          <span class="badge badge-secondary">Methasoft</span>
+                        </div>
+                      </td>
+                      <td><span class="badge badge-secondary">EMR</span></td>
+                      <td><span class="badge badge-success">Active</span></td>
+                      <td class="text-muted">Feb 4, 10:49 PM</td>
+                      <td>1,247</td>
+                      <td>0.2%</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="vendor-info">
+                          <div class="vendor-name">Community Medical Services - Anchorage</div>
+                          <span class="badge badge-secondary">SMART</span>
+                        </div>
+                      </td>
+                      <td><span class="badge badge-secondary">EMR</span></td>
+                      <td><span class="badge badge-success">Active</span></td>
+                      <td class="text-muted">Feb 4, 11:04 PM</td>
+                      <td>892</td>
+                      <td>0.1%</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="vendor-info">
+                          <div class="vendor-name">Freshdesk Support</div>
+                          <span class="badge badge-secondary">Helpdesk API</span>
+                        </div>
+                      </td>
+                      <td><span class="badge badge-secondary">Helpdesk</span></td>
+                      <td><span class="badge badge-success">Active</span></td>
+                      <td class="text-muted">Feb 4, 11:04 PM</td>
+                      <td>5</td>
+                      <td>0.0%</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="vendor-info">
+                          <div class="vendor-name">SEARHC - Klawock</div>
+                          <span class="badge badge-secondary">Methasoft</span>
+                        </div>
+                      </td>
+                      <td><span class="badge badge-secondary">EMR</span></td>
+                      <td><span class="badge badge-error">Error</span></td>
+                      <td class="text-muted">Feb 4, 09:19 PM</td>
+                      <td>0</td>
+                      <td class="error-rate">100.0%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
