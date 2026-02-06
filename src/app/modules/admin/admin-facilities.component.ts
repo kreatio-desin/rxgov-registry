@@ -434,10 +434,9 @@ interface MMUForm {
               <div class="card-content">
                 <div class="form-group">
                   <label class="form-label">Target Facility</label>
-                  <select class="form-input">
-                    <option>Anchorage Comprehensive Treatment Center</option>
-                    <option>Community Medical Services - Anchorage</option>
-                    <option>Narcotic Drug Treatment Center (NDTC)</option>
+                  <select class="form-input" [(ngModel)]="selectedFacilityForEmergency">
+                    <option value="">-- Select a facility --</option>
+                    <option *ngFor="let facility of facilities" [value]="facility.id">{{ facility.name }}</option>
                   </select>
                 </div>
 
