@@ -2302,6 +2302,28 @@ export class PatientDetailComponent implements OnInit {
     // If same facility, no break glass needed
   }
 
+  confirmBreakGlassAttestation(): void {
+    if (!this.breakGlassPatientId) return;
+
+    // Grant access token to the patient
+    this.patientService.grantAccessViaAttestation(
+      this.breakGlassPatientId,
+      this.currentUser?.id || '',
+      'Emergency break glass access for patient viewing',
+    );
+
+    // Hide attestation popup and show patient content
+    this.showBreakGlassAttestation = false;
+    this.hidePatientContent = false;
+    this.hasBreakGlassAccess = true;
+    this.breakGlassAccessTime = new Date();
+  }
+
+  cancelBreakGlassAttestation(): void {
+    // Go back without granting access
+    this.goBack();
+  }
+
   goBack(): void {
     this.router.navigate(['/']);
   }
