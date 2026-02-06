@@ -370,7 +370,9 @@ import { ThemeService } from '../../core/services/theme.service';
         color: var(--color-text-primary);
       }
 
-      > p {
+      .role-selection > p,
+      .account-selection > p,
+      .login-form > p {
         margin: 0 0 1.5rem 0;
         font-size: 0.875rem;
         color: var(--color-text-secondary);
