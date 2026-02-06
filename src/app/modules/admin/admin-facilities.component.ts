@@ -12,6 +12,11 @@ interface FacilityForm {
   autoInactivationDays: number | undefined;
 }
 
+interface MMUForm {
+  name: string;
+  facilityId: string;
+}
+
 @Component({
   selector: 'app-admin-facilities',
   standalone: true,
