@@ -60,7 +60,7 @@ interface FacilityForm {
                   </div>
                   {{ facility.name }}
                 </td>
-                <td>{{ facility.address }}</td>
+                <td>{{ facility.address }}{{ facility.city ? ', ' + facility.city : '' }}{{ facility.state ? ', ' + facility.state : '' }}</td>
                 <td>{{ facility.phone }}</td>
                 <td class="text-center">{{ facility.autoInactivationDays }}</td>
                 <td class="text-right">
