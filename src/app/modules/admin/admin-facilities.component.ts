@@ -579,16 +579,7 @@ export class AdminFacilitiesComponent implements OnInit {
 
   async loadFacilities(): Promise<void> {
     try {
-      const allFacilities = await this.facilityService.getAllFacilities();
-      this.facilities = allFacilities.map(f => ({
-        id: f.id,
-        name: f.name,
-        address: f.address || '',
-        phone: f.phone || '',
-        autoInactivationDays: f.autoInactivationDays || 30,
-        createdAt: f.createdAt,
-        updatedAt: f.updatedAt
-      }));
+      this.facilities = await this.facilityService.getAllFacilities();
     } catch (error) {
       console.error('Error loading facilities:', error);
     }
