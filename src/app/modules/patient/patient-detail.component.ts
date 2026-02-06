@@ -1993,43 +1993,151 @@ interface TransferForm {
         height: 18px;
       }
 
-      /* Alert Styles for Modal */
-      .alert {
+      /* Break Glass Modal Styles */
+      .break-glass-modal {
+        max-width: 28rem;
+      }
+
+      .modal-title {
+        margin: 0;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
         display: flex;
-        gap: 0.75rem;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .title-icon {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+      }
+
+      .modal-description {
+        margin: 0.5rem 0 0;
+        font-size: 0.875rem;
+        color: #6b7280;
+      }
+
+      .break-glass-body {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      /* Consent Alert */
+      .consent-alert {
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
         padding: 1rem;
         border-radius: 0.375rem;
         font-size: 0.875rem;
-        margin-bottom: 1.5rem;
       }
 
-      .alert-icon {
-        flex-shrink: 0;
-        width: 20px;
-        height: 20px;
-        margin-top: 0.125rem;
-      }
-
-      .alert.alert-info {
-        background: #eff6ff;
-        border: 1px solid #bfdbfe;
-        border-left: 4px solid #3b82f6;
+      .consent-title {
+        margin: 0 0 0.5rem;
+        font-weight: 600;
         color: #1e40af;
       }
 
-      .alert.alert-info .alert-icon {
-        color: #3b82f6;
-      }
-
-      .alert strong {
-        display: block;
-        font-weight: 600;
-        margin-bottom: 0.25rem;
-      }
-
-      .alert p {
+      .consent-message {
         margin: 0;
-        opacity: 0.9;
+        color: #1e40af;
+        line-height: 1.5;
+      }
+
+      /* Textarea */
+      .form-textarea {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-family: inherit;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        resize: vertical;
+        transition: border-color 0.2s;
+      }
+
+      .form-textarea:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .form-textarea::placeholder {
+        color: #9ca3af;
+      }
+
+      /* Checkbox Container */
+      .checkbox-container {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .form-checkbox {
+        width: 16px;
+        height: 16px;
+        margin-top: 0.125rem;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      .checkbox-label {
+        font-size: 0.875rem;
+        color: var(--color-text-primary);
+        cursor: pointer;
+        line-height: 1.5;
+      }
+
+      /* Modal Footer Buttons */
+      .btn-primary,
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s;
+        height: 2.25rem;
+      }
+
+      .btn-primary {
+        background: var(--color-button-bg);
+        color: white;
+      }
+
+      .btn-primary:hover:not(:disabled) {
+        background: var(--color-button-hover);
+      }
+
+      .btn-primary:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .btn-secondary {
+        background: var(--color-bg-primary);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-primary);
+      }
+
+      .btn-secondary:hover {
+        background: var(--color-bg-tertiary);
+      }
+
+      .button-icon {
+        width: 18px;
+        height: 18px;
+        margin-right: 0.25rem;
       }
 
       .form-group {
