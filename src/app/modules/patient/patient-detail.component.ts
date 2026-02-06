@@ -47,20 +47,16 @@ interface TransferForm {
   imports: [CommonModule, FormsModule],
   template: `
     <div class="patient-record-container">
-      <!-- Break Glass Warning Alert -->
-      <div *ngIf="hasBreakGlassAccess" class="break-glass-alert">
-        <div class="alert-content">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="alert-icon">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="m12 16 4-4"></path>
-            <path d="m12 8 4 4"></path>
-            <path d="M12 8 8 12"></path>
-            <path d="M12 16 8 12"></path>
-          </svg>
-          <div class="alert-text">
-            <span class="alert-title">Emergency Guest Access Active</span>
-            <span class="alert-message">You are viewing a patient from another facility. This session is being audited and you have access to this patient's details for 24 hours only.</span>
-          </div>
+      <!-- Emergency Guest Access Banner -->
+      <div *ngIf="hasBreakGlassAccess" class="emergency-guest-banner">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="banner-icon">
+          <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+          <path d="M12 8v4"></path>
+          <path d="M12 16h.01"></path>
+        </svg>
+        <div class="banner-content">
+          <h4 class="banner-title">Emergency Guest Access Active</h4>
+          <p class="banner-message">You are viewing a restricted record from <strong>{{ patient?.currentEnrollment?.facilityName }}</strong>. This session is being audited. Access will expire in 24 hours.</p>
         </div>
       </div>
 
