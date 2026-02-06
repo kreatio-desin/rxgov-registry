@@ -21,19 +21,70 @@ interface FacilityForm {
       <!-- Page Header -->
       <div class="page-header">
         <div class="header-content">
-          <h1 class="page-title">Facility Management</h1>
-          <p class="page-description">Manage treatment centers and their configurations</p>
+          <h1 class="page-title">System Settings and Data Quality</h1>
+          <p class="page-description">Monitor automated integration health and resolve data exceptions.</p>
         </div>
-        <button class="btn-add-facility" (click)="openAddModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
-            <path d="M5 12h14"></path>
-            <path d="M12 5v14"></path>
-          </svg>
-          Add Facility
-        </button>
       </div>
 
-      <!-- Facilities Table -->
+      <!-- Tab Navigation -->
+      <div class="tabs-container">
+        <div class="tabs-header">
+          <button
+            class="tab-button"
+            [class.active]="activeTab === 'facilities'"
+            (click)="activeTab = 'facilities'"
+          >
+            Facilities
+          </button>
+          <button
+            class="tab-button"
+            [class.active]="activeTab === 'mmus'"
+            (click)="activeTab = 'mmus'"
+          >
+            MMUs
+          </button>
+          <button
+            class="tab-button"
+            [class.active]="activeTab === 'audit'"
+            (click)="activeTab = 'audit'"
+          >
+            Audit Logs
+          </button>
+          <button
+            class="tab-button"
+            [class.active]="activeTab === 'integrations'"
+            (click)="activeTab = 'integrations'"
+          >
+            Integrations
+          </button>
+          <button
+            class="tab-button"
+            [class.active]="activeTab === 'emergency'"
+            (click)="activeTab = 'emergency'"
+          >
+            Emergency
+          </button>
+        </div>
+      </div>
+
+      <!-- Facilities Tab -->
+      <div *ngIf="activeTab === 'facilities'" class="tab-content">
+        <div class="tab-section">
+          <div class="section-header">
+            <div class="section-header-content">
+              <h3 class="section-title">Registered Treatment Centers</h3>
+              <p class="section-description">Manage contact details and key personnel for all connected facilities.</p>
+            </div>
+            <button class="btn-add-facility" (click)="openAddModal()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                <path d="M5 12h14"></path>
+                <path d="M12 5v14"></path>
+              </svg>
+              Add Facility
+            </button>
+          </div>
+
+          <!-- Facilities Table -->
       <div class="card">
         <div class="table-wrapper">
           <table class="facilities-table">
