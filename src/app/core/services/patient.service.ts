@@ -354,7 +354,7 @@ export class PatientService {
     // Get all patients to search
     const allPatients = await this.offlineStorage.getAll<Patient>('patients');
 
-    // Search for matches by SSN first (primary identifier), then by name + DOB
+    // Search for matches by SSN first (primary identifier), then by name + DOB, then by name only
     let exactMatches: Patient[] = [];
 
     if (ssn) {
@@ -363,12 +363,21 @@ export class PatientService {
     }
 
     // If no SSN match, search by name + DOB
-    if (exactMatches.length === 0) {
+    if (exactMatches.length === 0 && dateOfBirth) {
       exactMatches = allPatients.filter(
         (p) =>
           p.firstName.toLowerCase() === firstName.toLowerCase() &&
           p.lastName.toLowerCase() === lastName.toLowerCase() &&
           p.dateOfBirth === dateOfBirth,
+      );
+    }
+
+    // If still no match and we have name, search by name only (for quick lookups)
+    if (exactMatches.length === 0 && firstName && lastName) {
+      exactMatches = allPatients.filter(
+        (p) =>
+          p.firstName.toLowerCase() === firstName.toLowerCase() &&
+          p.lastName.toLowerCase() === lastName.toLowerCase(),
       );
     }
 
