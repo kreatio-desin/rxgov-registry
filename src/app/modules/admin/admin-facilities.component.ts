@@ -278,15 +278,11 @@ interface FacilityForm {
   `,
   styles: [`
     .admin-facilities-container {
-      padding: 0 1.5rem 2rem;
+      padding: 1.5rem;
     }
 
     .page-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       margin-bottom: 2rem;
-      gap: 1rem;
     }
 
     .header-content {
@@ -305,6 +301,95 @@ interface FacilityForm {
       margin: 0;
       font-size: 0.875rem;
       color: #6b7280;
+    }
+
+    /* Tabs Styling */
+    .tabs-container {
+      margin-bottom: 2rem;
+    }
+
+    .tabs-header {
+      display: flex;
+      gap: 0;
+      background: #f3f4f6;
+      border-radius: 0.75rem;
+      padding: 0.25rem;
+    }
+
+    .tab-button {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      background: transparent;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #6b7280;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        color: #374151;
+      }
+
+      &.active {
+        background: white;
+        color: #1f2937;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .tab-content {
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .tab-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .section-header-content {
+      flex: 1;
+    }
+
+    .section-title {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1f2937;
+      line-height: 1.5rem;
+    }
+
+    .section-description {
+      margin: 0;
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    .empty-state {
+      padding: 2rem;
+      text-align: center;
+      color: #6b7280;
+      background: var(--color-bg-primary);
+      border: 1px solid var(--color-border);
+      border-radius: 0.5rem;
     }
 
     .btn-add-facility {
