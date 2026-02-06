@@ -143,7 +143,7 @@ export class PatientService {
             phone: '(907) 555-0234',
           },
           currentEnrollment: {
-            facilityId: 'fac-searhc-001',
+            facilityId: 'fac-searhc-ket-001',
             facilityName: 'SEARHC – Ketchikan',
             moudType: 'Methadone',
             enrollmentDate: '2024-08-20',
