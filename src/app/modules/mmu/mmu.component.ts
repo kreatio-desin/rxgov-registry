@@ -38,6 +38,10 @@ interface Patient {
   lastDoseHours?: number;
   takeHomeStatus?: string;
   recentDoses?: DoseRecord[];
+  currentEnrollment?: {
+    facilityId: string;
+    facilityName: string;
+  };
 }
 
 interface DoseRecord {
