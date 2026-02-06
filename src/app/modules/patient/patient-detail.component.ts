@@ -2202,6 +2202,46 @@ interface TransferForm {
         white-space: nowrap;
         border-width: 0;
       }
+
+      /* Break Glass Attestation Modal Styles */
+      .break-glass-attestation-modal {
+        max-width: 32rem;
+      }
+
+      .break-glass-attestation-body {
+        padding: 1.5rem;
+      }
+
+      .warning-alert {
+        background-color: #fef3c7;
+        border: 1px solid #fcd34d;
+        border-radius: 0.375rem;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .warning-title {
+        font-weight: 600;
+        color: #92400e;
+        margin-bottom: 0.5rem;
+      }
+
+      .warning-message {
+        color: #78350f;
+        font-size: 0.875rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .warning-list {
+        list-style: disc;
+        margin-left: 1.25rem;
+        color: #78350f;
+      }
+
+      .warning-list li {
+        font-size: 0.875rem;
+        margin-bottom: 0.375rem;
+      }
     `,
   ],
 })
