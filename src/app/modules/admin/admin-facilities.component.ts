@@ -592,7 +592,7 @@ export class AdminFacilitiesComponent implements OnInit {
       name: '',
       address: '',
       phone: '',
-      autoInactivationDays: 30
+      autoInactivationDays: 30 as number
     };
     this.showModal = true;
   }
