@@ -87,12 +87,25 @@ export class PatientService {
     const existingPatients = await this.offlineStorage.getAll<Patient>('patients');
 
     // Check if we need to reload - if SSN is in old format (just last 4 digits)
-    const needsReload =
-      existingPatients.length > 0 && existingPatients[0].ssn && existingPatients[0].ssn.length <= 4; // Old format was just '1234'
+    // Also reload if data is inconsistent (e.g., wrong facility names)
+    const hasOldFormat =
+      existingPatients.length > 0 && existingPatients[0].ssn && existingPatients[0].ssn.length <= 4;
+    const hasInconsistentFacilities =
+      existingPatients.length > 0 &&
+      existingPatients.some(
+        (p) =>
+          (p.currentEnrollment?.facilityId === 'fac-cms-was-001' ||
+            p.currentEnrollment?.facilityId === 'fac-searhc-ket-001' ||
+            p.currentEnrollment?.facilityId === 'fac-searhc-jun-001') &&
+          p.currentEnrollment?.facilityName?.includes('Wasilla|Ketchikan|Juneau'),
+      );
+
+    const needsReload = hasOldFormat || hasInconsistentFacilities;
 
     if (existingPatients.length === 0 || needsReload) {
       if (needsReload) {
         await this.offlineStorage.clear('patients');
+        console.log('Cleared inconsistent patient data, reloading...');
       }
       const samplePatients: Patient[] = [
         {
