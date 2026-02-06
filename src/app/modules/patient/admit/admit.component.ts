@@ -12,6 +12,7 @@ import { PatientService } from '../../../core/services/patient.service';
 import { FacilityService, Facility } from '../../../core/services/facility.service';
 import { AuditService } from '../../../core/services/audit.service';
 import { SyncService } from '../../../core/services/sync.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 type EnrollmentStep = 'demographics' | 'duplicate-check' | 'clinical' | 'consents';
 
