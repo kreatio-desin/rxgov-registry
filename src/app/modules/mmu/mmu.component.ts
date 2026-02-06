@@ -2799,6 +2799,10 @@ export class MMUComponent implements OnInit, AfterViewInit {
         { date: '02/05', time: '1:18 PM', type: 'Observed', amount: '90mg' },
         { date: '02/04', time: '1:33 PM', type: 'Observed', amount: '90mg' },
       ],
+      currentEnrollment: {
+        facilityId: 'fac-act-001',
+        facilityName: 'Anchorage Comprehensive Treatment Center',
+      },
     },
     {
       id: 'pat2',
@@ -2819,6 +2823,10 @@ export class MMUComponent implements OnInit, AfterViewInit {
         { date: '02/04', time: '10:15 AM', type: 'Observed', amount: '8mg' },
         { date: '02/03', time: '9:45 AM', type: 'Observed', amount: '8mg' },
       ],
+      currentEnrollment: {
+        facilityId: 'fac-cms-anc-001',
+        facilityName: 'Community Medical Services – Anchorage',
+      },
     },
     {
       id: 'pat3',
@@ -2839,6 +2847,10 @@ export class MMUComponent implements OnInit, AfterViewInit {
         { date: '02/04', time: '3:15 PM', type: 'Observed', amount: '50mg' },
         { date: '02/03', time: '2:45 PM', type: 'Observed', amount: '50mg' },
       ],
+      currentEnrollment: {
+        facilityId: 'fac-cms-anc-001',
+        facilityName: 'Community Medical Services – Anchorage',
+      },
     },
     {
       id: 'pat4',
@@ -2859,6 +2871,10 @@ export class MMUComponent implements OnInit, AfterViewInit {
         { date: '02/04', time: '8:45 AM', type: 'Observed', amount: '60mg' },
         { date: '02/03', time: '9:15 AM', type: 'Observed', amount: '60mg' },
       ],
+      currentEnrollment: {
+        facilityId: 'fac-act-001',
+        facilityName: 'Anchorage Comprehensive Treatment Center',
+      },
     },
   ];
 
