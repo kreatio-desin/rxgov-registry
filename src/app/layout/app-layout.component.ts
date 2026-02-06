@@ -68,6 +68,16 @@ import { AuthService, AuthUser } from '../core/services/auth.service';
               <i class="bi bi-file-earmark-bar-graph"></i>
               <span class="nav-label">Reports</span>
             </a>
+            <a
+              routerLink="/admin/facilities"
+              routerLinkActive="active"
+              class="nav-item"
+              title="Administration"
+              *ngIf="currentUser && currentUser.role === 'admin'"
+            >
+              <i class="bi bi-gear"></i>
+              <span class="nav-label">Administration</span>
+            </a>
           </nav>
 
           <!-- Bottom Navigation -->
