@@ -86,8 +86,7 @@ export class PatientService {
     await this.offlineStorage.ensureDbReady();
     const existingPatients = await this.offlineStorage.getAll<Patient>('patients');
 
-    // Check if we need to reload - if SSN is in old format (just last 4 digits)
-    // Also reload if data is inconsistent (e.g., patients assigned to non-existent facilities)
+    // Check if we need to reload - multiple conditions
     const hasOldFormat =
       existingPatients.length > 0 && existingPatients[0].ssn && existingPatients[0].ssn.length <= 4;
 
@@ -97,12 +96,32 @@ export class PatientService {
       existingPatients.length > 0 &&
       existingPatients.some((p) => !validFacilityIds.includes(p.currentEnrollment?.facilityId || ''));
 
-    const needsReload = hasOldFormat || hasInvalidFacilities;
+    // Check if any patient has wrong facility name for their ID
+    const hasInconsistentFacilityNames =
+      existingPatients.length > 0 &&
+      existingPatients.some((p) => {
+        if (p.currentEnrollment?.facilityId === 'fac-act-001') {
+          return p.currentEnrollment?.facilityName !== 'Anchorage Comprehensive Treatment Center';
+        }
+        if (p.currentEnrollment?.facilityId === 'fac-cms-anc-001') {
+          return p.currentEnrollment?.facilityName !== 'Community Medical Services – Anchorage';
+        }
+        return false;
+      });
+
+    const needsReload = hasOldFormat || hasInvalidFacilities || hasInconsistentFacilityNames;
 
     if (existingPatients.length === 0 || needsReload) {
       if (needsReload) {
         await this.offlineStorage.clear('patients');
-        console.log('Cleared inconsistent patient data, reloading with correct facilities...');
+        console.warn(
+          '🔄 PATIENT DATA CACHE RESET: Data was inconsistent. Reloading with correct facility assignments...',
+        );
+        console.log('Reset reason:', {
+          hasOldFormat,
+          hasInvalidFacilities,
+          hasInconsistentFacilityNames,
+        });
       }
       const samplePatients: Patient[] = [
         {
