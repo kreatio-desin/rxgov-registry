@@ -1680,4 +1680,68 @@ export class AdminFacilitiesComponent implements OnInit {
       this.facilityForm.phone.trim().length > 0
     );
   }
+
+  openAddMMUModal(): void {
+    this.isEditingMMU = false;
+    this.editingMMUId = null;
+    this.mmuForm = {
+      name: '',
+      facilityId: ''
+    };
+    this.showMMUModal = true;
+  }
+
+  openEditMMUModal(mmu: any): void {
+    this.isEditingMMU = true;
+    this.editingMMUId = mmu.id;
+    this.mmuForm = {
+      name: mmu.name,
+      facilityId: mmu.facilityId
+    };
+    this.showMMUModal = true;
+  }
+
+  closeMMUModal(): void {
+    this.showMMUModal = false;
+    this.isEditingMMU = false;
+    this.editingMMUId = null;
+  }
+
+  async saveMMU(): Promise<void> {
+    if (!this.mmuForm.name.trim() || !this.mmuForm.facilityId) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    try {
+      const facilityName = this.facilities.find(f => f.id === this.mmuForm.facilityId)?.name || '';
+
+      if (this.isEditingMMU && this.editingMMUId) {
+        // Update existing MMU
+        const mmuToUpdate = this.mmus.find(m => m.id === this.editingMMUId);
+        if (mmuToUpdate) {
+          mmuToUpdate.name = this.mmuForm.name;
+          mmuToUpdate.facilityId = this.mmuForm.facilityId;
+          mmuToUpdate.facilityName = facilityName;
+          mmuToUpdate.updatedAt = new Date().toISOString();
+        }
+      } else {
+        // Add new MMU
+        const newMMU = {
+          id: `mmu-${Date.now()}`,
+          name: this.mmuForm.name,
+          facilityId: this.mmuForm.facilityId,
+          facilityName: facilityName,
+          stops: 0,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+        this.mmus.push(newMMU);
+      }
+      this.closeMMUModal();
+    } catch (error) {
+      console.error('Error saving MMU:', error);
+      alert('Error saving MMU');
+    }
+  }
 }
