@@ -615,7 +615,7 @@ interface DoseAdministration {
                   <span>Mother's First Name</span>
                 </div>
                 <div class="facility-info">
-                  <p><strong>Home Facility:</strong> {{ breakGlassPatient?.facilityId }}</p>
+                  <p><strong>Home Facility:</strong> {{ breakGlassPatient?.currentEnrollment?.facilityName }}</p>
                 </div>
               </div>
 
