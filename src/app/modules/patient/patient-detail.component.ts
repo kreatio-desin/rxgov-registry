@@ -2113,7 +2113,7 @@ export class PatientDetailComponent implements OnInit {
   };
 
   breakGlassTransferForm = {
-    destinationClinic: '',
+    transferReason: '',
     consentAttest: false,
   };
 
