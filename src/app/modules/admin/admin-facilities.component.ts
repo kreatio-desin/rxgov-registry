@@ -376,7 +376,7 @@ interface MMUForm {
                       <td>
                         <div class="vendor-info">
                           <div class="vendor-name">{{ facility.name }}</div>
-                          <span class="badge badge-secondary">{{ facility.type === 'otc' ? 'OTC' : 'MMU' }}</span>
+                          <span class="badge badge-secondary">{{ facilityMetrics[facility.id]?.vendor }}</span>
                         </div>
                       </td>
                       <td class="text-muted">{{ facility.address }}{{ facility.city ? ', ' + facility.city : '' }}</td>
