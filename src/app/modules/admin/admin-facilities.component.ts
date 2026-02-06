@@ -1063,6 +1063,463 @@ interface FacilityForm {
         background: #1d4ed8;
       }
     }
+
+    /* Admin Table Styles */
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+
+      thead {
+        background: var(--color-bg-tertiary);
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      th {
+        padding: 0.75rem;
+        text-align: left;
+        font-weight: 600;
+        color: var(--color-text-primary);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      td {
+        padding: 0.75rem;
+        border-bottom: 1px solid var(--color-border-light);
+        color: var(--color-text-primary);
+      }
+
+      tbody tr {
+        transition: background 0.15s;
+
+        &:hover {
+          background: var(--color-bg-tertiary);
+        }
+
+        &:last-child td {
+          border-bottom: none;
+        }
+      }
+    }
+
+    .cell-with-icon {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 500;
+    }
+
+    .table-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      flex-shrink: 0;
+      color: #6b7280;
+    }
+
+    .mono-text {
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .text-muted {
+      color: #6b7280;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 0.375rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .badge-default {
+      background: #f3f4f6;
+      color: #374151;
+    }
+
+    .badge-secondary {
+      background: #e5e7eb;
+      color: #374151;
+      font-size: 0.7rem;
+    }
+
+    .badge-success {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .badge-error {
+      background: #fee2e2;
+      color: #7f1d1d;
+    }
+
+    /* Audit Logs Styles */
+    .card-header {
+      padding: 1.5rem 1.5rem 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .card-title {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      line-height: 1.5rem;
+    }
+
+    .card-description {
+      margin: 0;
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-footer {
+      padding: 1.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .info-box {
+      border-radius: 0.5rem;
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      padding: 1rem;
+    }
+
+    .info-box-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #1e40af;
+    }
+
+    .info-icon {
+      width: 1rem;
+      height: 1rem;
+      color: #3b82f6;
+      flex-shrink: 0;
+    }
+
+    .filters-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1rem;
+    }
+
+    .filter-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      &.full-width {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .filter-icon {
+      position: absolute;
+      left: 0.75rem;
+      width: 1rem;
+      height: 1rem;
+      color: #9ca3af;
+      pointer-events: none;
+    }
+
+    .filter-item .form-input {
+      padding-left: 2.25rem;
+    }
+
+    .date-filters {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .pagination-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    .pagination-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .pagination-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      padding-top: 1rem;
+    }
+
+    .btn-pagination {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      border-radius: 0.375rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+
+      &:hover:not(:disabled) {
+        background: var(--color-bg-tertiary);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    /* Integrations Styles */
+    .integrations-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .integration-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: #6b7280;
+    }
+
+    .vendor-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .vendor-name {
+      font-weight: 500;
+      color: var(--color-text-primary);
+    }
+
+    .error-rate {
+      color: #dc2626;
+      font-weight: 600;
+    }
+
+    /* Emergency Styles */
+    .emergency-section {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .emergency-header {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-bottom: 2rem;
+
+      @media (min-width: 768px) {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+    }
+
+    .emergency-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #dc2626;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0;
+    }
+
+    .emergency-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      color: #dc2626;
+    }
+
+    .emergency-description {
+      margin: 0;
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    .resilience-toggle {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      background: #f3f4f6;
+      border: 1px solid var(--color-border);
+      border-radius: 0.5rem;
+    }
+
+    .toggle-label {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+
+    .toggle-input {
+      display: none;
+    }
+
+    .toggle-switch {
+      width: 2rem;
+      height: 1.125rem;
+      background: #d1d5db;
+      border-radius: 1rem;
+      position: relative;
+      transition: background 0.2s;
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        background: white;
+        border-radius: 50%;
+        top: 0.0625rem;
+        left: 0.0625rem;
+        transition: left 0.2s;
+      }
+    }
+
+    .toggle-input:checked + .toggle-switch {
+      background: #2563eb;
+
+      &::after {
+        left: calc(100% - 1.0625rem);
+      }
+    }
+
+    .toggle-icon {
+      width: 1rem;
+      height: 1rem;
+      color: #6b7280;
+    }
+
+    .toggle-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.125rem;
+    }
+
+    .toggle-title {
+      font-weight: 600;
+      color: var(--color-text-primary);
+      font-size: 0.875rem;
+    }
+
+    .toggle-subtitle {
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .emergency-content {
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+
+    .emergency-card {
+      border-left: 4px solid #2563eb;
+    }
+
+    .broadcast-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      color: #2563eb;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .textarea {
+      min-height: 6.25rem;
+      resize: vertical;
+    }
+
+    .alert-preview {
+      border-radius: 0.5rem;
+      border: 1px solid var(--color-border);
+      background: #f9fafb;
+      padding: 1rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .alert-icon {
+      flex-shrink: 0;
+    }
+
+    .megaphone-icon {
+      width: 1rem;
+      height: 1rem;
+      color: #6b7280;
+    }
+
+    .alert-text {
+      flex: 1;
+    }
+
+    .alert-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .alert-message {
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .btn-emergency {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--color-button-bg);
+      color: white;
+      border: none;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover {
+        background: var(--color-button-hover);
+      }
+    }
   `]
 })
 export class AdminFacilitiesComponent implements OnInit {
