@@ -2173,6 +2173,9 @@ export class PatientDetailComponent implements OnInit {
   showAdministerDoseModal = false;
   showTransferModal = false;
   showBreakGlassTransferModal = false;
+  showBreakGlassAttestation = false;
+  hidePatientContent = false;
+  breakGlassPatientId: string | null = null;
   currentDateTime: string = '';
   currentTransferDate: string = '';
   currentUser: AuthUser | null = null;
