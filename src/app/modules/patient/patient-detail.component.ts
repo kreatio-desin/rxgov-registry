@@ -47,6 +47,44 @@ interface TransferForm {
   imports: [CommonModule, FormsModule],
   template: `
     <div class="patient-record-container">
+      <!-- Break Glass Attestation Popup (appears before patient page loads) -->
+      <div *ngIf="showBreakGlassAttestation" class="modal-overlay" (click)="cancelBreakGlassAttestation()">
+        <div class="modal-content break-glass-attestation-modal" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h2 class="modal-title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="title-icon">
+                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+              </svg>
+              Emergency Break Glass Access Required
+            </h2>
+            <p class="modal-description">This patient belongs to <strong>{{ patient?.currentEnrollment?.facilityName }}</strong>. You are requesting emergency access to this restricted record.</p>
+          </div>
+
+          <div class="modal-body break-glass-attestation-body">
+            <div class="warning-alert">
+              <p class="warning-title">Important Notice</p>
+              <p class="warning-message">By confirming below, you attest that:</p>
+              <ul class="warning-list">
+                <li>You have a valid clinical or administrative reason to access this patient's record</li>
+                <li>This access is medically necessary or required for care coordination</li>
+                <li>Your session is being audited and logged for compliance purposes</li>
+                <li>Access will be revoked after 24 hours</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn-secondary" (click)="cancelBreakGlassAttestation()">Cancel</button>
+            <button class="btn-primary" (click)="confirmBreakGlassAttestation()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-icon">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Confirm Access Request
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- Emergency Guest Access Banner -->
       <div *ngIf="hasBreakGlassAccess" class="emergency-guest-banner">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="banner-icon">
