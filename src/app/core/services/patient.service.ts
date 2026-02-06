@@ -370,6 +370,17 @@ export class PatientService {
   }
 
   /**
+   * Force reload patient data - clears cache and reinitializes
+   * Use this if patient data appears stale or inconsistent
+   */
+  async forceReloadPatientData(): Promise<void> {
+    console.warn('🔄 FORCE RELOADING PATIENT DATA...');
+    await this.offlineStorage.clear('patients');
+    await this.initializeSamplePatients();
+    console.log('✅ Patient data reloaded successfully');
+  }
+
+  /**
    * Privacy-first patient search
    * Returns minimal data until attestation is provided
    */
