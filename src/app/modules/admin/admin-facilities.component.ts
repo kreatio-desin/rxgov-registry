@@ -630,14 +630,22 @@ export class AdminFacilitiesComponent implements OnInit {
           facilityToUpdate.address = this.facilityForm.address;
           facilityToUpdate.phone = this.facilityForm.phone;
           facilityToUpdate.autoInactivationDays = this.facilityForm.autoInactivationDays;
+          facilityToUpdate.updatedAt = new Date().toISOString();
         }
       } else {
         // Add new facility
         const newFacility: Facility = {
           id: `facility-${Date.now()}`,
           name: this.facilityForm.name,
+          type: 'otc',
           address: this.facilityForm.address,
+          city: '',
+          state: '',
+          zip: '',
           phone: this.facilityForm.phone,
+          services: [],
+          keyPersonnel: [],
+          isActive: true,
           autoInactivationDays: this.facilityForm.autoInactivationDays,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
