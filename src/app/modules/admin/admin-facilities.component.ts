@@ -85,47 +85,85 @@ interface FacilityForm {
           </div>
 
           <!-- Facilities Table -->
-      <div class="card">
-        <div class="table-wrapper">
-          <table class="facilities-table">
-            <thead>
-              <tr>
-                <th>Facility</th>
-                <th>Location</th>
-                <th>Contact</th>
-                <th>Auto Inactive (Days)</th>
-                <th class="text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let facility of facilities" class="table-row">
-                <td class="facility-name">
-                  <div class="facility-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M10 12h4"></path>
-                      <path d="M10 8h4"></path>
-                      <path d="M14 21v-3a2 2 0 0 0-4 0v3"></path>
-                      <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"></path>
-                      <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path>
-                    </svg>
-                  </div>
-                  {{ facility.name }}
-                </td>
-                <td>{{ facility.address }}{{ facility.city ? ', ' + facility.city : '' }}{{ facility.state ? ', ' + facility.state : '' }}</td>
-                <td>{{ facility.phone }}</td>
-                <td class="text-center">{{ facility.autoInactivationDays || 30 }}</td>
-                <td class="text-right">
-                  <button class="btn-action edit" (click)="openEditModal(facility)" title="Edit facility">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                      <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path>
-                    </svg>
-                    Edit
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="card">
+            <div class="table-wrapper">
+              <table class="facilities-table">
+                <thead>
+                  <tr>
+                    <th>Facility</th>
+                    <th>Location</th>
+                    <th>Contact</th>
+                    <th>Auto Inactive (Days)</th>
+                    <th class="text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let facility of facilities" class="table-row">
+                    <td class="facility-name">
+                      <div class="facility-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M10 12h4"></path>
+                          <path d="M10 8h4"></path>
+                          <path d="M14 21v-3a2 2 0 0 0-4 0v3"></path>
+                          <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"></path>
+                          <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path>
+                        </svg>
+                      </div>
+                      {{ facility.name }}
+                    </td>
+                    <td>{{ facility.address }}{{ facility.city ? ', ' + facility.city : '' }}{{ facility.state ? ', ' + facility.state : '' }}</td>
+                    <td>{{ facility.phone }}</td>
+                    <td class="text-center">{{ facility.autoInactivationDays || 30 }}</td>
+                    <td class="text-right">
+                      <button class="btn-action edit" (click)="openEditModal(facility)" title="Edit facility">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                          <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path>
+                        </svg>
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MMUs Tab -->
+      <div *ngIf="activeTab === 'mmus'" class="tab-content">
+        <div class="tab-section">
+          <div class="empty-state">
+            <p>MMU management coming soon...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Audit Logs Tab -->
+      <div *ngIf="activeTab === 'audit'" class="tab-content">
+        <div class="tab-section">
+          <div class="empty-state">
+            <p>Audit logs coming soon...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Integrations Tab -->
+      <div *ngIf="activeTab === 'integrations'" class="tab-content">
+        <div class="tab-section">
+          <div class="empty-state">
+            <p>Integrations coming soon...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emergency Tab -->
+      <div *ngIf="activeTab === 'emergency'" class="tab-content">
+        <div class="tab-section">
+          <div class="empty-state">
+            <p>Emergency management coming soon...</p>
+          </div>
         </div>
       </div>
 
