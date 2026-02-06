@@ -2277,11 +2277,29 @@ export class PatientDetailComponent implements OnInit {
   }
 
   private checkBreakGlassStatus(patientId: string): void {
-    // Check if user has break glass access to this patient
-    if (this.patientService.hasAccessToken(patientId)) {
+    // Check if this is a break glass scenario:
+    // 1. Patient's facility is different from current user's facility
+    // 2. User doesn't have an access token yet
+
+    if (!this.patient || !this.currentUser?.facilityId) {
+      return;
+    }
+
+    const isPatientFromDifferentFacility =
+      this.patient.currentEnrollment?.facilityId !== this.currentUser.facilityId;
+    const hasAccessToken = this.patientService.hasAccessToken(patientId);
+
+    if (isPatientFromDifferentFacility && !hasAccessToken) {
+      // Show break glass attestation popup
+      this.showBreakGlassAttestation = true;
+      this.hidePatientContent = true;
+      this.breakGlassPatientId = patientId;
+    } else if (isPatientFromDifferentFacility && hasAccessToken) {
+      // User already has access token - show banner and transfer button
       this.hasBreakGlassAccess = true;
       this.breakGlassAccessTime = new Date();
     }
+    // If same facility, no break glass needed
   }
 
   goBack(): void {
