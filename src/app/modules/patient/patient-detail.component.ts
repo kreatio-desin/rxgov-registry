@@ -2356,10 +2356,17 @@ export class PatientDetailComponent implements OnInit {
 
   private checkBreakGlassStatus(patientId: string): void {
     // Check if this is a break glass scenario:
-    // 1. Patient's facility is different from current user's facility
-    // 2. User doesn't have an access token yet
+    // 1. User is facility-staff or facility-manager (not admin)
+    // 2. Patient's facility is different from current user's facility
+    // 3. User doesn't have an access token yet
 
     if (!this.patient || !this.currentUser?.facilityId) {
+      return;
+    }
+
+    // Admins don't need break glass access - they can access all patients
+    const isAdmin = this.currentUser?.role === 'admin';
+    if (isAdmin) {
       return;
     }
 
@@ -2377,7 +2384,7 @@ export class PatientDetailComponent implements OnInit {
       this.hasBreakGlassAccess = true;
       this.breakGlassAccessTime = new Date();
     }
-    // If same facility, no break glass needed
+    // If same facility, no break glass needed (patient belongs to user's facility)
   }
 
   confirmBreakGlassAttestation(): void {
