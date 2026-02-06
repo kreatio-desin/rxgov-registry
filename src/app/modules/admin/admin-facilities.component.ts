@@ -243,9 +243,20 @@ interface MMUForm {
                 </div>
                 <select class="form-input">
                   <option>All Actions</option>
-                  <option>Login</option>
-                  <option>Logout</option>
-                  <option>Patient Viewed</option>
+                  <option>BREAK GLASS ACCESS</option>
+                  <option>DOSE CORRECTION</option>
+                  <option>EMERGENCY ALERT BROADCAST</option>
+                  <option>GUEST DOSING ATTESTATION</option>
+                  <option>LOGIN</option>
+                  <option>LOGOUT</option>
+                  <option>MMU PRE DEPARTURE SYNC</option>
+                  <option>PATIENT CREATED</option>
+                  <option>PATIENT VIEWED</option>
+                  <option>PDMP BATCH SUBMITTED</option>
+                  <option>REPORT DOWNLOADED</option>
+                  <option>REPORT VIEWED</option>
+                  <option>SSN EXPOSED</option>
+                  <option>TRANSFER INITIATED</option>
                 </select>
               </div>
 
