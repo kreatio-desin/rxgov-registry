@@ -165,7 +165,7 @@ import { AuthService, AuthUser } from '../core/services/auth.service';
                 >
                   {{
                     (currentUser.facilityName! | slice: 0 : 15) +
-                      ((currentUser.facilityName.length ?? 0) > 15 ? '...' : '')
+                      (currentUser.facilityName.length > 15 ? '...' : '')
                   }}
                 </div>
                 <div
