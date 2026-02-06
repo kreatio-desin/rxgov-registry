@@ -2141,58 +2141,16 @@ interface TransferForm {
       }
 
       .form-group {
-        margin-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
       }
 
       .form-label {
         display: block;
         font-weight: 500;
-        margin-bottom: 0.5rem;
         font-size: 0.875rem;
         color: var(--color-text-primary);
-      }
-
-      .form-input {
-        width: 100%;
-        padding: 0.5rem 0.75rem;
-        border: 1px solid var(--color-border);
-        border-radius: 0.375rem;
-        font-size: 0.875rem;
-        background: var(--color-bg-primary);
-        color: var(--color-text-primary);
-        font-family: inherit;
-        transition: border-color 0.2s;
-      }
-
-      .form-input:focus {
-        outline: none;
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-      }
-
-      .checkbox-group {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.75rem;
-        padding: 1rem;
-        background: var(--color-bg-tertiary);
-        border-radius: 0.375rem;
-        margin-bottom: 1rem;
-      }
-
-      .form-checkbox {
-        flex-shrink: 0;
-        margin-top: 0.25rem;
-        width: 18px;
-        height: 18px;
-        cursor: pointer;
-      }
-
-      .checkbox-label {
-        font-size: 0.875rem;
-        line-height: 1.5;
-        color: var(--color-text-primary);
-        cursor: pointer;
       }
     `,
   ],
