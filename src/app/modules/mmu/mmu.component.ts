@@ -3134,19 +3134,14 @@ export class MMUComponent implements OnInit, AfterViewInit {
   }
 
   selectPatientForEncounter(patient: Patient): void {
-    // Check if patient is restricted
-    const selectedStop = this.routeStops.find((s) => s.id === this.selectedStopId);
-    if (!selectedStop) {
-      return;
-    }
-
-    if (patient.facilityId !== selectedStop.facilityId || patient.isRestricted) {
-      // Show break glass modal
+    // Check if patient belongs to the same facility as the current user
+    if (patient.facilityId !== this.currentUser?.facilityId) {
+      // Patient belongs to a different facility - show break glass modal
       this.breakGlassPatient = patient;
       this.showBreakGlassModal = true;
       this.attestationConfirmed = false;
     } else {
-      // Patient is in facility, show encounter form
+      // Patient belongs to same facility - show encounter form directly
       this.selectedPatient = patient;
       this.resetDoseData();
     }
