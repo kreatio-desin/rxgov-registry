@@ -1584,6 +1584,7 @@ export class AdmitComponent implements OnInit {
     private facilityService: FacilityService,
     private auditService: AuditService,
     private syncService: SyncService,
+    private authService: AuthService,
     private router: Router,
   ) {
     this.initializeForms();
