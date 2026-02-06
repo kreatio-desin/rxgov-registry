@@ -99,7 +99,7 @@ interface TransferForm {
       </div>
 
       <!-- Header -->
-      <div class="patient-header">
+      <div class="patient-header" *ngIf="!hidePatientContent">
         <div class="header-top">
           <button class="back-btn" (click)="goBack()">
             <svg
