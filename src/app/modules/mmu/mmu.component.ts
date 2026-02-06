@@ -2781,7 +2781,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
       nickName: 'Ollie',
       dob: '1990-08-23',
       ssn: '5678',
-      facilityId: 'facility1',
+      facilityId: 'fac-cms-was-001',
       isRestricted: false,
       currentMedication: 'Methadone',
       dose: '90mg',
