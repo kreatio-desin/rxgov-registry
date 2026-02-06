@@ -1907,6 +1907,175 @@ interface TransferForm {
         opacity: 0.5;
         cursor: not-allowed;
       }
+
+      /* Break Glass Alert Styles */
+      .break-glass-alert {
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        padding: 1rem 1.5rem;
+        margin: 0;
+        border-bottom: 2px solid #991b1b;
+      }
+
+      .alert-content {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: white;
+        max-width: 100%;
+      }
+
+      .alert-icon {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        color: white;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+
+      .alert-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .alert-title {
+        font-weight: 600;
+        font-size: 0.95rem;
+        display: block;
+      }
+
+      .alert-message {
+        font-size: 0.85rem;
+        opacity: 0.95;
+        display: block;
+      }
+
+      .transfer-action-btn {
+        flex-shrink: 0;
+        background: white;
+        color: #dc2626;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+
+      .transfer-action-btn:hover {
+        background: #f3f4f6;
+        transform: translateY(-1px);
+      }
+
+      .transfer-action-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* Alert Styles for Modal */
+      .alert {
+        display: flex;
+        gap: 0.75rem;
+        padding: 1rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .alert-icon {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        margin-top: 0.125rem;
+      }
+
+      .alert.alert-info {
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        border-left: 4px solid #3b82f6;
+        color: #1e40af;
+      }
+
+      .alert.alert-info .alert-icon {
+        color: #3b82f6;
+      }
+
+      .alert strong {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+
+      .alert p {
+        margin: 0;
+        opacity: 0.9;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+        color: var(--color-text-primary);
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        font-family: inherit;
+        transition: border-color 0.2s;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 1rem;
+        background: var(--color-bg-tertiary);
+        border-radius: 0.375rem;
+        margin-bottom: 1rem;
+      }
+
+      .form-checkbox {
+        flex-shrink: 0;
+        margin-top: 0.25rem;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+
+      .checkbox-label {
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: var(--color-text-primary);
+        cursor: pointer;
+      }
     `,
   ],
 })
