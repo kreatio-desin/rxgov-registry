@@ -413,8 +413,8 @@ interface TransferForm {
             </div>
           </div>
 
-          <!-- Clinical Management (Facility Manager Only) -->
-          <div class="card" *ngIf="currentUser && currentUser.role === 'facility-manager'">
+          <!-- Clinical Management -->
+          <div class="card" *ngIf="currentUser && (currentUser.role === 'facility-manager' || currentUser.role === 'facility-staff')">
             <div class="card-header">
               <h3 class="card-title">Clinical Management</h3>
             </div>
