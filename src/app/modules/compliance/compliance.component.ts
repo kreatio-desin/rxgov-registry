@@ -416,7 +416,7 @@ interface BreakGlassAccess {
               <button class="btn-cancel" (click)="closeBreakGlassModal()">Cancel</button>
               <button
                 class="btn-confirm"
-                [disabled]="!breakGlassData?.attestationConfirmed"
+                [disabled]="!breakGlassData.attestationConfirmed"
                 (click)="confirmBreakGlassAccess()"
               >
                 Grant Access
