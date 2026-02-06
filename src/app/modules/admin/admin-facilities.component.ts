@@ -193,8 +193,114 @@ interface FacilityForm {
       <!-- Audit Logs Tab -->
       <div *ngIf="activeTab === 'audit'" class="tab-content">
         <div class="tab-section">
-          <div class="empty-state">
-            <p>Audit logs coming soon...</p>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h4 class="card-title">Security and Access Audit Log</h4>
+                <p class="card-description">Track sensitive data access, report downloads, and critical system actions.</p>
+              </div>
+              <button class="btn-add-facility">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
+                  <path d="M12 15V3"></path>
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <path d="m7 10 5 5 5-5"></path>
+                </svg>
+                Export CSV
+              </button>
+            </div>
+
+            <div class="card-content space-y-4">
+              <!-- Info Box -->
+              <div class="info-box">
+                <div class="info-box-header">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="info-icon">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 16v-4"></path>
+                    <path d="M12 8h.01"></path>
+                  </svg>
+                  <span>What activities are logged?</span>
+                </div>
+              </div>
+
+              <!-- Filters -->
+              <div class="filters-grid">
+                <div class="filter-item full-width">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
+                    <path d="m21 21-4.34-4.34"></path>
+                    <circle cx="11" cy="11" r="8"></circle>
+                  </svg>
+                  <input type="text" class="form-input" placeholder="Search action, user, or details..." />
+                </div>
+                <select class="form-input">
+                  <option>All Actions</option>
+                  <option>Login</option>
+                  <option>Logout</option>
+                  <option>Patient Viewed</option>
+                </select>
+              </div>
+
+              <div class="date-filters">
+                <div>
+                  <label class="form-label">Start Date</label>
+                  <input type="date" class="form-input" />
+                </div>
+                <div>
+                  <label class="form-label">End Date</label>
+                  <input type="date" class="form-input" />
+                </div>
+              </div>
+
+              <!-- Pagination -->
+              <div class="pagination-info">
+                <span>Showing 1-8 of 80 records</span>
+                <div class="pagination-buttons">
+                  <button class="btn-pagination" disabled>‹</button>
+                  <span>Page 1 of 10</span>
+                  <button class="btn-pagination">›</button>
+                </div>
+              </div>
+
+              <!-- Table -->
+              <div class="table-wrapper">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Timestamp</th>
+                      <th>Action</th>
+                      <th>User</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="mono-text">2026-02-06 16:09:22</td>
+                      <td><span class="badge badge-default">LOGIN</span></td>
+                      <td>Oliver Smith</td>
+                      <td class="text-muted">User logged in</td>
+                    </tr>
+                    <tr>
+                      <td class="mono-text">2026-02-06 15:29:20</td>
+                      <td><span class="badge badge-default">LOGOUT</span></td>
+                      <td>Oliver Smith</td>
+                      <td class="text-muted">User logged out</td>
+                    </tr>
+                    <tr>
+                      <td class="mono-text">2026-02-06 14:52:15</td>
+                      <td><span class="badge badge-default">PATIENT VIEWED</span></td>
+                      <td>Henry Taylor</td>
+                      <td class="text-muted">Patient record viewed</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Pagination Bottom -->
+              <div class="pagination-bottom">
+                <button class="btn-pagination" disabled>‹</button>
+                <span>Page 1 of 10</span>
+                <button class="btn-pagination">›</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
