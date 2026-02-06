@@ -114,7 +114,7 @@ export class PatientService {
             phone: '(907) 555-0105',
           },
           currentEnrollment: {
-            facilityId: 'fac-cms-001',
+            facilityId: 'fac-cms-was-001',
             facilityName: 'Community Medical Services – Wasilla',
             moudType: 'Methadone',
             enrollmentDate: '2024-05-12',
