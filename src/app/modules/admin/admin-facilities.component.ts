@@ -649,6 +649,7 @@ export class AdminFacilitiesComponent implements OnInit {
   showModal = false;
   isEditMode = false;
   editingFacilityId: string | null = null;
+  activeTab: 'facilities' | 'mmus' | 'audit' | 'integrations' | 'emergency' = 'facilities';
 
   facilityForm: FacilityForm = {
     name: '',
