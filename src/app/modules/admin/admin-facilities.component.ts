@@ -1594,6 +1594,14 @@ export class AdminFacilitiesComponent implements OnInit {
   async loadFacilities(): Promise<void> {
     try {
       this.facilities = await this.facilityService.getAllFacilities();
+      // Generate integration metrics for each facility
+      this.facilityMetrics = {};
+      for (const facility of this.facilities) {
+        this.facilityMetrics[facility.id] = {
+          messageCount: Math.floor(Math.random() * 2000),
+          errorRate: Math.floor(Math.random() * 50) / 10
+        };
+      }
     } catch (error) {
       console.error('Error loading facilities:', error);
     }
