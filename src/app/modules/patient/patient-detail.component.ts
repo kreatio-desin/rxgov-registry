@@ -481,7 +481,7 @@ interface TransferForm {
             </div>
             <div class="card-content">
               <div class="management-actions">
-                <button class="management-btn transfer-btn" (click)="openTransferModal()">
+                <button class="management-btn transfer-btn" *ngIf="hasBreakGlassAccess" (click)="openBreakGlassTransferModal()">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
