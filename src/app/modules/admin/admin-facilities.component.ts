@@ -9,7 +9,7 @@ interface FacilityForm {
   name: string;
   address: string;
   phone: string;
-  autoInactivationDays: number;
+  autoInactivationDays: number | undefined;
 }
 
 @Component({
