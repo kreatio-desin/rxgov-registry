@@ -408,9 +408,97 @@ interface FacilityForm {
 
       <!-- Emergency Tab -->
       <div *ngIf="activeTab === 'emergency'" class="tab-content">
-        <div class="tab-section">
-          <div class="empty-state">
-            <p>Emergency management coming soon...</p>
+        <div class="emergency-section">
+          <div class="emergency-header">
+            <div>
+              <h2 class="emergency-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="emergency-icon">
+                  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
+                  <path d="M12 8v4"></path>
+                  <path d="M12 16h.01"></path>
+                </svg>
+                Emergency Management Module
+              </h2>
+              <p class="emergency-description">Manage clinic status, broadcast alerts, and coordinate displaced patient care.</p>
+            </div>
+            <div class="resilience-toggle">
+              <label class="toggle-label">
+                <input type="checkbox" class="toggle-input" />
+                <div class="toggle-switch"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="toggle-icon">
+                  <path d="M18.36 6.64A9 9 0 0 1 20.77 15"></path>
+                  <path d="M6.16 6.16a9 9 0 1 0 12.68 12.68"></path>
+                  <path d="M12 2v4"></path>
+                  <path d="m2 2 20 20"></path>
+                </svg>
+                <div class="toggle-text">
+                  <span class="toggle-title">Resilience Mode</span>
+                  <span class="toggle-subtitle">Simulate Offline/Outage</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="emergency-content">
+            <div class="card emergency-card">
+              <div class="card-header">
+                <h4 class="card-title flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="broadcast-icon">
+                    <path d="M16.247 7.761a6 6 0 0 1 0 8.478"></path>
+                    <path d="M19.075 4.933a10 10 0 0 1 0 14.134"></path>
+                    <path d="M4.925 19.067a10 10 0 0 1 0-14.134"></path>
+                    <path d="M7.753 16.239a6 6 0 0 1 0-8.478"></path>
+                    <circle cx="12" cy="12" r="2"></circle>
+                  </svg>
+                  Broadcast Status
+                </h4>
+                <p class="card-description">Update your facility status for SOTA and the regional network.</p>
+              </div>
+
+              <div class="card-content">
+                <div class="form-group">
+                  <label class="form-label">Target Facility</label>
+                  <select class="form-input">
+                    <option>Anchorage Comprehensive Treatment Center</option>
+                    <option>Community Medical Services - Anchorage</option>
+                    <option>Narcotic Drug Treatment Center (NDTC)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Current Operational Status</label>
+                  <select class="form-input">
+                    <option>Open / Normal Operations</option>
+                    <option>Limited Operations</option>
+                    <option>Emergency Closure</option>
+                    <option>Relocated Services</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Alert Message</label>
+                  <textarea class="form-input textarea" placeholder="e.g. Clinic closed due to severe weather. Patients redirected to NDTC...">Normal Operations Resumed</textarea>
+                </div>
+
+                <div class="alert-preview">
+                  <div class="alert-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="megaphone-icon">
+                      <path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"></path>
+                      <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14"></path>
+                      <path d="M8 6v8"></path>
+                    </svg>
+                  </div>
+                  <div class="alert-text">
+                    <div class="alert-title">Broadcast Preview</div>
+                    <div class="alert-message">OPEN: Normal Operations Resumed</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-footer">
+                <button class="btn-emergency">Update Status and Notify Network</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
