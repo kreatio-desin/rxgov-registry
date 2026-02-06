@@ -144,7 +144,7 @@ interface MMUForm {
               <h3 class="section-title">Mobile Medication Units (MMUs)</h3>
               <p class="section-description">Manage MMUs and their assigned facilities</p>
             </div>
-            <button class="btn-add-facility">
+            <button class="btn-add-facility" (click)="openAddMMUModal()">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon">
                 <path d="M5 12h14"></path>
                 <path d="M12 5v14"></path>
@@ -165,7 +165,12 @@ interface MMUForm {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="table-row">
+                  <tr *ngIf="mmus.length === 0" class="table-row">
+                    <td colspan="4" style="text-align: center; padding: 2rem; color: #6b7280;">
+                      No MMUs configured yet
+                    </td>
+                  </tr>
+                  <tr *ngFor="let mmu of mmus" class="table-row">
                     <td class="cell-with-icon">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="table-icon">
                         <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
@@ -174,12 +179,12 @@ interface MMUForm {
                         <circle cx="17" cy="18" r="2"></circle>
                         <circle cx="7" cy="18" r="2"></circle>
                       </svg>
-                      Anchorage Mobile Unit 1
+                      {{ mmu.name }}
                     </td>
-                    <td>Anchorage Comprehensive Treatment Center</td>
-                    <td>5 stops</td>
+                    <td>{{ mmu.facilityName }}</td>
+                    <td>{{ mmu.stops || '0' }} stops</td>
                     <td class="text-right">
-                      <button class="btn-action edit">
+                      <button class="btn-action edit" (click)="openEditMMUModal(mmu)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                           <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                           <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path>
