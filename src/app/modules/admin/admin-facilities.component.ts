@@ -371,8 +371,8 @@ interface MMUForm {
                       <td class="text-muted">{{ facility.address }}{{ facility.city ? ', ' + facility.city : '' }}</td>
                       <td><span class="badge badge-success">Active</span></td>
                       <td class="text-muted">{{ facility.updatedAt ? (facility.updatedAt | date: 'MMM d, h:mm a') : 'N/A' }}</td>
-                      <td>{{ Math.floor(Math.random() * 2000) }}</td>
-                      <td>{{ Math.floor(Math.random() * 5 * 10) / 10 }}%</td>
+                      <td>{{ facilityMetrics[facility.id]?.messageCount || 0 }}</td>
+                      <td>{{ facilityMetrics[facility.id]?.errorRate || 0 }}%</td>
                     </tr>
                   </tbody>
                 </table>
