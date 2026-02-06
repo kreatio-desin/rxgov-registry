@@ -2886,8 +2886,13 @@ export class MMUComponent implements OnInit, AfterViewInit {
   showBreakGlassModal = false;
   breakGlassPatient: Patient | null = null;
   attestationConfirmed = false;
+  currentUser: any = null;
+
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    // Get current user for facility matching
+    this.currentUser = this.authService.getCurrentUser();
     // Load today's encounters
     this.recentStops = this.availableStops.slice(0, 3);
 
