@@ -1560,6 +1560,7 @@ interface MMUForm {
 export class AdminFacilitiesComponent implements OnInit {
   facilities: Facility[] = [];
   mmus: any[] = [];
+  facilityMetrics: { [key: string]: { messageCount: number; errorRate: number } } = {};
   showModal = false;
   isEditMode = false;
   editingFacilityId: string | null = null;
@@ -1568,7 +1569,6 @@ export class AdminFacilitiesComponent implements OnInit {
   editingMMUId: string | null = null;
   activeTab: 'facilities' | 'mmus' | 'audit' | 'integrations' | 'emergency' = 'facilities';
   selectedFacilityForEmergency = '';
-  Math = Math;
 
   facilityForm: FacilityForm = {
     name: '',
