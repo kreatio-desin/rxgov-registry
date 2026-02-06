@@ -832,55 +832,60 @@ interface TransferForm {
 
       <!-- Break Glass Transfer Modal -->
       <div *ngIf="showBreakGlassTransferModal" class="modal-overlay" (click)="closeBreakGlassTransferModal()">
-        <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-content break-glass-modal" (click)="$event.stopPropagation()">
           <!-- Close Button -->
           <button class="modal-close" (click)="closeBreakGlassTransferModal()">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M18 6 6 18"></path>
               <path d="m6 6 12 12"></path>
             </svg>
+            <span class="sr-only">Close</span>
           </button>
 
           <!-- Modal Header -->
           <div class="modal-header">
-            <h2>Transfer Patient to Your Clinic</h2>
-            <p>Transfer {{ patient?.lastName }}, {{ patient?.firstName }} from {{ patient?.currentEnrollment?.facilityName }} to {{ currentUser?.facilityName }}.</p>
+            <h2 class="modal-title">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="title-icon">
+                <path d="M10 12h4"></path>
+                <path d="M10 8h4"></path>
+                <path d="M14 21v-3a2 2 0 0 0-4 0v3"></path>
+                <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"></path>
+                <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path>
+              </svg>
+              Transfer Patient to Your Clinic
+            </h2>
+            <p class="modal-description">Transfer {{ patient?.lastName }}, {{ patient?.firstName }} from {{ patient?.currentEnrollment?.facilityName }} to {{ currentUser?.facilityName }}.</p>
           </div>
 
           <!-- Modal Body -->
-          <div class="modal-body">
+          <div class="modal-body break-glass-body">
             <!-- Patient Consent Alert -->
-            <div class="alert alert-info">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="alert-icon">
-                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-                <path d="M3 3v5h5"></path>
-              </svg>
-              <div>
-                <strong>Patient Consent Required</strong>
-                <p>This action requires documented patient consent for transfer of care. Ensure you have obtained verbal or written consent before proceeding.</p>
-              </div>
+            <div class="consent-alert">
+              <p class="consent-title">Patient Consent Required</p>
+              <p class="consent-message">This action requires documented patient consent for transfer of care. Ensure you have obtained verbal or written consent before proceeding.</p>
             </div>
 
-            <!-- Destination Facility Selection -->
+            <!-- Transfer Reason -->
             <div class="form-group">
-              <label class="form-label">Select Destination Facility</label>
-              <select class="form-input" [(ngModel)]="breakGlassTransferForm.destinationClinic">
-                <option value="">-- Select a facility --</option>
-                <option *ngFor="let facility of availableFacilities" [value]="facility.id">
-                  {{ facility.name }}
-                </option>
-              </select>
+              <label for="transfer-notes" class="form-label">Transfer Reason (Optional)</label>
+              <textarea
+                id="transfer-notes"
+                class="form-textarea"
+                [(ngModel)]="breakGlassTransferForm.transferReason"
+                placeholder="E.g., Patient relocated to Anchorage, closer to home, patient request..."
+                rows="3"
+              ></textarea>
             </div>
 
             <!-- Consent Checkbox -->
-            <div class="checkbox-group">
+            <div class="checkbox-container">
               <input
                 type="checkbox"
-                id="break-glass-consent"
+                id="transfer-consent"
                 [(ngModel)]="breakGlassTransferForm.consentAttest"
                 class="form-checkbox"
               />
-              <label for="break-glass-consent" class="checkbox-label">
+              <label for="transfer-consent" class="checkbox-label">
                 I confirm that patient consent has been obtained and documented for this transfer of care.
               </label>
             </div>
@@ -888,12 +893,19 @@ interface TransferForm {
 
           <!-- Modal Footer -->
           <div class="modal-footer">
-            <button class="btn-cancel" (click)="closeBreakGlassTransferModal()">Cancel</button>
+            <button class="btn-secondary" (click)="closeBreakGlassTransferModal()">Cancel</button>
             <button
-              class="btn-confirm"
+              class="btn-primary"
               (click)="confirmBreakGlassTransfer()"
-              [disabled]="!breakGlassTransferForm.consentAttest || !breakGlassTransferForm.destinationClinic"
+              [disabled]="!breakGlassTransferForm.consentAttest"
             >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-icon">
+                <path d="M10 12h4"></path>
+                <path d="M10 8h4"></path>
+                <path d="M14 21v-3a2 2 0 0 0-4 0v3"></path>
+                <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"></path>
+                <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"></path>
+              </svg>
               Complete Transfer
             </button>
           </div>
