@@ -2822,7 +2822,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
       nickName: 'Mike',
       dob: '1975-03-10',
       ssn: '456-78-9012',
-      facilityId: 'facility2',
+      facilityId: 'fac-searhc-ket-001',
       isRestricted: true,
       currentMedication: 'Naltrexone',
       dose: '50mg',
