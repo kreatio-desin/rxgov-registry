@@ -1741,6 +1741,11 @@ export class AdmitComponent implements OnInit {
       const clinical = this.clinicalForm.value;
       const consents = this.consentsForm.value;
 
+      // Get current user's facility for enrollment
+      const currentUser = this.authService.getCurrentUser();
+      const enrollmentFacilityId = currentUser?.facilityId || 'fac-act-001';
+      const enrollmentFacilityName = currentUser?.facilityName || 'Anchorage Comprehensive Treatment Center';
+
       const patient = await this.patientService.createPatient({
         firstName: demographics.firstName,
         lastName: demographics.lastName,
@@ -1749,8 +1754,8 @@ export class AdmitComponent implements OnInit {
         motherFirstName: demographics.motherFirstName,
         pdmpConsent: consents.pdmpConsent,
         currentEnrollment: {
-          facilityId: 'default',
-          facilityName: 'Anchorage Comprehensive Treatment Center',
+          facilityId: enrollmentFacilityId,
+          facilityName: enrollmentFacilityName,
           moudType: clinical.medication,
           enrollmentDate: clinical.enrollmentDate,
           status: 'active',
