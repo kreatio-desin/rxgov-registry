@@ -259,7 +259,7 @@ export class PatientService {
             phone: '(907) 555-0678',
           },
           currentEnrollment: {
-            facilityId: 'fac-searhc-002',
+            facilityId: 'fac-searhc-jun-001',
             facilityName: 'SEARHC – Juneau',
             moudType: 'Methadone',
             enrollmentDate: '2023-06-22',
@@ -288,7 +288,7 @@ export class PatientService {
             phone: '(907) 555-0789',
           },
           currentEnrollment: {
-            facilityId: 'fac-cms-001',
+            facilityId: 'fac-cms-was-001',
             facilityName: 'Community Medical Services – Wasilla',
             moudType: 'Buprenorphine',
             enrollmentDate: '2024-03-08',
