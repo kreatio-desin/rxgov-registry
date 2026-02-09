@@ -1259,6 +1259,13 @@ export class AppLayoutComponent implements OnInit {
     description: '',
   };
 
+  priorityOptions = [
+    'Low - General question',
+    'Medium - Minor Issue',
+    'High - Major Functionality Broken',
+    'Urgent - System Outage Critical',
+  ];
+
   constructor(
     private patientService: PatientService,
     private offlineStorage: OfflineStorageService,
