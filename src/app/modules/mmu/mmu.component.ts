@@ -150,7 +150,11 @@ interface DoseAdministration {
                 No encounters logged today.
               </div>
               <div *ngIf="todayEncounters.length > 0" class="encounters-list">
-                <div *ngFor="let encounter of todayEncounters" class="encounter-item" (click)="viewPatient(encounter.patientId)">
+                <div
+                  *ngFor="let encounter of todayEncounters"
+                  class="encounter-item"
+                  (click)="viewPatient(encounter.patientId)"
+                >
                   <div class="encounter-time">{{ encounter.time }}</div>
                   <div class="encounter-details">
                     <div class="encounter-name">{{ encounter.patientName }}</div>
@@ -622,7 +626,10 @@ interface DoseAdministration {
                   <span>Mother's First Name</span>
                 </div>
                 <div class="facility-info">
-                  <p><strong>Home Facility:</strong> {{ breakGlassPatient?.currentEnrollment?.facilityName }}</p>
+                  <p>
+                    <strong>Home Facility:</strong>
+                    {{ breakGlassPatient?.currentEnrollment?.facilityName }}
+                  </p>
                 </div>
               </div>
 
@@ -974,7 +981,9 @@ interface DoseAdministration {
         background: var(--color-bg-tertiary);
         border-left: 2px solid #3b82f6;
         cursor: pointer;
-        transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        transition:
+          background-color 0.2s ease,
+          box-shadow 0.2s ease;
       }
 
       .encounter-item:hover {
@@ -2915,7 +2924,10 @@ export class MMUComponent implements OnInit, AfterViewInit {
   attestationConfirmed = false;
   currentUser: any = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     // Get current user for facility matching
