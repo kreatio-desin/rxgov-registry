@@ -1127,7 +1127,7 @@ import { SupportService, SupportTicket, Tutorial } from '../core/services/suppor
         background: rgba(0, 0, 0, 0.05);
         font-weight: 500;
 
-        &[data-priority='Low'] {
+        &[data-priority='Low - General question'] {
           background: rgba(34, 197, 94, 0.1);
           color: #22c55e;
         }
@@ -1137,9 +1137,15 @@ import { SupportService, SupportTicket, Tutorial } from '../core/services/suppor
           color: #fb923c;
         }
 
-        &[data-priority='High - Urgent'] {
+        &[data-priority='High - Major Functionality Broken'] {
           background: rgba(239, 68, 68, 0.1);
           color: #ef4444;
+        }
+
+        &[data-priority='Urgent - System Outage Critical'] {
+          background: rgba(139, 0, 0, 0.15);
+          color: #8b0000;
+          font-weight: 600;
         }
       }
 
