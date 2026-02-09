@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../core/services/auth.service';
 
@@ -13,6 +14,7 @@ interface RouteStop {
 
 interface Encounter {
   id: string;
+  patientId: string;
   patientName: string;
   time: string;
   service: string;
@@ -148,7 +150,7 @@ interface DoseAdministration {
                 No encounters logged today.
               </div>
               <div *ngIf="todayEncounters.length > 0" class="encounters-list">
-                <div *ngFor="let encounter of todayEncounters" class="encounter-item">
+                <div *ngFor="let encounter of todayEncounters" class="encounter-item" (click)="viewPatient(encounter.patientId)">
                   <div class="encounter-time">{{ encounter.time }}</div>
                   <div class="encounter-details">
                     <div class="encounter-name">{{ encounter.patientName }}</div>
@@ -2908,7 +2910,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
   attestationConfirmed = false;
   currentUser: any = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     // Get current user for facility matching
@@ -3220,6 +3222,7 @@ export class MMUComponent implements OnInit, AfterViewInit {
     // Create new encounter record
     const encounter: Encounter = {
       id: Math.random().toString(36).substr(2, 9),
+      patientId: this.selectedPatient.id,
       patientName: `${this.selectedPatient.firstName} ${this.selectedPatient.lastName}`,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       service: `${this.doseData.medicationName} - ${this.doseData.observedDose}mg`,
@@ -3233,5 +3236,11 @@ export class MMUComponent implements OnInit, AfterViewInit {
 
     // Show success feedback (could be a toast notification)
     console.log('Encounter saved successfully', encounter);
+  }
+
+  viewPatient(patientId: string): void {
+    if (patientId) {
+      this.router.navigate(['/patient', patientId]);
+    }
   }
 }
