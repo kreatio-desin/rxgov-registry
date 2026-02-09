@@ -5,7 +5,7 @@ export interface SupportTicket {
   id: string;
   subject: string;
   description: string;
-  priority: 'Low' | 'Medium - Minor Issue' | 'High - Urgent';
+  priority: 'Low - General question' | 'Medium - Minor Issue' | 'High - Major Functionality Broken' | 'Urgent - System Outage Critical';
   status: 'open' | 'in-progress' | 'resolved' | 'closed';
   createdAt: string;
   updatedAt: string;
