@@ -7,6 +7,7 @@ import { OfflineStorageService } from '../core/services/offline-storage.service'
 import { SyncService } from '../core/services/sync.service';
 import { ThemeService } from '../core/services/theme.service';
 import { AuthService, AuthUser } from '../core/services/auth.service';
+import { SupportService, SupportTicket, Tutorial } from '../core/services/support.service';
 
 @Component({
   selector: 'app-layout',
