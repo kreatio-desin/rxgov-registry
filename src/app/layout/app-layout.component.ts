@@ -1431,5 +1431,6 @@ export class AppLayoutComponent implements OnInit {
       priority: 'Medium - Minor Issue',
       description: '',
     };
+    this.activeTab = 'new';
   }
 }
