@@ -273,7 +273,7 @@ export class SupportService {
       id: `ticket-${Date.now()}`,
       subject,
       description,
-      priority: (priority as 'Low' | 'Medium - Minor Issue' | 'High - Urgent') || 'Medium - Minor Issue',
+      priority: (priority as 'Low - General question' | 'Medium - Minor Issue' | 'High - Major Functionality Broken' | 'Urgent - System Outage Critical') || 'Medium - Minor Issue',
       status: 'open',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
