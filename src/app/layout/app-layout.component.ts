@@ -202,9 +202,150 @@ import { SupportService, SupportTicket, Tutorial } from '../core/services/suppor
       </div>
 
       <!-- Floating Help Button -->
-      <button class="help-button" title="Help and Support">
+      <button class="help-button" title="Help and Support" (click)="openHelpDialog()">
         <i class="bi bi-life-preserver"></i>
       </button>
+
+      <!-- Help and Support Modal -->
+      <div *ngIf="showHelpDialog" class="help-modal-overlay" (click)="closeHelpDialog()">
+        <div class="help-modal-content" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <div class="header-content">
+              <h2 class="modal-title">Help and Support</h2>
+              <p class="modal-description">Submit a request, view your tickets, or learn how to use the app.</p>
+            </div>
+            <button class="close-button" (click)="closeHelpDialog()" title="Close">
+              <i class="bi bi-x"></i>
+            </button>
+          </div>
+
+          <div class="tabs-container">
+            <div class="tabs-list">
+              <button
+                class="tab-button"
+                [class.active]="activeTab === 'new'"
+                (click)="activeTab = 'new'"
+              >
+                New Request
+              </button>
+              <button
+                class="tab-button"
+                [class.active]="activeTab === 'tickets'"
+                (click)="activeTab = 'tickets'"
+              >
+                My Tickets
+              </button>
+              <button
+                class="tab-button"
+                [class.active]="activeTab === 'tutorials'"
+                (click)="activeTab = 'tutorials'"
+              >
+                My Tutorials
+              </button>
+            </div>
+
+            <!-- New Request Tab -->
+            <div *ngIf="activeTab === 'new'" class="tab-content">
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input
+                  id="subject"
+                  type="text"
+                  [(ngModel)]="newTicket.subject"
+                  placeholder="Brief summary of the issue"
+                  class="form-input"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="priority">Priority</label>
+                <select [(ngModel)]="newTicket.priority" class="form-input">
+                  <option value="Low">Low</option>
+                  <option value="Medium - Minor Issue">Medium - Minor Issue</option>
+                  <option value="High - Urgent">High - Urgent</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea
+                  id="description"
+                  [(ngModel)]="newTicket.description"
+                  placeholder="Please describe the issue in detail..."
+                  class="form-textarea"
+                ></textarea>
+              </div>
+
+              <button class="submit-button" (click)="submitTicket()">
+                <i class="bi bi-send"></i>
+                Submit Ticket
+              </button>
+            </div>
+
+            <!-- My Tickets Tab -->
+            <div *ngIf="activeTab === 'tickets'" class="tab-content tickets-list">
+              <div *ngIf="tickets.length === 0" class="empty-state">
+                <i class="bi bi-inbox"></i>
+                <p>No tickets submitted yet.</p>
+              </div>
+
+              <div *ngFor="let ticket of tickets" class="ticket-item">
+                <div class="ticket-header">
+                  <div class="ticket-title">{{ ticket.subject }}</div>
+                  <span class="ticket-status" [attr.data-status]="ticket.status">
+                    {{ ticket.status | uppercase }}
+                  </span>
+                </div>
+                <div class="ticket-meta">
+                  <span class="priority" [attr.data-priority]="ticket.priority">
+                    {{ ticket.priority }}
+                  </span>
+                  <span class="date">{{ ticket.createdAt | date: 'MMM d, yyyy' }}</span>
+                </div>
+                <p class="ticket-description">{{ ticket.description }}</p>
+              </div>
+            </div>
+
+            <!-- My Tutorials Tab -->
+            <div *ngIf="activeTab === 'tutorials'" class="tab-content tutorials-list">
+              <div *ngIf="tutorials.length === 0" class="empty-state">
+                <i class="bi bi-book"></i>
+                <p>No tutorials available.</p>
+              </div>
+
+              <div *ngFor="let tutorial of tutorials" class="tutorial-item">
+                <div class="tutorial-icon">
+                  <i [class]="'bi ' + tutorial.icon"></i>
+                </div>
+                <div class="tutorial-info">
+                  <h3 class="tutorial-title">{{ tutorial.title }}</h3>
+                  <p class="tutorial-description">{{ tutorial.description }}</p>
+                  <div class="tutorial-meta">
+                    <span class="duration">
+                      <i class="bi bi-clock"></i>
+                      {{ tutorial.duration }} min
+                    </span>
+                    <span class="category">{{ tutorial.category }}</span>
+                  </div>
+                </div>
+                <div class="tutorial-actions">
+                  <button
+                    *ngIf="!tutorial.completed"
+                    class="start-button"
+                    (click)="startTutorial(tutorial)"
+                  >
+                    Start
+                  </button>
+                  <span *ngIf="tutorial.completed" class="completed-badge">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Completed
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `,
   styles: [
