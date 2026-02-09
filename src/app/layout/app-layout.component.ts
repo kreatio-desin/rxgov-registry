@@ -837,6 +837,404 @@ import { SupportService, SupportTicket, Tutorial } from '../core/services/suppor
           display: none;
         }
       }
+
+      /* Help Modal */
+      .help-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        animation: fadeIn 0.2s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .help-modal-content {
+        background: var(--color-bg-primary);
+        border-radius: 8px;
+        box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+        width: 90%;
+        max-width: 500px;
+        max-height: 600px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        animation: slideUp 0.3s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 24px;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .header-content {
+        flex: 1;
+      }
+
+      .modal-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+        color: var(--color-text-primary);
+      }
+
+      .modal-description {
+        font-size: 14px;
+        color: var(--color-text-secondary);
+        margin: 0;
+      }
+
+      .close-button {
+        background: none;
+        border: none;
+        color: var(--color-text-secondary);
+        font-size: 20px;
+        cursor: pointer;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: background 0.2s, color 0.2s;
+
+        &:hover {
+          background: var(--color-bg-tertiary);
+          color: var(--color-text-primary);
+        }
+      }
+
+      .tabs-container {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        overflow: hidden;
+      }
+
+      .tabs-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 12px 24px 0;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .tab-button {
+        padding: 10px 12px;
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        color: var(--color-text-secondary);
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+
+        &:hover {
+          color: var(--color-text-primary);
+        }
+
+        &.active {
+          color: var(--color-primary);
+          border-bottom-color: var(--color-primary);
+        }
+      }
+
+      .tab-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        label {
+          font-size: 13px;
+          font-weight: 500;
+          color: var(--color-text-primary);
+        }
+      }
+
+      .form-input,
+      .form-textarea {
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        padding: 8px 12px;
+        font-size: 13px;
+        background: var(--color-bg-secondary);
+        color: var(--color-text-primary);
+        font-family: inherit;
+        transition: border-color 0.2s;
+
+        &:focus {
+          outline: none;
+          border-color: var(--color-primary);
+          box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        &::placeholder {
+          color: var(--color-text-tertiary);
+        }
+      }
+
+      .form-textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .submit-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 16px;
+        background: var(--color-primary);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+        margin-top: 8px;
+
+        &:hover {
+          background: var(--color-primary-dark);
+        }
+      }
+
+      .tickets-list,
+      .tutorials-list {
+        gap: 12px;
+      }
+
+      .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 40px 20px;
+        color: var(--color-text-secondary);
+        text-align: center;
+
+        i {
+          font-size: 32px;
+          opacity: 0.5;
+        }
+
+        p {
+          font-size: 13px;
+          margin: 0;
+        }
+      }
+
+      .ticket-item {
+        padding: 12px;
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        background: var(--color-bg-secondary);
+      }
+
+      .ticket-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
+      .ticket-title {
+        font-weight: 500;
+        font-size: 13px;
+        color: var(--color-text-primary);
+      }
+
+      .ticket-status {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 4px 8px;
+        border-radius: 3px;
+        text-transform: uppercase;
+
+        &[data-status='open'] {
+          background: rgba(59, 130, 246, 0.1);
+          color: #3b82f6;
+        }
+
+        &[data-status='in-progress'] {
+          background: rgba(251, 146, 60, 0.1);
+          color: #fb923c;
+        }
+
+        &[data-status='resolved'] {
+          background: rgba(34, 197, 94, 0.1);
+          color: #22c55e;
+        }
+
+        &[data-status='closed'] {
+          background: rgba(107, 114, 128, 0.1);
+          color: #6b7280;
+        }
+      }
+
+      .ticket-meta {
+        display: flex;
+        gap: 12px;
+        font-size: 11px;
+        color: var(--color-text-secondary);
+        margin-bottom: 8px;
+      }
+
+      .priority {
+        padding: 2px 6px;
+        border-radius: 3px;
+        background: rgba(0, 0, 0, 0.05);
+        font-weight: 500;
+
+        &[data-priority='Low'] {
+          background: rgba(34, 197, 94, 0.1);
+          color: #22c55e;
+        }
+
+        &[data-priority='Medium - Minor Issue'] {
+          background: rgba(251, 146, 60, 0.1);
+          color: #fb923c;
+        }
+
+        &[data-priority='High - Urgent'] {
+          background: rgba(239, 68, 68, 0.1);
+          color: #ef4444;
+        }
+      }
+
+      .date {
+        color: var(--color-text-tertiary);
+      }
+
+      .ticket-description {
+        font-size: 12px;
+        color: var(--color-text-secondary);
+        margin: 0;
+        line-height: 1.4;
+      }
+
+      .tutorial-item {
+        display: flex;
+        gap: 12px;
+        padding: 12px;
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        background: var(--color-bg-secondary);
+        align-items: flex-start;
+      }
+
+      .tutorial-icon {
+        font-size: 24px;
+        color: var(--color-primary);
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .tutorial-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .tutorial-title {
+        font-size: 13px;
+        font-weight: 500;
+        margin: 0 0 4px 0;
+        color: var(--color-text-primary);
+      }
+
+      .tutorial-description {
+        font-size: 12px;
+        color: var(--color-text-secondary);
+        margin: 0 0 8px 0;
+      }
+
+      .tutorial-meta {
+        display: flex;
+        gap: 12px;
+        font-size: 11px;
+        color: var(--color-text-tertiary);
+
+        span {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+      }
+
+      .tutorial-actions {
+        flex-shrink: 0;
+      }
+
+      .start-button {
+        padding: 6px 12px;
+        background: var(--color-primary);
+        color: white;
+        border: none;
+        border-radius: 3px;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+        white-space: nowrap;
+
+        &:hover {
+          background: var(--color-primary-dark);
+        }
+      }
+
+      .completed-badge {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 12px;
+        color: #22c55e;
+        font-weight: 500;
+      }
     `,
   ],
 })
