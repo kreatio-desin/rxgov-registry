@@ -1248,6 +1248,17 @@ export class AppLayoutComponent implements OnInit {
   sidebarOpen = false;
   currentUser: AuthUser | null = null;
 
+  // Help and Support Dialog
+  showHelpDialog = false;
+  activeTab: 'new' | 'tickets' | 'tutorials' = 'new';
+  tickets: SupportTicket[] = [];
+  tutorials: Tutorial[] = [];
+  newTicket = {
+    subject: '',
+    priority: 'Medium - Minor Issue',
+    description: '',
+  };
+
   constructor(
     private patientService: PatientService,
     private offlineStorage: OfflineStorageService,
@@ -1255,6 +1266,7 @@ export class AppLayoutComponent implements OnInit {
     private router: Router,
     private themeService: ThemeService,
     private authService: AuthService,
+    private supportService: SupportService,
   ) {
     this.syncStatus$ = this.syncService.syncStatus$;
     this.setupKeyboardShortcuts();
