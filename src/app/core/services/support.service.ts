@@ -5,7 +5,11 @@ export interface SupportTicket {
   id: string;
   subject: string;
   description: string;
-  priority: 'Low - General question' | 'Medium - Minor Issue' | 'High - Major Functionality Broken' | 'Urgent - System Outage Critical';
+  priority:
+    | 'Low - General question'
+    | 'Medium - Minor Issue'
+    | 'High - Major Functionality Broken'
+    | 'Urgent - System Outage Critical';
   status: 'open' | 'in-progress' | 'resolved' | 'closed';
   createdAt: string;
   updatedAt: string;
@@ -100,7 +104,7 @@ export class SupportService {
           {
             id: 'step-3',
             title: 'Fill in Patient Details',
-            description: 'Enter the patient\'s personal information including name, DOB, and SSN.',
+            description: "Enter the patient's personal information including name, DOB, and SSN.",
             targetSelector: '.patient-form',
             position: 'top',
           },
@@ -139,13 +143,15 @@ export class SupportService {
           {
             id: 'step-3',
             title: 'Attestation',
-            description: 'You will be asked to confirm that you have a valid reason for accessing the record.',
+            description:
+              'You will be asked to confirm that you have a valid reason for accessing the record.',
             position: 'bottom',
           },
           {
             id: 'step-4',
             title: 'Access Duration',
-            description: 'Your emergency access will be valid for 24 hours, after which you will need to request it again.',
+            description:
+              'Your emergency access will be valid for 24 hours, after which you will need to request it again.',
             position: 'bottom',
           },
         ],
@@ -190,7 +196,8 @@ export class SupportService {
           {
             id: 'step-5',
             title: 'Submit Encounter',
-            description: 'Save the encounter and it will appear in the "Today\'s Encounters" section.',
+            description:
+              'Save the encounter and it will appear in the "Today\'s Encounters" section.',
             targetSelector: '.save-encounter-btn',
             position: 'left',
           },
@@ -208,14 +215,16 @@ export class SupportService {
           {
             id: 'step-1',
             title: 'Global Search',
-            description: 'Use the search bar at the top of the page to search for patients by name or ID.',
+            description:
+              'Use the search bar at the top of the page to search for patients by name or ID.',
             targetSelector: '.search-container',
             position: 'bottom',
           },
           {
             id: 'step-2',
             title: 'Search Tips',
-            description: 'You can search by first name, last name, or registry ID. Partial matches work too.',
+            description:
+              'You can search by first name, last name, or registry ID. Partial matches work too.',
             position: 'bottom',
           },
           {
@@ -246,7 +255,8 @@ export class SupportService {
           {
             id: 'step-2',
             title: 'Select Report Type',
-            description: 'Choose the type of report you want to view (Break Glass, Compliance, etc.).',
+            description:
+              'Choose the type of report you want to view (Break Glass, Compliance, etc.).',
             position: 'bottom',
           },
           {
@@ -273,7 +283,12 @@ export class SupportService {
       id: `ticket-${Date.now()}`,
       subject,
       description,
-      priority: (priority as 'Low - General question' | 'Medium - Minor Issue' | 'High - Major Functionality Broken' | 'Urgent - System Outage Critical') || 'Medium - Minor Issue',
+      priority:
+        (priority as
+          | 'Low - General question'
+          | 'Medium - Minor Issue'
+          | 'High - Major Functionality Broken'
+          | 'Urgent - System Outage Critical') || 'Medium - Minor Issue',
       status: 'open',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),

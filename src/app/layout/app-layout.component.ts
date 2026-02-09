@@ -44,7 +44,13 @@ import { SupportService, SupportTicket, Tutorial } from '../core/services/suppor
               <i class="bi bi-layout-dashboard"></i>
               <span class="nav-label">My Clinic</span>
             </a>
-            <a routerLink="/mmu" routerLinkActive="active" class="nav-item" title="Mobile Unit" *ngIf="!currentUser || currentUser.role !== 'admin'">
+            <a
+              routerLink="/mmu"
+              routerLinkActive="active"
+              class="nav-item"
+              title="Mobile Unit"
+              *ngIf="!currentUser || currentUser.role !== 'admin'"
+            >
               <i class="bi bi-bus"></i>
               <span class="nav-label">Mobile Unit</span>
             </a>
@@ -212,7 +218,9 @@ import { SupportService, SupportTicket, Tutorial } from '../core/services/suppor
           <div class="modal-header">
             <div class="header-content">
               <h2 class="modal-title">Help and Support</h2>
-              <p class="modal-description">Submit a request, view your tickets, or learn how to use the app.</p>
+              <p class="modal-description">
+                Submit a request, view your tickets, or learn how to use the app.
+              </p>
             </div>
             <button class="close-button" (click)="closeHelpDialog()" title="Close">
               <i class="bi bi-x"></i>
@@ -924,7 +932,9 @@ import { SupportService, SupportTicket, Tutorial } from '../core/services/suppor
         align-items: center;
         justify-content: center;
         border-radius: 4px;
-        transition: background 0.2s, color 0.2s;
+        transition:
+          background 0.2s,
+          color 0.2s;
 
         &:hover {
           background: var(--color-bg-tertiary);
