@@ -1366,4 +1366,57 @@ export class AppLayoutComponent implements OnInit {
         return '';
     }
   }
+
+  // Help and Support Methods
+  openHelpDialog(): void {
+    this.showHelpDialog = true;
+    this.activeTab = 'new';
+    this.loadTicketsAndTutorials();
+  }
+
+  closeHelpDialog(): void {
+    this.showHelpDialog = false;
+    this.resetForm();
+  }
+
+  private loadTicketsAndTutorials(): void {
+    this.tickets = this.supportService.getTickets();
+    this.tutorials = this.supportService.getTutorials();
+  }
+
+  submitTicket(): void {
+    if (!this.newTicket.subject.trim() || !this.newTicket.description.trim()) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    this.supportService.submitTicket(
+      this.newTicket.subject,
+      this.newTicket.description,
+      this.newTicket.priority,
+    );
+
+    this.resetForm();
+    this.activeTab = 'tickets';
+    this.loadTicketsAndTutorials();
+  }
+
+  startTutorial(tutorial: Tutorial): void {
+    // Mark tutorial as completed for now
+    this.supportService.markTutorialCompleted(tutorial.id);
+    this.loadTicketsAndTutorials();
+
+    // In a full implementation, this would launch an interactive overlay
+    // with step-by-step guidance highlighting specific UI elements
+    console.log('Starting tutorial:', tutorial.title);
+    alert(`Tutorial "${tutorial.title}" started. Steps: ${tutorial.steps.length}`);
+  }
+
+  private resetForm(): void {
+    this.newTicket = {
+      subject: '',
+      priority: 'Medium - Minor Issue',
+      description: '',
+    };
+  }
 }
