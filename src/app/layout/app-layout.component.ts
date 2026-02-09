@@ -260,9 +260,9 @@ import { SupportService, SupportTicket, Tutorial } from '../core/services/suppor
               <div class="form-group">
                 <label for="priority">Priority</label>
                 <select [(ngModel)]="newTicket.priority" class="form-input">
-                  <option value="Low">Low</option>
-                  <option value="Medium - Minor Issue">Medium - Minor Issue</option>
-                  <option value="High - Urgent">High - Urgent</option>
+                  <option *ngFor="let option of priorityOptions" [value]="option">
+                    {{ option }}
+                  </option>
                 </select>
               </div>
 
