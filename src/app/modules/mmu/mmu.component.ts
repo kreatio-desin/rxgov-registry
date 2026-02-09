@@ -973,6 +973,13 @@ interface DoseAdministration {
         border-radius: 0.25rem;
         background: var(--color-bg-tertiary);
         border-left: 2px solid #3b82f6;
+        cursor: pointer;
+        transition: background-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .encounter-item:hover {
+        background: var(--color-bg-secondary);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
 
       .encounter-time {
