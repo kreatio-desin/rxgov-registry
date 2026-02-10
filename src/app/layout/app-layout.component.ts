@@ -1757,4 +1757,35 @@ export class AppLayoutComponent implements OnInit {
     };
     this.activeTab = 'new';
   }
+
+  // Accessibility Methods
+  openAccessibilityDialog(): void {
+    this.showAccessibilityDialog = true;
+    this.accessibilitySettings = this.accessibilityService.getSettings();
+  }
+
+  closeAccessibilityDialog(): void {
+    this.showAccessibilityDialog = false;
+  }
+
+  toggleHighContrast(): void {
+    this.accessibilityService.toggleHighContrast();
+  }
+
+  setTextSize(size: TextSize): void {
+    this.accessibilityService.setTextSize(size);
+  }
+
+  getSizeLabel(size: TextSize): string {
+    switch (size) {
+      case 'normal':
+        return 'Normal';
+      case 'large':
+        return 'Large';
+      case 'extra':
+        return 'Extra';
+      default:
+        return 'Normal';
+    }
+  }
 }
