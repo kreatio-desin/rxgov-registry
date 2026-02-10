@@ -23,20 +23,45 @@
         font-size: 15.4px !important;
       }
 
+      body.text-size-large {
+        font-size: 15.4px !important;
+      }
+
       /* Extra text size - 125% scaling (17.5px) */
       html.text-size-extra {
         font-size: 17.5px !important;
       }
 
-      /* Force ALL elements to inherit font-size from html */
-      html.text-size-large *,
+      body.text-size-extra {
+        font-size: 17.5px !important;
+      }
+
+      /* Force ALL descendants to inherit font-size */
+      html.text-size-large * {
+        font-size: inherit !important;
+      }
+
       html.text-size-extra * {
         font-size: inherit !important;
       }
 
-      /* For normal size, also ensure inheritance */
-      html * {
-        font-size: inherit;
+      body.text-size-large * {
+        font-size: inherit !important;
+      }
+
+      body.text-size-extra * {
+        font-size: inherit !important;
+      }
+
+      /* Also apply to all elements under app-root */
+      html.text-size-large app-root *,
+      html.text-size-large app-root *:not(style) {
+        font-size: inherit !important;
+      }
+
+      html.text-size-extra app-root *,
+      html.text-size-extra app-root *:not(style) {
+        font-size: inherit !important;
       }
 
       /* Headings - scale proportionally using em */
@@ -74,7 +99,7 @@
         font-size: inherit !important;
       }
 
-      /* All inline and text elements */
+      /* All text and interactive elements */
       a,
       span,
       p,
