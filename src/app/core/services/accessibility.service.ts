@@ -49,38 +49,42 @@ export class AccessibilityService {
   private applySettings(): void {
     const settings = this.settingsSubject.value;
     const html = document.documentElement;
-    const body = document.body;
-
-    console.log('Applying accessibility settings:', settings);
 
     // Apply high contrast mode
     if (settings.highContrast) {
       html.setAttribute('data-high-contrast', 'true');
       html.classList.add('high-contrast-mode');
-      body.classList.add('high-contrast-mode');
     } else {
       html.removeAttribute('data-high-contrast');
       html.classList.remove('high-contrast-mode');
-      body.classList.remove('high-contrast-mode');
     }
 
     // Apply text size - remove all text size classes first
     html.classList.remove('text-size-large', 'text-size-extra');
-    body.classList.remove('text-size-large', 'text-size-extra');
 
-    // Add the appropriate text size class to HTML element
+    // Add the appropriate text size class to HTML element only
     if (settings.textSize === 'large') {
       html.classList.add('text-size-large');
-      console.log('Applied text-size-large class. HTML classes:', html.className);
     } else if (settings.textSize === 'extra') {
       html.classList.add('text-size-extra');
-      console.log('Applied text-size-extra class. HTML classes:', html.className);
-    } else {
-      console.log('Removed all text-size classes. HTML classes:', html.className);
     }
 
-    // Also set data attributes for backward compatibility
+    // Set data attribute for reference
     html.setAttribute('data-text-size', settings.textSize);
+
+    // Verify the class was applied
+    if (
+      (settings.textSize === 'large' && html.classList.contains('text-size-large')) ||
+      (settings.textSize === 'extra' && html.classList.contains('text-size-extra')) ||
+      settings.textSize === 'normal'
+    ) {
+      console.log(
+        'Accessibility settings applied successfully:',
+        settings,
+        'HTML classes:',
+        html.className,
+      );
+    }
   }
 
   getSettings(): AccessibilitySettings {
