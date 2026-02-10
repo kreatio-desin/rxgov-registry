@@ -49,15 +49,28 @@ export class AccessibilityService {
   private applySettings(): void {
     const settings = this.settingsSubject.value;
     const html = document.documentElement;
+    const body = document.body;
 
     // Apply high contrast mode
     if (settings.highContrast) {
       html.setAttribute('data-high-contrast', 'true');
+      body.classList.add('high-contrast-mode');
     } else {
       html.removeAttribute('data-high-contrast');
+      body.classList.remove('high-contrast-mode');
     }
 
-    // Apply text size
+    // Apply text size - remove all text size classes first
+    body.classList.remove('text-size-large', 'text-size-extra');
+
+    // Add the appropriate text size class
+    if (settings.textSize === 'large') {
+      body.classList.add('text-size-large');
+    } else if (settings.textSize === 'extra') {
+      body.classList.add('text-size-extra');
+    }
+
+    // Also set data attributes for backward compatibility
     html.setAttribute('data-text-size', settings.textSize);
   }
 
