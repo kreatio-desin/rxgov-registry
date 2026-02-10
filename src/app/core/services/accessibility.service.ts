@@ -111,4 +111,8 @@ export class AccessibilityService {
     const settings = this.settingsSubject.value;
     this.setHighContrast(!settings.highContrast);
   }
+
+  forceApplySettings(): void {
+    this.applySettings();
+  }
 }
