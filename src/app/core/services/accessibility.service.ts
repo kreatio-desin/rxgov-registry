@@ -63,12 +63,18 @@ export class AccessibilityService {
     // Apply text size - remove all text size classes first
     body.classList.remove('text-size-large', 'text-size-extra');
 
-    // Add the appropriate text size class
+    // Set CSS variable for text scaling
+    let textScale = '1';
     if (settings.textSize === 'large') {
       body.classList.add('text-size-large');
+      textScale = '1.1';
     } else if (settings.textSize === 'extra') {
       body.classList.add('text-size-extra');
+      textScale = '1.25';
     }
+
+    // Set CSS variable on root element
+    html.style.setProperty('--text-scale', textScale);
 
     // Also set data attributes for backward compatibility
     html.setAttribute('data-text-size', settings.textSize);
