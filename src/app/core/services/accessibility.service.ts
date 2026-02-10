@@ -51,6 +51,8 @@ export class AccessibilityService {
     const html = document.documentElement;
     const body = document.body;
 
+    console.log('Applying accessibility settings:', settings);
+
     // Apply high contrast mode
     if (settings.highContrast) {
       html.setAttribute('data-high-contrast', 'true');
@@ -66,20 +68,16 @@ export class AccessibilityService {
     html.classList.remove('text-size-large', 'text-size-extra');
     body.classList.remove('text-size-large', 'text-size-extra');
 
-    // Set CSS variable for text scaling
-    let textScale = '1';
+    // Add the appropriate text size class to HTML element
     if (settings.textSize === 'large') {
       html.classList.add('text-size-large');
-      body.classList.add('text-size-large');
-      textScale = '1.1';
+      console.log('Applied text-size-large class. HTML classes:', html.className);
     } else if (settings.textSize === 'extra') {
       html.classList.add('text-size-extra');
-      body.classList.add('text-size-extra');
-      textScale = '1.25';
+      console.log('Applied text-size-extra class. HTML classes:', html.className);
+    } else {
+      console.log('Removed all text-size classes. HTML classes:', html.className);
     }
-
-    // Set CSS variable on root element
-    html.style.setProperty('--text-scale', textScale);
 
     // Also set data attributes for backward compatibility
     html.setAttribute('data-text-size', settings.textSize);
