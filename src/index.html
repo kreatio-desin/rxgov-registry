@@ -8,94 +8,88 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <style>
       /* Global Accessibility Styles */
-      /* Large text size - 110% scaling */
-      body.text-size-large {
-        font-size: 15.4px;
+      /* Default base font size */
+      :root {
+        --text-scale: 1;
       }
 
-      body.text-size-large,
-      body.text-size-large * {
+      body {
+        font-size: calc(14px * var(--text-scale));
+      }
+
+      /* Ensure all elements inherit font size from body */
+      * {
         font-size: inherit;
       }
 
-      body.text-size-large table,
-      body.text-size-large .patients-table {
-        font-size: 15.4px;
-      }
-
-      body.text-size-large table th,
-      body.text-size-large .patients-table th {
-        font-size: 13.2px;
-      }
-
-      body.text-size-large table td,
-      body.text-size-large .patients-table td {
-        font-size: 15.4px;
-      }
-
-      body.text-size-large .cell-rxid {
-        font-size: 13.2px;
-      }
-
-      body.text-size-large .ssn-masked {
-        font-size: 14.3px;
-      }
-
-      body.text-size-large .dose-info {
-        font-size: 13.2px;
-      }
-
-      body.text-size-large .transfer-name {
-        font-size: 15.4px;
-      }
-
-      body.text-size-large .transfer-from {
-        font-size: 13.2px;
+      /* Large text size - 110% scaling */
+      body.text-size-large {
+        --text-scale: 1.1;
+        font-size: calc(14px * var(--text-scale));
       }
 
       /* Extra text size - 125% scaling */
       body.text-size-extra {
-        font-size: 17.5px;
+        --text-scale: 1.25;
+        font-size: calc(14px * var(--text-scale));
       }
 
-      body.text-size-extra,
-      body.text-size-extra * {
+      /* Override specific elements that have hardcoded sizes */
+      body.text-size-large h1,
+      body.text-size-large h2,
+      body.text-size-large h3 {
         font-size: inherit;
       }
 
-      body.text-size-extra table,
-      body.text-size-extra .patients-table {
-        font-size: 17.5px;
+      body.text-size-extra h1,
+      body.text-size-extra h2,
+      body.text-size-extra h3 {
+        font-size: inherit;
       }
 
-      body.text-size-extra table th,
-      body.text-size-extra .patients-table th {
-        font-size: 15px;
+      /* Table specific adjustments */
+      table {
+        font-size: inherit;
       }
 
-      body.text-size-extra table td,
-      body.text-size-extra .patients-table td {
-        font-size: 17.5px;
+      th,
+      td {
+        font-size: inherit;
       }
 
-      body.text-size-extra .cell-rxid {
-        font-size: 15px;
+      /* Form elements */
+      input,
+      textarea,
+      select,
+      button {
+        font-size: inherit;
       }
 
-      body.text-size-extra .ssn-masked {
-        font-size: 16.25px;
+      /* Ensure headings scale proportionally */
+      h1 {
+        font-size: calc(2em * var(--text-scale, 1));
       }
 
-      body.text-size-extra .dose-info {
-        font-size: 15px;
+      h2 {
+        font-size: calc(1.75em * var(--text-scale, 1));
       }
 
-      body.text-size-extra .transfer-name {
-        font-size: 15.75px;
+      h3 {
+        font-size: calc(1.5em * var(--text-scale, 1));
       }
 
-      body.text-size-extra .transfer-from {
-        font-size: 15px;
+      h4 {
+        font-size: calc(1.25em * var(--text-scale, 1));
+      }
+
+      h5,
+      h6 {
+        font-size: calc(1em * var(--text-scale, 1));
+      }
+
+      /* Small elements */
+      small {
+        font-size: calc(0.875em * var(--text-scale, 1));
       }
     </style>
   </head>
