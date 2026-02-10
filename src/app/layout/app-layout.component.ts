@@ -90,7 +90,7 @@ import { AccessibilityService, AccessibilitySettings, TextSize } from '../core/s
               <i class="bi bi-circle-half"></i>
               <span class="nav-label">Theme</span>
             </button>
-            <button class="nav-item" title="Accessibility">
+            <button class="nav-item" title="Accessibility" (click)="openAccessibilityDialog()">
               <i class="bi bi-person-standing"></i>
               <span class="nav-label">Accessibility</span>
             </button>
