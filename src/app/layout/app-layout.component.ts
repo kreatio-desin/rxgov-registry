@@ -1598,6 +1598,7 @@ export class AppLayoutComponent implements OnInit {
     private themeService: ThemeService,
     private authService: AuthService,
     private supportService: SupportService,
+    private accessibilityService: AccessibilityService,
   ) {
     this.syncStatus$ = this.syncService.syncStatus$;
     this.setupKeyboardShortcuts();
