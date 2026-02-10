@@ -8,74 +8,69 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <style>
       /* Global Accessibility Styles */
-      :root {
-        --text-scale: 1;
-      }
-
-      html {
-        font-size: calc(14px * var(--text-scale));
-      }
-
+      /* Default base font size */
+      html,
       body {
-        font-size: inherit;
-      }
-
-      /* Large text size - 110% scaling */
-      html.text-size-large,
-      body.text-size-large {
-        --text-scale: 1.1;
-      }
-
-      html.text-size-large {
-        font-size: calc(14px * 1.1);
-      }
-
-      /* Extra text size - 125% scaling */
-      html.text-size-extra,
-      body.text-size-extra {
-        --text-scale: 1.25;
-      }
-
-      html.text-size-extra {
-        font-size: calc(14px * 1.25);
+        font-size: 14px;
       }
 
       /* Ensure all elements inherit font size by default */
       * {
-        font-size: inherit;
+        font-size: inherit !important;
       }
 
-      /* Specific overrides for elements with hardcoded sizes */
+      /* Large text size - 110% scaling */
+      html.text-size-large {
+        font-size: 15.4px !important;
+      }
+
+      html.text-size-large * {
+        font-size: inherit !important;
+      }
+
+      /* Extra text size - 125% scaling */
+      html.text-size-extra {
+        font-size: 17.5px !important;
+      }
+
+      html.text-size-extra * {
+        font-size: inherit !important;
+      }
+
+      /* Headings scale proportionally with base font */
       h1 {
-        font-size: 2em;
+        font-size: 2em !important;
       }
 
       h2 {
-        font-size: 1.75em;
+        font-size: 1.75em !important;
       }
 
       h3 {
-        font-size: 1.5em;
+        font-size: 1.5em !important;
       }
 
       h4 {
-        font-size: 1.25em;
+        font-size: 1.25em !important;
       }
 
       h5,
       h6 {
-        font-size: 1em;
+        font-size: 1em !important;
       }
 
       small {
-        font-size: 0.875em;
+        font-size: 0.875em !important;
       }
 
-      /* Tables inherit from body */
-      table,
+      /* Tables inherit from parent */
+      table {
+        font-size: inherit !important;
+      }
+
       th,
       td {
-        font-size: inherit;
+        font-size: inherit !important;
       }
 
       /* Form elements */
@@ -83,13 +78,32 @@
       textarea,
       select,
       button {
-        font-size: inherit;
+        font-size: inherit !important;
       }
 
       /* Icons inherit font size */
       i,
       svg {
-        font-size: inherit;
+        font-size: inherit !important;
+      }
+
+      /* Ensure badges and special elements inherit */
+      .badge,
+      .label,
+      span {
+        font-size: inherit !important;
+      }
+
+      /* Links */
+      a {
+        font-size: inherit !important;
+      }
+
+      /* Paragraphs and lists */
+      p,
+      li,
+      div {
+        font-size: inherit !important;
       }
     </style>
   </head>
