@@ -1296,6 +1296,261 @@ import { AccessibilityService, AccessibilitySettings, TextSize } from '../core/s
         color: #22c55e;
         font-weight: 500;
       }
+
+      /* Accessibility Modal */
+      .accessibility-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        animation: fadeIn 0.2s ease-in-out;
+      }
+
+      .accessibility-modal-content {
+        background: var(--color-bg-primary);
+        border-radius: 8px;
+        box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+        width: 90%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        animation: slideUp 0.3s ease-out;
+      }
+
+      .accessibility-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 24px;
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .accessibility-header-content {
+        flex: 1;
+      }
+
+      .accessibility-modal-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0 0 8px 0;
+        color: var(--color-text-primary);
+      }
+
+      .accessibility-modal-description {
+        font-size: 14px;
+        color: var(--color-text-secondary);
+        margin: 0;
+      }
+
+      .accessibility-close-button {
+        background: none;
+        border: none;
+        color: var(--color-text-secondary);
+        font-size: 20px;
+        cursor: pointer;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: background 0.2s, color 0.2s;
+
+        &:hover {
+          background: var(--color-bg-tertiary);
+          color: var(--color-text-primary);
+        }
+      }
+
+      .accessibility-modal-body {
+        padding: 20px 24px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .accessibility-section {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .accessibility-option-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .accessibility-option-text {
+        flex: 1;
+      }
+
+      .accessibility-option-label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin: 0 0 4px 0;
+        color: var(--color-text-primary);
+      }
+
+      .accessibility-option-description {
+        font-size: 12px;
+        color: var(--color-text-secondary);
+        margin: 0;
+      }
+
+      /* High Contrast Toggle */
+      .accessibility-toggle {
+        width: 48px;
+        height: 28px;
+        border-radius: 14px;
+        border: 2px solid var(--color-border);
+        background: var(--color-bg-tertiary);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        padding: 2px;
+        flex-shrink: 0;
+
+        &.active {
+          background: var(--color-primary);
+          border-color: var(--color-primary);
+        }
+
+        &:hover {
+          border-color: var(--color-text-secondary);
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--color-primary);
+          outline-offset: 2px;
+        }
+      }
+
+      .accessibility-toggle-thumb {
+        width: 20px;
+        height: 20px;
+        background: white;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+        display: block;
+
+        .accessibility-toggle.active & {
+          transform: translateX(20px);
+        }
+      }
+
+      /* Text Size Buttons */
+      .accessibility-text-size-group {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .accessibility-size-button {
+        padding: 12px;
+        border: 2px solid var(--color-border);
+        border-radius: 6px;
+        background: var(--color-bg-secondary);
+        color: var(--color-text-primary);
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        text-align: center;
+
+        &[data-size='normal'] {
+          font-size: 14px;
+        }
+
+        &[data-size='large'] {
+          font-size: 16px;
+        }
+
+        &[data-size='extra'] {
+          font-size: 18px;
+        }
+
+        &:hover {
+          background: var(--color-bg-tertiary);
+          border-color: var(--color-primary);
+        }
+
+        &.active {
+          background: var(--color-primary);
+          color: white;
+          border-color: var(--color-primary);
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--color-primary);
+          outline-offset: 2px;
+        }
+      }
+
+      /* High Contrast Mode Styles */
+      :host-context([data-high-contrast='true']) {
+        --color-bg-primary: #ffffff;
+        --color-bg-secondary: #f5f5f5;
+        --color-bg-tertiary: #e8e8e8;
+        --color-text-primary: #000000;
+        --color-text-secondary: #1a1a1a;
+        --color-text-tertiary: #333333;
+        --color-border: #000000;
+        --color-primary: #0066cc;
+        --color-primary-dark: #004a99;
+        --color-error: #cc0000;
+      }
+
+      /* Text Size Styles */
+      :host-context([data-text-size='large']) {
+        font-size: 110%;
+
+        .page-title {
+          font-size: 22px;
+        }
+
+        .nav-label {
+          font-size: 13px;
+        }
+
+        .search-input {
+          font-size: 15px;
+        }
+
+        .main-content {
+          padding: 28px;
+        }
+      }
+
+      :host-context([data-text-size='extra']) {
+        font-size: 125%;
+
+        .page-title {
+          font-size: 24px;
+        }
+
+        .nav-label {
+          font-size: 14px;
+        }
+
+        .search-input {
+          font-size: 16px;
+        }
+
+        .main-content {
+          padding: 32px;
+        }
+      }
     `,
   ],
 })
