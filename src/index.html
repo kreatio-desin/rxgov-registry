@@ -7,53 +7,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <style>
-      /* Global Accessibility Styles */
+      /* Global Accessibility Styles - MUST be in head before any component styles */
+
       /* Default base font size */
-      html,
+      html {
+        font-size: 14px !important;
+      }
+
       body {
-        font-size: 14px;
+        font-size: 14px !important;
       }
 
-      /* Ensure all elements inherit font size by default */
-      * {
-        font-size: inherit !important;
-      }
-
-      /* Large text size - 110% scaling */
+      /* Large text size - 110% scaling (15.4px) */
       html.text-size-large {
         font-size: 15.4px !important;
       }
 
-      html.text-size-large * {
-        font-size: inherit !important;
-      }
-
-      /* Extra text size - 125% scaling */
+      /* Extra text size - 125% scaling (17.5px) */
       html.text-size-extra {
         font-size: 17.5px !important;
       }
 
+      /* Force ALL elements to inherit font-size from html */
+      html.text-size-large *,
       html.text-size-extra * {
         font-size: inherit !important;
       }
 
-      /* Headings scale proportionally with base font */
-      h1 {
-        font-size: 2em !important;
+      /* For normal size, also ensure inheritance */
+      html * {
+        font-size: inherit;
       }
 
-      h2 {
-        font-size: 1.75em !important;
-      }
-
-      h3 {
-        font-size: 1.5em !important;
-      }
-
-      h4 {
-        font-size: 1.25em !important;
-      }
-
+      /* Headings - scale proportionally using em */
+      h1,
+      h2,
+      h3,
+      h4,
       h5,
       h6 {
         font-size: 1em !important;
@@ -63,11 +53,8 @@
         font-size: 0.875em !important;
       }
 
-      /* Tables inherit from parent */
-      table {
-        font-size: inherit !important;
-      }
-
+      /* Tables */
+      table,
       th,
       td {
         font-size: inherit !important;
@@ -81,28 +68,21 @@
         font-size: inherit !important;
       }
 
-      /* Icons inherit font size */
-      i,
-      svg {
+      /* Buttons with text */
+      .btn,
+      [class*="btn"] {
         font-size: inherit !important;
       }
 
-      /* Ensure badges and special elements inherit */
-      .badge,
-      .label,
-      span {
-        font-size: inherit !important;
-      }
-
-      /* Links */
-      a {
-        font-size: inherit !important;
-      }
-
-      /* Paragraphs and lists */
+      /* All inline and text elements */
+      a,
+      span,
       p,
       li,
-      div {
+      div,
+      label,
+      i,
+      svg {
         font-size: inherit !important;
       }
     </style>
