@@ -1721,10 +1721,6 @@ export class AppLayoutComponent implements OnInit {
   openAccessibilityDialog(): void {
     this.showAccessibilityDialog = true;
     this.accessibilitySettings = this.accessibilityService.getSettings();
-    // Force reapply to ensure settings take effect
-    setTimeout(() => {
-      this.accessibilityService.forceApplySettings();
-    }, 100);
   }
 
   closeAccessibilityDialog(): void {
