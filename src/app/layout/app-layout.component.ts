@@ -1582,6 +1582,14 @@ export class AppLayoutComponent implements OnInit {
     'Urgent - System Outage Critical',
   ];
 
+  // Accessibility Dialog
+  showAccessibilityDialog = false;
+  accessibilitySettings = {
+    highContrast: false,
+    textSize: 'normal' as TextSize,
+  };
+  textSizeOptions: TextSize[] = ['normal', 'large', 'extra'];
+
   constructor(
     private patientService: PatientService,
     private offlineStorage: OfflineStorageService,
