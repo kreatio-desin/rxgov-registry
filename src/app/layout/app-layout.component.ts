@@ -8,7 +8,11 @@ import { SyncService } from '../core/services/sync.service';
 import { ThemeService } from '../core/services/theme.service';
 import { AuthService, AuthUser } from '../core/services/auth.service';
 import { SupportService, SupportTicket, Tutorial } from '../core/services/support.service';
-import { AccessibilityService, AccessibilitySettings, TextSize } from '../core/services/accessibility.service';
+import {
+  AccessibilityService,
+  AccessibilitySettings,
+  TextSize,
+} from '../core/services/accessibility.service';
 
 @Component({
   selector: 'app-layout',
@@ -45,7 +49,13 @@ import { AccessibilityService, AccessibilitySettings, TextSize } from '../core/s
               <i class="bi bi-layout-dashboard"></i>
               <span class="nav-label">My Clinic</span>
             </a>
-            <a routerLink="/mmu" routerLinkActive="active" class="nav-item" title="Mobile Unit" *ngIf="!currentUser || currentUser.role !== 'admin'">
+            <a
+              routerLink="/mmu"
+              routerLinkActive="active"
+              class="nav-item"
+              title="Mobile Unit"
+              *ngIf="!currentUser || currentUser.role !== 'admin'"
+            >
               <i class="bi bi-bus"></i>
               <span class="nav-label">Mobile Unit</span>
             </a>
@@ -213,7 +223,9 @@ import { AccessibilityService, AccessibilitySettings, TextSize } from '../core/s
           <div class="modal-header">
             <div class="header-content">
               <h2 class="modal-title">Help and Support</h2>
-              <p class="modal-description">Submit a request, view your tickets, or learn how to use the app.</p>
+              <p class="modal-description">
+                Submit a request, view your tickets, or learn how to use the app.
+              </p>
             </div>
             <button class="close-button" (click)="closeHelpDialog()" title="Close">
               <i class="bi bi-x"></i>
@@ -349,14 +361,24 @@ import { AccessibilityService, AccessibilitySettings, TextSize } from '../core/s
       </div>
 
       <!-- Accessibility Options Modal -->
-      <div *ngIf="showAccessibilityDialog" class="accessibility-modal-overlay" (click)="closeAccessibilityDialog()">
+      <div
+        *ngIf="showAccessibilityDialog"
+        class="accessibility-modal-overlay"
+        (click)="closeAccessibilityDialog()"
+      >
         <div class="accessibility-modal-content" (click)="$event.stopPropagation()">
           <div class="accessibility-modal-header">
             <div class="accessibility-header-content">
               <h2 class="accessibility-modal-title">Accessibility Options</h2>
-              <p class="accessibility-modal-description">Customize the display to meet your visual needs.</p>
+              <p class="accessibility-modal-description">
+                Customize the display to meet your visual needs.
+              </p>
             </div>
-            <button class="accessibility-close-button" (click)="closeAccessibilityDialog()" title="Close">
+            <button
+              class="accessibility-close-button"
+              (click)="closeAccessibilityDialog()"
+              title="Close"
+            >
               <i class="bi bi-x"></i>
             </button>
           </div>
@@ -367,7 +389,9 @@ import { AccessibilityService, AccessibilitySettings, TextSize } from '../core/s
               <div class="accessibility-option-header">
                 <div class="accessibility-option-text">
                   <label class="accessibility-option-label">High Contrast Mode</label>
-                  <p class="accessibility-option-description">Increases contrast for better readability.</p>
+                  <p class="accessibility-option-description">
+                    Increases contrast for better readability.
+                  </p>
                 </div>
                 <button
                   type="button"
@@ -979,7 +1003,9 @@ import { AccessibilityService, AccessibilitySettings, TextSize } from '../core/s
         align-items: center;
         justify-content: center;
         border-radius: 4px;
-        transition: background 0.2s, color 0.2s;
+        transition:
+          background 0.2s,
+          color 0.2s;
 
         &:hover {
           background: var(--color-bg-tertiary);
@@ -1362,7 +1388,9 @@ import { AccessibilityService, AccessibilitySettings, TextSize } from '../core/s
         align-items: center;
         justify-content: center;
         border-radius: 4px;
-        transition: background 0.2s, color 0.2s;
+        transition:
+          background 0.2s,
+          color 0.2s;
 
         &:hover {
           background: var(--color-bg-tertiary);
