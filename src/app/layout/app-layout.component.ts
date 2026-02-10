@@ -347,6 +347,60 @@ import { AccessibilityService, AccessibilitySettings, TextSize } from '../core/s
           </div>
         </div>
       </div>
+
+      <!-- Accessibility Options Modal -->
+      <div *ngIf="showAccessibilityDialog" class="accessibility-modal-overlay" (click)="closeAccessibilityDialog()">
+        <div class="accessibility-modal-content" (click)="$event.stopPropagation()">
+          <div class="accessibility-modal-header">
+            <div class="accessibility-header-content">
+              <h2 class="accessibility-modal-title">Accessibility Options</h2>
+              <p class="accessibility-modal-description">Customize the display to meet your visual needs.</p>
+            </div>
+            <button class="accessibility-close-button" (click)="closeAccessibilityDialog()" title="Close">
+              <i class="bi bi-x"></i>
+            </button>
+          </div>
+
+          <div class="accessibility-modal-body">
+            <!-- High Contrast Mode -->
+            <div class="accessibility-section">
+              <div class="accessibility-option-header">
+                <div class="accessibility-option-text">
+                  <label class="accessibility-option-label">High Contrast Mode</label>
+                  <p class="accessibility-option-description">Increases contrast for better readability.</p>
+                </div>
+                <button
+                  type="button"
+                  class="accessibility-toggle"
+                  [class.active]="accessibilitySettings.highContrast"
+                  (click)="toggleHighContrast()"
+                  [attr.aria-checked]="accessibilitySettings.highContrast"
+                  role="switch"
+                >
+                  <span class="accessibility-toggle-thumb"></span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Text Size -->
+            <div class="accessibility-section">
+              <label class="accessibility-option-label">Text Size</label>
+              <div class="accessibility-text-size-group">
+                <button
+                  *ngFor="let size of textSizeOptions"
+                  type="button"
+                  class="accessibility-size-button"
+                  [class.active]="accessibilitySettings.textSize === size"
+                  (click)="setTextSize(size)"
+                  [attr.data-size]="size"
+                >
+                  {{ getSizeLabel(size) }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   `,
   styles: [
