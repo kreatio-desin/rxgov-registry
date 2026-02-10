@@ -1611,6 +1611,11 @@ export class AppLayoutComponent implements OnInit {
     this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user;
     });
+
+    // Load accessibility settings
+    this.accessibilityService.settings$.subscribe((settings) => {
+      this.accessibilitySettings = settings;
+    });
   }
 
   private setupKeyboardShortcuts(): void {
