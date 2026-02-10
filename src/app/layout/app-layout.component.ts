@@ -1510,46 +1510,150 @@ import { AccessibilityService, AccessibilitySettings, TextSize } from '../core/s
         --color-primary-dark: #004a99;
         --color-error: #cc0000;
       }
-
-      /* Text Size Styles */
-      :host-context([data-text-size='large']) {
-        font-size: 110%;
-
-        .page-title {
-          font-size: 22px;
-        }
-
-        .nav-label {
-          font-size: 13px;
-        }
-
-        .search-input {
-          font-size: 15px;
-        }
-
-        .main-content {
-          padding: 28px;
-        }
+    `,
+    /* Global text size styles - applied to body element */
+    `
+      /* Default (Normal) text size */
+      body {
+        font-size: 14px;
       }
 
-      :host-context([data-text-size='extra']) {
+      /* Large text size - 110% scaling */
+      body.text-size-large {
+        font-size: 15.4px;
+      }
+
+      body.text-size-large table,
+      body.text-size-large .patients-table {
+        font-size: 15.4px;
+      }
+
+      body.text-size-large th {
+        font-size: 13.2px;
+      }
+
+      body.text-size-large td {
+        font-size: 15.4px;
+      }
+
+      body.text-size-large .cell-rxid,
+      body.text-size-large .cell-name {
+        font-size: 13.2px;
+      }
+
+      body.text-size-large .ssn-masked {
+        font-size: 14.3px;
+      }
+
+      body.text-size-large .dose-info {
+        font-size: 13.2px;
+      }
+
+      body.text-size-large .page-title {
+        font-size: 22px;
+      }
+
+      body.text-size-large .nav-label {
+        font-size: 13px;
+      }
+
+      body.text-size-large .search-input {
+        font-size: 15px;
+      }
+
+      body.text-size-large .main-content {
+        padding: 28px;
+      }
+
+      body.text-size-large h1,
+      body.text-size-large h2,
+      body.text-size-large h3 {
+        font-size: 110%;
+      }
+
+      /* Extra text size - 125% scaling */
+      body.text-size-extra {
+        font-size: 17.5px;
+      }
+
+      body.text-size-extra table,
+      body.text-size-extra .patients-table {
+        font-size: 17.5px;
+      }
+
+      body.text-size-extra th {
+        font-size: 15px;
+      }
+
+      body.text-size-extra td {
+        font-size: 17.5px;
+      }
+
+      body.text-size-extra .cell-rxid,
+      body.text-size-extra .cell-name {
+        font-size: 15px;
+      }
+
+      body.text-size-extra .ssn-masked {
+        font-size: 16.25px;
+      }
+
+      body.text-size-extra .dose-info {
+        font-size: 15px;
+      }
+
+      body.text-size-extra .page-title {
+        font-size: 24px;
+      }
+
+      body.text-size-extra .nav-label {
+        font-size: 14px;
+      }
+
+      body.text-size-extra .search-input {
+        font-size: 16px;
+      }
+
+      body.text-size-extra .main-content {
+        padding: 32px;
+      }
+
+      body.text-size-extra h1,
+      body.text-size-extra h2,
+      body.text-size-extra h3 {
         font-size: 125%;
+      }
 
-        .page-title {
-          font-size: 24px;
-        }
+      body.text-size-extra .transfer-name {
+        font-size: 15.75px;
+      }
 
-        .nav-label {
-          font-size: 14px;
-        }
+      body.text-size-extra .transfer-from {
+        font-size: 15px;
+      }
 
-        .search-input {
-          font-size: 16px;
-        }
+      body.text-size-extra .section-header-compact {
+        font-size: 15.75px;
+      }
 
-        .main-content {
-          padding: 32px;
-        }
+      body.text-size-extra .btn-review {
+        font-size: 15px;
+      }
+
+      body.text-size-large .transfer-name {
+        font-size: 15.4px;
+      }
+
+      body.text-size-large .transfer-from {
+        font-size: 13.2px;
+      }
+
+      body.text-size-large .section-header-compact {
+        font-size: 15.4px;
+      }
+
+      body.text-size-large .btn-review {
+        font-size: 13.2px;
       }
     `,
   ],
