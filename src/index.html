@@ -10,53 +10,72 @@
       /* Global Accessibility Styles */
       :root {
         --text-scale: 1;
-        font-size: 14px;
       }
 
-      /* Apply scaling to all elements with font-size */
-      * {
-        --text-scale-value: calc(1em * var(--text-scale));
-      }
-
-      body {
+      html {
         font-size: calc(14px * var(--text-scale));
       }
 
+      body {
+        font-size: inherit;
+      }
+
       /* Large text size - 110% scaling */
+      html.text-size-large,
       body.text-size-large {
         --text-scale: 1.1;
       }
 
+      html.text-size-large {
+        font-size: calc(14px * 1.1);
+      }
+
       /* Extra text size - 125% scaling */
+      html.text-size-extra,
       body.text-size-extra {
         --text-scale: 1.25;
       }
 
-      /* Scale all text content */
-      p, span, div, a, label, button, input, textarea, select, li, th, td {
-        font-size: calc(1em * var(--text-scale));
+      html.text-size-extra {
+        font-size: calc(14px * 1.25);
       }
 
-      /* Headings - scale with content */
-      h1, h2, h3, h4, h5, h6 {
-        font-size: calc(1em * var(--text-scale));
-      }
-
-      /* Icons and special elements */
-      i, svg {
+      /* Ensure all elements inherit font size by default */
+      * {
         font-size: inherit;
-        width: calc(1em * var(--text-scale));
-        height: calc(1em * var(--text-scale));
       }
 
-      /* Tables */
-      table {
-        font-size: calc(1em * var(--text-scale));
+      /* Specific overrides for elements with hardcoded sizes */
+      h1 {
+        font-size: 2em;
       }
 
-      table th,
-      table td {
-        font-size: calc(1em * var(--text-scale));
+      h2 {
+        font-size: 1.75em;
+      }
+
+      h3 {
+        font-size: 1.5em;
+      }
+
+      h4 {
+        font-size: 1.25em;
+      }
+
+      h5,
+      h6 {
+        font-size: 1em;
+      }
+
+      small {
+        font-size: 0.875em;
+      }
+
+      /* Tables inherit from body */
+      table,
+      th,
+      td {
+        font-size: inherit;
       }
 
       /* Form elements */
@@ -64,16 +83,13 @@
       textarea,
       select,
       button {
-        font-size: calc(1em * var(--text-scale));
+        font-size: inherit;
       }
 
-      /* Ensure padding and margins scale proportionally */
-      body.text-size-large {
-        --spacing-scale: 1.1;
-      }
-
-      body.text-size-extra {
-        --spacing-scale: 1.25;
+      /* Icons inherit font size */
+      i,
+      svg {
+        font-size: inherit;
       }
     </style>
   </head>
