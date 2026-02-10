@@ -54,21 +54,26 @@ export class AccessibilityService {
     // Apply high contrast mode
     if (settings.highContrast) {
       html.setAttribute('data-high-contrast', 'true');
+      html.classList.add('high-contrast-mode');
       body.classList.add('high-contrast-mode');
     } else {
       html.removeAttribute('data-high-contrast');
+      html.classList.remove('high-contrast-mode');
       body.classList.remove('high-contrast-mode');
     }
 
     // Apply text size - remove all text size classes first
+    html.classList.remove('text-size-large', 'text-size-extra');
     body.classList.remove('text-size-large', 'text-size-extra');
 
     // Set CSS variable for text scaling
     let textScale = '1';
     if (settings.textSize === 'large') {
+      html.classList.add('text-size-large');
       body.classList.add('text-size-large');
       textScale = '1.1';
     } else if (settings.textSize === 'extra') {
+      html.classList.add('text-size-extra');
       body.classList.add('text-size-extra');
       textScale = '1.25';
     }
