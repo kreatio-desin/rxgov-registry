@@ -34,6 +34,9 @@ import {
               <div class="logo-title">REGISTRY</div>
               <div class="logo-subtitle">My Clinic</div>
             </div>
+            <button class="collapse-btn" (click)="toggleSidebar()" [attr.aria-label]="sidebarCollapsed ? 'Expand menu' : 'Collapse menu'">
+              <i class="bi" [class.bi-chevron-left]="!sidebarCollapsed" [class.bi-chevron-right]="sidebarCollapsed"></i>
+            </button>
           </div>
 
           <!-- Navigation Items -->
@@ -566,6 +569,35 @@ import {
         line-height: 1;
       }
 
+      .collapse-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 4px;
+        background: none;
+        border: 1px solid var(--color-border);
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: all 0.2s ease;
+        padding: 0;
+        margin-left: auto;
+
+        i.bi {
+          font-size: 16px !important;
+          display: inline-block !important;
+          font-family: 'bootstrap-icons' !important;
+        }
+
+        &:hover {
+          background: var(--color-bg-tertiary);
+          color: var(--color-primary);
+          border-color: var(--color-primary);
+        }
+      }
+
       .nav-menu {
         display: flex;
         flex-direction: column;
@@ -596,6 +628,8 @@ import {
         i.bi {
           font-size: 18px !important;
           font-family: 'bootstrap-icons' !important;
+          font-weight: normal;
+          font-style: normal;
           flex-shrink: 0;
           display: inline-block !important;
           vertical-align: middle;
@@ -603,6 +637,12 @@ import {
           color: inherit;
           margin: 0;
           padding: 0;
+
+          &::before {
+            font-family: 'bootstrap-icons' !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+          }
         }
 
         &:hover {
@@ -633,9 +673,17 @@ import {
         i.bi {
           font-size: 18px !important;
           font-family: 'bootstrap-icons' !important;
+          font-weight: normal;
+          font-style: normal;
           width: auto;
           height: auto;
           display: inline-block !important;
+
+          &::before {
+            font-family: 'bootstrap-icons' !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+          }
         }
       }
 
@@ -644,9 +692,17 @@ import {
         i.bi {
           font-size: 18px !important;
           font-family: 'bootstrap-icons' !important;
+          font-weight: normal;
+          font-style: normal;
           width: auto;
           height: auto;
           display: inline-block !important;
+
+          &::before {
+            font-family: 'bootstrap-icons' !important;
+            font-weight: normal !important;
+            font-style: normal !important;
+          }
         }
       }
 
@@ -702,14 +758,19 @@ import {
 
         .logo-section {
           justify-content: center;
-          padding: 0 12px;
+          padding: 0 8px;
           height: 56px;
+
+          .collapse-btn {
+            margin-left: 0;
+          }
         }
 
         .logo-img {
           width: 32px;
           height: 32px;
           flex-shrink: 0;
+          display: none;
         }
 
         .nav-menu {
@@ -732,11 +793,19 @@ import {
           i.bi {
             font-size: 20px !important;
             font-family: 'bootstrap-icons' !important;
+            font-weight: normal;
+            font-style: normal;
             margin: 0;
             padding: 0;
             flex-shrink: 0;
             display: inline-block !important;
             color: inherit;
+
+            &::before {
+              font-family: 'bootstrap-icons' !important;
+              font-weight: normal !important;
+              font-style: normal !important;
+            }
           }
 
           /* Tooltip on hover - uses data-tooltip attribute */
@@ -789,11 +858,19 @@ import {
           i.bi {
             font-size: 20px !important;
             font-family: 'bootstrap-icons' !important;
+            font-weight: normal;
+            font-style: normal;
             margin: 0;
             padding: 0;
             flex-shrink: 0;
             display: inline-block !important;
             color: inherit;
+
+            &::before {
+              font-family: 'bootstrap-icons' !important;
+              font-weight: normal !important;
+              font-style: normal !important;
+            }
           }
 
             &::after {
@@ -855,27 +932,7 @@ import {
       }
 
       .menu-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: none;
-        border: 1px solid var(--color-border);
-        width: 36px;
-        height: 36px;
-        border-radius: 6px;
-        cursor: pointer;
-        color: var(--color-text-secondary);
-        font-size: 18px;
-        transition: all 0.2s ease;
-
-        &:hover {
-          background: var(--color-bg-tertiary);
-          color: var(--color-primary);
-        }
-
-        i.bi {
-          display: inline-block;
-        }
+        display: none;
       }
 
       .page-title {
