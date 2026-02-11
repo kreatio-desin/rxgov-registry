@@ -713,7 +713,7 @@ interface DoseAdministration {
 
       .mmu-content {
         display: grid;
-        grid-template-columns: 1fr 2fr;
+        grid-template-columns: 1fr 1fr;
         gap: 1rem;
         padding: 1rem;
         flex: 1;

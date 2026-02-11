@@ -50,16 +50,6 @@ import { AuthService, AuthUser } from '../../core/services/auth.service';
             </div>
           </div>
 
-          <div class="profile-info-section">
-            <h2>Permissions</h2>
-            <div class="permissions-list">
-              <div *ngFor="let permission of currentUser.permissions" class="permission-item">
-                <i class="bi bi-check-circle"></i>
-                <span>{{ formatPermission(permission) }}</span>
-              </div>
-            </div>
-          </div>
-
           <div class="profile-actions">
             <button class="action-button secondary" (click)="goBack()">
               <i class="bi bi-arrow-left"></i>
