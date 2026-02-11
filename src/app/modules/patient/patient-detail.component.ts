@@ -309,7 +309,7 @@ interface TransferForm {
           <div class="card">
             <div class="card-header flex-between">
               <h3 class="card-title">Patient Status</h3>
-              <button class="edit-btn" title="Edit Details">
+              <button class="edit-btn" title="Edit Details" (click)="openEditDemographicsModal()">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -942,6 +942,107 @@ interface TransferForm {
               </svg>
               Complete Transfer
             </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Patient Demographics Modal -->
+      <div *ngIf="showEditDemographicsModal" class="modal-overlay" (click)="closeEditDemographicsModal()">
+        <div class="modal-content edit-demographics-modal" (click)="$event.stopPropagation()">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <div class="header-content">
+              <h2 class="modal-title">Edit Patient Demographics</h2>
+              <p class="modal-description">Update personal information for {{ patient?.firstName }} {{ patient?.lastName }}.</p>
+            </div>
+            <button class="modal-close" (click)="closeEditDemographicsModal()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18"></path>
+                <path d="m6 6 12 12"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <div class="form-grid">
+              <!-- First Name -->
+              <div class="form-group">
+                <label for="edit-firstName">First Name <span class="required">*</span></label>
+                <input type="text" id="edit-firstName" [(ngModel)]="editForm.firstName" class="form-input" />
+              </div>
+
+              <!-- Middle Initial -->
+              <div class="form-group">
+                <label for="edit-middleInitial">Middle Initial</label>
+                <input type="text" id="edit-middleInitial" [(ngModel)]="editForm.middleInitial" maxlength="1" class="form-input" />
+              </div>
+
+              <!-- Last Name -->
+              <div class="form-group">
+                <label for="edit-lastName">Last Name <span class="required">*</span></label>
+                <input type="text" id="edit-lastName" [(ngModel)]="editForm.lastName" class="form-input" />
+              </div>
+
+              <!-- Alias -->
+              <div class="form-group">
+                <label for="edit-alias">Alias</label>
+                <input type="text" id="edit-alias" [(ngModel)]="editForm.alias" class="form-input" />
+              </div>
+
+              <!-- Date of Birth -->
+              <div class="form-group">
+                <label for="edit-dob">Date of Birth <span class="required">*</span></label>
+                <input type="date" id="edit-dob" [(ngModel)]="editForm.dateOfBirth" class="form-input" />
+              </div>
+
+              <!-- SSN -->
+              <div class="form-group">
+                <label for="edit-ssn">SSN (Last 4) <span class="required">*</span></label>
+                <input type="text" id="edit-ssn" [(ngModel)]="editForm.ssn" maxlength="4" class="form-input" />
+              </div>
+
+              <!-- Medicaid Number -->
+              <div class="form-group">
+                <label for="edit-medicaid">Medicaid Number</label>
+                <input type="text" id="edit-medicaid" [(ngModel)]="editForm.medicaidNumber" class="form-input" />
+              </div>
+
+              <!-- Gender -->
+              <div class="form-group">
+                <label for="edit-gender">Gender <span class="required">*</span></label>
+                <select id="edit-gender" [(ngModel)]="editForm.gender" class="form-input">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                  <option value="Prefer not to say">Prefer not to say</option>
+                </select>
+              </div>
+
+              <!-- Address -->
+              <div class="form-group form-group-full">
+                <label for="edit-address">Residential Address</label>
+                <input type="text" id="edit-address" [(ngModel)]="editForm.address" class="form-input" placeholder="987 Birch Ln, Anchorage, AK" />
+              </div>
+
+              <!-- Phone -->
+              <div class="form-group">
+                <label for="edit-phone">Phone</label>
+                <input type="tel" id="edit-phone" [(ngModel)]="editForm.phone" class="form-input" placeholder="(907) 555-0105" />
+              </div>
+
+              <!-- Mother's First Name -->
+              <div class="form-group">
+                <label for="edit-mother">Mother's First Name</label>
+                <input type="text" id="edit-mother" [(ngModel)]="editForm.motherFirstName" class="form-input" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <button class="btn-secondary" (click)="closeEditDemographicsModal()">Cancel</button>
+            <button class="btn-primary" (click)="saveEditedDemographics()">Save Changes</button>
           </div>
         </div>
       </div>
@@ -2242,6 +2343,84 @@ interface TransferForm {
         font-size: 0.875rem;
         margin-bottom: 0.375rem;
       }
+
+      /* Edit Demographics Modal */
+      .edit-demographics-modal {
+        max-width: 32rem;
+        width: 100%;
+      }
+
+      .edit-demographics-modal .modal-body {
+        max-height: 60vh;
+        overflow-y: auto;
+      }
+
+      .edit-demographics-modal .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .edit-demographics-modal .form-group-full {
+        grid-column: 1 / -1;
+      }
+
+      .edit-demographics-modal label {
+        display: block;
+        font-weight: 500;
+        font-size: 0.875rem;
+        color: var(--color-text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .edit-demographics-modal .required {
+        color: #ef4444;
+        font-weight: 600;
+      }
+
+      .edit-demographics-modal .form-input {
+        width: 100%;
+        padding: 0.625rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-family: inherit;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+
+      .edit-demographics-modal .form-input:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .edit-demographics-modal .modal-footer {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: flex-end;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--color-border);
+        margin-top: 1.5rem;
+      }
+
+      .edit-demographics-modal .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+      }
+
+      .edit-demographics-modal .header-content {
+        flex: 1;
+      }
+
+      .edit-demographics-modal .modal-close {
+        position: relative;
+        top: -0.5rem;
+        right: -0.5rem;
+      }
     `,
   ],
 })
@@ -2310,6 +2489,22 @@ export class PatientDetailComponent implements OnInit {
       group: false,
     },
     clinicalNotes: '',
+  };
+
+  // Edit Patient Demographics Modal
+  showEditDemographicsModal = false;
+  editForm = {
+    firstName: '',
+    lastName: '',
+    middleInitial: '',
+    alias: '',
+    dateOfBirth: '',
+    ssn: '',
+    medicaidNumber: '',
+    gender: 'Male',
+    address: '',
+    phone: '',
+    motherFirstName: '',
   };
 
   constructor(
@@ -2550,5 +2745,74 @@ export class PatientDetailComponent implements OnInit {
       console.error('Error initiating transfer:', error);
       alert('Failed to initiate transfer. Please try again.');
     }
+  }
+
+  // Edit Patient Demographics Methods
+  openEditDemographicsModal(): void {
+    if (!this.patient) return;
+
+    // Initialize form with patient data
+    this.editForm = {
+      firstName: this.patient.firstName || '',
+      lastName: this.patient.lastName || '',
+      middleInitial: this.patient.middleInitial || '',
+      alias: this.patient.nickName || '',
+      dateOfBirth: this.patient.dateOfBirth || '',
+      ssn: this.patient.ssn || '',
+      medicaidNumber: this.patient.medicaidNumber || '',
+      gender: this.patient.demographics?.gender || 'Male',
+      address: this.patient.demographics?.address || '',
+      phone: this.patient.demographics?.phone || '',
+      motherFirstName: this.patient.motherFirstName || '',
+    };
+    this.showEditDemographicsModal = true;
+  }
+
+  closeEditDemographicsModal(): void {
+    this.showEditDemographicsModal = false;
+    // Reset form
+    this.editForm = {
+      firstName: '',
+      lastName: '',
+      middleInitial: '',
+      alias: '',
+      dateOfBirth: '',
+      ssn: '',
+      medicaidNumber: '',
+      gender: 'Male',
+      address: '',
+      phone: '',
+      motherFirstName: '',
+    };
+  }
+
+  saveEditedDemographics(): void {
+    if (!this.patient || !this.editForm.firstName || !this.editForm.lastName) {
+      alert('First Name and Last Name are required fields.');
+      return;
+    }
+
+    // Update patient object with form values
+    this.patient.firstName = this.editForm.firstName;
+    this.patient.lastName = this.editForm.lastName;
+    this.patient.middleInitial = this.editForm.middleInitial;
+    this.patient.nickName = this.editForm.alias;
+    this.patient.dateOfBirth = this.editForm.dateOfBirth;
+    this.patient.ssn = this.editForm.ssn;
+    this.patient.medicaidNumber = this.editForm.medicaidNumber;
+    this.patient.motherFirstName = this.editForm.motherFirstName;
+
+    if (!this.patient.demographics) {
+      this.patient.demographics = {};
+    }
+    this.patient.demographics.gender = this.editForm.gender;
+    this.patient.demographics.address = this.editForm.address;
+    this.patient.demographics.phone = this.editForm.phone;
+
+    // Update the patient nickname display
+    this.patientNickname = this.editForm.alias ? `"${this.editForm.alias}"` : '';
+
+    alert('Patient demographics updated successfully.');
+    this.closeEditDemographicsModal();
   }
 }
