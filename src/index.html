@@ -6,20 +6,31 @@
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet" crossorigin="anonymous" />
     <style>
-      /* Ensure Bootstrap Icons display properly */
-      .bi::before {
+      /* Bootstrap Icons Fallback Styling */
+      .bi {
         display: inline-block;
+        width: 1em;
+        height: 1em;
+        vertical-align: -0.125em;
+        fill: currentColor;
+      }
+
+      i[class^="bi-"],
+      i[class*=" bi-"] {
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
         vertical-align: -0.125em;
       }
 
-      i.bi {
-        font-style: normal;
-        font-weight: 400;
-        line-height: 1;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+      button i.bi,
+      a i.bi,
+      label i.bi {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
       }
 
       /* Global Accessibility Styles - MUST be in head before any component styles */

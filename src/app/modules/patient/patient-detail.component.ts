@@ -403,7 +403,7 @@ interface TransferForm {
               <div class="prescriptions-section">
                 <div class="prescriptions-header">
                   <h4>Active Prescriptions</h4>
-                  <button class="change-btn">Change</button>
+                  <button class="change-btn" (click)="openUpdatePrescriptionModal()">Change</button>
                 </div>
                 <div class="prescription-card">
                   <div class="prescription-name">Methadone 60mg</div>
@@ -1031,6 +1031,70 @@ interface TransferForm {
           <div class="modal-footer">
             <button class="btn-secondary" (click)="closeEditDemographicsModal()">Cancel</button>
             <button class="btn-primary" (click)="saveEditedDemographics()">Save Changes</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Update Prescription Modal -->
+      <div *ngIf="showUpdatePrescriptionModal" class="modal-overlay" (click)="closeUpdatePrescriptionModal()">
+        <div class="modal-content update-prescription-modal" (click)="$event.stopPropagation()">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <div class="header-content">
+              <h2 class="modal-title">Update Prescription</h2>
+              <p class="modal-description">Update the current prescription for {{ patient?.firstName }} {{ patient?.lastName }}.</p>
+            </div>
+            <button class="modal-close" (click)="closeUpdatePrescriptionModal()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18"></path>
+                <path d="m6 6 12 12"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <div class="prescription-form-group">
+              <!-- Medication -->
+              <div class="form-field">
+                <label for="edit-medication">Medication</label>
+                <select id="edit-medication" [(ngModel)]="prescriptionForm.medication" class="form-input">
+                  <option *ngFor="let med of medicationOptions" [value]="med">{{ med }}</option>
+                </select>
+              </div>
+
+              <!-- Dosage -->
+              <div class="form-field">
+                <label for="edit-dosage">Dosage (mg)</label>
+                <input type="number" id="edit-dosage" [(ngModel)]="prescriptionForm.dosage" class="form-input" />
+              </div>
+
+              <!-- Frequency -->
+              <div class="form-field">
+                <label for="edit-frequency">Frequency</label>
+                <select id="edit-frequency" [(ngModel)]="prescriptionForm.frequency" class="form-input">
+                  <option *ngFor="let freq of frequencyOptions" [value]="freq">{{ freq }}</option>
+                </select>
+              </div>
+
+              <!-- Take Home Recommendation -->
+              <div class="form-field">
+                <label for="edit-takeHome">Take Home Recommendation</label>
+                <div class="checkbox-container">
+                  <input type="checkbox" id="edit-takeHome" [(ngModel)]="prescriptionForm.takeHomeRecommended" class="form-checkbox" />
+                  <div class="checkbox-content">
+                    <label for="edit-takeHome" class="checkbox-label">Take Home Recommended</label>
+                    <p class="checkbox-description">Overall recommendation. Individual doses may vary based on clinical assessment.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <button class="btn-secondary" (click)="closeUpdatePrescriptionModal()">Cancel</button>
+            <button class="btn-primary" (click)="saveUpdatedPrescription()">Save Changes</button>
           </div>
         </div>
       </div>
@@ -2409,6 +2473,110 @@ interface TransferForm {
         top: -0.5rem;
         right: -0.5rem;
       }
+
+      /* Update Prescription Modal */
+      .update-prescription-modal {
+        max-width: 28rem;
+        width: 100%;
+      }
+
+      .update-prescription-modal .modal-body {
+        max-height: 60vh;
+        overflow-y: auto;
+      }
+
+      .prescription-form-group {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-field label {
+        display: block;
+        font-weight: 500;
+        font-size: 0.875rem;
+        color: var(--color-text-primary);
+      }
+
+      .form-field .form-input {
+        width: 100%;
+        padding: 0.625rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-family: inherit;
+        background: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+
+      .form-field .form-input:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .checkbox-container {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 1rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.375rem;
+        background: var(--color-bg-tertiary);
+      }
+
+      .form-checkbox {
+        width: 16px;
+        height: 16px;
+        margin-top: 2px;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      .checkbox-content {
+        flex: 1;
+      }
+
+      .checkbox-label {
+        display: block;
+        font-weight: 500;
+        font-size: 0.875rem;
+        color: var(--color-text-primary);
+        cursor: pointer;
+        margin-bottom: 0.25rem;
+      }
+
+      .checkbox-description {
+        font-size: 0.75rem;
+        color: var(--color-text-secondary);
+        margin: 0;
+      }
+
+      .update-prescription-modal .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+      }
+
+      .update-prescription-modal .header-content {
+        flex: 1;
+      }
+
+      .update-prescription-modal .modal-footer {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: flex-end;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--color-border);
+        margin-top: 1.5rem;
+      }
     `,
   ],
 })
@@ -2492,6 +2660,18 @@ export class PatientDetailComponent implements OnInit {
     phone: '',
     motherFirstName: '',
   };
+
+  // Update Prescription Modal
+  showUpdatePrescriptionModal = false;
+  prescriptionForm = {
+    medication: 'Methadone',
+    dosage: 60,
+    frequency: 'Daily',
+    takeHomeRecommended: false,
+  };
+
+  medicationOptions = ['Methadone', 'Buprenorphine', 'Naltrexone'];
+  frequencyOptions = ['Daily', 'Twice Daily', 'Weekly', 'Bi-Weekly', 'Monthly'];
 
   constructor(
     private route: ActivatedRoute,
@@ -2802,5 +2982,24 @@ export class PatientDetailComponent implements OnInit {
 
     alert('Patient demographics updated successfully.');
     this.closeEditDemographicsModal();
+  }
+
+  // Update Prescription Modal Methods
+  openUpdatePrescriptionModal(): void {
+    this.showUpdatePrescriptionModal = true;
+  }
+
+  closeUpdatePrescriptionModal(): void {
+    this.showUpdatePrescriptionModal = false;
+  }
+
+  saveUpdatedPrescription(): void {
+    if (!this.prescriptionForm.medication || !this.prescriptionForm.dosage || !this.prescriptionForm.frequency) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    alert(`Prescription updated:\n${this.prescriptionForm.medication} ${this.prescriptionForm.dosage}mg ${this.prescriptionForm.frequency}${this.prescriptionForm.takeHomeRecommended ? '\nTake Home: Recommended' : ''}`);
+    this.closeUpdatePrescriptionModal();
   }
 }
