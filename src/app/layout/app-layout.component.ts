@@ -19,7 +19,7 @@ import {
   standalone: true,
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, FormsModule],
   template: `
-    <div class="layout-wrapper">
+    <div class="layout-wrapper" [class.sidebar-collapsed]="sidebarCollapsed">
       <!-- Sidebar Navigation -->
       <aside class="sidebar" [class.collapsed]="sidebarCollapsed">
         <div class="sidebar-content">
@@ -495,6 +495,11 @@ import {
         grid-template-columns: 200px 1fr;
         min-height: 100vh;
         background-color: var(--color-bg-secondary);
+        transition: grid-template-columns 0.3s ease;
+
+        &.sidebar-collapsed {
+          grid-template-columns: 70px 1fr;
+        }
 
         @media (max-width: 768px) {
           grid-template-columns: 1fr;
@@ -590,11 +595,14 @@ import {
         i,
         i.bi {
           font-size: 18px !important;
+          font-family: 'bootstrap-icons' !important;
           flex-shrink: 0;
-          display: inline-block;
+          display: inline-block !important;
           vertical-align: middle;
           line-height: 1;
           color: inherit;
+          margin: 0;
+          padding: 0;
         }
 
         &:hover {
@@ -624,8 +632,10 @@ import {
 
         i.bi {
           font-size: 18px !important;
+          font-family: 'bootstrap-icons' !important;
           width: auto;
           height: auto;
+          display: inline-block !important;
         }
       }
 
@@ -633,8 +643,10 @@ import {
       button.nav-item {
         i.bi {
           font-size: 18px !important;
+          font-family: 'bootstrap-icons' !important;
           width: auto;
           height: auto;
+          display: inline-block !important;
         }
       }
 
@@ -719,9 +731,12 @@ import {
           i,
           i.bi {
             font-size: 20px !important;
+            font-family: 'bootstrap-icons' !important;
             margin: 0;
+            padding: 0;
             flex-shrink: 0;
-            display: inline-block;
+            display: inline-block !important;
+            color: inherit;
           }
 
           /* Tooltip on hover - uses data-tooltip attribute */
@@ -771,12 +786,15 @@ import {
             }
 
             i,
-            i.bi {
-              font-size: 20px !important;
-              margin: 0;
-              flex-shrink: 0;
-              display: inline-block;
-            }
+          i.bi {
+            font-size: 20px !important;
+            font-family: 'bootstrap-icons' !important;
+            margin: 0;
+            padding: 0;
+            flex-shrink: 0;
+            display: inline-block !important;
+            color: inherit;
+          }
 
             &::after {
               content: attr(data-tooltip);
@@ -837,7 +855,9 @@ import {
       }
 
       .menu-toggle {
-        display: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background: none;
         border: 1px solid var(--color-border);
         width: 36px;
@@ -846,11 +866,15 @@ import {
         cursor: pointer;
         color: var(--color-text-secondary);
         font-size: 18px;
+        transition: all 0.2s ease;
 
-        @media (max-width: 768px) {
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        &:hover {
+          background: var(--color-bg-tertiary);
+          color: var(--color-primary);
+        }
+
+        i.bi {
+          display: inline-block;
         }
       }
 
