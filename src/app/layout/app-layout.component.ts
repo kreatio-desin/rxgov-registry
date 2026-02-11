@@ -158,6 +158,10 @@ import {
           </div>
 
           <div class="header-right">
+            <button class="help-btn" title="Help and Support" (click)="openHelpDialog()">
+              <i class="bi bi-life-preserver"></i>
+            </button>
+
             <button class="notification-btn" (click)="toggleNotificationsPanel()">
               <i class="bi bi-bell"></i>
               <span class="notification-badge" *ngIf="unreadNotificationCount > 0">
@@ -268,11 +272,6 @@ import {
           </div>
         </div>
       </div>
-
-      <!-- Floating Help Button -->
-      <button class="help-button" title="Help and Support" (click)="openHelpDialog()">
-        <i class="bi bi-life-preserver"></i>
-      </button>
 
       <!-- Help and Support Modal -->
       <div *ngIf="showHelpDialog" class="help-modal-overlay" (click)="closeHelpDialog()">
@@ -1231,29 +1230,17 @@ import {
       }
 
       /* Help Button */
-      .help-button {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background: var(--color-primary);
-        color: white;
+      .help-btn {
+        background: none;
         border: none;
+        color: var(--color-text-secondary);
+        font-size: 20px;
         cursor: pointer;
-        font-size: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
-        transition: all 0.2s;
-        z-index: 999;
+        transition: color 0.2s;
+        padding: 8px;
 
         &:hover {
-          background: var(--color-primary-dark);
-          box-shadow: 0 6px 16px rgba(0, 102, 204, 0.4);
-          transform: scale(1.05);
+          color: var(--color-text-primary);
         }
       }
 
@@ -1286,14 +1273,6 @@ import {
 
         .main-content {
           padding: 16px;
-        }
-
-        .help-button {
-          bottom: 16px;
-          right: 16px;
-          width: 44px;
-          height: 44px;
-          font-size: 20px;
         }
       }
 
