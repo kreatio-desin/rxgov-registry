@@ -526,19 +526,54 @@ import {
         padding: 8px 12px;
         text-decoration: none;
 
-        i {
-          font-size: 18px;
+        i,
+        i.bi {
+          font-size: 18px !important;
           flex-shrink: 0;
+          display: inline-block;
+          vertical-align: middle;
+          line-height: 1;
+          color: inherit;
         }
 
         &:hover {
           background: var(--color-sidebar-hover);
           color: var(--color-primary);
+
+          i,
+          i.bi {
+            color: inherit;
+          }
         }
 
         &.active {
           background: var(--color-active-bg);
           color: var(--color-active-text);
+
+          i,
+          i.bi {
+            color: inherit;
+          }
+        }
+      }
+
+      /* Ensure icons display in anchor nav items */
+      a.nav-item {
+        text-decoration: none;
+
+        i.bi {
+          font-size: 18px !important;
+          width: auto;
+          height: auto;
+        }
+      }
+
+      /* Ensure icons display in button nav items */
+      button.nav-item {
+        i.bi {
+          font-size: 18px !important;
+          width: auto;
+          height: auto;
         }
       }
 
