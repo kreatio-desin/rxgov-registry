@@ -972,22 +972,10 @@ interface TransferForm {
                 <input type="text" id="edit-firstName" [(ngModel)]="editForm.firstName" class="form-input" />
               </div>
 
-              <!-- Middle Initial -->
-              <div class="form-group">
-                <label for="edit-middleInitial">Middle Initial</label>
-                <input type="text" id="edit-middleInitial" [(ngModel)]="editForm.middleInitial" maxlength="1" class="form-input" />
-              </div>
-
               <!-- Last Name -->
               <div class="form-group">
                 <label for="edit-lastName">Last Name <span class="required">*</span></label>
                 <input type="text" id="edit-lastName" [(ngModel)]="editForm.lastName" class="form-input" />
-              </div>
-
-              <!-- Alias -->
-              <div class="form-group">
-                <label for="edit-alias">Alias</label>
-                <input type="text" id="edit-alias" [(ngModel)]="editForm.alias" class="form-input" />
               </div>
 
               <!-- Date of Birth -->
@@ -1002,12 +990,6 @@ interface TransferForm {
                 <input type="text" id="edit-ssn" [(ngModel)]="editForm.ssn" maxlength="4" class="form-input" />
               </div>
 
-              <!-- Medicaid Number -->
-              <div class="form-group">
-                <label for="edit-medicaid">Medicaid Number</label>
-                <input type="text" id="edit-medicaid" [(ngModel)]="editForm.medicaidNumber" class="form-input" />
-              </div>
-
               <!-- Gender -->
               <div class="form-group">
                 <label for="edit-gender">Gender <span class="required">*</span></label>
@@ -1019,10 +1001,40 @@ interface TransferForm {
                 </select>
               </div>
 
+              <!-- Race -->
+              <div class="form-group">
+                <label for="edit-race">Race</label>
+                <input type="text" id="edit-race" [(ngModel)]="editForm.race" class="form-input" />
+              </div>
+
+              <!-- Ethnicity -->
+              <div class="form-group">
+                <label for="edit-ethnicity">Ethnicity</label>
+                <input type="text" id="edit-ethnicity" [(ngModel)]="editForm.ethnicity" class="form-input" />
+              </div>
+
               <!-- Address -->
               <div class="form-group form-group-full">
                 <label for="edit-address">Residential Address</label>
-                <input type="text" id="edit-address" [(ngModel)]="editForm.address" class="form-input" placeholder="987 Birch Ln, Anchorage, AK" />
+                <input type="text" id="edit-address" [(ngModel)]="editForm.address" class="form-input" placeholder="987 Birch Ln" />
+              </div>
+
+              <!-- City -->
+              <div class="form-group">
+                <label for="edit-city">City</label>
+                <input type="text" id="edit-city" [(ngModel)]="editForm.city" class="form-input" placeholder="Anchorage" />
+              </div>
+
+              <!-- State -->
+              <div class="form-group">
+                <label for="edit-state">State</label>
+                <input type="text" id="edit-state" [(ngModel)]="editForm.state" class="form-input" placeholder="AK" maxlength="2" />
+              </div>
+
+              <!-- Zip -->
+              <div class="form-group">
+                <label for="edit-zip">Zip Code</label>
+                <input type="text" id="edit-zip" [(ngModel)]="editForm.zip" class="form-input" placeholder="99501" />
               </div>
 
               <!-- Phone -->
@@ -2496,15 +2508,17 @@ export class PatientDetailComponent implements OnInit {
   editForm = {
     firstName: '',
     lastName: '',
-    middleInitial: '',
-    alias: '',
     dateOfBirth: '',
     ssn: '',
-    medicaidNumber: '',
     gender: 'Male',
     address: '',
+    city: '',
+    state: '',
+    zip: '',
     phone: '',
     motherFirstName: '',
+    race: '',
+    ethnicity: '',
   };
 
   constructor(
@@ -2755,15 +2769,17 @@ export class PatientDetailComponent implements OnInit {
     this.editForm = {
       firstName: this.patient.firstName || '',
       lastName: this.patient.lastName || '',
-      middleInitial: this.patient.middleInitial || '',
-      alias: this.patient.nickName || '',
       dateOfBirth: this.patient.dateOfBirth || '',
       ssn: this.patient.ssn || '',
-      medicaidNumber: this.patient.medicaidNumber || '',
       gender: this.patient.demographics?.gender || 'Male',
       address: this.patient.demographics?.address || '',
+      city: this.patient.demographics?.city || '',
+      state: this.patient.demographics?.state || '',
+      zip: this.patient.demographics?.zip || '',
       phone: this.patient.demographics?.phone || '',
       motherFirstName: this.patient.motherFirstName || '',
+      race: this.patient.demographics?.race || '',
+      ethnicity: this.patient.demographics?.ethnicity || '',
     };
     this.showEditDemographicsModal = true;
   }
@@ -2774,15 +2790,17 @@ export class PatientDetailComponent implements OnInit {
     this.editForm = {
       firstName: '',
       lastName: '',
-      middleInitial: '',
-      alias: '',
       dateOfBirth: '',
       ssn: '',
-      medicaidNumber: '',
       gender: 'Male',
       address: '',
+      city: '',
+      state: '',
+      zip: '',
       phone: '',
       motherFirstName: '',
+      race: '',
+      ethnicity: '',
     };
   }
 
@@ -2795,22 +2813,33 @@ export class PatientDetailComponent implements OnInit {
     // Update patient object with form values
     this.patient.firstName = this.editForm.firstName;
     this.patient.lastName = this.editForm.lastName;
-    this.patient.middleInitial = this.editForm.middleInitial;
-    this.patient.nickName = this.editForm.alias;
     this.patient.dateOfBirth = this.editForm.dateOfBirth;
     this.patient.ssn = this.editForm.ssn;
-    this.patient.medicaidNumber = this.editForm.medicaidNumber;
     this.patient.motherFirstName = this.editForm.motherFirstName;
 
+    // Initialize demographics if it doesn't exist
     if (!this.patient.demographics) {
-      this.patient.demographics = {};
+      this.patient.demographics = {
+        gender: 'Male',
+        race: '',
+        ethnicity: '',
+        address: '',
+        city: '',
+        state: '',
+        zip: '',
+        phone: '',
+      };
     }
+
+    // Update demographics
     this.patient.demographics.gender = this.editForm.gender;
     this.patient.demographics.address = this.editForm.address;
+    this.patient.demographics.city = this.editForm.city;
+    this.patient.demographics.state = this.editForm.state;
+    this.patient.demographics.zip = this.editForm.zip;
     this.patient.demographics.phone = this.editForm.phone;
-
-    // Update the patient nickname display
-    this.patientNickname = this.editForm.alias ? `"${this.editForm.alias}"` : '';
+    this.patient.demographics.race = this.editForm.race;
+    this.patient.demographics.ethnicity = this.editForm.ethnicity;
 
     alert('Patient demographics updated successfully.');
     this.closeEditDemographicsModal();
