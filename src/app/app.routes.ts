@@ -38,6 +38,10 @@ export const routes: Routes = [
     loadComponent: () => import('./modules/users/users.component').then(m => m.UsersComponent)
   },
   {
+    path: 'profile',
+    loadComponent: () => import('./modules/profile/profile.component').then(m => m.ProfileComponent)
+  },
+  {
     path: 'admin',
     children: [
       {

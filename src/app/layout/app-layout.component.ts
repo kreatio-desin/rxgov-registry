@@ -112,10 +112,6 @@ import {
               <i class="bi bi-arrow-repeat"></i>
               <span class="nav-label">Offline Sync</span>
             </button>
-            <button class="nav-item nav-logout" title="Sign Out" (click)="logout()">
-              <i class="bi bi-box-arrow-right"></i>
-              <span class="nav-label">Sign Out</span>
-            </button>
           </div>
         </div>
       </aside>
@@ -162,54 +158,115 @@ import {
           </div>
 
           <div class="header-right">
-            <div class="facility-info">
-              <div class="status-indicator"></div>
-              <div class="facility-text">
-                <div
-                  class="facility-name hidden lg:block"
-                  *ngIf="currentUser && currentUser.facilityName"
-                >
-                  {{ currentUser.facilityName }}
+            <button class="notification-btn" (click)="toggleNotificationsPanel()">
+              <i class="bi bi-bell"></i>
+              <span class="notification-badge" *ngIf="unreadNotificationCount > 0">
+                {{ unreadNotificationCount }}
+              </span>
+            </button>
+
+            <div class="user-menu-container">
+              <button class="user-info-btn" (click)="toggleUserMenu()">
+                <div class="user-info-content">
+                  <div class="user-header-text">
+                    <div class="user-name-header">{{ currentUser?.name || 'User' }}</div>
+                    <div class="user-facility-header">
+                      {{
+                        currentUser && currentUser.facilityName
+                          ? (currentUser.facilityName | slice: 0 : 20)
+                          : 'System Administrator'
+                      }}
+                    </div>
+                  </div>
+                  <i class="bi bi-chevron-down"></i>
                 </div>
-                <div
-                  class="facility-name-short lg:hidden"
-                  *ngIf="currentUser && currentUser.facilityName"
-                >
-                  {{
-                    (currentUser.facilityName! | slice: 0 : 15) +
-                      (currentUser.facilityName.length > 15 ? '...' : '')
-                  }}
+              </button>
+
+              <!-- User Menu Dropdown -->
+              <div
+                *ngIf="showUserMenu"
+                class="user-menu-dropdown"
+                (click)="$event.stopPropagation()"
+              >
+                <div class="dropdown-header">
+                  <div class="dropdown-user-info">
+                    <div class="dropdown-user-name">{{ currentUser?.name }}</div>
+                    <div class="dropdown-user-role" [attr.data-role]="currentUser?.role">
+                      {{ this.getRoleDisplayName(currentUser?.role) }}
+                    </div>
+                    <div class="dropdown-user-facility">
+                      {{ currentUser?.facilityName || 'System Administrator' }}
+                    </div>
+                  </div>
                 </div>
-                <div
-                  class="facility-name hidden lg:block"
-                  *ngIf="!currentUser?.facilityName && currentUser?.role === 'admin'"
-                >
-                  System Administrator
-                </div>
-                <div
-                  class="facility-name-short lg:hidden"
-                  *ngIf="!currentUser?.facilityName && currentUser?.role === 'admin'"
-                >
-                  Admin
-                </div>
-                <div class="user-name">{{ currentUser?.name || 'User' }}</div>
-                <div class="user-role" [attr.data-role]="currentUser?.role">
-                  {{ this.getRoleDisplayName(currentUser?.role) }}
-                </div>
+                <div class="dropdown-divider"></div>
+                <button class="dropdown-item" (click)="navigateToProfile()">
+                  <i class="bi bi-person"></i>
+                  <span>View Profile</span>
+                </button>
+                <div class="dropdown-divider"></div>
+                <button class="dropdown-item logout-item" (click)="logout()">
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Sign Out</span>
+                </button>
               </div>
             </div>
-
-            <button class="notification-btn">
-              <i class="bi bi-bell"></i>
-              <span class="notification-badge">2</span>
-            </button>
           </div>
         </header>
 
         <!-- Main Content Area -->
-        <main class="main-content">
+        <main class="main-content" (click)="showUserMenu && (showUserMenu = false)">
           <router-outlet></router-outlet>
         </main>
+      </div>
+
+      <!-- Notifications Panel -->
+      <div
+        *ngIf="showNotificationsPanel"
+        class="notifications-panel-overlay"
+        (click)="closeNotificationsPanel()"
+      >
+        <div
+          class="notifications-panel"
+          (click)="$event.stopPropagation()"
+        >
+          <div class="notifications-header">
+            <h2>Notifications</h2>
+            <button class="close-notifications-btn" (click)="closeNotificationsPanel()">
+              <i class="bi bi-x"></i>
+            </button>
+          </div>
+
+          <div class="notifications-actions">
+            <button class="action-btn" (click)="markAllRead()">
+              <i class="bi bi-check-circle"></i>
+              Mark all read
+            </button>
+            <button class="action-btn" (click)="clearAllNotifications()">
+              <i class="bi bi-trash"></i>
+              Clear all
+            </button>
+          </div>
+
+          <div class="notifications-list">
+            <div *ngIf="notifications.length === 0" class="empty-notifications">
+              <p>No notifications</p>
+            </div>
+
+            <div *ngFor="let notification of notifications" class="notification-item" [class.unread]="!notification.read">
+              <div class="notification-icon">
+                <i [class]="getNotificationIcon(notification.type)"></i>
+              </div>
+              <div class="notification-content">
+                <p class="notification-title">{{ notification.title }}</p>
+                <p class="notification-time">{{ notification.timestamp | date: 'MMM dd, yyyy h:mm a' }}</p>
+              </div>
+              <button class="notification-close-btn" (click)="removeNotification(notification.id)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Floating Help Button -->
@@ -824,6 +881,7 @@ import {
         font-size: 20px;
         cursor: pointer;
         transition: color 0.2s;
+        padding: 8px;
 
         &:hover {
           color: var(--color-text-primary);
@@ -832,8 +890,8 @@ import {
 
       .notification-badge {
         position: absolute;
-        top: -4px;
-        right: -4px;
+        top: 0;
+        right: 0;
         background: var(--color-error);
         color: white;
         border-radius: 50%;
@@ -844,6 +902,325 @@ import {
         justify-content: center;
         font-size: 11px;
         font-weight: bold;
+      }
+
+      /* User Menu Styles */
+      .user-menu-container {
+        position: relative;
+      }
+
+      .user-info-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        &:hover {
+          background: var(--color-bg-tertiary);
+        }
+      }
+
+      .user-info-content {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .user-header-text {
+        text-align: right;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .user-name-header {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--color-text-primary);
+      }
+
+      .user-facility-header {
+        font-size: 12px;
+        color: var(--color-text-secondary);
+      }
+
+      .user-menu-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 8px;
+        background: var(--color-bg-primary);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        min-width: 280px;
+      }
+
+      .dropdown-header {
+        padding: 12px 16px;
+      }
+
+      .dropdown-user-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .dropdown-user-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-text-primary);
+      }
+
+      .dropdown-user-role {
+        font-size: 12px;
+        font-weight: 500;
+        padding: 2px 6px;
+        border-radius: 3px;
+        width: fit-content;
+
+        &[data-role='admin'] {
+          background: #dbeafe;
+          color: #1e40af;
+        }
+
+        &[data-role='facility-manager'] {
+          background: #e9d5ff;
+          color: #7c3aed;
+        }
+
+        &[data-role='facility-staff'] {
+          background: #dcfce7;
+          color: #166534;
+        }
+      }
+
+      .dropdown-user-facility {
+        font-size: 11px;
+        color: var(--color-text-secondary);
+      }
+
+      .dropdown-divider {
+        height: 1px;
+        background: var(--color-border);
+        margin: 0;
+      }
+
+      .dropdown-item {
+        width: 100%;
+        padding: 12px 16px;
+        background: none;
+        border: none;
+        text-align: left;
+        color: var(--color-text-primary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        transition: background 0.2s;
+
+        &:hover {
+          background: var(--color-bg-tertiary);
+        }
+
+        &.logout-item {
+          color: var(--color-error);
+
+          &:hover {
+            background: rgba(239, 68, 68, 0.1);
+          }
+        }
+
+        i {
+          font-size: 16px;
+        }
+      }
+
+      /* Notifications Panel Styles */
+      .notifications-panel-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1001;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .notifications-panel {
+        width: 384px;
+        height: 100vh;
+        background: var(--color-bg-primary);
+        border-left: 1px solid var(--color-border);
+        display: flex;
+        flex-direction: column;
+        box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+
+        @media (max-width: 640px) {
+          width: 100%;
+        }
+      }
+
+      .notifications-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--color-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+          margin: 0;
+          font-size: 18px;
+          font-weight: 600;
+          color: var(--color-text-primary);
+        }
+      }
+
+      .close-notifications-btn {
+        background: none;
+        border: none;
+        color: var(--color-text-secondary);
+        font-size: 20px;
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: background 0.2s, color 0.2s;
+
+        &:hover {
+          background: var(--color-bg-tertiary);
+          color: var(--color-text-primary);
+        }
+      }
+
+      .notifications-actions {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--color-border);
+        display: flex;
+        gap: 8px;
+      }
+
+      .action-btn {
+        flex: 1;
+        padding: 8px 12px;
+        background: var(--color-bg-tertiary);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        color: var(--color-text-primary);
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        transition: all 0.2s;
+
+        &:hover {
+          background: var(--color-primary);
+          color: white;
+          border-color: var(--color-primary);
+        }
+
+        i {
+          font-size: 13px;
+        }
+      }
+
+      .notifications-list {
+        flex: 1;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .empty-notifications {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-secondary);
+        font-size: 14px;
+      }
+
+      .notification-item {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--color-border);
+        display: flex;
+        gap: 12px;
+        transition: background 0.2s;
+        cursor: pointer;
+
+        &:hover {
+          background: var(--color-bg-tertiary);
+        }
+
+        &.unread {
+          background: rgba(59, 130, 246, 0.05);
+        }
+      }
+
+      .notification-icon {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--color-bg-tertiary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-primary);
+        font-size: 16px;
+      }
+
+      .notification-content {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .notification-title {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--color-text-primary);
+        word-wrap: break-word;
+      }
+
+      .notification-time {
+        margin: 4px 0 0 0;
+        font-size: 11px;
+        color: var(--color-text-secondary);
+      }
+
+      .notification-close-btn {
+        flex-shrink: 0;
+        background: none;
+        border: none;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        font-size: 14px;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: background 0.2s, color 0.2s;
+
+        &:hover {
+          background: var(--color-bg-secondary);
+          color: var(--color-error);
+        }
       }
 
       /* Main Content */
@@ -1612,6 +1989,36 @@ export class AppLayoutComponent implements OnInit {
   };
   textSizeOptions: TextSize[] = ['normal', 'large', 'extra'];
 
+  // User Menu
+  showUserMenu = false;
+  showNotificationsPanel = false;
+
+  // Notifications
+  unreadNotificationCount = 3;
+  notifications: any[] = [
+    {
+      id: '1',
+      title: 'Connection restored. Syncing data...',
+      type: 'info',
+      timestamp: new Date(Date.now() - 1000 * 60 * 5),
+      read: false,
+    },
+    {
+      id: '2',
+      title: 'You are offline. Resilience Mode Active.',
+      type: 'warning',
+      timestamp: new Date(Date.now() - 1000 * 60 * 15),
+      read: false,
+    },
+    {
+      id: '3',
+      title: 'New patient record created',
+      type: 'success',
+      timestamp: new Date(Date.now() - 1000 * 60 * 60),
+      read: false,
+    },
+  ];
+
   constructor(
     private patientService: PatientService,
     private offlineStorage: OfflineStorageService,
@@ -1723,6 +2130,57 @@ export class AppLayoutComponent implements OnInit {
         return 'Facility Staff';
       default:
         return '';
+    }
+  }
+
+  // User Menu Methods
+  toggleUserMenu(): void {
+    this.showUserMenu = !this.showUserMenu;
+  }
+
+  navigateToProfile(): void {
+    this.showUserMenu = false;
+    this.router.navigate(['/profile']);
+  }
+
+  // Notifications Methods
+  toggleNotificationsPanel(): void {
+    this.showNotificationsPanel = !this.showNotificationsPanel;
+  }
+
+  closeNotificationsPanel(): void {
+    this.showNotificationsPanel = false;
+  }
+
+  markAllRead(): void {
+    this.notifications = this.notifications.map((n) => ({ ...n, read: true }));
+    this.unreadNotificationCount = 0;
+  }
+
+  clearAllNotifications(): void {
+    this.notifications = [];
+    this.unreadNotificationCount = 0;
+  }
+
+  removeNotification(id: string): void {
+    const notification = this.notifications.find((n) => n.id === id);
+    if (notification && !notification.read) {
+      this.unreadNotificationCount = Math.max(0, this.unreadNotificationCount - 1);
+    }
+    this.notifications = this.notifications.filter((n) => n.id !== id);
+  }
+
+  getNotificationIcon(type: string): string {
+    switch (type) {
+      case 'success':
+        return 'bi bi-check-circle text-green-600';
+      case 'error':
+        return 'bi bi-exclamation-circle text-red-600';
+      case 'warning':
+        return 'bi bi-exclamation-triangle text-yellow-600';
+      case 'info':
+      default:
+        return 'bi bi-info-circle text-blue-600';
     }
   }
 
