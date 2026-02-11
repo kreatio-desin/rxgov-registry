@@ -271,7 +271,7 @@ interface UserForm {
               <label for="user-role">Role <span class="required">*</span></label>
               <select id="user-role" [(ngModel)]="userForm.role" class="form-input">
                 <option value="facility-staff">Facility Staff</option>
-                <option *ngIf="currentUser?.role === 'admin'" value="facility-manager">Facility Manager</option>
+                <option *ngIf="currentUser?.role === 'admin' || currentUser?.role === 'facility-manager'" value="facility-manager">Facility Manager</option>
                 <option *ngIf="currentUser?.role === 'admin'" value="admin">Administrator</option>
               </select>
               <p class="form-hint">{{ getRoleDescription(userForm.role) }}</p>
