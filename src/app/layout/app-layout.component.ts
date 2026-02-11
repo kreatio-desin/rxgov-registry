@@ -637,12 +637,6 @@ import {
           color: inherit;
           margin: 0;
           padding: 0;
-
-          &::before {
-            font-family: 'bootstrap-icons' !important;
-            font-weight: normal !important;
-            font-style: normal !important;
-          }
         }
 
         &:hover {
@@ -678,12 +672,6 @@ import {
           width: auto;
           height: auto;
           display: inline-block !important;
-
-          &::before {
-            font-family: 'bootstrap-icons' !important;
-            font-weight: normal !important;
-            font-style: normal !important;
-          }
         }
       }
 
@@ -697,12 +685,6 @@ import {
           width: auto;
           height: auto;
           display: inline-block !important;
-
-          &::before {
-            font-family: 'bootstrap-icons' !important;
-            font-weight: normal !important;
-            font-style: normal !important;
-          }
         }
       }
 
@@ -800,12 +782,6 @@ import {
             flex-shrink: 0;
             display: inline-block !important;
             color: inherit;
-
-            &::before {
-              font-family: 'bootstrap-icons' !important;
-              font-weight: normal !important;
-              font-style: normal !important;
-            }
           }
 
           /* Tooltip on hover - uses data-tooltip attribute */
@@ -865,12 +841,6 @@ import {
             flex-shrink: 0;
             display: inline-block !important;
             color: inherit;
-
-            &::before {
-              font-family: 'bootstrap-icons' !important;
-              font-weight: normal !important;
-              font-style: normal !important;
-            }
           }
 
             &::after {
