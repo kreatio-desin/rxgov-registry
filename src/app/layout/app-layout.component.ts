@@ -21,7 +21,7 @@ import {
   template: `
     <div class="layout-wrapper">
       <!-- Sidebar Navigation -->
-      <aside class="sidebar">
+      <aside class="sidebar" [class.collapsed]="sidebarCollapsed">
         <div class="sidebar-content">
           <!-- Logo -->
           <div class="logo-section">
@@ -44,6 +44,7 @@ import {
               [routerLinkActiveOptions]="{ exact: true }"
               class="nav-item"
               title="My Clinic"
+              data-tooltip="My Clinic"
               *ngIf="!currentUser || currentUser.role !== 'admin'"
             >
               <i class="bi bi-layout-dashboard"></i>
@@ -54,6 +55,7 @@ import {
               routerLinkActive="active"
               class="nav-item"
               title="Mobile Unit"
+              data-tooltip="Mobile Unit"
               *ngIf="!currentUser || currentUser.role !== 'admin'"
             >
               <i class="bi bi-bus"></i>
@@ -64,6 +66,7 @@ import {
               routerLinkActive="active"
               class="nav-item"
               title="Facilities"
+              data-tooltip="Facilities"
             >
               <i class="bi bi-building-2"></i>
               <span class="nav-label">Facilities</span>
@@ -73,6 +76,7 @@ import {
               routerLinkActive="active"
               class="nav-item"
               title="Reports"
+              data-tooltip="Reports"
               *ngIf="
                 currentUser &&
                 (currentUser.role === 'facility-manager' || currentUser.role === 'admin')
@@ -86,6 +90,7 @@ import {
               routerLinkActive="active"
               class="nav-item"
               title="Administration"
+              data-tooltip="Administration"
               *ngIf="currentUser && currentUser.role === 'admin'"
             >
               <i class="bi bi-gear"></i>
@@ -96,19 +101,19 @@ import {
           <!-- Bottom Navigation -->
           <div class="nav-bottom">
             <div class="nav-divider"></div>
-            <button class="nav-item" title="Theme" (click)="toggleTheme()">
+            <button class="nav-item" title="Theme" data-tooltip="Theme" (click)="toggleTheme()">
               <i class="bi bi-circle-half"></i>
               <span class="nav-label">Theme</span>
             </button>
-            <button class="nav-item" title="Accessibility" (click)="openAccessibilityDialog()">
+            <button class="nav-item" title="Accessibility" data-tooltip="Accessibility" (click)="openAccessibilityDialog()">
               <i class="bi bi-person-standing"></i>
               <span class="nav-label">Accessibility</span>
             </button>
-            <button class="nav-item" title="Users" (click)="navigateToUsers()">
+            <button class="nav-item" title="Users" data-tooltip="Users" (click)="navigateToUsers()">
               <i class="bi bi-people"></i>
               <span class="nav-label">Users</span>
             </button>
-            <button class="nav-item" title="Offline Sync">
+            <button class="nav-item" title="Offline Sync" data-tooltip="Offline Sync">
               <i class="bi bi-arrow-repeat"></i>
               <span class="nav-label">Offline Sync</span>
             </button>
@@ -669,6 +674,133 @@ import {
             &:hover {
               background: var(--color-error-light);
               color: var(--color-error);
+            }
+          }
+        }
+      }
+
+      /* Collapsed Sidebar Styles */
+      .sidebar.collapsed {
+        width: 70px;
+        transition: width 0.3s ease;
+
+        .logo-text {
+          display: none;
+        }
+
+        .logo-section {
+          justify-content: center;
+          padding: 0 12px;
+          height: 56px;
+        }
+
+        .logo-img {
+          width: 32px;
+          height: 32px;
+          flex-shrink: 0;
+        }
+
+        .nav-menu {
+          padding: 8px 0;
+        }
+
+        .nav-item {
+          width: 100%;
+          padding: 8px;
+          justify-content: center;
+          min-height: 48px;
+          position: relative;
+          gap: 0;
+
+          .nav-label {
+            display: none;
+          }
+
+          i,
+          i.bi {
+            font-size: 20px !important;
+            margin: 0;
+            flex-shrink: 0;
+            display: inline-block;
+          }
+
+          /* Tooltip on hover - uses data-tooltip attribute */
+          &::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: calc(100% + 12px);
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--color-text-primary);
+            color: var(--color-bg-primary);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 1001;
+            font-weight: 500;
+          }
+
+          &:hover {
+            &::after {
+              opacity: 1;
+            }
+          }
+        }
+
+        .nav-bottom {
+          padding: 8px 0;
+
+          .nav-divider {
+            display: none;
+          }
+
+          .nav-item {
+            width: 100%;
+            padding: 8px;
+            justify-content: center;
+            min-height: 48px;
+            position: relative;
+            gap: 0;
+
+            .nav-label {
+              display: none;
+            }
+
+            i,
+            i.bi {
+              font-size: 20px !important;
+              margin: 0;
+              flex-shrink: 0;
+              display: inline-block;
+            }
+
+            &::after {
+              content: attr(data-tooltip);
+              position: absolute;
+              left: calc(100% + 12px);
+              top: 50%;
+              transform: translateY(-50%);
+              background: var(--color-text-primary);
+              color: var(--color-bg-primary);
+              padding: 8px 12px;
+              border-radius: 4px;
+              font-size: 12px;
+              white-space: nowrap;
+              opacity: 0;
+              pointer-events: none;
+              transition: opacity 0.2s;
+              z-index: 1001;
+              font-weight: 500;
+            }
+
+            &:hover {
+              &::after {
+                opacity: 1;
+              }
             }
           }
         }
@@ -1940,6 +2072,7 @@ export class AppLayoutComponent implements OnInit {
   isOnline = navigator.onLine;
   syncStatus$: any;
   sidebarOpen = false;
+  sidebarCollapsed = false;
   currentUser: AuthUser | null = null;
 
   // Help and Support Dialog
@@ -2046,7 +2179,7 @@ export class AppLayoutComponent implements OnInit {
   }
 
   toggleSidebar(): void {
-    this.sidebarOpen = !this.sidebarOpen;
+    this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 
   async onSearchInput(): Promise<void> {
