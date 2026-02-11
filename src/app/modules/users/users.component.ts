@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { AuthService, AuthUser } from '../../core/services/auth.service';
 
 interface UserWithStatus extends AuthUser {
@@ -7,10 +8,23 @@ interface UserWithStatus extends AuthUser {
   lastLogin: string;
 }
 
+interface Facility {
+  id: string;
+  name: string;
+}
+
+interface UserForm {
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: 'admin' | 'facility-manager' | 'facility-staff';
+  selectedFacilities: string[];
+}
+
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   template: `
     <div class="users-container">
       <!-- Header -->
@@ -34,6 +48,7 @@ interface UserWithStatus extends AuthUser {
           *ngIf="
             currentUser && (currentUser.role === 'facility-manager' || currentUser.role === 'admin')
           "
+          (click)="openAddUserModal()"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -196,6 +211,111 @@ interface UserWithStatus extends AuthUser {
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
           <p>No users found</p>
+        </div>
+      </div>
+
+      <!-- User Form Modal -->
+      <div *ngIf="showUserFormModal" class="modal-overlay" (click)="closeUserFormModal()">
+        <div class="modal-content user-form-modal" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <div class="header-content">
+              <h2 class="modal-title">{{ isEditMode ? 'Edit User' : 'Add User' }}</h2>
+              <p class="modal-description">
+                {{ isEditMode ? 'Update user information, role, and facility access.' : 'Create a new user account and assign facility access.' }}
+              </p>
+            </div>
+            <button class="modal-close" (click)="closeUserFormModal()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M18 6 6 18"></path>
+                <path d="m6 6 12 12"></path>
+              </svg>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="user-firstName">First Name <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="user-firstName"
+                  [(ngModel)]="userForm.firstName"
+                  placeholder="Jane"
+                  class="form-input"
+                />
+              </div>
+              <div class="form-field">
+                <label for="user-lastName">Last Name <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="user-lastName"
+                  [(ngModel)]="userForm.lastName"
+                  placeholder="Doe"
+                  class="form-input"
+                />
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label for="user-email">Email Address <span class="required">*</span></label>
+              <input
+                type="email"
+                id="user-email"
+                [(ngModel)]="userForm.email"
+                placeholder="jane.doe@clinic.com"
+                class="form-input"
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="user-role">Role <span class="required">*</span></label>
+              <select id="user-role" [(ngModel)]="userForm.role" class="form-input">
+                <option value="facility-staff">Facility Staff</option>
+                <option *ngIf="currentUser?.role === 'admin'" value="facility-manager">Facility Manager</option>
+                <option *ngIf="currentUser?.role === 'admin'" value="admin">Administrator</option>
+              </select>
+              <p class="form-hint">{{ getRoleDescription(userForm.role) }}</p>
+            </div>
+
+            <div *ngIf="currentUser?.role === 'admin'" class="form-field">
+              <label>Facility Access <span class="required">*</span></label>
+              <div class="facility-access-list">
+                <div class="facility-item">
+                  <input
+                    type="checkbox"
+                    id="facility-all"
+                    [checked]="userForm.selectedFacilities.includes('all')"
+                    (change)="toggleAllFacilities($event)"
+                    class="form-checkbox"
+                  />
+                  <label for="facility-all" class="facility-label">All Facilities (System Admin)</label>
+                </div>
+                <div class="facility-item" *ngFor="let facility of availableFacilities">
+                  <input
+                    type="checkbox"
+                    [id]="'facility-' + facility.id"
+                    [checked]="userForm.selectedFacilities.includes(facility.id)"
+                    [disabled]="userForm.selectedFacilities.includes('all')"
+                    (change)="toggleFacility(facility.id, $event)"
+                    class="form-checkbox"
+                  />
+                  <label [for]="'facility-' + facility.id" class="facility-label">{{ facility.name }}</label>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="currentUser?.role === 'facility-manager'" class="form-field">
+              <label>Facility Access</label>
+              <p class="facility-info">
+                {{ currentUser?.facilityName }} (Your Facility)
+              </p>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn-secondary" (click)="closeUserFormModal()">Cancel</button>
+            <button class="btn-primary" (click)="saveUser()">{{ isEditMode ? 'Save Changes' : 'Create User' }}</button>
+          </div>
         </div>
       </div>
     </div>
@@ -461,12 +581,252 @@ interface UserWithStatus extends AuthUser {
           height: 28px;
         }
       }
+
+      /* Modal Overlay */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+
+      .modal-content {
+        background: var(--color-bg-primary);
+        border-radius: 0.5rem;
+        box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+        max-width: 32rem;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+      }
+
+      .user-form-modal {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--color-border);
+        gap: 1rem;
+      }
+
+      .header-content {
+        flex: 1;
+      }
+
+      .modal-title {
+        margin: 0;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
+      }
+
+      .modal-description {
+        margin: 0.5rem 0 0 0;
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+      }
+
+      .modal-close {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--color-text-secondary);
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        transition: color 0.2s;
+      }
+
+      .modal-close:hover {
+        color: var(--color-text-primary);
+      }
+
+      .modal-body {
+        padding: 1.5rem;
+        flex: 1;
+        overflow-y: auto;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .form-field label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--color-text-primary);
+      }
+
+      .required {
+        color: #ef4444;
+      }
+
+      .form-input {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--color-border);
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        color: var(--color-text-primary);
+        background: var(--color-input-bg);
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .form-hint {
+        margin: 0;
+        font-size: 0.75rem;
+        color: var(--color-text-secondary);
+        background: var(--color-bg-tertiary);
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+      }
+
+      .facility-access-list {
+        border: 1px solid var(--color-border);
+        border-radius: 0.375rem;
+        padding: 0.75rem;
+        max-height: 200px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .facility-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .form-checkbox {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        accent-color: var(--color-primary);
+      }
+
+      .form-checkbox:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+
+      .facility-label {
+        font-size: 0.875rem;
+        color: var(--color-text-primary);
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .facility-info {
+        margin: 0;
+        padding: 0.75rem;
+        background: var(--color-bg-tertiary);
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        color: var(--color-text-primary);
+      }
+
+      .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        padding: 1.5rem;
+        border-top: 1px solid var(--color-border);
+        background: var(--color-bg-secondary);
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .btn-primary {
+        background: var(--color-primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: var(--color-primary-hover);
+      }
+
+      .btn-secondary {
+        background: var(--color-bg-tertiary);
+        color: var(--color-text-primary);
+        border: 1px solid var(--color-border);
+      }
+
+      .btn-secondary:hover {
+        background: var(--color-bg-tertiary);
+      }
     `,
   ],
 })
 export class UsersComponent implements OnInit {
   currentUser: AuthUser | null = null;
   filteredUsers: UserWithStatus[] = [];
+
+  // Modal state
+  showUserFormModal = false;
+  isEditMode = false;
+  selectedUserForEdit: UserWithStatus | null = null;
+
+  // Form state
+  userForm: UserForm = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    role: 'facility-staff',
+    selectedFacilities: [],
+  };
+
+  // Facilities list
+  availableFacilities: Facility[] = [
+    { id: 'fac-act-001', name: 'Anchorage Comprehensive Treatment Center' },
+    { id: 'fac-cms-anc-001', name: 'Community Medical Services – Anchorage' },
+    { id: 'fac-ndtc-001', name: 'Narcotic Drug Treatment Center (NDTC)' },
+    { id: 'fac-interior-001', name: 'Interior Medication Assisted Treatment' },
+    { id: 'fac-cms-was-001', name: 'Community Medical Services – Wasilla' },
+    { id: 'fac-searhc-jun-001', name: 'SEARHC – Juneau' },
+    { id: 'fac-searhc-ket-001', name: 'SEARHC – Ketchikan' },
+    { id: 'fac-searhc-sit-001', name: 'SEARHC – Sitka' },
+    { id: 'fac-searhc-kla-001', name: 'SEARHC – Klawock' },
+  ];
 
   // Demo users with status and last login
   private allUsers: UserWithStatus[] = [
@@ -583,8 +943,7 @@ export class UsersComponent implements OnInit {
   }
 
   editUser(user: UserWithStatus): void {
-    console.log('Edit user:', user);
-    alert(`Edit user: ${user.name}`);
+    this.openEditUserModal(user);
   }
 
   suspendUser(user: UserWithStatus): void {
@@ -602,5 +961,166 @@ export class UsersComponent implements OnInit {
   resetPassword(user: UserWithStatus): void {
     console.log('Reset password for:', user);
     alert(`Password reset link sent to ${user.email}`);
+  }
+
+  // Modal Methods
+  openAddUserModal(): void {
+    this.isEditMode = false;
+    this.selectedUserForEdit = null;
+    this.resetForm();
+    this.showUserFormModal = true;
+  }
+
+  openEditUserModal(user: UserWithStatus): void {
+    this.isEditMode = true;
+    this.selectedUserForEdit = user;
+
+    // Parse full name
+    const nameParts = user.name.split(' ');
+    const firstName = nameParts[0];
+    const lastName = nameParts.slice(1).join(' ');
+
+    // Pre-populate form
+    this.userForm = {
+      firstName,
+      lastName,
+      email: user.email,
+      role: user.role as 'admin' | 'facility-manager' | 'facility-staff',
+      selectedFacilities: user.facilityId ? [user.facilityId] : [],
+    };
+
+    this.showUserFormModal = true;
+  }
+
+  closeUserFormModal(): void {
+    this.showUserFormModal = false;
+    this.resetForm();
+    this.selectedUserForEdit = null;
+  }
+
+  private resetForm(): void {
+    this.userForm = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      role: 'facility-staff',
+      selectedFacilities: [],
+    };
+  }
+
+  saveUser(): void {
+    // Validation
+    if (!this.userForm.firstName.trim()) {
+      alert('First Name is required.');
+      return;
+    }
+    if (!this.userForm.lastName.trim()) {
+      alert('Last Name is required.');
+      return;
+    }
+    if (!this.userForm.email.trim()) {
+      alert('Email Address is required.');
+      return;
+    }
+    if (!this.userForm.role) {
+      alert('Role is required.');
+      return;
+    }
+
+    // For admin role, validate facility access
+    if (this.currentUser?.role === 'admin' && this.userForm.selectedFacilities.length === 0) {
+      alert('Please select at least one facility access.');
+      return;
+    }
+
+    if (this.isEditMode && this.selectedUserForEdit) {
+      // Update existing user
+      this.selectedUserForEdit.name = `${this.userForm.firstName} ${this.userForm.lastName}`;
+      this.selectedUserForEdit.email = this.userForm.email;
+      this.selectedUserForEdit.role = this.userForm.role;
+
+      if (this.userForm.selectedFacilities.length > 0) {
+        this.selectedUserForEdit.facilityId = this.userForm.selectedFacilities[0];
+        const selectedFacility = this.availableFacilities.find(f => f.id === this.userForm.selectedFacilities[0]);
+        if (selectedFacility) {
+          this.selectedUserForEdit.facilityName = selectedFacility.name;
+        }
+      }
+
+      alert(`User ${this.userForm.firstName} ${this.userForm.lastName} has been updated successfully.`);
+    } else {
+      // Create new user
+      const newUser: UserWithStatus = {
+        id: `user-${Date.now()}`,
+        name: `${this.userForm.firstName} ${this.userForm.lastName}`,
+        email: this.userForm.email,
+        role: this.userForm.role,
+        permissions: this.getPermissionsForRole(this.userForm.role),
+        status: 'active',
+        lastLogin: 'Never',
+      };
+
+      // Set facility
+      if (this.currentUser?.role === 'admin' && this.userForm.selectedFacilities.length > 0) {
+        newUser.facilityId = this.userForm.selectedFacilities[0];
+        const selectedFacility = this.availableFacilities.find(f => f.id === this.userForm.selectedFacilities[0]);
+        if (selectedFacility) {
+          newUser.facilityName = selectedFacility.name;
+        }
+      } else if (this.currentUser?.role === 'facility-manager') {
+        newUser.facilityId = this.currentUser.facilityId;
+        newUser.facilityName = this.currentUser.facilityName;
+      }
+
+      this.allUsers.push(newUser);
+      this.filterUsers();
+      alert(`User ${this.userForm.firstName} ${this.userForm.lastName} has been created successfully.`);
+    }
+
+    this.closeUserFormModal();
+  }
+
+  toggleAllFacilities(event: any): void {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      this.userForm.selectedFacilities = ['all'];
+    } else {
+      this.userForm.selectedFacilities = [];
+    }
+  }
+
+  toggleFacility(facilityId: string, event: any): void {
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      this.userForm.selectedFacilities = [facilityId];
+    } else {
+      this.userForm.selectedFacilities = [];
+    }
+  }
+
+  getRoleDescription(role: string): string {
+    switch (role) {
+      case 'admin':
+        return 'Full system access with ability to manage all users and facilities.';
+      case 'facility-manager':
+        return 'Can manage facility staff and view facility-specific data.';
+      case 'facility-staff':
+        return 'Front-line clinical staff with standard patient care and dosing capabilities.';
+      default:
+        return '';
+    }
+  }
+
+  private getPermissionsForRole(role: string): string[] {
+    switch (role) {
+      case 'admin':
+        return ['all'];
+      case 'facility-manager':
+        return ['view_facility_patients', 'manage_facility_staff'];
+      case 'facility-staff':
+        return ['view_facility_patients'];
+      default:
+        return [];
+    }
   }
 }
