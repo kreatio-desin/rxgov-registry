@@ -796,7 +796,7 @@ interface DoseAdministration {
         border-radius: 0.375rem;
         font-size: 0.75rem;
         background-color: var(--color-bg-tertiary);
-        height: 1.75rem;
+        height: 3.75rem;
         overflow: visible;
         text-overflow: ellipsis;
         white-space: nowrap;
