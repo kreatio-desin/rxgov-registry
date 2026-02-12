@@ -1,4 +1,10 @@
 export const environment = {
   production: true,
-  googleMapsApiKey: 'YOUR_GOOGLE_PLACES_API_KEY',
+  apiUrl: 'https://api.rxgov.com/api',
+  apiBaseUrl: 'https://api.rxgov.com',
+  features: {
+    enableOfflineMode: true,
+    enableSync: true,
+    enableLogging: false,
+  },
 };
