@@ -1,13 +1,176 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>RxgovRegistry</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>RxgovRegistry</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet" crossorigin="anonymous" />
+    <style>
+      /* Bootstrap Icons Styling - Enhanced */
+      .bi,
+      i.bi,
+      [class^="bi-"],
+      [class*=" bi-"] {
+        display: inline-block !important;
+        font-family: 'bootstrap-icons' !important;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        line-height: 1;
+        vertical-align: -0.125em;
+        text-transform: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Icons in buttons */
+      button i.bi,
+      button i[class^="bi-"],
+      button i[class*=" bi-"] {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        color: inherit;
+        font-size: inherit;
+      }
+
+      /* Icons in links/anchors */
+      a i.bi,
+      a i[class^="bi-"],
+      a i[class*=" bi-"] {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        color: inherit;
+        font-size: inherit;
+        text-decoration: none;
+      }
+
+      /* Icons in labels */
+      label i.bi,
+      label i[class^="bi-"],
+      label i[class*=" bi-"] {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        color: inherit;
+        font-size: inherit;
+      }
+
+      /* Ensure nav items with icons work properly */
+      .nav-item i.bi {
+        display: inline-block !important;
+        color: inherit !important;
+      }
+
+      /* Global Accessibility Styles - MUST be in head before any component styles */
+
+      /* Default base font size */
+      html {
+        font-size: 14px !important;
+      }
+
+      body {
+        font-size: 14px !important;
+      }
+
+      /* Large text size - 110% scaling (15.4px) */
+      html.text-size-large {
+        font-size: 15.4px !important;
+      }
+
+      body.text-size-large {
+        font-size: 15.4px !important;
+      }
+
+      /* Extra text size - 125% scaling (17.5px) */
+      html.text-size-extra {
+        font-size: 17.5px !important;
+      }
+
+      body.text-size-extra {
+        font-size: 17.5px !important;
+      }
+
+      /* Force ALL descendants to inherit font-size */
+      html.text-size-large * {
+        font-size: inherit !important;
+      }
+
+      html.text-size-extra * {
+        font-size: inherit !important;
+      }
+
+      body.text-size-large * {
+        font-size: inherit !important;
+      }
+
+      body.text-size-extra * {
+        font-size: inherit !important;
+      }
+
+      /* Also apply to all elements under app-root */
+      html.text-size-large app-root *,
+      html.text-size-large app-root *:not(style) {
+        font-size: inherit !important;
+      }
+
+      html.text-size-extra app-root *,
+      html.text-size-extra app-root *:not(style) {
+        font-size: inherit !important;
+      }
+
+      /* Headings - scale proportionally using em */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-size: 1em !important;
+      }
+
+      small {
+        font-size: 0.875em !important;
+      }
+
+      /* Tables */
+      table,
+      th,
+      td {
+        font-size: inherit !important;
+      }
+
+      /* Form elements */
+      input,
+      textarea,
+      select,
+      button {
+        font-size: inherit !important;
+      }
+
+      /* Buttons with text */
+      .btn,
+      [class*='btn'] {
+        font-size: inherit !important;
+      }
+
+      /* All text and interactive elements */
+      a,
+      span,
+      p,
+      li,
+      div,
+      label,
+      i,
+      svg {
+        font-size: inherit !important;
+      }
+    </style>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 </html>
