@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppLayoutComponent } from './layout/app-layout.component';
+import { AppLayoutComponent } from './layouts/app-layout/app-layout.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthService } from './core/services/auth.service';
 
